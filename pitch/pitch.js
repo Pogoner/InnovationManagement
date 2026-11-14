@@ -220,7 +220,7 @@
     launchStage.style.setProperty('--rocket-rise', `${reduced ? (progress ? -95 : 0) : -eased * Math.max(650, innerHeight*.92)}px`);
     launchStage.style.setProperty('--smoke-scale', (1+progress*1.8).toFixed(3));
     setLaunchState(progress >= .98 ? 'complete' : progress > .08 ? 'starting' : 'ready');
-    const nextRemaining = progress > .08 ? 0 : 8-Math.max(1,step);
+    const nextRemaining = progress > .08 ? 0 : sections.length+1-Math.max(1,step);
     if (remaining !== nextRemaining) {
       remaining = nextRemaining;
       $('#rail-count').textContent = `T−${String(remaining).padStart(2,'0')}`;

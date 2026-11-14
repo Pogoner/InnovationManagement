@@ -12,88 +12,131 @@
   const n = value => Number(value.toFixed(3));
   const set = (node, property, value) => node.style.setProperty(property, String(value));
 
-  function placeMarkup(index) {
-    const angle = (index / 20) * Math.PI * 2;
-    const plateX = Math.cos(angle) * 183;
-    const plateY = Math.sin(angle) * 62;
-    const chairX = Math.cos(angle) * 247;
-    const chairY = Math.sin(angle) * 111;
-    const rotation = angle * 180 / Math.PI + 90;
-    return `<g class="fe-place" data-fe-place="${index}">
-      <g transform="translate(${n(chairX)} ${n(chairY)}) rotate(${n(rotation)})">
-        <path class="fe-chair" d="M-13 5V-5Q-13-13-5-13H5Q13-13 13-5V5M-13 0H13"/>
-        <path class="fe-chair-inner" d="M-9 5H9V-5Q9-9 5-9H-5Q-9-9-9-5Z"/>
-      </g>
-      <g transform="translate(${n(plateX)} ${n(plateY)})">
-        <ellipse class="fe-plate-light" rx="22" ry="13"/>
-        <ellipse class="fe-plate" rx="12" ry="7.5"/>
-        <ellipse class="fe-plate-inner" rx="8" ry="4.7"/>
-        <path class="fe-cutlery" d="M-17-6V7M-20-6V-1H-14V-6M17-6V7M15-6V1H17"/>
+  // Editorial room concept: ten separate two-person tables. Every pair sits
+  // landward and faces the same launch panorama; the plan is not a site survey.
+  const diningTables = [
+    {x:95,y:287},{x:205,y:261},{x:315,y:250},{x:425,y:261},{x:535,y:287},
+    {x:68,y:405},{x:183,y:375},{x:298,y:363},{x:413,y:375},{x:528,y:405}
+  ];
+  const marketingMix = [
+    {title:'People',sub:'/ Customer',lines:['Raumfahrtfans · Unternehmer','Executive & Customer Hospitality']},
+    {title:'Product',lines:['20 Gäste · 7 Gänge · Launch','Missionsbriefing & Concierge']},
+    {title:'Price',lines:['35.000 USD im Pilot','bis 50.000 USD als Zielpreis']},
+    {title:'Place',lines:['Direktvertrieb & Family Offices','USA-Pilot · Fläche noch offen']},
+    {title:'Promotion',lines:['Einladungen & Empfehlungen','Ausgewählte Medien & Partner']}
+  ];
+
+  function tableMarkup(table,index) {
+    const rotation = Math.atan2(320-table.x,table.y-155)*180/Math.PI;
+    return `<g transform="translate(${table.x} ${table.y}) rotate(${n(rotation)})">
+      <g class="fe-dinner-table" data-fe-table="${index}">
+        <ellipse class="fe-table-shadow" cy="19" rx="40" ry="18"/>
+        <path class="fe-table-leg" d="M-17 6V29M17 6V29"/>
+        <path class="fe-table-edge" d="M-38 0V7C-38 24 38 24 38 7V0"/>
+        <ellipse class="fe-table-top" rx="38" ry="17"/>
+        <ellipse class="fe-table-outline fe-table-trace" pathLength="1" rx="38" ry="17"/>
+        ${[-16,16].map((x,seat)=>`<g data-fe-place="${index*2+seat}" class="fe-place" transform="translate(${x} 5)">
+          <g transform="translate(0 23)"><path class="fe-chair" d="M-11-5V4Q-11 10-4 10H4Q11 10 11 4V-5M-11 4H11"/><path class="fe-chair-inner" d="M-8-4H8V3H-8Z"/><circle class="fe-guest" cy="-1" r="4.5"/></g>
+          <ellipse class="fe-plate-light" rx="17" ry="11"/><ellipse class="fe-plate" rx="8.5" ry="5.5"/><ellipse class="fe-plate-inner" rx="5.5" ry="3.4"/>
+          <path class="fe-cutlery" d="M-12-5V6M-14-5V-1H-10V-5M12-5V6"/>
+        </g>`).join('')}
+        <g class="fe-candle" transform="translate(0 -4)"><ellipse class="fe-candle-halo" rx="21" ry="13"/><path class="fe-candle-stem" d="M0 3V-5"/><path class="fe-candle-flame" d="M0-11C-3-7-3-5 0-5S3-7 0-11Z"/></g>
       </g>
     </g>`;
   }
 
   scenes[5] = {
-    markup: () => `<div class="fe-scene fe-dining" role="img" aria-label="Konzept: Ein Tisch mit zwanzig Plätzen, sieben Gängen und einem Preis von 35.000 US-Dollar im Pilot; langfristiger Zielpreis bis zu 50.000 US-Dollar je Gast. Die fünf Ps verbinden das Erlebnis mit seinen Gästen.">
+    markup: () => `<div class="fe-scene fe-dining" role="group" aria-label="Raumkonzept: zehn versetzte Zweiertische mit zwanzig Plätzen, alle auf das Startpanorama ausgerichtet. Sieben Gänge begleiten das Erlebnis. Der sichtbare 5P-Mix: People – vermögende Raumfahrtfans, Unternehmer und Firmenkunden. Product – Dinner, Launch, Missionsbriefing und Concierge. Price – 35.000 US-Dollar im Pilot, langfristig bis zu 50.000 US-Dollar als zu validierender Zielpreis. Place – Direktvertrieb und Family Offices, US-Pilot mit noch offenem Standort. Promotion – Einladungen, Empfehlungen, ausgewählte Medien und mögliche Partner. Konzeptvisualisierung, keine Standort- oder Partnerzusage.">
       <svg class="fe-svg" viewBox="0 0 640 520" aria-hidden="true" focusable="false">
         <defs>
-          <linearGradient id="fe-table-surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9d9d9" stop-opacity=".025"/><stop offset=".6" stop-color="#efbd91" stop-opacity=".075"/><stop offset="1" stop-color="#efbd91" stop-opacity=".018"/></linearGradient>
-          <radialGradient id="fe-place-glow"><stop stop-color="#efbd91" stop-opacity=".48"/><stop offset="1" stop-color="#efbd91" stop-opacity="0"/></radialGradient>
-          <radialGradient id="fe-candle-glow"><stop stop-color="#fff1ca" stop-opacity=".9"/><stop offset=".16" stop-color="#efbd91" stop-opacity=".45"/><stop offset="1" stop-color="#efbd91" stop-opacity="0"/></radialGradient>
+          <linearGradient id="fe-table-surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9d9d9" stop-opacity=".08"/><stop offset=".6" stop-color="#efbd91" stop-opacity=".19"/><stop offset="1" stop-color="#efbd91" stop-opacity=".04"/></linearGradient>
+          <radialGradient id="fe-place-glow"><stop stop-color="#efbd91" stop-opacity=".42"/><stop offset="1" stop-color="#efbd91" stop-opacity="0"/></radialGradient>
+          <radialGradient id="fe-candle-glow"><stop stop-color="#fff1ca" stop-opacity=".85"/><stop offset=".16" stop-color="#efbd91" stop-opacity=".35"/><stop offset="1" stop-color="#efbd91" stop-opacity="0"/></radialGradient>
+          <radialGradient id="fe-launch-light"><stop stop-color="#ffe4b0" stop-opacity=".55"/><stop offset=".4" stop-color="#efbd91" stop-opacity=".12"/><stop offset="1" stop-color="#efbd91" stop-opacity="0"/></radialGradient>
+          <linearGradient id="fe-rocket-metal"><stop stop-color="#5e727b"/><stop offset=".5" stop-color="#e6ece6"/><stop offset="1" stop-color="#526774"/></linearGradient>
           <linearGradient id="fe-market-line"><stop stop-color="#a9d9d9" stop-opacity=".55"/><stop offset="1" stop-color="#efbd91"/></linearGradient>
         </defs>
-        <g class="fe-experience-heading"><text x="320" y="42" text-anchor="middle">20 GÄSTE <tspan class="fe-heading-divider">/</tspan> 7 GÄNGE <tspan class="fe-heading-divider">/</tspan> EIN MOMENT</text></g>
-        <g class="fe-table-drift" data-fe-table>
-          <g transform="translate(320 258) rotate(-13)">
-            <ellipse class="fe-table-shadow" cx="0" cy="42" rx="234" ry="78"/>
-            <path class="fe-table-leg fe-table-trace" pathLength="1" d="M-118 35L-118 101M-111 36L-111 98M112 35L112 101M119 34L119 98M-131 102H-99M100 102H131"/>
-            <path class="fe-table-edge fe-table-trace" pathLength="1" d="M-213 0V9C-213 55-118 91 0 91S213 55 213 9V0"/>
-            <ellipse class="fe-table-top" rx="213" ry="83"/>
-            <ellipse class="fe-table-ghost" rx="213" ry="83"/>
-            <ellipse class="fe-table-outline fe-table-trace" pathLength="1" rx="213" ry="83"/>
-            <ellipse class="fe-table-runner fe-table-trace" pathLength="1" rx="130" ry="27"/>
-            ${Array.from({length:20}, (_,index) => placeMarkup(index)).join('')}
-            ${[-105,-53,0,53,105].map((x,index) => `<g class="fe-candle" data-fe-candle="${index}" transform="translate(${x} 0)"><ellipse class="fe-candle-halo" rx="45" ry="30"/><ellipse class="fe-candle-base" cy="5" rx="4" ry="2.5"/><path class="fe-candle-stem" d="M0 4V-8"/><path class="fe-candle-flame" d="M0-16C-5-10-4-7 0-7S5-10 0-16Z"/></g>`).join('')}
+        <g data-fe-layout>
+          <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">10 TISCHE · 20 GÄSTE · FREIE SICHT</text>
+          <g class="fe-launch-light" data-fe-launch-light><ellipse fill="url(#fe-launch-light)" cx="320" cy="170" rx="148" ry="75"/></g>
+          <path class="fe-view-horizon" d="M62 177H270M370 177H578"/>
+          <g class="fe-dining-rocket">
+            <path class="fe-rocket-body" d="M320 50C309 64 306 78 306 93V166H334V93C334 78 331 64 320 50Z"/>
+            <path class="fe-rocket-rings" d="M306 93H334M306 109H334M306 149H334M306 155 295 174H306M334 155 345 174H334"/>
+            <path class="fe-rocket-plume" data-fe-plume d="M309 167Q311 187 320 201Q329 187 331 167Z"/>
+            <path class="fe-dining-tower" d="M358 68V177M374 68V177M358 71 374 94 358 117 374 140 358 163M358 93H339M352 177H384"/>
+          </g>
+          <path class="fe-panorama-arc fe-table-trace" pathLength="1" d="M42 215Q320 157 598 215"/>
+          <path class="fe-panorama-arc-back" d="M42 220Q320 162 598 220"/>
+          <text class="fe-view-label" x="514" y="177" text-anchor="middle">STARTPANORAMA</text>
+          <g class="fe-sightlines">${diningTables.map((table,index)=>`<path class="fe-sightline" data-fe-sightline="${index}" pathLength="1" d="M${table.x} ${table.y-10}Q${n((table.x+320)/2)} ${n((table.y+165)/2-10)} 320 170"/>`).join('')}</g>
+          <path class="fe-terrace" d="M28 332Q320 263 612 332M28 340Q320 271 612 340"/>
+          ${diningTables.map(tableMarkup).join('')}
+          <text class="fe-layout-caption" x="320" y="480" text-anchor="middle">VERSATZ + LEICHTE TERRASSIERUNG</text>
+          <text class="fe-layout-note" x="320" y="506" text-anchor="middle">Schematisches Raumkonzept · keine Entfernungsangabe</text>
+        </g>
+        <g data-fe-panorama class="fe-panorama">
+          <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">EIN ABEND. EIN GEMEINSAMER BLICK.</text>
+          <path class="fe-window-frame" d="M37 65V351M603 65V351M37 65H603"/>
+          <path class="fe-window-base" d="M37 351H603"/>
+          <g class="fe-courses">
+            <path class="fe-course-guide" d="M68 430H572"/>
+            <path class="fe-course-line" pathLength="1" d="M68 430H572"/>
+            ${Array.from({length:7},(_,index)=>`<g class="fe-course" data-fe-course="${index}" transform="translate(${68+index*84} 430)"><circle class="fe-course-ring" r="15"/><circle class="fe-course-dot" r="3"/><text y="40" text-anchor="middle">0${index+1}</text></g>`).join('')}
+            <text class="fe-course-caption" x="320" y="508" text-anchor="middle">7 GÄNGE · MISSIONSBRIEFING · LAUNCH</text>
           </g>
         </g>
-        <g data-fe-courses class="fe-courses">
-          <path class="fe-course-guide" d="M104 419Q320 356 536 419"/>
-          <path class="fe-course-line" pathLength="1" d="M104 419Q320 356 536 419"/>
-          ${Array.from({length:7},(_,index) => {
-            const t = index / 6;
-            const x = 104 + 432*t;
-            const y = 419 - 126*t*(1-t);
-            return `<g class="fe-course" data-fe-course="${index}" transform="translate(${n(x)} ${n(y)})"><circle class="fe-course-ring" r="17"/><circle class="fe-course-dot" r="3"/><text y="37" text-anchor="middle">0${index+1}</text></g>`;
-          }).join('')}
-          <text class="fe-course-caption" x="320" y="486" text-anchor="middle">SIEBEN GÄNGE. EINE DRAMATURGIE.</text>
+        <g data-fe-price class="fe-price">
+          <text class="fe-diagram-heading" x="320" y="47" text-anchor="middle">EXKLUSIVITÄT BRAUCHT NACHFRAGE</text>
+          <path class="fe-price-orbit" d="M61 271Q320 15 579 271M61 271Q320 506 579 271"/>
+          <text class="fe-price-label" x="161" y="203" text-anchor="middle">PILOT</text>
+          <text class="fe-price-value" x="161" y="277" text-anchor="middle">35.000</text>
+          <text class="fe-price-label fe-price-target-label" x="478" y="203" text-anchor="middle">ZIELPREIS BIS ZU</text>
+          <text class="fe-price-value" x="478" y="277" text-anchor="middle">50.000</text>
+          <path class="fe-price-connector" pathLength="1" d="M264 258H374M362 250L374 258 362 266"/>
+          <text class="fe-price-unit" x="320" y="321" text-anchor="middle">USD JE GAST</text>
+          <text class="fe-price-validation" x="320" y="401" text-anchor="middle">ZAHLUNGSBEREITSCHAFT IM PILOT PRÜFEN</text>
+          <text class="fe-layout-note" x="320" y="432" text-anchor="middle">Modellannahmen · kein buchbares Angebot</text>
         </g>
-        <g data-fe-market class="fe-market">
-          <path class="fe-price-connector" pathLength="1" d="M247 383H392M380 375L392 383 380 391"/>
-          <text class="fe-price-label" x="161" y="340" text-anchor="middle">PILOT</text>
-          <text class="fe-price-value" x="161" y="395" text-anchor="middle">35.000</text>
-          <text class="fe-price-label fe-price-target-label" x="478" y="340" text-anchor="middle">ZIELPREIS BIS ZU</text>
-          <text class="fe-price-value" x="478" y="395" text-anchor="middle">50.000</text>
-          <text class="fe-price-unit" x="320" y="435" text-anchor="middle">USD JE GAST · IM PILOT ZU VALIDIEREN</text>
-          <path class="fe-mix-track" pathLength="1" d="M64 474H576"/>
-          ${[64,192,320,448,576].map((x,index)=>`<g class="fe-mix-node" data-fe-mix-node="${index}"><circle cx="${x}" cy="474" r="5"/><path d="M${x} 480V496"/></g>`).join('')}
+        <g data-fe-marketing class="fe-marketing">
+          <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">5P · VOM ERLEBNIS ZUM GAST</text>
+          <path class="fe-mix-guide" d="M43 75V435"/>
+          <path class="fe-mix-track" pathLength="1" d="M43 75V435"/>
+          ${marketingMix.map((part,index)=>`<g class="fe-mix-row" data-fe-mix-row="${index}" transform="translate(0 ${73+index*87})">
+            <circle class="fe-mix-circle" cx="43" cy="10" r="19"/><text class="fe-mix-number" x="43" y="16" text-anchor="middle">${index+1}</text>
+            <text class="fe-mix-name" x="80" y="11">${part.title}</text>${part.sub?`<text class="fe-mix-sub" x="80" y="35">${part.sub}</text>`:''}
+            <path class="fe-mix-connector" d="M237 10H267M261 5 267 10 261 15"/>
+            <text class="fe-mix-content" x="286" y="1">${part.lines[0]}<tspan x="286" dy="27">${part.lines[1]}</tspan></text>
+            <path class="fe-mix-rule" d="M80 52H619"/>
+          </g>`).join('')}
+          <text class="fe-layout-note" x="320" y="509" text-anchor="middle">Finaler 5P-Mix · Partner, Fläche und Preise zu validieren</text>
         </g>
       </svg>
-      <div class="fe-mix-labels" data-fe-mix-labels aria-hidden="true"><span>People<small>/ Customer</small></span><span>Product</span><span>Price</span><span>Place</span><span>Promotion</span></div>
+      <div class="fe-mobile-marketing" data-fe-mobile-marketing aria-hidden="true">
+        <p class="fe-mobile-mix-heading">5P · Vom Erlebnis zum Gast</p>
+        <ol>${marketingMix.map((part,index)=>`<li data-fe-mobile-row="${index}"><span class="fe-mobile-mix-index">${index+1}</span><h3>${part.title}${part.sub?`<small>${part.sub}</small>`:''}</h3><p>${part.lines.map(line=>`<span>${line}</span>`).join('')}</p></li>`).join('')}</ol>
+        <p class="fe-mobile-mix-note">Preise, Partner und Fläche sind zu validieren.</p>
+      </div>
     </div>`,
     mount(root) {
       const scene = root.querySelector('.fe-dining');
-      const table = root.querySelector('[data-fe-table]');
+      const layout = root.querySelector('[data-fe-layout]');
+      const tables = Array.from(root.querySelectorAll('[data-fe-table]'));
       const traces = Array.from(root.querySelectorAll('.fe-table-trace'));
       const places = Array.from(root.querySelectorAll('[data-fe-place]'));
-      const candles = Array.from(root.querySelectorAll('[data-fe-candle]'));
-      const courseGroup = root.querySelector('[data-fe-courses]');
-      const courseLine = root.querySelector('.fe-course-line');
+      const rays = Array.from(root.querySelectorAll('[data-fe-sightline]'));
+      const light = root.querySelector('[data-fe-launch-light]');
+      const plume = root.querySelector('[data-fe-plume]');
+      const panorama = root.querySelector('[data-fe-panorama]');
       const courses = Array.from(root.querySelectorAll('[data-fe-course]'));
-      const market = root.querySelector('[data-fe-market]');
+      const courseLine = root.querySelector('.fe-course-line');
+      const price = root.querySelector('[data-fe-price]');
       const priceLine = root.querySelector('.fe-price-connector');
+      const marketing = root.querySelector('[data-fe-marketing]');
+      const mobileMarketing = root.querySelector('[data-fe-mobile-marketing]');
+      const mobileMixRows = Array.from(root.querySelectorAll('[data-fe-mobile-row]'));
       const mixTrack = root.querySelector('.fe-mix-track');
-      const mixNodes = Array.from(root.querySelectorAll('[data-fe-mix-node]'));
-      const mixLabels = root.querySelector('[data-fe-mix-labels]');
+      const mixRows = Array.from(root.querySelectorAll('[data-fe-mix-row]'));
       let last = '';
       return {
         update(progress, context = {}) {
@@ -101,30 +144,35 @@
           const key = `${n(p)}|${Boolean(context.reduced)}|${Boolean(context.mobile)}`;
           if (key === last) return;
           last = key;
-          const laid = smooth(0,.23,p);
-          const offering = smooth(.61,.79,p);
-          traces.forEach((trace,index) => set(trace,'stroke-dashoffset',n(1-smooth(index*.035,.25+index*.035,p))));
-          set(scene,'--fe-table-fill',n(.1+.9*laid));
-          table.setAttribute('transform',`translate(0 ${n(-74*offering)}) translate(320 258) scale(${n(1-.055*offering)}) translate(-320 -258)`);
-          places.forEach((place,index) => {
-            const reveal = smooth(.025 + index*.015,.14 + index*.015,p);
-            set(place,'opacity',n(reveal));
-            place.setAttribute('transform',`translate(0 ${n(21*(1-reveal))})`);
+          scene.dataset.feView = p>=.77?'marketing':p>=.57?'price':p>=.31?'panorama':'layout';
+          mobileMarketing.setAttribute('aria-hidden',String(!context.mobile || p<.77));
+          set(layout,'opacity',n(1-smooth(.29,.35,p)));
+          set(scene,'--fe-table-fill',n(.2+.8*smooth(0,.21,p)));
+          tables.forEach((table,index)=>{
+            const arrival = smooth(index*.012,.07+index*.012,p);
+            set(table,'opacity',n(arrival));
+            table.setAttribute('transform',`translate(0 ${n(13*(1-arrival))})`);
           });
-          candles.forEach((candle,index) => set(candle,'opacity',n(smooth(.17+index*.035,.38+index*.035,p))));
-          const courseProgress = smooth(.30,.61,p);
-          set(courseGroup,'opacity',n(smooth(.20,.30,p)*(1-smooth(.59,.71,p))));
-          set(courseLine,'stroke-dashoffset',n(1-courseProgress));
-          courses.forEach((course,index) => {
-            const arrival = smooth(.28+index*.041,.355+index*.041,p);
-            set(course,'--fe-course-lit',n(arrival));
+          traces.forEach((trace,index)=>set(trace,'stroke-dashoffset',n(1-smooth(index*.009,.13+index*.009,p))));
+          places.forEach((place,index)=>set(place,'opacity',n(smooth(.045+index*.006,.11+index*.006,p))));
+          rays.forEach((ray,index)=>set(ray,'stroke-dashoffset',n(1-smooth(.12+index*.005,.23+index*.005,p))));
+          set(light,'opacity',n(smooth(.12,.27,p)));
+          set(plume,'opacity',n(.12+.88*smooth(.17,.28,p)));
+          set(panorama,'opacity',n(smooth(.29,.35,p)*(1-smooth(.55,.61,p))));
+          set(courseLine,'stroke-dashoffset',n(1-smooth(.35,.52,p)));
+          courses.forEach((course,index)=>set(course,'--fe-course-lit',n(smooth(.34+index*.022,.39+index*.022,p))));
+          set(price,'opacity',n(smooth(.57,.64,p)*(1-smooth(.76,.82,p))));
+          set(priceLine,'stroke-dashoffset',n(1-smooth(.63,.73,p)));
+          const mixOpacity = n(smooth(.77,.83,p));
+          set(marketing,'opacity',mixOpacity);
+          set(mobileMarketing,'opacity',mixOpacity);
+          mobileMixRows.forEach((row,index)=>set(row,'opacity',n(smooth(.78+index*.025,.84+index*.025,p))));
+          set(mixTrack,'stroke-dashoffset',n(1-smooth(.78,.96,p)));
+          mixRows.forEach((row,index)=>{
+            const arrival = smooth(.78+index*.025,.84+index*.025,p);
+            set(row,'opacity',n(arrival));
+            row.setAttribute('transform',`translate(${n(18*(1-arrival))} ${73+index*87})`);
           });
-          set(market,'opacity',n(smooth(.61,.76,p)));
-          set(priceLine,'stroke-dashoffset',n(1-smooth(.72,.9,p)));
-          set(mixTrack,'stroke-dashoffset',n(1-smooth(.74,.96,p)));
-          mixNodes.forEach((node,index) => set(node,'opacity',n(smooth(.72+index*.035,.80+index*.035,p))));
-          set(mixLabels,'opacity',n(smooth(.75,.91,p)));
-          set(mixLabels,'transform',`translateY(${n((1-smooth(.75,.91,p))*12)}px)`);
         }
       };
     }

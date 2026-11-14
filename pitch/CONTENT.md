@@ -1,7 +1,6 @@
 # RocketLight · Inhalt und Datenherkunft
 
-Stand: 14. November 2026. Die auswählbare Ansicht `pitch/` führt durch die **sieben
-Originalschritte** der Projektarbeit. Grundlage ist das aktuelle, vom Nutzer
+Stand: 14. November 2026. Die auswählbare Ansicht `pitch/` führt durch **acht Teile** nach dem ergänzten Prüfungsmaßstab: die sieben Originalschritte und eine ausdrücklich gekennzeichnete kritische Methodenevaluation. Grundlage ist das aktuelle, vom Nutzer
 bereitgestellte Archiv `OneDrive_stuff.zip`. Im Archiv sind keine `_old`-Dateien
 enthalten. Die kombinierte Präsentation ist nach der Nutzerangabe die
 Hauptfassung für Schritt 1 und 7; bei Zahlen und Rangfolgen gelten die aktuellen
@@ -13,12 +12,14 @@ von der Website herunterladbar.
 | Schritt | Inhalt im Pitch | Maßgebliche Originale |
 | --- | --- | --- |
 | 1 · Unternehmen | Mission, drei Geschäftsfelder, datierte Kennzahlen | Kombinierte Step-1/7-PPTX, Folien 2–3; SEC-Prospekt und Q2-Bericht |
-| 2 · Innovationsprüfstand | Vier bestehende Innovationen, Hube-Werte Team/KI, Methode und Interpretation | Part-2-XLSX, `Inno_Prüfstand`, `Ranking`, `Steckbriefe`; PPT-Folien 4–7 ergänzen |
+| 2 · Innovationsprüfstand | Drei Innovationen im Starship-System plus Starlink als ergänzender Vergleich, Hube-Werte Team/KI, Methode und Interpretation | Part-2-XLSX, `Inno_Prüfstand`, `Ranking`, `Steckbriefe`; PPT-Folien 4–7 ergänzen |
 | 3 · Trends und Ideen | Acht differenzierte Trends, 19 Vergleichsideen, acht Favoriten plus vier Open-Innovation-Ideen, zwölf Matrixeinträge, drei Business Cases | Part-3-XLSX, insbesondere `Trendbewertung`, `Portfolio`, `Trendradar`, `Ideenvergleich`, `Auswahlübersicht`, `Now-How-Wow-Matrix` |
 | 4 · Ideenbewertung | Sechs Hube-Renditebewertungen, zwölf Kriterien, drei Fünfjahresmodelle und detaillierter RocketLight-Case | Drei aktuelle XLSM-Arbeitsmappen zu RocketLight, Starlink Insights und Launch Engineering Cloud |
 | 5 · Marketing | People / Customer → Product → Price → Place → Promotion; alle 25 Felder und Vergleich der drei KI-Entwürfe | `RocketLight_Part5_5P_Multi_KI.xlsx`: `Finaler 5P-Mix!A5:E29`, `KI-Vergleich`, `Annahmen & Abgabe-Check` |
 | 6 · Roadmap | Eigenständige Varianten A/B, Gates, sechs Teilprojekte, vier W-Fragen, vollständige Budget-/Terminansichten | Beide Part-6-PPTX; per SHA-256 identisch mit den bereits eingebundenen Originalen |
 | 7 · Ganzheitliches Innovationsmanagement | Sechs Analysefelder; vier Empfehlungen für Struktur, Prozesse, Kultur und Kompetenzen | Kombinierte PPTX, Folien 9–16; ergänzendes Empfehlungsdeck, Folie 11 und Sprechernotizen |
+
+| 8 · Kritische Methodenevaluation | Strukturierte Gegenüberstellung von Beitrag, Grenze und ergänzendem Instrument; Annahme–Test–Entscheidung | Redaktionelle Synthese der Unterlagen 2–7; Prüfungsmaßstab als neuer Anhang; NASA TRL und Strategyzer Test Card als ergänzende Methodenquellen. Im ZIP fehlt eine separate Part-8-Datei. |
 
 Das Animationsdeck ist die gestalterische Anregung: kapitelsynchroner Countdown,
 vier Empfehlungen als Triebwerke und Raketenstart im Finale. Seine technischen
@@ -172,17 +173,16 @@ bereits unter 680 px Höhe, damit Text, Zeichnung und Phasennavigation Platz beh
 
 ## Filmische Darstellung
 
-Die sieben Originalkapitel bleiben vollständig im HTML. Die filmische Ebene
+Die sieben Originalkapitel sowie die neue Methodenevaluation bleiben vollständig im HTML. Die filmische Ebene
 verschiebt sie jeweils in ein natives, per Direktlink erreichbares `details`-Element
 und ergänzt eine kurze Scrollszene. Alle bestehenden IDs, Dokumente, Rechenwege und
 Interaktionen bleiben erhalten; ohne die Filmskripte bleibt die bisherige Kapitelansicht
-lesbar. Die Szenentexte stehen in `film-story.js`, die Visualisierung in den vier
+lesbar. Die Szenentexte stehen in `film-story.js`, die Visualisierung in den thematischen
 `film-*.js`-Dateien und dem gemeinsamen Controller `film.js`.
 
 Die Animationen zeigen keine zusätzlichen Messwerte: Technologiebalken, Trendpunkte,
 IR und Umsatz folgen den bestehenden Quellen. Die Umsatzsequenz nennt ausdrücklich
-Variante A, auch wenn für die Architektur Variante B gewählt ist. Die zwanzig
-Gedecke und sieben Gänge illustrieren das Dinner-Konzept. Die vier symbolischen
+Variante A, auch wenn für die Architektur Variante B gewählt ist. Zehn separate Zweiertische mit zwanzig Plätzen, freie Sichtachsen und sieben Gänge illustrieren das überarbeitete Dinner-Konzept. Die vier symbolischen
 Antriebe stehen für Struktur, Prozesse, Kultur und Kompetenzen.
 
 Die Architektur verwendet dasselbe Landschaftsbild und dieselben transparenten
@@ -191,3 +191,53 @@ und Bodenanker; ein vertikaler Bildaufbau führt vom Entwurf zum Konzeptbild.
 Auf schmalen Bildschirmen erhält die Landschaft eine tiefere Bildbühne, damit
 das Gebäude vollständig im Ausschnitt bleibt. Gezeichnete Gates zeigen den
 Präsentationsfortschritt, keine tatsächlich erteilten Freigaben.
+
+## Ergänzung nach dem Prüfungsmaßstab vom 14.11.2026
+
+Der neu angehängte Maßstab umfasst acht Teile. Die Navigation, der Countdown und
+alle Kapitelnummern folgen jetzt dieser Struktur. Folgende Kerngrafiken sind
+Teil der Scrollinszenierung und benötigen kein geöffnetes Dossier:
+
+| Part | Sichtbare Grafik im Hauptpitch |
+| --- | --- |
+| 1 | Drei Geschäftsfelder um die SpaceX-Mission |
+| 2 | Drei Starship-Projekte mit Team-/KI-Balken; Starlink als expliziter Vergleich |
+| 3 | 360°-Suchfeld, exaktes Trendportfolio, acht Stufenmodell-Zeilen in zwei Phasen, vollständige zwölfteilige Now/How/Wow-Matrix, drei Finalisten |
+| 4 | Sechs Team-/KI-Punkte der drei Ideen im Nutzen-Aufwand-Portfolio; IR-Werte und anschließend die A-Umsatzkurve |
+| 5 | Zehn Zweiertische, zwanzig Plätze und Sichtachsen; sieben Gänge, Preisannahmen und konkreter 5P-Mix |
+| 6 | Fünf Gates sowie zeitproportionale Roadmap aller sechs Teilprojekte, mit vier Pilotterminen für die gewählte Variante |
+| 7 | Vier konkrete Managementempfehlungen als gemeinsamer Antrieb |
+| 8 | Zwei Evaluationsmatrizen für die Methoden aus Parts 2–7; Annahme–Test–Entscheidung für Nachfrage, Betrieb und Wirtschaftlichkeit |
+
+### Transparente redaktionelle Ergänzungen
+
+Das Originalblatt `Stufenmodell` enthält zwei illustrative Beispiele, keine acht
+fertigen Ableitungen. Die neuen acht Zuordnungen führen die tatsächlich gewählten
+Favoriten aus `Auswahlübersicht!B8:B15` durch die vier Modellstufen Trend,
+Herausforderung, Zukunftsmarkt und Geschäftschance. Beide Hauptgrafiken kennzeichnen
+sie als redaktionelle Ableitung. RocketLight bleibt eine zusätzliche Idee aus
+Open Innovation und wird nicht einem Trendfavoriten zugeschrieben.
+
+Die Auswahl bleibt ein Teamentscheid: RocketLight führt die Team-IR, während die KI
+Launch Engineering Cloud geringfügig vor Starlink Insights sieht. Die sechs Werte
+werden nicht zu einem vermeintlichen Konsens verrechnet.
+
+Teil 8 ist eine strukturierte redaktionelle Evaluation der vorhandenen Methoden.
+NASA TRL und Strategyzer Test Card sind als ergänzende Instrumente verlinkt; es
+werden weder neue TRL-Werte noch bereits durchgeführte Tests behauptet.
+
+Das neue Raumkonzept wurde auf Wunsch auf zehn Zweiertische umgestellt, bei
+unveränderter Gesamtkapazität von zwanzig Gästen. Der Einstieg zeigt mehrere
+Tische und einen deutlich präsenteren Start. Der Sitzplan zeigt die geplanten
+Sichtachsen schematisch; er ersetzt keine Standortplanung. Motivherkunft und
+Bildprompt stehen in `assets/README.md`.
+
+### Reduzierte Bewegung und schmale Ansichten
+
+Bei reduzierter Bewegung erscheinen die Kerngrafiken der Teile 3, 4 und 5 als
+vollständige, ruhige Bildfolge im normalen Seitenfluss. Sie benötigen weder
+Phasenauswahl noch ein geöffnetes Dossier. Dichte Diagramme erhalten bei schmalen
+Fenstern eine eigene, per Tastatur bedienbare horizontale Scrollfläche; die Seite
+selbst bleibt vertikal. Die 5P-Zeilen, Roadmap und Methodenevaluation verwenden
+auf schmalen Ansichten lesbare HTML-Darstellungen. Die Kennzahlen und Quelltermine
+stimmen mit den animierten Fassungen überein.

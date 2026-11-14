@@ -3,47 +3,63 @@
 .fe-scene .fe-svg { width: 100%; height: 100%; display: block; overflow: visible; }
 .fe-scene svg text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-weight: 400; fill: #eff3ed; }
 .fe-scene svg path, .fe-scene svg ellipse, .fe-scene svg circle { vector-effect: non-scaling-stroke; }
-.fe-scene .fe-experience-heading text { font-size: 15px; letter-spacing: 2.5px; fill: #b4c4c9; }
-.fe-heading-divider { fill: #efbd91; }
-.fe-table-shadow { fill: #03070b; opacity: .4; filter: blur(11px); }
+.fe-dining { --fe-table-fill: .2; }
+.fe-scene .fe-diagram-heading { font-size: 17px; letter-spacing: 1.5px; fill: #c4d4d8; }
+.fe-dinner-table,.fe-place { opacity: 0; }
+.fe-table-shadow { fill: #03070b; opacity: .35; filter: blur(5px); }
 .fe-table-top { fill: url(#fe-table-surface); opacity: var(--fe-table-fill, 0); }
-.fe-table-ghost { fill: none; stroke: #a9d9d91c; stroke-width: 1; }
-.fe-table-outline { fill: none; stroke: #b6ddda; stroke-width: 1.25; }
-.fe-table-edge { fill: #060e15b8; stroke: #a9d9d94f; stroke-width: 1; }
-.fe-table-leg { fill: none; stroke: #a9d9d95c; stroke-width: 1; }
-.fe-table-runner { fill: none; stroke: #efbd916e; stroke-width: .7; }
-.fe-table-trace { stroke-dasharray: 1; stroke-dashoffset: 1; }
-.fe-place { opacity: 0; }
-.fe-chair { fill: #0a151dab; stroke: #a9d9d9a3; stroke-width: 1; }
-.fe-chair-inner { fill: #efbd910b; stroke: none; }
+.fe-table-outline { fill: none; stroke: #c7e5e1; stroke-width: 1.2; }
+.fe-table-edge { fill: #061019c2; stroke: #a9d9d976; stroke-width: .8; }
+.fe-table-leg { fill: none; stroke: #a9d9d955; stroke-width: .8; }
+.fe-table-trace,.fe-sightline { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-chair { fill: #0b1a23; stroke: #a9d9d9bd; stroke-width: .9; }
+.fe-chair-inner { fill: #efbd9121; stroke: none; }
+.fe-guest { fill: #e8cfb3; }
 .fe-plate-light { fill: url(#fe-place-glow); }
-.fe-plate { fill: #dce5df12; stroke: #eee7d3d9; stroke-width: .9; }
+.fe-plate { fill: #dce5df23; stroke: #eee7d3d9; stroke-width: .9; }
 .fe-plate-inner { fill: none; stroke: #efbd917d; stroke-width: .65; }
-.fe-cutlery { fill: none; stroke: #b7c7cd7d; stroke-width: .65; stroke-linecap: round; }
-.fe-candle { opacity: 0; }
+.fe-cutlery { fill: none; stroke: #b7c7cdab; stroke-width: .65; stroke-linecap: round; }
 .fe-candle-halo { fill: url(#fe-candle-glow); }
-.fe-candle-base { fill: #efbd91b3; }
-.fe-candle-stem { fill: none; stroke: #e9d8b7; stroke-width: 1.6; }
+.fe-candle-stem { fill: none; stroke: #e9d8b7; stroke-width: 1.2; }
 .fe-candle-flame { fill: #fff0c7; }
-.fe-courses { opacity: 0; }
-.fe-course-guide { fill: none; stroke: #a9d9d91e; stroke-width: 1; }
-.fe-course-line { fill: none; stroke: #efbd91; stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.fe-course-ring { fill: #08131c; stroke: #a9d9d970; stroke-width: 1; opacity: calc(.35 + var(--fe-course-lit, 0) * .65); }
+.fe-panorama-arc { fill: none; stroke: #bce4df; stroke-width: 1.4; }
+.fe-panorama-arc-back { fill: none; stroke: #a9d9d92b; stroke-width: 1; }
+.fe-view-horizon { stroke: #a9d9d93d; stroke-width: .8; }
+.fe-sightline { fill: none; stroke: #efbd9166; stroke-width: .8; }
+.fe-terrace { fill: none; stroke: #a9d9d92e; stroke-width: .8; }
+.fe-rocket-body { fill: url(#fe-rocket-metal); stroke: #c8e1df; stroke-width: .75; }
+.fe-rocket-rings { fill: #273d49; stroke: #a9d9d9ac; stroke-width: .6; }
+.fe-rocket-plume { fill: #ffe1a8; filter: drop-shadow(0 0 10px #efbd91b0); }
+.fe-dining-tower { fill: none; stroke: #a9d9d985; stroke-width: .9; }
+.fe-scene .fe-view-label { font-size: 13px; letter-spacing: 1px; fill: #b9cbc9; }
+.fe-scene .fe-layout-caption { font-size: 18px; letter-spacing: 1.5px; fill: #d2deda; }
+.fe-scene .fe-layout-note { font-size: 15px; letter-spacing: .2px; fill: #aebfc5; }
+.fe-panorama,.fe-price,.fe-marketing { opacity: 0; }
+.fe-window-frame { fill: none; stroke: #a9d9d938; stroke-width: .9; }
+.fe-window-base { stroke: #efbd9170; stroke-width: 1; }
+.fe-course-guide { fill: none; stroke: #a9d9d93e; stroke-width: 1; }
+.fe-course-line { fill: none; stroke: #efbd91; stroke-width: 1.1; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-course-ring { fill: #08131ce8; stroke: #a9d9d9b8; stroke-width: 1; opacity: calc(.35 + var(--fe-course-lit, 0) * .65); }
 .fe-course-dot { fill: #efbd91; opacity: var(--fe-course-lit, 0); }
-.fe-course text { font-size: 17px; letter-spacing: 1px; fill: #a8b5bb; opacity: calc(.4 + var(--fe-course-lit, 0) * .6); }
-.fe-scene .fe-course-caption { font-size: 14px; letter-spacing: 2px; fill: #a9b8be; }
-.fe-market { opacity: 0; }
-.fe-scene .fe-price-label { fill: #a9d9d9; font-size: 16px; letter-spacing: 2px; }
+.fe-course text { font-size: 20px; letter-spacing: 1px; fill: #c4d2d6; opacity: calc(.4 + var(--fe-course-lit, 0) * .6); }
+.fe-scene .fe-course-caption { font-size: 18px; letter-spacing: 1.2px; fill: #c3d3d7; }
+.fe-price-orbit { fill: none; stroke: #a9d9d920; stroke-width: .8; }
+.fe-scene .fe-price-label { fill: #a9d9d9; font-size: 17px; letter-spacing: 1.6px; }
 .fe-scene .fe-price-target-label { fill: #efbd91; }
-.fe-scene .fe-price-value { font-size: 55px; letter-spacing: -3px; font-weight: 350; font-variant-numeric: tabular-nums; }
-.fe-scene .fe-price-unit { fill: #abbcc3; font-size: 14px; letter-spacing: 1px; }
+.fe-scene .fe-price-value { font-size: 58px; letter-spacing: -3px; font-weight: 350; font-variant-numeric: tabular-nums; }
+.fe-scene .fe-price-unit { fill: #bdccd0; font-size: 18px; letter-spacing: 1px; }
+.fe-scene .fe-price-validation { fill: #dce5dd; font-size: 18px; letter-spacing: .9px; }
 .fe-price-connector { fill: none; stroke: url(#fe-market-line); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.fe-mix-track { fill: none; stroke: #a9d9d941; stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.fe-mix-node { opacity: 0; }
-.fe-mix-node circle { fill: #efbd91; stroke: #060b10; stroke-width: 2; }
-.fe-mix-node path { stroke: #efbd9150; stroke-width: 1; }
-.fe-mix-labels { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); align-items: start; position: absolute; bottom: -4px; inset-inline: 0; gap: 8px; text-align: center; color: #d6e1e2; font-size: 13px; line-height: 1.3; opacity: 0; }
-.fe-mix-labels small { display: block; font-size: 10px; color: #a8b5bb; margin-top: 3px; }
+.fe-mix-guide { fill: none; stroke: #a9d9d931; stroke-width: 1; }
+.fe-mix-track { fill: none; stroke: #efbd91; stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-mix-row { opacity: 0; }
+.fe-mix-circle { fill: #101c25; stroke: #efbd91; stroke-width: 1; }
+.fe-scene .fe-mix-number { fill: #efbd91; font-size: 18px; font-variant-numeric: tabular-nums; }
+.fe-scene .fe-mix-name { font-size: 25px; letter-spacing: -.7px; }
+.fe-scene .fe-mix-sub { font-size: 17px; fill: #a9d9d9; }
+.fe-mix-connector { fill: none; stroke: #efbd9190; stroke-width: 1; }
+.fe-scene .fe-mix-content { font-size: 19px; fill: #c8d6da; letter-spacing: -.1px; }
+.fe-mix-rule { stroke: #a9d9d927; stroke-width: .7; }
 
 /* Four independent recommendations physically assemble into one grounded vehicle. */
 .fe-system .fe-svg { padding-bottom: 20px; }
@@ -73,14 +89,13 @@
 .fe-system-caption span { color: #efbd91; padding: 0 8px; }
 
 @media (max-width: 760px) {
-  .fe-scene .fe-experience-heading text { font-size: 20px; letter-spacing: 1px; }
-  .fe-scene .fe-price-label { font-size: 20px; letter-spacing: 1.3px; }
+  .fe-scene .fe-diagram-heading { font-size: 20px; letter-spacing: .8px; }
+  .fe-scene .fe-price-label { font-size: 19px; letter-spacing: .7px; }
   .fe-scene .fe-price-value { font-size: 58px; }
-  .fe-scene .fe-price-unit { font-size: 17px; letter-spacing: .4px; }
-  .fe-scene .fe-course-caption { font-size: 18px; letter-spacing: 1px; }
-  .fe-course text { font-size: 22px; }
-  .fe-mix-labels { font-size: 11px; gap: 3px; bottom: -2px; }
-  .fe-mix-labels small { font-size: 9px; }
+  .fe-scene .fe-layout-caption { font-size: 20px; letter-spacing: .7px; }
+  .fe-scene .fe-layout-note { font-size: 17px; letter-spacing: -.2px; }
+  .fe-scene .fe-mix-content { font-size: 20px; letter-spacing: -.35px; }
+  .fe-scene .fe-mix-sub { font-size: 19px; }
   .fe-scene .fe-engine-name { font-size: 29px; letter-spacing: -.8px; }
   .fe-scene .fe-engine-purpose { font-size: 18px; }
   .fe-scene .fe-system-foundation { font-size: 17px; letter-spacing: .5px; }
@@ -89,6 +104,39 @@
 
 @media print {
   .fe-scene .fe-svg { max-height: 380px; }
-  .fe-table-trace,.fe-course-line,.fe-price-connector,.fe-mix-track,.fe-vehicle-trace,.fe-engine-wire,.fe-engine-trace,.fe-engine-label-rule { stroke-dashoffset: 0 !important; }
-  .fe-place,.fe-candle,.fe-market,.fe-mix-node,.fe-mix-labels,.fe-engine-unit,.fe-engine-label { opacity: 1 !important; }
+  .fe-table-trace,.fe-sightline,.fe-course-line,.fe-price-connector,.fe-mix-track,.fe-vehicle-trace,.fe-engine-wire,.fe-engine-trace,.fe-engine-label-rule { stroke-dashoffset: 0 !important; }
+  .fe-place,.fe-candle,.fe-mix-row,.fe-engine-unit,.fe-engine-label { opacity: 1 !important; }
+}
+
+
+/* The concrete 5P content remains ordinary readable text on narrow screens.
+   The same progress feeds every instance, including static-sequence clones. */
+.fe-mobile-marketing { display: none; }
+@media (max-width: 760px) {
+  .fe-dining .fe-marketing { display: none; }
+  .fe-mobile-marketing {
+    display: none; position: absolute; inset: 0; width: 100%; min-width: 0;
+    opacity: 0; color: #d3e0e1; pointer-events: none;
+  }
+  .fe-dining[data-fe-view="marketing"] .fe-mobile-marketing { display: block; }
+  .fe-mobile-mix-heading { color: #b9cdd1; font-size: 14px; line-height: 1.4; margin: 0 0 12px; }
+  .fe-mobile-marketing ol { list-style: none; padding: 0; margin: 0; }
+  .fe-mobile-marketing li {
+    display: grid; grid-template-columns: 22px 80px minmax(0,1fr); align-items: center;
+    gap: 8px; min-width: 0; padding: 7px 0; border-bottom: 1px solid #a9d9d92b;
+  }
+  .fe-mobile-mix-index {
+    display: grid; place-items: center; width: 20px; height: 20px;
+    border: 1px solid #efbd918c; border-radius: 50%; color: #efbd91;
+    font-size: 11px; font-variant-numeric: tabular-nums;
+  }
+  .fe-mobile-marketing h3 { font-size: 14px; font-weight: 450; line-height: 1.35; margin: 0; color: #eff3ed; }
+  .fe-mobile-marketing h3 small { display: block; font-size: 13px; font-weight: 400; color: #a9d9d9; margin-top: 2px; }
+  .fe-mobile-marketing li > p { font-size: 13px; line-height: 1.4; margin: 0; color: #c8d7dc; }
+  .fe-mobile-marketing li > p span { display: block; }
+  .fe-mobile-mix-note { font-size: 13px; line-height: 1.5; margin-top: 11px; color: #adc3cc; }
+  .film-static-sequence[data-static-step="5"] .fe-dining[data-fe-view="marketing"] { height: auto; min-height: 0; }
+  .film-static-sequence[data-static-step="5"] .fe-dining[data-fe-view="marketing"] > .fe-svg { display: none; }
+  .film-static-sequence[data-static-step="5"] .fe-dining[data-fe-view="marketing"] .fe-mobile-marketing { position: relative; inset: auto; }
+  .film-ready.is-reduced .film-visual > .fe-dining[data-fe-view="marketing"] > .fe-svg { visibility: hidden; }
 }

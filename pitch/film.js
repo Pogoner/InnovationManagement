@@ -1,4 +1,4 @@
-/* One shared landscape, seven native-scroll reels. The existing pitch owns RAF. */
+/* One shared landscape, eight native-scroll reels. The existing pitch owns RAF. */
 (() => {
   'use strict';
   const story = window.PitchFilmStory;
@@ -10,12 +10,12 @@
   const smooth = (a,b,n) => { const p=clamp((n-a)/(b-a)); return p*p*(3-2*p); };
   const fmt = n => n.toFixed(4);
   const arrow = '<svg class="arrow-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12 12 4M4 4h8v8"/></svg>';
-  const stillPoints = {1:[.35,.70,1],2:[.40,.81,1],3:[.27,.41,.735,1],4:[.36,.80,1],5:[.33,.60,1],6:[.14,.53,.75,1],7:[.18,.46,.68,1]};
+  const stillPoints = {1:[.35,.70,1],2:[.40,.81,1],3:[.10,.28,.44,.60,.80,1],4:[.27,.57,1],5:[.28,.53,.74,1],6:[.14,.40,.74,1],7:[.18,.46,.68,1],8:[.25,.60,1]};
   const world = document.createElement('div');
   world.className = 'film-background';
   world.setAttribute('aria-hidden','true');
   world.innerHTML = '<div class="film-camera"><img class="film-landscape-image" src="../teil6/scene.webp" width="1672" height="941" alt=""><div class="film-water-light"></div><div class="film-world-architecture">' +
-    window.PitchArchitecture.markup() + '</div></div><div class="film-world-grade"></div><div class="film-world-grain"></div>';
+    window.PitchArchitecture.markup() + '</div></div><div class="film-dining-world"><img src="assets/dining-panorama.webp" width="1672" height="941" alt=""><div></div></div><div class="film-world-grade"></div><div class="film-world-grain"></div>';
   document.body.prepend(world);
   const camera = world.querySelector('.film-camera');
   const architecture = world.querySelector('.film-world-architecture');
@@ -41,7 +41,7 @@
     const reel = document.createElement('div');
     reel.className = 'film-reel';
     reel.style.setProperty('--reel-length',chapter.length);
-    reel.innerHTML = '<div class="film-stage" data-film-step="'+chapter.step+'"><div class="film-chapter-meta"><span>'+String(chapter.step).padStart(2,'0')+' / '+chapter.label+'</span><span>ROCKETLIGHT / MISSION '+String(8-chapter.step).padStart(2,'0')+'</span></div><div class="film-copy"><p class="eyebrow film-beat-tag"></p><h2 id="film-title-'+chapter.step+'"></h2><p class="film-beat-copy"></p><a class="film-evidence-link" href="#belege-'+chapter.step+'">Zahlen &amp; Hintergründe '+arrow+'</a></div><div class="film-visual"></div><div class="film-stage-bottom"><div class="film-local-progress" aria-hidden="true"><i></i></div><p class="film-scene-cue"></p><nav class="film-beat-nav" aria-label="Phasen: '+chapter.label+'"></nav></div><span class="film-chapter-watermark" aria-hidden="true">'+String(chapter.step).padStart(2,'0')+'</span></div>';
+    reel.innerHTML = '<div class="film-stage" data-film-step="'+chapter.step+'"><div class="film-chapter-meta"><span>PART '+String(chapter.step).padStart(2,'0')+' / '+chapter.label+'</span><span>ROCKETLIGHT / MISSION '+String(story.length+1-chapter.step).padStart(2,'0')+'</span></div><div class="film-copy"><p class="eyebrow film-beat-tag"></p><h2 id="film-title-'+chapter.step+'"></h2><p class="film-beat-copy"></p><a class="film-evidence-link" href="#belege-'+chapter.step+'">Zahlen &amp; Hintergründe '+arrow+'</a></div><div class="film-visual"></div><div class="film-stage-bottom"><div class="film-local-progress" aria-hidden="true"><i></i></div><p class="film-scene-cue"></p><nav class="film-beat-nav" aria-label="Phasen: '+chapter.label+'"></nav></div><span class="film-chapter-watermark" aria-hidden="true">'+String(chapter.step).padStart(2,'0')+'</span></div>';
     section.classList.remove('page-width');
     section.classList.add('film-chapter');
     section.setAttribute('aria-labelledby','film-title-'+chapter.step);
@@ -55,7 +55,7 @@
       button.type='button';
       button.setAttribute('aria-label',beat.cue);
       button.dataset.filmChapter=chapter.step;
-      button.dataset.filmPoint=Math.min(.96,beat.at+.06);
+      button.dataset.filmPoint=stillPoints[chapter.step][index];
       button.dataset.filmStill=stillPoints[chapter.step][index];
       button.innerHTML='<span></span>';
       nav.append(button);
@@ -116,9 +116,16 @@
     camera.style.top=(portrait?height-masterHeight-66:(height-masterHeight)/2).toFixed(2)+'px';
     const y=scrollY;
     records.forEach(record=>{
+      if (reduced && !record.staticScene && window.PitchStatic && [3,4,5].includes(record.chapter.step)) {
+        record.staticScene=window.PitchStatic.create(record.chapter,scenes[record.chapter.step],stillPoints[record.chapter.step],{variant,mobile:width<=760});
+        record.reel.append(record.staticScene.element);
+      }
+      if(record.staticScene)record.staticScene.updateContext({variant,mobile:width<=760});
+      record.section.setAttribute('aria-labelledby',reduced&&record.staticScene?record.staticScene.headingId:'film-title-'+record.chapter.step);
       record.top=record.reel.getBoundingClientRect().top+y;
       record.height=record.reel.offsetHeight;
       record.range=Math.max(1,record.height-record.stage.offsetHeight);
+      record.linear=width<=760 && (record.chapter.step===6 || record.chapter.step===8);
       record.lastP=-1;
     });
     heroTop=prologue.getBoundingClientRect().top+y;
@@ -140,7 +147,7 @@
     hero.style.setProperty('--hero-copy-opacity',fmt(1-smooth(.58,1,intro)));
     let current=records[0];
     records.forEach(record=>{
-      const p=reduced?(record.staticPoint??1):clamp((y-record.top)/record.range);
+      const p=(reduced||record.linear)?(record.staticPoint??1):clamp((y-record.top)/record.range);
       record.progress=p;
       const visible=y+height>=record.top&&y<=record.top+record.height;
       if(visible||record.lastP<0||reduced) {
@@ -156,6 +163,10 @@
     });
     const step=current.chapter.step;
     const p=current.progress;
+    const dining=records.find(record=>record.chapter.step===5);
+    const diningMix=smooth(dining.top-height*.5,dining.top+height*.08,y)*(1-smooth(dining.top+dining.height-height*.65,dining.top+dining.height+height*.1,y));
+    const diningFocus=smooth(.28,.38,dining.progress)*(1-smooth(.54,.65,dining.progress));
+    world.style.setProperty('--dining-opacity',fmt(diningMix*(.26+diningFocus*.66)));
     const worldIn=smooth(heroBottom-height*.7,heroBottom-height*.08,y);
     const worldOut=1-smooth(launchTop-height*.4,launchTop+height*.3,y);
     world.style.opacity=fmt(worldIn*worldOut);
@@ -181,7 +192,7 @@
 
   function setVariant(value) {
     variant=value;
-    records.forEach(r=>{r.lastP=-1;});
+    records.forEach(r=>{r.lastP=-1;r.staticScene?.updateVariant(value);});
     document.dispatchEvent(new Event('pitch:layout'));
   }
   function captureMotionPosition(next) {
@@ -190,7 +201,15 @@
     if(y<heroBottom)return {node:prologue,offset:0};
     let record=records[0];
     records.forEach(r=>{if(y+Math.min(height*.2,130)>=r.top)record=r;});
-    if(y<record.top+record.height)return {record,point:record.progress??0};
+    if(y<record.top+record.height) {
+      let point=record.progress??0;
+      if(reduced && record.staticScene) {
+        let selected=0;
+        record.staticScene.phases.forEach((phase,index)=>{if(phase.getBoundingClientRect().top<=height*.45)selected=index;});
+        point=stillPoints[record.chapter.step][selected];
+      }
+      return {record,point};
+    }
     let node=record.disclosure;
     if(y>=launchTop)node=y>=document.querySelector('#quellen').getBoundingClientRect().top+y?document.querySelector('#quellen'):launch;
     return {node,offset:y-(node.getBoundingClientRect().top+y)};
@@ -211,7 +230,7 @@
     if(dirty)measure();
     const r=records.find(item=>item.chapter.step===Number(control.dataset.filmChapter));
     if(!r)return;
-    if(reduced) {
+    if(reduced||r.linear) {
       // A deliberate phase choice remains available without moving imagery.
       const p=Number(control.dataset.filmStill);
       r.staticPoint=p;

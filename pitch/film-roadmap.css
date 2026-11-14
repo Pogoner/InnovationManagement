@@ -1,0 +1,144 @@
+/* Scene 06: readable gates and a proportional six-lane implementation plan.
+   Load after film.css; architectural drawing and world coordinates stay untouched. */
+.film-stage[data-film-step="6"] .film-visual {
+  width: 100%; max-width: 650px; height: auto; max-height: none;
+}
+.film-stage[data-film-step="6"] .film-architecture-plan {
+  width: 100%; padding: 0; border: 0; position: relative;
+}
+.film-plan-header { display: flex; align-items: center; gap: 18px; }
+.film-stage[data-film-step="6"] .film-variant-switch {
+  flex: 1 1 auto; display: flex; min-width: 0; align-self: center;
+}
+.film-stage[data-film-step="6"] .film-variant-switch button {
+  min-height: 44px; padding: 8px 10px; font-size: 12px;
+}
+.film-stage[data-film-step="6"] .film-plan-budget {
+  position: static; flex: 0 0 auto; display: block; padding: 0; text-align: right;
+}
+.film-stage[data-film-step="6"] .film-plan-name { display: block; font-size: 8px; letter-spacing: .09em; }
+.film-stage[data-film-step="6"] .film-plan-total { font-size: 32px; line-height: 1.1; margin-top: 3px; }
+.film-stage[data-film-step="6"] .film-plan-unit { font-size: 10px; line-height: 1.35; }
+.film-plan-views { display: grid; margin-top: 20px; align-items: start; }
+.film-gates-view,.film-timeline-view { grid-area: 1 / 1; min-width: 0; }
+.film-gates-view { opacity: calc(1 - var(--roadmap-mix,0)); width: min(330px,100%); justify-self: end; }
+.film-timeline-view { opacity: var(--roadmap-mix,0); }
+.film-architecture-plan[data-plan-view="gates"] .film-timeline-view,
+.film-architecture-plan[data-plan-view="roadmap"] .film-gates-view { pointer-events: none; }
+.film-stage[data-film-step="6"] .film-plan-gates li { min-height: 57px; padding-block: 8px; }
+.film-stage[data-film-step="6"] .film-plan-gates strong { font-size: 13px; line-height: 1.35; }
+.film-stage[data-film-step="6"] .film-plan-gates time { font-size: 11px; }
+.film-stage[data-film-step="6"] .film-plan-gates li > span { font-size: 10px; }
+.film-stage[data-film-step="6"] .film-plan-note { font-size: 10px; line-height: 1.45; }
+.film-plan-timeline { display: block; width: 100%; height: auto; overflow: visible; }
+.film-plan-timeline text {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  fill: #d7e4e4; font-weight: 400; font-variant-numeric: tabular-nums;
+}
+.film-plan-timeline path,.film-plan-timeline line,.film-plan-timeline rect,.film-plan-timeline circle {
+  vector-effect: non-scaling-stroke;
+}
+.film-plan-timeline .plan-chart-heading { fill: #a9c0c8; font-size: 16px; letter-spacing: 1.3px; }
+.plan-years line { stroke: #a9d9d91e; stroke-width: .8; }
+.film-plan-timeline .plan-years text { fill: #b2c5ca; font-size: 19px; }
+.plan-gate-dots path { fill: #a9d9d970; stroke: #b8d8d9; stroke-width: .6; }
+.film-plan-timeline .plan-gate-dots text { fill: #bbcccc; font-size: 15px; }
+.plan-lane { opacity: calc(.32 + var(--lane-reveal,0) * .68); }
+.film-plan-timeline .plan-lane-label { fill: #dce7e6; font-size: 20px; letter-spacing: -.25px; }
+.plan-lane-guide { fill: none; stroke: #a9d9d92d; stroke-width: .8; }
+.plan-task { fill: #a9d9d9; opacity: calc(.35 + var(--lane-reveal,0) * .65); }
+.plan-task.is-track { fill: #efbd9124; stroke: #efbd91a1; stroke-width: 1; stroke-dasharray: 3 3; }
+.plan-pilot circle { fill: #efbd91; stroke: #0a131c; stroke-width: 1; }
+.film-plan-timeline .plan-pilot text { fill: #efbd91; font-size: 17px; }
+.plan-time-scan { stroke: #f3d7ad; stroke-width: 1.1; }
+.plan-legend rect { fill: #a9d9d9; }
+.plan-legend circle { fill: #efbd91; }
+.film-plan-timeline .plan-legend text { fill: #abc0c7; font-size: 18px; }
+.film-roadmap-pilots {
+  display: flex; flex-wrap: wrap; gap: 3px 6px; align-items: baseline;
+  margin-top: 3px; padding-top: 9px; border-top: 1px solid #a9d9d929;
+  color: #c7d6db; font-size: 10px; line-height: 1.5; font-variant-numeric: tabular-nums;
+}
+.film-roadmap-pilots > span { color: #efbd91; font-size: 9px; letter-spacing: .07em; margin-right: 2px; }
+.film-roadmap-pilots > b { color: #78909b; font-weight: 400; }
+.film-mobile-roadmap,.film-mobile-critical { display: none; }
+
+@media (min-width: 761px) and (max-height: 800px) {
+  .film-stage[data-film-step="6"] { padding-top: 132px; }
+  .film-plan-header { gap: 10px; }
+  .film-stage[data-film-step="6"] .film-plan-name { display: none; }
+  .film-stage[data-film-step="6"] .film-plan-total { font-size: 28px; margin: 0; }
+  .film-stage[data-film-step="6"] .film-plan-unit { font-size: 9px; padding: 0; }
+  .film-stage[data-film-step="6"] .film-variant-switch button { padding-inline: 7px; font-size: 11px; }
+  .film-plan-views { margin-top: 8px; }
+  .film-stage[data-film-step="6"] .film-plan-gates li { min-height: 0; padding-block: 7px; }
+  .film-stage[data-film-step="6"] .film-plan-gates strong { font-size: 12px; }
+  .film-stage[data-film-step="6"] .film-plan-gates li > i { top: 14px; }
+  .film-stage[data-film-step="6"] .film-plan-note { font-size: 9px; margin-top: 9px; }
+  .film-roadmap-pilots { font-size: 9px; gap: 2px 5px; padding-top: 5px; line-height: 1.4; }
+  .film-roadmap-pilots > span { font-size: 8px; }
+}
+
+/* Narrow screens use ordinary page flow. Every gate, row and pilot stays visible;
+   source dates determine bar geometry exactly as in the desktop SVG. */
+@media (max-width: 760px) {
+  .film-chapter[data-step="6"] .film-reel { height: auto; }
+  .film-stage[data-film-step="6"],
+  .film-ready.is-reduced .film-stage[data-film-step="6"] {
+    position: relative; height: auto; min-height: 0; overflow: visible;
+    padding-top: 130px; padding-bottom: 155px; gap: 24px;
+  }
+  .film-stage[data-film-step="6"] .film-visual,
+  .film-ready.is-reduced .film-stage[data-film-step="6"] .film-visual {
+    width: 100%; max-width: none; height: auto; min-height: 0; max-height: none; aspect-ratio: auto;
+    flex: 0 0 auto; margin-top: 0;
+  }
+  .film-plan-header { gap: 12px; }
+  .film-stage[data-film-step="6"] .film-variant-switch button { min-height: 44px; padding-inline: 7px; font-size: 12px; }
+  .film-stage[data-film-step="6"] .film-variant-switch button span { margin-left: 3px; }
+  .film-stage[data-film-step="6"] .film-plan-name { display: none; }
+  .film-stage[data-film-step="6"] .film-plan-total { font-size: 28px; margin: 0; }
+  .film-stage[data-film-step="6"] .film-plan-unit { font-size: 10px; }
+  .film-plan-views { display: block; margin-top: 25px; }
+  .film-gates-view,.film-timeline-view { width: 100%; opacity: 1; }
+  .film-stage[data-film-step="6"] .film-plan-gates { display: block; margin: 0; }
+  .film-stage[data-film-step="6"] .film-plan-gates::before,
+  .film-stage[data-film-step="6"] .film-plan-gates::after {
+    left: 4px; right: auto; width: 1px; height: auto; top: 18px; bottom: 23px; transform: none;
+  }
+  .film-stage[data-film-step="6"] .film-plan-gates li {
+    display: grid; grid-template-columns: 1fr auto; padding: 8px 0 8px 28px; min-height: 56px; opacity: 1;
+  }
+  .film-stage[data-film-step="6"] .film-plan-gates li > i { left: 1px; top: 16px; }
+  .film-stage[data-film-step="6"] .film-plan-gates li > span { font-size: 11px; }
+  .film-stage[data-film-step="6"] .film-plan-gates time { font-size: 12px; }
+  .film-stage[data-film-step="6"] .film-plan-gates strong { display: block; font-size: 13px; line-height: 1.4; margin-top: 4px; }
+  .film-stage[data-film-step="6"] .film-plan-note { font-size: 11px; max-width: none; margin-top: 10px; }
+  .film-timeline-view { margin-top: 28px; padding-top: 23px; border-top: 1px solid #a9d9d933; }
+  .film-plan-timeline { display: none; }
+  .film-mobile-roadmap { display: block; }
+  .film-mobile-chart-title { font-size: 17px; font-weight: 450; color: #dbe6e4; line-height: 1.4; margin-bottom: 20px; }
+  .film-mobile-years { height: 22px; position: relative; font-size: 11px; color: #9bb5bf; font-variant-numeric: tabular-nums; }
+  .film-mobile-years span { position: absolute; transform: translateX(-5%); }
+  .film-mobile-lanes { list-style: none; margin: 0; padding: 0; }
+  .film-mobile-lane { padding: 10px 0 16px; border-top: 1px solid #a9d9d91c; }
+  .film-mobile-lane-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .film-mobile-lane-head strong { font-size: 13px; font-weight: 450; line-height: 1.4; color: #d9e5e5; }
+  .film-mobile-lane-head > span { font-size: 10px; line-height: 1.4; color: #a5bdc5; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .film-mobile-track { position: relative; height: 16px; margin-top: 8px; border-bottom: 1px solid #a9d9d93d; }
+  .film-mobile-bar { position: absolute; height: 7px; top: 5px; border-radius: 1px; background: #a9d9d9; }
+  .film-mobile-bar.is-track { height: 7px; border: 1px dashed #efbd91a1; background: #efbd9124; }
+  .film-mobile-pilot { position: absolute; width: 6px; height: 6px; top: 5px; transform: translateX(-50%); border-radius: 50%; background: #efbd91; }
+  .film-mobile-pilot b { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); color: #efbd91; font-size: 10px; font-style: normal; font-weight: 400; }
+  .film-mobile-chart-note { color: #a7bdc5; font-size: 11px; line-height: 1.6; margin-top: 15px; }
+  .film-roadmap-pilots { gap: 4px 7px; font-size: 11px; line-height: 1.5; margin-top: 16px; padding-top: 14px; }
+  .film-roadmap-pilots > span { font-size: 10px; flex-basis: 100%; }
+  .film-mobile-critical { display: block; color: #c6d5d9; font-size: 12px; line-height: 1.7; margin-top: 17px; }
+}
+
+@media (max-width: 420px) {
+  .film-plan-header { gap: 8px; }
+  .film-stage[data-film-step="6"] .film-variant-switch button { font-size: 11px; padding-inline: 5px; }
+  .film-stage[data-film-step="6"] .film-plan-total { font-size: 25px; }
+  .film-stage[data-film-step="6"] .film-plan-unit { font-size: 9px; }
+}

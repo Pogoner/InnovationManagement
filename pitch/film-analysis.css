@@ -63,6 +63,26 @@
 .fa-selection-tree { stroke: #a9d9d95e; stroke-width: 1; }
 .fa-finalist-name { font-size: 25px; letter-spacing: -.6px; }
 
+/* Every required Part 3 graphic is a main-story shot. Numbered clusters remain
+   at the source coordinates instead of nudging coincident values apart. */
+.fa-radar-label { font-size: 20px; letter-spacing: -.35px; }
+.fa-cluster-ids { font-size: 15px; letter-spacing: -.4px; }
+.fa-trend-name { font-size: 17px; }
+.fa-stufen-heading { font-size: 15px; fill: #a8b5bb !important; letter-spacing: -.2px; }
+.fa-stufen-number { font-size: 14px; fill: #efbd91 !important; }
+.fa-stufen-copy { font-size: 18px; letter-spacing: -.3px; }
+.fa-stufen-idea { font-size: 19px; fill: #efbd91 !important; letter-spacing: -.45px; }
+.fa-stufen-link { stroke: #a9d9d983; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+.fa-stufen-note { font-size: 14px; fill: #a8b5bb !important; }
+.fa-matrix-wow { fill: #efbd910d; }
+.fa-matrix-quadrant { font-size: 17px; letter-spacing: 1px; fill: #a8b5bb !important; }
+.fa-matrix-tick { font-size: 16px; fill: #a8b5bb !important; }
+.fa-matrix-point circle { fill: #172c34; stroke: #a9d9d99c; stroke-width: 1; }
+.fa-matrix-point text { font-size: 13px; font-weight: 550; }
+.fa-matrix-point.is-pitch circle { fill: #413328; stroke: #efbd91; }
+.fa-matrix-key .fa-matrix-idea { font-size: 16px; fill: #a8b5bb; }
+.fa-matrix-key .fa-matrix-idea.is-finalist { fill: #eff3ed; font-weight: 550; }
+
 /* The financial contrast uses source values; the line follows actual A inputs. */
 .fa-score-link { stroke: #a9d9d961; stroke-width: 1; }
 .fa-benefit-value { font-size: 54px; letter-spacing: -2px; }
@@ -81,6 +101,18 @@
 .fa-year-label { font-size: 18px; fill: #a8b5bb !important; }
 .fa-revenue-head { fill: #fff3db; }.fa-revenue-head-glow { fill: #efbd911a; stroke: #efbd9130; stroke-width: 1; }
 
+/* Source-linked six-point Hube portfolio. Open points are KI assessments;
+   filled points are Team. Connection lines do not imply measured change. */
+.fa-case-tick { font-size: 16px; fill: #a8b5bb !important; }
+.fa-case-column { font-size: 16px; letter-spacing: 1.2px; fill: #efbd91 !important; }
+.fa-case-name { font-size: 18px; letter-spacing: -.5px; }
+.fa-case-score { font-size: 34px; letter-spacing: -1.3px; }
+.fa-case-id { font-size: 14px; font-weight: 550 !important; }
+.fa-case-journey { stroke: #a9d9d9ac; stroke-width: 1.4; }
+.fa-case-team { fill: #efbd91; stroke: #071018; stroke-width: 1.5; }
+.fa-case-ai { fill: #071018; stroke: #a9d9d9; stroke-width: 1.8; }
+.fa-business-case-0 .fa-case-id { fill: #efbd91; }
+
 @media (max-width: 760px) {
   .fa-kicker { font-size: 22px; letter-spacing: 1.1px; }
   .fa-small, .fa-axis-label { font-size: 20px; letter-spacing: .6px; }
@@ -94,4 +126,16 @@
   .fa-finalist-name { font-size: 27px; }
   .fa-trend-key text:last-child { display: none; }
   .fa-revenue-phase .fa-footnote, .fa-selection-final .fa-footnote { font-size: 21px; }
+  .fa-radar-label { font-size: 22px; }
+  .fa-trend-name { font-size: 20px; }
+  .fa-trend-key text:last-child { display: block; }
+  .fa-trend-key .fa-stufen-note { font-size: 17px; }
+  .fa-stufen-heading { font-size: 16px; }
+  .fa-stufen-copy { font-size: 19px; }
+  .fa-stufen-idea { font-size: 20px; }
+  .fa-stufen-note { font-size: 16px; }
+  .fa-case-name { font-size: 19px; }
+  .fa-audit .fa-kicker { font-size: 16px; letter-spacing: .6px; }
+  .fa-selection .fa-kicker, .fa-finance .fa-kicker { font-size: 16px; letter-spacing: 1px; }
+  .fa-selection .fa-axis-label, .fa-cases-phase .fa-axis-label { font-size: 16px; }
 }

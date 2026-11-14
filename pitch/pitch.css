@@ -355,3 +355,14 @@ html { scroll-padding-top: 0; }
 @media print {
   .pitch-page { padding: 0; color: #111; background: #fff; }.pitch-header,.mission-rail,.launch-art,.hero-image,.hero-shade,.bridge,.launch-controls,.source-links,.image-credit { display: none; }.pitch-page p { color: #333; }.pitch-page h1,.pitch-page h2,.pitch-page h3,.pitch-page em { color: #111 !important; }.pitch-hero { min-height: 0; }.hero-copy { padding: 40px 0; }.hero-base { position: static; }.pitch-section { padding-top: 40px; }.launch-section { height: auto; min-height: 0; }.launch-stage { position: relative; min-height: 0; height: auto; }.launch-copy { padding: 40px 0; }.launch-stars,.launch-horizon,.launch-glow { display: none; }.page-width { width: 100%; }.pitch-page details > * { display: block; }.section-label { margin-bottom: 24px; }
 }
+
+/* The examination structure is visible and directly navigable. */
+.rubric-map { margin-block: 42px; padding-block: 30px; border-block: 1px solid var(--line); }
+.rubric-map h3 { font-size: 23px; font-weight: 450; margin-bottom: 24px; }
+.rubric-map ol { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2px 35px; padding: 0; margin: 0; list-style: none; }
+.rubric-map a { display: flex; gap: 15px; padding-block: 15px; min-height: 76px; }
+.rubric-map a > span { color: var(--copper); font-size: 15px; font-variant-numeric: tabular-nums; }
+.rubric-map strong { display: block; font-size: 14px; font-weight: 450; color: var(--paper); }
+.rubric-map small { display: block; font-size: 12px; line-height: 1.6; color: var(--muted); margin-top: 5px; }
+.rubric-map a:hover strong { color: var(--ice); }
+@media (max-width:760px) { .rubric-map ol { grid-template-columns: 1fr; } }

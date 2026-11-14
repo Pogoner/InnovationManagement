@@ -75,9 +75,9 @@ Die Roadmap zeigt die Methode: ruhiger Ausgangsort → Standortsuche → Auswahl
 
 ## 6. Bewegung als gemeinsame Sprache
 
-Die Pitch-Ansicht überträgt dieses Prinzip auf sieben zusammenhängende Szenen:
+Die Pitch-Ansicht überträgt dieses Prinzip auf acht zusammenhängende Szenen:
 ein kurzer Gedanke und eine sich entwickelnde Zeichnung pro Phase, die vollständigen
-Belege in einer direkt erreichbaren Vertiefung darunter. Die gemeinsame Landschaft
+Belege in einer direkt erreichbaren Vertiefung darunter. Die laut Prüfungsstruktur benötigten Kerngrafiken erscheinen jedoch bereits in eigenen Scrollphasen: Trendportfolio, acht Stufenmodell-Ableitungen, Now/How/Wow-Matrix, Drei-Ideen-Vergleich, 5P-Mix, Maßnahmen-Roadmap, Managementempfehlungen und Methodenevaluation. Die gemeinsame Landschaft
 bleibt räumlicher Bezugspunkt. Ihre Kamera, Architekturzeichnung und Gebäudefotos
 verwenden einen gemeinsamen Koordinatenraum; der Übergang in die nächste Szene
 blendet diesen Bildraum weich um. Der native Scrollfortschritt bestimmt den Zustand

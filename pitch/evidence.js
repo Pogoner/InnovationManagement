@@ -59,7 +59,19 @@ const state = seed();
   };
 
   window.PitchEvidence = freeze({
-    ideas: IDEAS,
+    // The uploaded workbooks are the source for the concise matrix copy.
+    // Keep the established KI / Team array order used by the renderer.
+    ideas: window.PitchResearch.matrix.map(idea => ({
+      id: idea.id,
+      name: idea.name,
+      trend: idea.origin === 'open-innovation' ? 'Open Innovation' : idea.trend,
+      d: idea.summary,
+      m: [idea.ai.feasibility, idea.team.feasibility],
+      o: [idea.ai.originality, idea.team.originality],
+      c: [idea.ai.category, idea.team.category],
+      rationale: idea.rationale,
+      sources: idea.sources
+    })),
     base: state.base,
     weights: state.w,
     criteria: { benefit: N_CRIT, effort: A_CRIT },

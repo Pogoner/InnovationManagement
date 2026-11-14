@@ -12,6 +12,11 @@
   const write = (key, value) => { try { localStorage.setItem(key, value); } catch (_) {} };
   const writeHistory = (method, data, url) => { try { history[method](data,'',url); } catch (_) { /* Local file previews can restrict History API writes. */ } };
   const safeURL = value => /^https?:\/\//i.test(value) ? escape(value) : '#quellen';
+  const revealTarget = target => {
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      if (parent.tagName === 'DETAILS') parent.open = true;
+    }
+  };
   const displayName = idea => idea.id === 9 ? 'RocketLight Dinner' : idea.name;
   let selectedIdea = 9;
   // The source UI defines index 0 as KI and index 1 as the group/team.
@@ -24,8 +29,9 @@
     const idea = E.ideas.find(item => item.id === id);
     if (!idea) return;
     selectedIdea = id;
-    $('#selected-idea').innerHTML = `<span class="eyebrow">IDEE ${String(id).padStart(2,'0')} · ${escape(idea.trend)}</span><h3>${escape(displayName(idea))}</h3><p>${escape(idea.d)}</p><div class="idea-scores"><span>Machbarkeit <b>${idea.m[matrixIndex]}/5</b></span><span>Originalität <b>${idea.o[matrixIndex]}/5</b></span><span><b>${escape(idea.c[matrixIndex])}</b></span></div>`;
+    $('#selected-idea').innerHTML = `<span class="eyebrow">IDEE ${String(id).padStart(2,'0')} · ${escape(idea.trend)}</span><h3>${escape(displayName(idea))}</h3><p>${escape(idea.d)}</p><div class="idea-scores"><span>Machbarkeit <b>${idea.m[matrixIndex]}/5</b></span><span>Originalität <b>${idea.o[matrixIndex]}/5</b></span><span><b>${escape(idea.c[matrixIndex])}</b></span></div><p class="idea-rationale">${escape(idea.rationale?.[matrixIndex === 1 ? 'team' : 'ai'] || '')}</p><div class="inline-sources">${(idea.sources || []).map((id,index)=>`<a href="#source-${escape(id)}">Beleg ${index+1} ↗</a>`).join('')}</div>`;
     $$('[data-idea]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.idea) === id)));
+    $$('[data-idea-group]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.ideaGroup.split(',').map(Number).includes(id))));
   }
 
   function renderMatrix() {
@@ -37,7 +43,10 @@
     });
     $('#matrix-points').innerHTML = Array.from(groups, ([coordinates, ideas]) => {
       const [x, y] = coordinates.split(',').map(Number);
-      return `<div class="matrix-point" style="left:${(x-1)*25}%;bottom:${(y-1)*25}%;--point-count:${ideas.length}">${ideas.map(idea => `<button type="button" data-idea="${idea.id}" aria-pressed="${idea.id === selectedIdea}" aria-label="${escape(displayName(idea))}, Machbarkeit ${x} von 5, Originalität ${y} von 5, ${escape(idea.c[matrixIndex])}">${String(idea.id).padStart(2,'0')}</button>`).join('')}</div>`;
+      const ids = ideas.map(idea => idea.id);
+      const label = ideas.length > 1 ? `${ideas.length}×` : String(ids[0]).padStart(2,'0');
+      const names = ideas.map(displayName).join(', ');
+      return `<div class="matrix-point" style="left:${(x-1)*25}%;bottom:${(y-1)*25}%"><button type="button" ${ideas.length>1?`data-idea-group="${ids.join(',')}"`:`data-idea="${ids[0]}"`} aria-pressed="${ids.includes(selectedIdea)}" aria-label="${escape(names)}, Machbarkeit ${x} von 5, Originalität ${y} von 5${ideas.length>1?'. Mehrfach auswählen, um durch die Ideen zu wechseln.':''}">${label}</button></div>`;
     }).join('');
     $$('[data-matrix]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.matrix) === matrixIndex)));
     selectIdea(selectedIdea);
@@ -49,6 +58,8 @@
 
   function renderAssessments() {
     $('#assessment-comparison').innerHTML = E.rocketlightAssessments.map(({ assessment, result }, index) => `<article class="assessment-card"><header><span>${index === 0 ? 'DIE SICHT DES TEAMS' : 'DIE SICHT DER KI · CLAUDE'}</span><b>${index === 0 ? 'Quick win' : 'Umsetzung prüfen'}</b></header><div class="assessment-score"><strong>${number(result.IR)}</strong><span>Innovationsrendite<br>nach Hube</span></div>${[['Nutzen',result.IN],['Aufwand',result.IA]].map(([label,value]) => `<div class="score-row"><div><span>${label}</span><b>${number(value)} / 5</b></div><div class="score-track" aria-hidden="true"><span style="width:${value/5*100}%"></span></div></div>`).join('')}</article>`).join('');
+    const modeledCases = E.assessments.filter(({assessment}) => assessment.fy);
+    $('#businesscase-comparison').innerHTML = `<div class="table-scroll"><table><caption>Fünf relative Projektjahre · Millionen USD · Annahmen aus den drei aktuellen XLSM-Dateien</caption><thead><tr><th>Konzept</th><th class="number">Umsatz</th><th class="number">F&amp;E</th><th class="number">Gewinnindikator</th></tr></thead><tbody>${modeledCases.map(({assessment:a,result:r})=>`<tr class="${a.idea===9?'highlight-row':''}"><th scope="row">${escape(a.project)}</th><td class="number">${number(r.fy.R/1e6)}</td><td class="number">${number(r.fy.C/1e6)}</td><td class="number">${number(r.fy.P/1e6)}</td></tr>`).join('')}</tbody></table></div><p>Umsatz ist kein Gewinn. Alle drei Gewinnindikatoren übertragen dieselbe operative Modellmarge des Kerngeschäfts Space + Connectivity (3.766 / 15.473 Mio. USD). Die F&amp;E-Beträge erfassen Entwicklung, nicht den vollständigen laufenden Betrieb. Die Fälle sind eigenständige Szenarien und werden nicht addiert.</p><div class="table-scroll"><table><caption>Umsatzentwicklung je Geschäftsidee · Millionen USD</caption><thead><tr><th>Konzept</th>${[1,2,3,4,5].map(y=>`<th class="number">Jahr ${y}</th>`).join('')}</tr></thead><tbody>${modeledCases.map(({assessment:a,result:r})=>`<tr><th scope="row">${escape(a.project)}</th>${r.fy.revenue.map(v=>`<td class="number">${number(v/1e6)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><a class="text-link" href="#quellen">Originalkalkulationen mit allen Eingaben herunterladen ↓</a>`;
     const [team, ai] = E.rocketlightAssessments;
     const criteriaTable = (criteria, group, title) => `<div class="table-scroll"><table><caption>${title} · RocketLight Dinner</caption><thead><tr><th>Kriterium</th><th class="number">Gewicht</th><th class="number">Team</th><th class="number">KI</th></tr></thead><tbody>${criteria.map((criterion, index) => `<tr><td>${escape(criterion.t)}</td><td class="number">${E.weights[group][index]} %</td><td class="number">${(group === 'n' ? team.result.n : team.result.x)[index]}</td><td class="number">${(group === 'n' ? ai.result.n : ai.result.x)[index]}</td></tr>`).join('')}</tbody></table></div>`;
     $('#assessment-details').innerHTML = `<div class="table-scroll"><table><caption>Vergleich der drei Finalisten mit den Gruppen-Gewichten. IN = Nutzen, IA = Aufwand, IR = IN ÷ IA.</caption><thead><tr><th>Konzept</th><th>Bewertung</th><th class="number">IN</th><th class="number">IA</th><th class="number">IR</th><th>Portfolio</th></tr></thead><tbody>${E.assessments.map(({assessment:a,result:r}) => `<tr class="${a.idea === 9 ? 'highlight-row' : ''}"><td>${escape(a.project)}</td><td>${escape(a.assessor)}</td><td class="number">${number(r.IN)}</td><td class="number">${number(r.IA)}</td><td class="number">${number(r.IR)}</td><td>${escape(r.pf[0])}</td></tr>`).join('')}</tbody></table></div><div class="criteria-tables">${criteriaTable(E.criteria.benefit,'n','Nutzen / Chancen')}${criteriaTable(E.criteria.effort,'a','Aufwand / Risiko')}</div><p class="table-note">Die Werte beziehen sich auf den ursprünglichen Dinner-Case. Die Team-Bewertung enthält im Original keine schriftlichen Einzelbegründungen. Die folgenden Begründungen stammen aus der KI-Bewertung; sie sind Einschätzungen, keine bestätigten Projektergebnisse.</p><details class="disclosure"><summary>Die einzelnen KI-Begründungen lesen <span aria-hidden="true">+</span></summary><div class="criteria-reasons">${[...E.criteria.benefit,...E.criteria.effort].filter(c => ai.assessment.why[c.k]).map(c => `<h4>${escape(c.t)}</h4><p>${escape(ai.assessment.why[c.k])}</p>`).join('')}</div></details>`;
@@ -65,7 +76,7 @@
       ['Personal für Entwicklung · Mio. USD',f.staffCost.map(v=>v/1e6),2],['Sachaufwand · Mio. USD',input.material.map(v=>v/1e6),2],['Projekt-/F&E-Aufwand · Mio. USD',f.rnd.map(v=>v/1e6),2]
     ];
     $('#finance-table').innerHTML = `<table><caption>Variante A · Originalrechnung, relative Jahre 1–5 auf die Roadmap 2027–2031 übertragen.</caption><thead><tr><th>Planwert</th>${years.map(year=>`<th class="number">${year}</th>`).join('')}</tr></thead><tbody>${rows.map(([label,values,digits])=>`<tr><td>${label}</td>${values.map(value=>`<td class="number">${number(value,digits)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
-    $('#finance-explanation').textContent = `${number(f.qtySum,0)} verkaufte Plätze ergeben ${number(f.R/1e6)} Mio. USD Umsatz. Der kumulierte Entwicklungsaufwand beträgt ${number(f.C/1e6)} Mio. USD. Der Kalkulator leitet einen Gewinnindikator von ${number(f.P/1e6)} Mio. USD aus der allgemeinen Unternehmensmarge (${number(f.margin*100)} %) ab. Diese Übertragung ersetzt keine eigene Gastronomie-Kostenrechnung und keinen Projekt-Cashflow; sie belegt weder eine tatsächliche Gewinnmarge noch einen Break-even.`;
+    $('#finance-explanation').textContent = `${number(f.qtySum,0)} verkaufte Plätze ergeben ${number(f.R/1e6)} Mio. USD Umsatz. Der kumulierte Entwicklungsaufwand beträgt ${number(f.C/1e6)} Mio. USD. Der Kalkulator leitet einen Gewinnindikator von ${number(f.P/1e6)} Mio. USD aus der Modellmarge des Kerngeschäfts Space + Connectivity (${number(f.margin*100)} %) ab. Diese Übertragung ersetzt keine eigene Gastronomie-Kostenrechnung und keinen Projekt-Cashflow; sie belegt weder eine tatsächliche Gewinnmarge noch einen Break-even.`;
   }
 
   function renderVariant(announce = false) {
@@ -82,10 +93,11 @@
     $('#gate-timeline').innerHTML = meta.gates.map(gate => {const [day,month,year] = gate.date.split('.');return `<li><span>${escape(gate.id)}</span><time datetime="${year}-${month}-${day}">${escape(gate.date)}</time><h4>${escape(gate.title)}</h4><p>${escape(gate.description)}</p></li>`;}).join('');
     $('#critical-path').textContent = meta.critical;
     $('#roadmap-projects').innerHTML = `<ol class="project-list">${data.t1.map((project,index)=>`<li><span>TEILPROJEKT ${String(index+1).padStart(2,'0')}</span><h4>${escape(project.name)}</h4><p>${escape(project.inhalt)}</p><p><strong>Ziel:</strong> ${escape(project.ziel)}</p></li>`).join('')}</ol><h3>Die vier W-Fragen</h3><p>Geplante Rollen, Partner und Termine. Genannte Organisationen oder Personen haben damit keine Zusage erteilt.</p><div class="four-questions">${[['was','Was?'],['wer','Wer?'],['wann','Wann?'],['wie','Wie?']].map(([key,label])=>`<section><h4>${label}</h4><ul>${data.w4[key].map(item=>`<li>${escape(item)}</li>`).join('')}</ul></section>`).join('')}</div>`;
-    $('#variant-caveat').textContent = isA ? 'Geplanter Ablauf: Teilprojekte laufen teilweise parallel. Die Gates markieren Entscheidungen, keinen bereits erreichten Projektstatus. Der vollständige Plan zeigt Überlappungen und Abhängigkeiten.' : 'Eigenständige Alternative: 13,38 Mio. USD in der Budgettabelle, hier gerundet 13,4 Mio. USD. Die Piloten starten im Plan bereits 2027 im KSC, die eigene Lounge eröffnet am 01.10.2028. Der Umsatz von 47,2 Mio. USD ist aus dem Basiskonzept übernommen; die A-Jahresrechnung ist kein Finanzplan für B.';
+    $('#variant-caveat').textContent = isA ? 'Originalroadmap vom 05.11.2026: Teilprojekte laufen teilweise parallel; Gates sind geplante Entscheidungen. Die dort genannte 12-Monats-Garantie ist eine frühere Planannahme. Im finalen 5P-Mix bleiben Bedingungen und Kosten eines Ersatztermins zu prüfen.' : 'Eigenständige Alternative: 13,38 Mio. USD in der Budgettabelle, hier gerundet 13,4 Mio. USD. Die Piloten starten im Plan bereits 2027 im KSC, die eigene Lounge eröffnet am 01.10.2028. Der Umsatz von 47,2 Mio. USD ist aus dem Basiskonzept übernommen; die A-Jahresrechnung ist kein Finanzplan für B.';
     $$('[data-plan-link]').forEach(link => link.href = `../teil6/?variante=${variant}#${link.dataset.planLink}`);
     $('#presentation-download').href = `../praesentation/${data.file}`;
-    $('#decision-alternative').hidden = isA;
+    const alternativeNote = $('#decision-alternative');
+    if (alternativeNote) alternativeNote.hidden = isA;
     if (announce) $('#variant-status').textContent = `${meta.short}. ${meta.budget} ${meta.budgetLabel}. ${meta.firstDinnerLabel}: ${meta.firstDinner}. Termine, Projekte und Links wurden angepasst.`;
     queueMeasure();
   }
@@ -109,6 +121,9 @@
   let needsMeasure = true;
   let frameID = 0;
   let sectionTops = [];
+  const engines = $$('[data-engine]');
+  let engineTops = [];
+  let activeEngines = -1;
   let launchTop = 0;
   let launchRange = 1;
   let activeStep = -1;
@@ -126,6 +141,7 @@
   function queueMeasure() { needsMeasure = true; queueFrame(); }
   function measure() {
     sectionTops = sections.map(section => section.getBoundingClientRect().top + scrollY);
+    engineTops = engines.map(engine => engine.getBoundingClientRect().top + scrollY);
     const launch = $('#start');
     launchTop = launch.getBoundingClientRect().top + scrollY;
     launchRange = Math.max(1, launch.offsetHeight - innerHeight);
@@ -166,6 +182,11 @@
     if (needsMeasure) measure();
     const y = scrollY;
     const marker = y + Math.min(innerHeight * .35, 270);
+    const enginesReady = engineTops.filter(top => y + innerHeight * .8 >= top).length;
+    if (enginesReady !== activeEngines) {
+      activeEngines = enginesReady;
+      engines.forEach((engine,index) => engine.classList.toggle('is-active',index < enginesReady));
+    }
     let step = 0;
     sectionTops.forEach((top,index) => { if (marker >= top) step = index+1; });
     if (activeStep !== step) {
@@ -186,13 +207,14 @@
       if (elapsed < 1) queueFrame();
     }
     launchProgress = progress;
-    const eased = progress * progress * (3-2*progress);
+    const flight = clamp((progress - .08) / .92);
+    const eased = flight * flight * (3-2*flight);
     const ignition = reduced ? (progress ? .6 : 0) : clamp(progress/.22);
     launchStage.style.setProperty('--ignition', ignition.toFixed(3));
     launchStage.style.setProperty('--rocket-rise', `${reduced ? (progress ? -95 : 0) : -eased * Math.max(650, innerHeight*.92)}px`);
     launchStage.style.setProperty('--smoke-scale', (1+progress*1.8).toFixed(3));
     setLaunchState(progress >= .98 ? 'complete' : progress > .08 ? 'starting' : 'ready');
-    const nextRemaining = progress >= .98 ? 0 : 8-Math.max(1,step);
+    const nextRemaining = progress > .08 ? 0 : 8-Math.max(1,step);
     if (remaining !== nextRemaining) {
       remaining = nextRemaining;
       $('#rail-count').textContent = `T−${String(remaining).padStart(2,'0')}`;
@@ -206,6 +228,11 @@
   document.addEventListener('click', event => {
     const ideaButton = event.target.closest('[data-idea]');
     if (ideaButton) selectIdea(Number(ideaButton.dataset.idea));
+    const ideaGroup = event.target.closest('[data-idea-group]');
+    if (ideaGroup) {
+      const ids = ideaGroup.dataset.ideaGroup.split(',').map(Number);
+      selectIdea(ids[(ids.indexOf(selectedIdea)+1)%ids.length]);
+    }
     const matrixButton = event.target.closest('[data-matrix]');
     if (matrixButton) { matrixIndex = Number(matrixButton.dataset.matrix); renderMatrix(); }
     const variantButton = event.target.closest('[data-variant]');
@@ -222,6 +249,7 @@
       if (target) {
         event.preventDefault();
         setMenu(false);
+        revealTarget(target);
         writeHistory('pushState',{pitchVariant:variant},anchor.hash);
         target.scrollIntoView({behavior: reduced ? 'instant' : 'smooth', block:'start'});
         target.setAttribute('tabindex','-1');
@@ -327,6 +355,7 @@
   // Rendering all evidence precedes restoration of a shared chapter link.
   if (location.hash) requestAnimationFrame(() => {
     const target = document.getElementById(location.hash.slice(1));
+    if (target) revealTarget(target);
     target?.scrollIntoView({behavior:'instant',block:'start'});
     queueMeasure();
   });

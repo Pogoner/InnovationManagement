@@ -29,11 +29,11 @@ Gemeinsame Designänderungen zentral in `DESIGN.md` pflegen. Eine kleine Inhalts
 
 ## Alternative Pitch-Ansicht · Schritte 1–7
 
-[`pitch/`](pitch/) führt als auswählbare Scroll-Seite durch Chance, Ideenauswahl, Erlebnis, Rechnung, Marktzugang, Umsetzung und Entscheidung. Die Hauptnavigation bietet „Pitch · 1–7“; weitere Einstiege liegen im Dinner-Erlebnis und in der Roadmap. `#pitch` auf der Hauptseite leitet ebenfalls dorthin. Die bestehenden Arbeitsansichten bleiben erreichbar. Alle Seitenverweise sind relativ und funktionieren auch unter dem Projektpfad `/InnovationManagement/` des Forks.
+[`pitch/`](pitch/) führt als auswählbare Scroll-Seite durch Unternehmen, Innovationsprüfstand, Trends und Ideen, Bewertung, Marktzugang, Roadmap und ganzheitliches Innovationsmanagement. Die Hauptnavigation bietet „Pitch · 1–7“; weitere Einstiege liegen im Dinner-Erlebnis und in der Roadmap. `#pitch` auf der Hauptseite leitet ebenfalls dorthin. Die bestehenden Arbeitsansichten bleiben erreichbar. Alle Seitenverweise sind relativ und funktionieren auch unter dem Projektpfad `/InnovationManagement/` des Forks.
 
 Der seitliche Countdown zeigt den Präsentationsfortschritt und mündet im inszenierten Raketenstart; auf schmalen Ansichten wird er zur unteren Kapitelleiste. Kapitel können direkt über `#schritt-1` bis `#schritt-7` aufgerufen werden. Native Scroll-/Tastaturbedienung, reduzierte Bewegung und flache Fenster erhalten eine lesbare Darstellung. Der Start kann auch per Button ausgelöst werden.
 
-`pitch/evidence.js` liest die Originaldaten aus `assets/js/data.js`, die Rechenfunktionen aus `assets/js/model.js` und beide Planungsvarianten aus `teil6/data.js`. Der Pitch verwendet den dokumentierten Konzeptstand und verändert keine gespeicherten Rechnerwerte. Variantenwahl und Bewegung teilen die bestehenden `rocketlight:variant`-/`rocketlight:motion`-Präferenzen. Die sieben Kapitel sind eine redaktionelle Zusammenführung; die vollständigen Bewertungen, Quellen und Originalpläne bleiben über Detailzugänge verfügbar.
+`pitch/evidence.js` liest die Originaldaten aus `assets/js/data.js`, die Rechenfunktionen aus `assets/js/model.js` und beide Planungsvarianten aus `teil6/data.js`. Der Pitch verwendet den dokumentierten Konzeptstand und verändert keine gespeicherten Rechnerwerte. Variantenwahl und Bewegung teilen die bestehenden `rocketlight:variant`-/`rocketlight:motion`-Präferenzen. Die sieben Kapitel folgen den aktuellen Originalbeiträgen aus dem OneDrive-Archiv. `pitch/research.js` ergänzt die vollständige Innovations- und Trendanalyse mit Herkunftszellen. Alle 25 Felder des finalen 5P-Mix, vier Managementempfehlungen sowie die Originaldokumente unter `quellen/` sind über aufklappbare Details erreichbar. Details zu Korrekturen, Quellenhierarchie und Modellgrenzen stehen in [`pitch/CONTENT.md`](pitch/CONTENT.md).
 
 ## Teil 6: Roadmap & Maßnahmenplan
 
@@ -45,3 +45,7 @@ Die eigenständige Seite [`teil6/`](teil6/) führt als zusammenhängende, filmis
 - Die passenden Folien liegen als PPTX in `praesentation/` (je 6 Folien im Design der Gruppenpräsentation, mit Sprechernotizen).
 - Einstieg in die aktuelle Umsetzung: `teil6/index.html`, `cinema.css` und `cinema.js`; Szeneninhalte in `story.js`, vollständiger Plan in `data.js` und `details.js`. `style.css` liefert die Basis für Typografie und Detailansichten. Die tatsächlich eingebundenen Dateien stehen in `teil6/index.html`.
 - Über „Plan & Quellen“ sind die vollständigen Daten direkt erreichbar. Reduzierte Bewegung und sehr flache Fenster erhalten eine lesbare Kapitelansicht.
+
+## Veröffentlichung im Fork
+
+GitHub Pages ist für `Pogoner/InnovationManagement` auf `main` und `/ (root)` eingerichtet. Die Pitch-Ansicht liegt unter `https://pogoner.github.io/InnovationManagement/pitch/`; die Arbeitsansicht bleibt unter dem Repository-Stamm erreichbar. Neue Commits auf `main` werden durch den Pages-Build veröffentlicht.

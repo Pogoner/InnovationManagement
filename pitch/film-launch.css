@@ -7,7 +7,7 @@
 .has-photoreal-launch > .launch-glow,
 .has-photoreal-launch > .film-launch-wave,
 .has-photoreal-launch > .film-final-number { display: none; }
-.launch-cinema { position: absolute; inset: 0; overflow: hidden; z-index: 0; background: #08111c; pointer-events: none; }
+.launch-cinema { position: absolute; inset: var(--header-height,80px) 0 0; overflow: hidden; z-index: 0; background: #08111c; pointer-events: none; }
 .launch-optics { position: absolute; }
 .launch-cinema-world { position: absolute; left: 50%; top: 0; width: max(100%,calc(var(--launch-frame-height,100svh) * var(--launch-world-aspect,1.776834))); height: max(100%,calc(var(--launch-frame-width,100vw) / var(--launch-world-aspect,1.776834))); transform: translateX(-50%) translate(var(--launch-frame-pan,0px),var(--launch-photo-camera-y,0%)) scale(var(--launch-photo-camera-scale,1)); transform-origin: var(--launch-anchor-x,73.565%) var(--launch-anchor-y,55.26%); will-change: transform; }
 .pitch-page .launch-cinema img { display: block; max-width: none; }

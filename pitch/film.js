@@ -105,14 +105,15 @@
     const areaWidth=world.getBoundingClientRect().width;
     // Portrait uses a lower, wider stage so the complete building stays in frame.
     const portrait=width<=760;
-    const masterWidth=portrait?Math.max(areaWidth,height*.45*(1672/941)):Math.max(areaWidth,height*(1672/941));
+    headerClearance=(document.querySelector('.pitch-header')?.getBoundingClientRect().height||80)+18;
+    const sceneHeight=Math.max(height*.70,height-headerClearance-54);
+    const masterWidth=portrait?Math.max(areaWidth,height*.45*(1672/941)):Math.max(areaWidth,sceneHeight*(1672/941));
     const masterHeight=masterWidth*941/1672;
     camera.style.width=masterWidth.toFixed(2)+'px';
     camera.style.height=masterHeight.toFixed(2)+'px';
     camera.style.left=(portrait?areaWidth/2-masterWidth*.56:(areaWidth-masterWidth)/2).toFixed(2)+'px';
     cameraTop=portrait?height-masterHeight-66:(height-masterHeight)/2;
     cameraHeight=masterHeight;
-    headerClearance=(document.querySelector('.pitch-header')?.getBoundingClientRect().height||80)+18;
     camera.style.top=cameraTop.toFixed(2)+'px';
     const y=scrollY;
     records.forEach(record=>{
@@ -142,8 +143,8 @@
     const context={reduced,variant,mobile:width<=760};
     const intro=reduced?0:clamp((y-heroTop)/heroRange);
     hero.style.setProperty('--intro-progress',fmt(intro));
-    hero.style.setProperty('--hero-zoom',(1.04+intro*.15).toFixed(4));
-    hero.style.setProperty('--hero-pan',(-intro*height*.06).toFixed(2)+'px');
+    hero.style.setProperty('--hero-zoom',(1.02+intro*.12).toFixed(4));
+    hero.style.setProperty('--hero-pan',(intro*height*.012).toFixed(2)+'px');
     hero.style.setProperty('--hero-copy-opacity',fmt(1-smooth(.58,1,intro)));
     let current=records[0];
     records.forEach(record=>{
@@ -186,7 +187,7 @@
     // Ground, drawings and building move together; the nearer rocket's nose
     // remains below the fixed header at its measured y=20/941 image anchor.
     const rocketTipY=cameraTop+cameraHeight*(.72+(20/941-.72)*cameraScale)+panY;
-    panY+=Math.max(0,headerClearance-rocketTipY)*siteMix;
+    panY+=Math.max(0,headerClearance-rocketTipY);
     const panX=reduced?0:Math.cos((step+p)*.6)*width*.012;
     camera.style.transform='translate3d('+panX.toFixed(2)+'px,'+panY.toFixed(2)+'px,0) scale('+cameraScale.toFixed(4)+')';
     const baseStrength=.32;

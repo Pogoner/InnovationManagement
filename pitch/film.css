@@ -8,7 +8,7 @@
 .film-world-grade { position: absolute; inset: 0; background: linear-gradient(90deg,#060b10c4 0%,#060b1060 39%,#060b1012 66%,#060b1047 100%),linear-gradient(0deg,#060b10c4,transparent 27%,transparent 70%,#060b1070); }
 .film-world-grain { position: absolute; inset: 0; opacity: .16; background-image: repeating-linear-gradient(0deg,transparent 0 3px,#a9d9d90b 3px 4px); }
 .film-dining-world { position: absolute; inset: 0; background: #060b10; opacity: var(--dining-opacity,0); }
-.film-dining-world > img { width: 100%; height: 100%; object-fit: cover; object-position: 66% center; opacity: var(--dining-image-opacity,.34); transform: scale(1.025); }
+.film-dining-world > img { width: 100%; height: calc(100% - var(--header-height,80px)); margin-top: var(--header-height,80px); object-fit: cover; object-position: 66% top; opacity: var(--dining-image-opacity,.34); transform: scale(1.01); transform-origin: 66% top; }
 .film-dining-world > div { position: absolute; inset: 0; background: linear-gradient(90deg,#060b10e6 0%,#060b10c9 30%,#060b1015 77%),linear-gradient(0deg,#060b1088,transparent 50%); }
 .film-water-light { position: absolute; left: 0; right: 0; top: 60%; height: 40%; opacity: .12; background: repeating-linear-gradient(177deg,transparent 0 21px,#a9d9d940 22px,transparent 23px 54px); transform: translate3d(var(--water-drift,0px),0,0); mask-image: linear-gradient(transparent,#0008,transparent); }
 .film-world-architecture { position: absolute; inset: 0; opacity: 0; }
@@ -34,7 +34,7 @@
 /* A short camera move takes the opening into the common landscape. */
 .film-prologue { position: relative; height: 155svh; }
 .film-ready .pitch-hero { position: sticky; top: 0; height: 100svh; min-height: 660px; }
-.film-ready .hero-image { transform: translate3d(0,var(--hero-pan,0px),0) scale(var(--hero-zoom,1.04)); will-change: transform; }
+.film-ready .hero-image { top: var(--header-height,80px); height: calc(100% - var(--header-height,80px)); object-position: 65% top; transform: translate3d(0,var(--hero-pan,0px),0) scale(var(--hero-zoom,1.02)); transform-origin: 65% top; will-change: transform; }
 .film-ready .hero-shade { background: linear-gradient(90deg,#060b10d9 0%,#060b1070 33%,#060b1000 66%),linear-gradient(0deg,#060b10e8,transparent 40%,#060b1020); }
 .film-ready .hero-copy h1 { max-width: 630px; }
 .film-ready .hero-copy { opacity: var(--hero-copy-opacity,1); transform: translate3d(0,calc(var(--intro-progress,0) * -36px),0); }

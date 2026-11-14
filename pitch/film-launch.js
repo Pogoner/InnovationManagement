@@ -112,7 +112,7 @@
         const status = failed ? 'Der Film konnte nicht geladen werden. Bitte die Seite neu laden.' :
           isPlaying ? (waiting ? 'Film lädt …' : `${phase} Film läuft${video.muted ? ' ohne Ton' : ' mit Sounddesign'}.`) :
           complete ? 'Der Start ist abgeschlossen. Das letzte Filmbild bleibt stehen.' :
-          mode === 'paused' ? 'Film pausiert. Abspielen oder weiterscrollen.' :
+          mode === 'paused' ? (reduced ? 'Film pausiert. Mit Film fortsetzen geht es weiter.' : 'Film pausiert. Abspielen oder weiterscrollen.') :
           reduced ? 'Ruhige Darstellung. Du kannst den Film bewusst abspielen.' : `${phase} Scrollen oder den Film abspielen.`;
         if (controls.status && status !== lastStatus) { controls.status.textContent = status; lastStatus = status; }
         return p;

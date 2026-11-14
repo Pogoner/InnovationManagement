@@ -13,7 +13,7 @@ Das Erdgeschoss beider Gebäudevarianten soll durchgängig verglast sein. Dach, 
 - Eigenständige Roadmap: https://pogoner.github.io/InnovationManagement/teil6/
 - Bei Wiederaufnahme waren die früher angekündigten Film- und Glasänderungen weder auf `main` noch in den aktuellen Arbeitsdateien vorhanden. Die frühere Chat-Zusammenfassung ist keine Implementierungsbestätigung.
 
-## Offene Arbeit
+## Arbeitspakete der Wiederaufnahme (inzwischen erledigt)
 
 1. Durchgängige NASA-Startaufnahme beschaffen, Herkunft und Nutzbarkeit dokumentieren, lokal komprimiert speichern.
 2. Filmcontroller und Gestaltung in `pitch/film-launch.js`, `pitch/film-launch.css` und den bestehenden Zeitgeber integrieren; kein Autoplay-Ton, kein Austausch durch ein fremdes Schlussbild.
@@ -47,3 +47,17 @@ Durchgängiger NASA-Auszug (27 Sekunden) mit eigenem zuschaltbarem Sounddesign i
 `pitch/film-launch.js` verwendet jetzt das gesicherte MP4 mit gemeinsamer Bild-/Tonzeit. Play/Pause, Wiederholung, Ton und native Zeitleiste stehen außerhalb der ausblendbaren Überschrift. Der bisherige 11-Sekunden-Timer und die Bildlayer entfallen. `pitch.js` und `film.js` übergeben den Scrollfortschritt an den Controller; nach manuellem Abspielen oder Seek wird die Scrollabbildung am aktuellen Filmbild fortgesetzt. Außerhalb der Ansicht und bei verborgenem Tab wird pausiert. Reduzierte Bewegung hält ein ruhiges Bild; bewusstes Abspielen bleibt möglich. Der Schluss hält das echte letzte Filmbild.
 
 Der veraltete `film-site.js`-Cacheverweis der eigenständigen Roadmap ist korrigiert. Syntax und eine isolierte Zustandsprüfung des Controllers sind bestanden; die tatsächliche Browser- und Live-Prüfung dieses Meilensteins folgt im nächsten Schritt.
+
+## Abschluss: veröffentlicht und im Browser geprüft
+
+- Funktionsstand: `2be4001a36dae97c736b5fade6287c1937c9b053`. Pages-Lauf `43647907299` ist erfolgreich; die ausgelieferten HTML-/JS-/CSS-Dateien waren bytegleich mit dem Commit.
+- Im Live-Browser geprüft: echte MP4-Wiedergabe, Ende bei 26,9667 s mit tatsächlichem Schlussbild, Wiederholung ab Anfang, Pause, Seek über die native Zeitleiste und opt-in Ton. Nach Pause führte ein kleiner Scrollschritt von 3,49 s auf 5,09 s, ohne zum bisherigen Scrollzeitpunkt zurückzuspringen. Rückwärtsscrollen führt die Aufnahme wieder zurück.
+- Reduzierte Bewegung zeigt zunächst das ruhige erste Bild; bewusstes Abspielen funktioniert auch dann. Die schmale/flache Ansicht wechselt in den normalen Seitenfluss.
+- Fassaden A und B im Pitch in Bau-/Servicephase und in der eigenständigen Roadmap geprüft. Dach, Stützen, Tische und Lounge-Obergeschoss bleiben sichtbar; das EG lässt die Landschaft durch.
+- Layoutprüfung bei 1363 × 936, 909 × 624 und 545 × 374 CSS-Pixeln. Kompakte Größen über Browserzoom, keine physischen Mobilgeräte. Kein horizontaler Seitenüberlauf in den geprüften Zuständen.
+- Der pausierte Zustand im reduzierten Modus erhält einen passenden Hinweis ohne Scrollaufforderung. README und Prüfnotiz sind auf den tatsächlichen Film umgestellt.
+- Ausführliche Prüfergebnisse und Grenzen: `docs/pitch-review/launch-film-review.md`.
+
+### Bei einer erneuten Unterbrechung
+
+Nicht von vorn beginnen. Film, Poster, Glas-SVGs, Controller und Bedienelemente liegen auf `main`. Den neuesten Commit und seinen Pages-Lauf lesen; nur konkret offene neue Befunde weiterbearbeiten. Der Auftrag ist funktional abgeschlossen.

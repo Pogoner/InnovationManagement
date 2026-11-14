@@ -106,6 +106,7 @@
 .film-architecture-plan[data-plan-view="linear"] .film-plan-header { max-width: 650px; }
 .film-architecture-plan[data-plan-view="linear"] .film-phase-position { display: none; }
 .film-stage[data-film-step="6"]:has([data-plan-view="linear"]) .film-stage-bottom { display: none; }
+.film-stage[data-film-step="6"]:has([data-plan-view="linear"]) .film-visual::before { inset-inline: 0; }
 .film-architecture-plan[data-plan-view="linear"] .film-phase-sequence { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px 40px; margin-top: 30px; }
 .film-phase-sequence-heading { grid-column: 1 / -1; font-size: 19px; line-height: 1.4; margin: 0; color: #c7dbde; }
 .film-phase-card.is-linear { border-top: 1px solid #a9d9d936; padding-top: 19px; }

@@ -32,3 +32,12 @@ Beide Gebäudekomposite sind in `teil6/pavilion-glass.svg` und `teil6/lounge-gla
 ## Meilenstein 2: Startfilm gesichert
 
 Durchgängiger NASA-Auszug (27 Sekunden) mit eigenem zuschaltbarem Sounddesign ist lokal im Projekt gespeichert: `pitch/assets/starship-launch-27s.mp4` (3,94 MB). Poster: erstes Filmbild, kein fremdes Motiv. Herkunft und Bearbeitung: `pitch/assets/launch-media.md`. Filmzeit enthält bereits die synchronisierte AAC-Spur. Controller/Bedienelemente und Browserprüfung sind noch offen.
+
+## Wiederaufnahme: gesicherter Stand erneut bestätigt
+
+- `main` steht bei `04ee562a6478b42704cf87b0e67f7099073a918b`; die vorherigen Schritte sind diesmal erhalten.
+- Glasfassaden: `7c06b273a2abdec5cba306f7a33597e48842c407`, in Pitch und eigenständiger Roadmap eingebunden.
+- Startfilm samt AAC-Sounddesign und Poster: `04ee562a6478b42704cf87b0e67f7099073a918b`.
+- Pages-Veröffentlichung genau dieses Commits: Lauf `43646934532`, erfolgreich.
+- Die vorhandenen Dateien `film-launch.js` und `film-launch.css` enthalten noch den früheren Bildlayer-Controller. Dateiexistenz bedeutet hier nicht, dass der Film schon integriert ist.
+- Nächster kleiner Sicherungsschritt: Filmcontroller, Bedienelemente und gemeinsame Scroll-Anbindung. Danach gezielte Browserprüfung und eigene Pages-Veröffentlichung bestätigen.

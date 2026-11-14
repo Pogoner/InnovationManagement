@@ -1,6 +1,7 @@
 /* Seven scenes share a single image plane. Content remains in native details. */
 .film-ready { --film-bottom: 0px; }
 .film-ready main, .film-ready .pitch-footer { position: relative; z-index: 1; }
+.film-ready main { overflow-anchor: none; }
 .film-background { position: fixed; inset: 0 var(--rail-width) 0 0; overflow: hidden; pointer-events: none; z-index: 0; opacity: 0; background: #060b10; }
 .film-camera { position: absolute; transform-origin: 40.5% 72%; will-change: transform; }
 .film-landscape-image { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none !important; opacity: var(--landscape-strength,.25); }
@@ -73,13 +74,14 @@
 .chapter-dossier[open] > summary { border-bottom: 1px solid #a9d9d924; }
 .chapter-dossier[open] .dossier-toggle { transform: rotate(45deg); }
 .chapter-source-body { padding-top: 80px; padding-bottom: 10px; scroll-margin-top: calc(var(--header-height) + 24px); }
+.chapter-source-body > .page-width { width: 100%; }
 .chapter-source-body .bridge { margin-bottom: 0; }
 
 /* Architecture keeps the image free: a light plan at right, the actual site below. */
-.film-stage[data-film-step="6"] { align-items: start; padding-top: calc(var(--header-height) + 105px); }
+.film-stage[data-film-step="6"] { align-items: start; padding-top: calc(var(--header-height) + 75px); }
 .film-stage[data-film-step="6"] .film-copy { max-width: 530px; }
 .film-stage[data-film-step="6"] .film-copy h2 { font-size: clamp(36px,4.2vw,59px); }
-.film-stage[data-film-step="6"] .film-beat-copy { max-width: 400px; }
+.film-stage[data-film-step="6"] .film-beat-copy { max-width: 460px; }
 .film-stage[data-film-step="6"] .film-visual { justify-self: end; width: min(270px,100%); height: auto; }
 .film-architecture-plan { padding: 0 0 18px 25px; border-left: 1px solid #a9d9d930; }
 .film-variant-switch { display: flex; gap: 3px; background: #070e1599; padding: 3px; border: 1px solid #a9d9d92e; border-radius: 5px; }
@@ -94,7 +96,7 @@
 .film-plan-gates { list-style: none; padding: 0; margin: 0; position: relative; }
 .film-plan-gates::before { content: ""; position: absolute; top: 18px; bottom: 23px; left: 4px; width: 1px; background: #a9d9d928; }
 .film-plan-gates::after { content: ""; position: absolute; top: 18px; bottom: 23px; left: 4px; width: 1px; background: #efbd91; transform-origin: top; transform: scaleY(var(--gate-progress,0)); }
-.film-plan-gates li { padding: 10px 0 10px 27px; min-height: 61px; display: grid; grid-template-columns: 1fr auto; column-gap: 12px; position: relative; color: #d8e3e2; opacity: calc(.4 + var(--gate-light,0) * .6); }
+.film-plan-gates li { padding: 10px 0 10px 27px; min-height: 61px; display: grid; grid-template-columns: 1fr auto; column-gap: 12px; position: relative; color: #d8e3e2; opacity: calc(.6 + var(--gate-light,0) * .4); }
 .film-plan-gates li > i { position: absolute; left: 1px; top: 17px; width: 7px; height: 7px; z-index: 1; border: 1px solid #a9d9d9; background: #10212a; border-radius: 50%; box-shadow: 0 0 0 calc(var(--gate-light,0) * 4px) #efbd9112; }
 .film-plan-gates li > span { font-size: 9px; color: #efbd91; }
 .film-plan-gates time { font-size: 9px; font-variant-numeric: tabular-nums; }

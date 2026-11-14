@@ -10,6 +10,7 @@
   const smooth = (a,b,n) => { const p=clamp((n-a)/(b-a)); return p*p*(3-2*p); };
   const fmt = n => n.toFixed(4);
   const arrow = '<svg class="arrow-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12 12 4M4 4h8v8"/></svg>';
+  const stillPoints = {1:[.35,.70,1],2:[.40,.81,1],3:[.27,.41,.735,1],4:[.36,.80,1],5:[.33,.60,1],6:[.14,.53,.75,1],7:[.18,.46,.68,1]};
   const world = document.createElement('div');
   world.className = 'film-background';
   world.setAttribute('aria-hidden','true');
@@ -55,6 +56,7 @@
       button.setAttribute('aria-label',beat.cue);
       button.dataset.filmChapter=chapter.step;
       button.dataset.filmPoint=Math.min(.96,beat.at+.06);
+      button.dataset.filmStill=stillPoints[chapter.step][index];
       button.innerHTML='<span></span>';
       nav.append(button);
     });
@@ -182,10 +184,26 @@
     records.forEach(r=>{r.lastP=-1;});
     document.dispatchEvent(new Event('pitch:layout'));
   }
-  function setReduced(value) {
+  function captureMotionPosition(next) {
+    if(reduced===next)return null;
+    const y=scrollY;
+    if(y<heroBottom)return {node:prologue,offset:0};
+    let record=records[0];
+    records.forEach(r=>{if(y+Math.min(height*.2,130)>=r.top)record=r;});
+    if(y<record.top+record.height)return {record,point:record.progress??0};
+    let node=record.disclosure;
+    if(y>=launchTop)node=y>=document.querySelector('#quellen').getBoundingClientRect().top+y?document.querySelector('#quellen'):launch;
+    return {node,offset:y-(node.getBoundingClientRect().top+y)};
+  }
+  function setReduced(value,anchor) {
     if(reduced===value)return;
     reduced=value; dirty=true;
     records.forEach(r=>{r.lastP=-1;});
+    if(anchor) {
+      measure();
+      const top=anchor.record?anchor.record.top+(value?0:anchor.point*anchor.record.range):anchor.node.getBoundingClientRect().top+scrollY+anchor.offset;
+      scrollTo({top,behavior:'instant'});
+    }
   }
   document.addEventListener('click',event=>{
     const control=event.target.closest('[data-film-chapter]');
@@ -195,7 +213,7 @@
     if(!r)return;
     if(reduced) {
       // A deliberate phase choice remains available without moving imagery.
-      const p=Number(control.dataset.filmPoint);
+      const p=Number(control.dataset.filmStill);
       r.staticPoint=p;
       r.renderer.update(p,{reduced:false,variant,mobile:width<=760});
       paintCopy(r,p);
@@ -206,7 +224,7 @@
     } else scrollTo({top:r.top+Number(control.dataset.filmPoint)*r.range,behavior:'smooth'});
   });
   photo.addEventListener('load',()=>document.dispatchEvent(new Event('pitch:layout')));
-  window.PitchFilm={measure,update,setVariant,setReduced};
+  window.PitchFilm={measure,update,setVariant,setReduced,captureMotionPosition};
   records.forEach(record=>{
     record.renderer.update(reduced?1:0,{reduced,variant,mobile:width<=760});
     paintCopy(record,reduced?1:0);

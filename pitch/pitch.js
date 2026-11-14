@@ -119,7 +119,8 @@
   const media = matchMedia('(prefers-reduced-motion: reduce)');
   let motionPreference = read('rocketlight:motion');
   let preferredReduced = motionPreference === 'reduced' || (motionPreference !== 'full' && media.matches);
-  let reduced = preferredReduced || innerHeight < 560;
+  const shortWindow = () => innerHeight < 560 || (innerWidth <= 760 && innerHeight < 680);
+  let reduced = preferredReduced || shortWindow();
   let needsMeasure = true;
   let frameID = 0;
   let sectionTops = [];
@@ -155,13 +156,14 @@
     menuButton.setAttribute('aria-expanded', String(open));
   }
   function updateMotion() {
-    reduced = preferredReduced || innerHeight < 560;
+    reduced = preferredReduced || shortWindow();
+    const motionAnchor = window.PitchFilm?.captureMotionPosition(reduced);
     document.body.classList.add('motion-ready');
     document.body.classList.toggle('is-reduced', reduced);
-    window.PitchFilm?.setReduced(reduced);
+    window.PitchFilm?.setReduced(reduced,motionAnchor);
     motionButton.setAttribute('aria-pressed', String(preferredReduced));
     motionButton.setAttribute('aria-label', preferredReduced ? 'Bewegung aktivieren' : 'Bewegung reduzieren');
-    motionButton.title = innerHeight < 560 ? 'Statische Darstellung bei geringer Fensterhöhe' : preferredReduced ? 'Bewegung aktivieren' : 'Bewegung reduzieren';
+    motionButton.title = shortWindow() ? 'Statische Darstellung bei geringer Fensterhöhe' : preferredReduced ? 'Bewegung aktivieren' : 'Bewegung reduzieren';
     manualLaunch = null;
     queueMeasure();
   }
@@ -291,7 +293,7 @@
     queueFrame();
   }, {passive:true});
   addEventListener('resize', () => {
-    const nextReduced = preferredReduced || innerHeight < 560;
+    const nextReduced = preferredReduced || shortWindow();
     if (nextReduced !== reduced) updateMotion();
     queueMeasure();
   }, {passive:true});

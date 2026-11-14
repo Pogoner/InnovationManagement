@@ -46,7 +46,7 @@ window.PitchFilmStory = [
     beats: [
       { at: 0, tag: 'DER ORT FÜR DIE IDEE', title: 'Ein Horizont.<br><em>Eine Möglichkeit.</em>', copy: 'Am Anfang steht eine Fläche. Sichtachse, Zugang und Genehmigungen entscheiden darüber, ob sie zum Standort werden kann.', cue: 'Suchen und prüfen' },
       { at: .24, tag: 'DER ENTWURF', title: 'Eine Linie wird<br><em>zum Entwurf.</em>', copy: 'Die Architektur entsteht auf derselben Fläche. Pavillon und Lounge zeigen zwei unterschiedliche Wege zum Erlebnis.', cue: 'Den Entwurf entstehen sehen' },
-      { at: .51, tag: 'GEPLANTE FREIGABEPUNKTE', title: 'Freigabe für Freigabe.<br><em>Schritt für Schritt.</em>', copy: 'Erst prüfen, dann investieren. Die Gates verbinden Standort, Sicherheit, Bau und den späteren Pilotbetrieb.', cue: 'Der Plan verbindet die Arbeit' },
+      { at: .51, tag: 'GEPLANTE FREIGABEPUNKTE', title: 'Erst prüfen.<br><em>Dann investieren.</em>', copy: 'Fünf Gates verbinden Standort, Sicherheit, Bau und Pilotbetrieb. Jede Freigabe öffnet den nächsten Schritt.', cue: 'Der Plan verbindet die Arbeit' },
       { at: .77, tag: 'VOM ENTWURF ZUM ERLEBNIS', title: 'Die Idee bekommt<br><em>einen Ort.</em>', copy: 'Der mobile Pavillon beginnt mit kleinerem Budget. Die feste Lounge schafft einen dauerhaften Standort. Beide Varianten bleiben Planungen.', cue: 'Planung → Pilot → Betrieb' }
     ]
   },

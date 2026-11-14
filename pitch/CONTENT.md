@@ -167,6 +167,8 @@ der Zündung, nicht erst nach dem Flug. Vier Triebwerke stehen für vier Empfehl
 die Inszenierung zeigt keine reale technische Triebwerkskonfiguration. Native
 Scrollsteuerung, Tastatur, reduzierte Bewegung und die statische Ersatzansicht
 unter 560 px Fensterhöhe bleiben verfügbar.
+In schmalen Ansichten bis 760 px Breite beginnt die statische Ersatzansicht
+bereits unter 680 px Höhe, damit Text, Zeichnung und Phasennavigation Platz behalten.
 
 ## Filmische Darstellung
 

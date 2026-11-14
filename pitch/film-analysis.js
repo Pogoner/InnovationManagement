@@ -200,7 +200,7 @@
             ${[1,2,3,4].map(index=>`<path class="fa-grid-line" d="M86 ${330-index*60}H570"/>`).join('')}
             ${[1,3,5,7,9].map(index=>`<path class="fa-grid-line" d="M${86+index/9*484} 90V330"/>`).join('')}
             <rect class="fa-trend-act" x="328" y="90" width="242" height="150"/><path class="fa-threshold" d="M328 90V330M86 240H570"/>
-            <text class="fa-axis-label" x="86" y="36">EINFLUSS · 1–5</text><text class="fa-plot-callout" x="448" y="153" text-anchor="middle">HANDELN</text>
+            <text class="fa-axis-label" x="86" y="36">EINFLUSS · 1–5</text><text class="fa-plot-callout" x="500" y="226" text-anchor="middle">HANDELN</text>
             <text class="fa-axis-label" x="570" y="380" text-anchor="end">HANDLUNGSDRUCK · DAUER + NÄHE</text>
             ${[1,2,3,4,5].map(value=>`<text class="fa-tick" x="65" y="${336-(value-1)*60}" text-anchor="end">${value}</text>`).join('')}
             ${[1,3,5,7,9,10].map(value=>`<text class="fa-tick" x="${86+(value-1)/9*484}" y="358" text-anchor="middle">${value}</text>`).join('')}

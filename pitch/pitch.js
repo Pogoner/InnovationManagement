@@ -85,8 +85,8 @@
     const isA = variant === 'A';
     $$('[data-variant]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.variant === variant)));
     const image = $('#variant-image');
-    image.src = `../teil6/${isA ? 'pavilion' : 'lounge'}.webp`;
-    image.alt = `Konzeptvisualisierung der Variante ${variant}: ${meta.name}.`;
+    image.src = 'assets/dining-panorama.webp';
+    image.alt = `Gemeinsames Innenraumkonzept für Variante ${variant}: einzelne Zweiertische auf versetzten Terrassen mit freier Sicht auf den Raketenstart. Künstlerische Visualisierung.`;
     $('#variant-location').textContent = meta.location.toLocaleUpperCase('de-DE');
     $('#variant-title').innerHTML = isA ? 'Ein Pavillon.<br>Mehr als ein Horizont.' : 'Ein fester Ort.<br>Für besondere Momente.';
     $('#variant-description').textContent = isA ? 'Erst in Florida erproben, dann den zweiten Standort entwickeln.' : 'Piloten im Kennedy Space Center sind geplant, während die eigene Lounge entsteht.';

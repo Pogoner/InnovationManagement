@@ -164,15 +164,19 @@
     const step=current.chapter.step;
     const p=current.progress;
     const dining=records.find(record=>record.chapter.step===5);
-    const diningMix=smooth(dining.top-height*.5,dining.top+height*.08,y)*(1-smooth(dining.top+dining.height-height*.65,dining.top+dining.height+height*.1,y));
+    const site=records[5];
+    const siteMix=smooth(site.top-height*.58,site.top+height*.08,y)*(1-smooth(site.top+site.height-height*.65,site.top+site.height+height*.1,y));
+    const experienceMix=smooth(dining.top-height*.5,dining.top+height*.08,y)*(1-smooth(dining.top+dining.height-height*.65,dining.top+dining.height+height*.1,y));
+    // The architectural reveal ends inside the same room introduced in Part 5.
+    const interiorReveal=siteMix*smooth(.80,.98,site.progress);
+    const diningMix=Math.max(experienceMix,interiorReveal);
     const diningFocus=smooth(.28,.38,dining.progress)*(1-smooth(.54,.65,dining.progress));
-    world.style.setProperty('--dining-opacity',fmt(diningMix*(.26+diningFocus*.66)));
+    world.style.setProperty('--dining-opacity',fmt(diningMix));
+    world.style.setProperty('--dining-image-opacity',fmt(.34+Math.max(diningFocus*experienceMix,interiorReveal*.35)*.55));
     const worldIn=smooth(heroBottom-height*.7,heroBottom-height*.08,y);
     const worldOut=1-smooth(launchTop-height*.4,launchTop+height*.3,y);
     world.style.opacity=fmt(worldIn*worldOut);
     world.dataset.scene=String(step);
-    const site=records[5];
-    const siteMix=smooth(site.top-height*.58,site.top+height*.08,y)*(1-smooth(site.top+site.height-height*.65,site.top+site.height+height*.1,y));
     architecture.style.opacity=fmt(siteMix);
     if(siteMix>0)worldDrawing.update(site.progress,context);
     const baseScale=1.10+Math.sin((step+p)*.7)*.045;

@@ -56,4 +56,5 @@ html{scroll-padding-top:90px}.cinematic-page{background:var(--cinema-bg);color:v
 .cinema.is-compact .landscape{height:100%;min-height:0}
 .cinema.is-compact .cinema-world{width:max(100vw,177.777778svh);height:max(100svh,56.25vw);min-width:0;min-height:0}
 .cinema-footer button:disabled{color:#7b909a;cursor:default}
+.cinema-nav .cinema-pitch-link,.cinema-mobile-menu .cinema-pitch-link{color:var(--cinema-copper)}
 @media print{.cinema-header,.cinema,.cinema-mobile-menu,.plan-actions,.cinema-footer button{display:none!important}.cinematic-page,.plan-section,.cinema-footer{background:#fff;color:#111}.plan-section{padding:30px 0}.plan-intro h2{font-size:32px}.plan-disclosure>summary{font-size:20px;padding-block:16px}.plan-disclosure>div{display:block!important}.story-static[hidden]{display:block}.story-static{padding:0}.story-static article{break-inside:avoid}.cinema-footer>div>p,.mission-fact ul,.plan-intro p{color:#444}}

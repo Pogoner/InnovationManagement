@@ -160,7 +160,9 @@ document.getElementById('view').addEventListener('input',e=>{
   if(t.dataset.set){state[t.dataset.set]=t.value;save();return}
 });
 const h=(location.hash||'').slice(1);
-if(h==='roadmap'||h==='teil6'){
+if(h==='pitch'){
+  location.replace('./pitch/'+location.search);
+}else if(h==='roadmap'||h==='teil6'){
   location.replace('./teil6/');
 }else{
   useCtx({spacex:'spacex',case:'spacex',dinner:'dinner',launch:'dinner',methode:'method',method:'method'}[h]||'user');
@@ -169,6 +171,7 @@ if(h==='roadmap'||h==='teil6'){
 }
 /* Zurück/Vor und Sprunglinks innerhalb der einen Seite */
 addEventListener('hashchange',()=>{const k=(location.hash||'').slice(1);
+  if(k==='pitch'){location.replace('./pitch/'+location.search);return}
   if(k==='roadmap'||k==='teil6'){location.replace('./teil6/');return}
   const c={idee:'user',spacex:'spacex',case:'spacex',dinner:'dinner',launch:'dinner',methode:'method',method:'method'}[k];
   if(c){useCtx(c);if(k==='launch')ui.sub.dinner='launch';ui.confirm=null;render();if(c==='spacex')window.scrollTo(0,0);else toTool()}});

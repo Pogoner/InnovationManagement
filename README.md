@@ -5,7 +5,7 @@ Innovationsrendite-Rechner nach dem Inno-Rendite-Kalkulator von Prof. Dr. Gerhar
 - Statische Website ohne Build-Schritt oder eigenes Backend. Die Hauptseite hat die Reiter „Eigene Idee prüfen“, „SpaceX-Case“, „RocketLight Dinner“ und „Methode & Quellen“. Der Reiter „SpaceX-Case“ ist eine durchgehende Erzählung: Zwischen den Kapiteln mit allen Diagrammen stehen Szenen, in denen dieselben zwölf Ideen-Punkte vom Sternenfeld über Trends, How-Wow-Now-Matrix, Finalisten, Bewertung, 5-Jahres-Zahlen und Portfolio bis zum Ranking wandern; die Schrittleiste springt zum jeweiligen Kapitel. Der Reiter „RocketLight Dinner“ ist ebenso eine durchgehende Seite (Erlebnis, Menü, Reservieren, Countdown); die Teil-6-Schritte führen weiter auf `teil6/`. „Eigene Idee prüfen“ bleibt ein schrittweiser Ablauf. Die Teil-6-Seite liegt in `teil6/`.
 - Dateien: `index.html` bindet `assets/css/*.css` und `assets/js/*.js` ein (Aufteilung siehe [AGENTS.md](AGENTS.md)). Bei Änderungen an CSS/JS die `?v=`-Version in `index.html` erneuern (erste zwölf Hex-Zeichen des SHA-256 der Datei).
 - Finalisten des SpaceX-Case: RocketLight Dinner, Starlink Insights und SpaceX Launch Engineering Cloud – jeweils als Team-Bewertung und als KI-Bewertung (Claude) mit 5-Jahres-Kalkulation. Gespeicherte Arbeitsmappen erhalten die beiden neuen KI-Bewertungen einmalig per Migration.
-- Hosting: GitHub → Settings → Pages → Branch `main`, Ordner `/ (root)`. Jeder Push auf `main` startet automatisch einen GitHub-Pages-Veröffentlichungslauf; `.nojekyll` kennzeichnet die Dateien für die direkte statische Auslieferung.
+- Hosting: GitHub → Settings → Pages → Branch `main`, Ordner `/ (root)`. Sobald Pages für das jeweilige Repository eingerichtet ist, startet ein Push auf `main` den Veröffentlichungsablauf. Ein neuer Fork übernimmt diese Hosting-Einstellung nicht automatisch. `.nojekyll` kennzeichnet die Dateien für die direkte statische Auslieferung.
 - Rechenlogik: IR = IN / IA, Bilanz = IN − IA, Portfolio-Kategorien < 2 / 2–3 / ≥ 3; 5-Jahres-Kalkulation mit Gewinnanteil- und Kostenanteil-Skala wie im Excel-Tool.
 - Daten werden im Browser gespeichert; Austausch über Export/Import (JSON) unter „Gewichtung & Daten“.
 
@@ -27,9 +27,17 @@ Codex verwendet `AGENTS.md` als Repository-Anweisung; Claude Code unterstützt d
 
 Gemeinsame Designänderungen zentral in `DESIGN.md` pflegen. Eine kleine Inhaltsänderung verlangt keinen Umbau anderer Teambeiträge; die Prüftiefe richtet sich nach dem geänderten Verhalten.
 
+## Alternative Pitch-Ansicht · Schritte 1–7
+
+[`pitch/`](pitch/) führt als auswählbare Scroll-Seite durch Chance, Ideenauswahl, Erlebnis, Rechnung, Marktzugang, Umsetzung und Entscheidung. Die Hauptnavigation bietet „Pitch · 1–7“; weitere Einstiege liegen im Dinner-Erlebnis und in der Roadmap. `#pitch` auf der Hauptseite leitet ebenfalls dorthin. Die bestehenden Arbeitsansichten bleiben erreichbar. Alle Seitenverweise sind relativ und funktionieren auch unter dem Projektpfad `/InnovationManagement/` des Forks.
+
+Der seitliche Countdown zeigt den Präsentationsfortschritt und mündet im inszenierten Raketenstart; auf schmalen Ansichten wird er zur unteren Kapitelleiste. Kapitel können direkt über `#schritt-1` bis `#schritt-7` aufgerufen werden. Native Scroll-/Tastaturbedienung, reduzierte Bewegung und flache Fenster erhalten eine lesbare Darstellung. Der Start kann auch per Button ausgelöst werden.
+
+`pitch/evidence.js` liest die Originaldaten aus `assets/js/data.js`, die Rechenfunktionen aus `assets/js/model.js` und beide Planungsvarianten aus `teil6/data.js`. Der Pitch verwendet den dokumentierten Konzeptstand und verändert keine gespeicherten Rechnerwerte. Variantenwahl und Bewegung teilen die bestehenden `rocketlight:variant`-/`rocketlight:motion`-Präferenzen. Die sieben Kapitel sind eine redaktionelle Zusammenführung; die vollständigen Bewertungen, Quellen und Originalpläne bleiben über Detailzugänge verfügbar.
+
 ## Teil 6: Roadmap & Maßnahmenplan
 
-Die eigenständige Seite [`teil6/`](https://ia13400.github.io/InnovationCalculator/teil6/) führt als zusammenhängende, filmische Scroll-Erzählung vom RocketLight-Dinner-Konzept bis zur Umsetzung: Standortscan, Architekturzeichnung, Freigabe, Bau und Betrieb entwickeln sich in derselben Landschaft. Gesamtprojekt, relevante Teilprojekte und die parallele Kulinarik bleiben verknüpft. Die bisherigen Direktlinks `#roadmap` und `#teil6` öffnen diese neue Erfahrung. Auch die Schritte „Umsetzung · Teil 6“ im Dinner-Reiter führen zum passenden Abschnitt.
+Die eigenständige Seite [`teil6/`](teil6/) führt als zusammenhängende, filmische Scroll-Erzählung vom RocketLight-Dinner-Konzept bis zur Umsetzung: Standortscan, Architekturzeichnung, Freigabe, Bau und Betrieb entwickeln sich in derselben Landschaft. Gesamtprojekt, relevante Teilprojekte und die parallele Kulinarik bleiben verknüpft. Die bisherigen Direktlinks `#roadmap` und `#teil6` öffnen diese neue Erfahrung. Auch die Schritte „Umsetzung · Teil 6“ im Dinner-Reiter führen zum passenden Abschnitt.
 
 - Aktuelle Einstiege: Geschichte (`#cinema`) und vollständiger Plan (`#plan`). Die älteren Direktlinks `#vision` (Geschichtenbeginn), `#mission` (4 W-Fragen) und `#path` (Standortsuche) bleiben als kompatible Verknüpfungen erhalten. `#projects`, `#budget`, `#timeline` und `#sources` öffnen die jeweiligen Detailabschnitte.
 - Umschalter zwischen Variante A (mobiler Pavillon, passend zu Kalkulator und 5P-Mix) und Variante B (feste Lounge in Titusville); die Wahl wird im Browser gespeichert.

@@ -185,6 +185,7 @@
       `<span aria-hidden="true">${String(index + 1).padStart(2, '0')}</span></button>`
     ).join('');
     $$('button[data-variant]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.variant === variant)));
+    $$('.cinema-pitch-link').forEach(link => { link.href = `../pitch/?variante=${variant}`; });
     $$('[data-building]').forEach(node => {
       const active = node.dataset.building === variant;
       node.classList.toggle('is-active', active);

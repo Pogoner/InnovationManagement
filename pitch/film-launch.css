@@ -59,7 +59,7 @@
   .has-photoreal-launch .launch-copy > p:not(.eyebrow) { margin-top: 18px; font-size: 16px; }
   .has-photoreal-launch .launch-copy .eyebrow { margin-bottom: 16px; }
   .has-photoreal-launch .launch-controls { margin-top: 20px; }
-  .has-photoreal-launch .launch-copy .launch-status { margin-top: 12px; max-width: 65ch; font-size: 10px !important; line-height: 1.4; }
+  .has-photoreal-launch .launch-copy > p.launch-status { margin-top: 12px; max-width: 65ch; font-size: 10px !important; line-height: 1.4; }
   .launch-cinema-cue { width: 180px; bottom: calc(32px + var(--film-bottom,0px)); }
   .launch-cinema-cue > strong { font-size: 20px; }
 }
@@ -72,7 +72,7 @@
   .has-photoreal-launch .launch-copy .eyebrow { font-size: 8px; margin-bottom: 15px; }
   .has-photoreal-launch .launch-engine-status { max-width: 280px; }
   .has-photoreal-launch .launch-controls { margin-top: 24px; gap: 11px 20px; max-width: 300px; }
-  .has-photoreal-launch .launch-copy .launch-status { font-size: 10px !important; max-width: 26ch; }
+  .has-photoreal-launch .launch-copy > p.launch-status { font-size: 10px !important; max-width: 26ch; }
   .launch-cinema-grade { background: linear-gradient(0deg,#03090fc2,transparent 35%,#03090f30 58%,#03090fdb 95%),linear-gradient(90deg,#03090f9e,transparent 76%); }
   .launch-cinema-cue { width: 190px; right: var(--gutter); bottom: 115px; }
   .launch-cinema-cue > span { font-size: 7px; }

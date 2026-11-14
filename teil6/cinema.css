@@ -87,3 +87,6 @@ html{scroll-padding-top:90px}.cinematic-page{background:var(--cinema-bg);color:v
 .cinema.is-reduced .cinema-site-plan,.cinema.is-reduced .cinema-interior{display:none}
 @media(max-height:800px) and (min-width:761px){.scene-workstep{margin-top:14px;padding-top:10px}.scene-workstep strong{font-size:12px}.scene-workstep p{font-size:11px}.scene-workstep-track{margin-top:8px}.story-caption{width:min(460px,43vw)}}
 @media(max-width:760px){.scene-workstep{margin-top:15px;padding-top:11px;max-width:350px}.scene-workstep strong{font-size:12px}.scene-workstep p{font-size:11px}.scene-workstep-meta{font-size:7px}.scene-workstep-track{margin-top:8px}.cinema-interior>img{object-position:69% center}.story-static-worksteps strong{font-size:14px}.story-static-worksteps span{font-size:13px}}
+
+/* The closer launch keeps a clear corridor beside the planning panels. */
+@media (min-width:761px){.right-stage{right:clamp(4.3vw,calc(50vw - max(27.3vw,48.5333svh) + 80px),32vw)}}

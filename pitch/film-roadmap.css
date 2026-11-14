@@ -2,6 +2,9 @@
    The phase block stays above/right of the shared architectural picture. */
 .film-stage[data-film-step="6"] .film-visual { width: 100%; max-width: 650px; height: auto; max-height: none; }
 .film-stage[data-film-step="6"]:has([data-plan-view="phase"]) .film-visual { width: min(465px,100%); }
+@media (min-width: 1201px) {
+  .film-stage[data-film-step="6"]:has([data-plan-view="phase"]) .film-visual { justify-self: start; }
+}
 .film-stage[data-film-step="6"] .film-architecture-plan { width: 100%; padding: 0; border: 0; position: relative; }
 .film-stage[data-film-step="6"] .film-visual::before { content: ""; position: absolute; z-index: -1; inset: -28px -32px -24px; pointer-events: none; background: radial-gradient(ellipse at 55% 35%,#060b10e8 15%,#060b1099 65%,transparent 100%); }
 .film-plan-header { display: flex; align-items: center; gap: 18px; }

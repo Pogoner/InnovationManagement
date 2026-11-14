@@ -114,7 +114,6 @@
   const menu = $('#chapter-menu');
   const menuButton = $('#chapter-toggle');
   const motionButton = $('#motion-toggle');
-  const launchButton = $('#launch-button');
   const launchStage = $('.launch-stage');
   const media = matchMedia('(prefers-reduced-motion: reduce)');
   let motionPreference = read('rocketlight:motion');
@@ -131,10 +130,6 @@
   let launchRange = 1;
   let activeStep = -1;
   let remaining = -1;
-  let launchState = '';
-  let manualLaunch = null;
-  let launchProgress = 0;
-  let lastScroll = scrollY;
   let destroyed = false;
   let resizeObserver;
 
@@ -164,23 +159,7 @@
     motionButton.setAttribute('aria-pressed', String(preferredReduced));
     motionButton.setAttribute('aria-label', preferredReduced ? 'Bewegung aktivieren' : 'Bewegung reduzieren');
     motionButton.title = shortWindow() ? 'Statische Darstellung bei geringer Fensterhöhe' : preferredReduced ? 'Bewegung aktivieren' : 'Bewegung reduzieren';
-    manualLaunch = null;
     queueMeasure();
-  }
-  function setLaunchState(state) {
-    if (launchState === state) return;
-    launchState = state;
-    const status = $('#launch-status');
-    if (state === 'complete') {
-      status.textContent = reduced ? 'Mission gestartet. Statische Darstellung mit reduzierter Bewegung.' : 'Liftoff. Aus einer Idee wird eine gemeinsame Mission.';
-      launchButton.innerHTML = 'Start wiederholen <span aria-hidden="true">↻</span>';
-    } else if (state === 'starting' || state === 'ascent') {
-      status.textContent = state === 'ascent' ? 'Die Rakete hebt ab. Ein gemeinsamer Aufbruch.' : 'Zündung. Der Moment beginnt.';
-      launchButton.innerHTML = 'Rakete starten <span aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></span>';
-    } else {
-      status.textContent = reduced ? 'Reduzierte Bewegung: Der Abschluss bleibt als ruhiges Bild sichtbar.' : 'Der Start folgt deinem Scrollfortschritt.';
-      launchButton.innerHTML = 'Rakete starten <span aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></span>';
-    }
   }
   function frame(now) {
     frameID = 0;
@@ -205,21 +184,10 @@
         if (link.hash === `#schritt-${step}`) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current');
       });
     }
-    let progress = reduced ? (marker >= launchTop ? 1 : 0) : clamp((y - launchTop + 70) / launchRange);
-    if (manualLaunch) {
-      if (manualLaunch.started === null) manualLaunch.started = now;
-      const elapsed = reduced ? 1 : clamp((now - manualLaunch.started) / 11000);
-      progress = manualLaunch.from + (1-manualLaunch.from) * elapsed;
-      if (elapsed < 1) queueFrame();
-    }
-    launchProgress = progress;
-    const flight = clamp((progress - .08) / .92);
-    const eased = flight * flight * (3-2*flight);
-    const ignition = reduced ? (progress ? .6 : 0) : clamp(progress/.22);
-    launchStage.style.setProperty('--ignition', ignition.toFixed(3));
-    launchStage.style.setProperty('--rocket-rise', `${reduced ? (progress ? -95 : 0) : -eased * Math.max(650, innerHeight*.92)}px`);
-    launchStage.style.setProperty('--smoke-scale', (1+progress*1.8).toFixed(3));
-    setLaunchState(progress >= .98 ? 'complete' : progress > .23 ? 'ascent' : progress > .065 ? 'starting' : 'ready');
+    const scrollProgress = clamp((y - launchTop) / launchRange);
+    const progress = window.PitchFilm?.update({y,viewport:innerHeight,reduced,variant,launchProgress:scrollProgress}) ?? scrollProgress;
+    // The video owns playback time; reuse this frame loop only while it plays.
+    if (launchStage.dataset.launchMode === 'playing') queueFrame();
     const nextRemaining = progress > .08 ? 0 : sections.length+1-Math.max(1,step);
     if (remaining !== nextRemaining) {
       remaining = nextRemaining;
@@ -229,7 +197,6 @@
     const totalProgress = clamp((marker-(sectionTops[0] || 0))/Math.max(1,launchTop+launchRange-(sectionTops[0] || 0)));
     $('#rail-progress').style.transform = `scaleY(${progress >= .98 ? 1 : totalProgress})`;
     $('.hero-image').style.setProperty('--hero-shift', `${reduced ? 0 : Math.min(y*.12,100)}px`);
-    window.PitchFilm?.update({y,viewport:innerHeight,reduced,variant,launchProgress:progress});
   }
 
   document.addEventListener('click', event => {
@@ -286,15 +253,8 @@
     if (motionPreference !== 'full' && motionPreference !== 'reduced') preferredReduced = media.matches;
     updateMotion();
   });
-  launchButton.addEventListener('click', () => {
-    manualLaunch = { started:null, from:launchProgress >= .98 ? 0 : launchProgress };
-    queueFrame();
-  });
-  addEventListener('scroll', () => {
-    if (scrollY < lastScroll-2 || scrollY < launchTop-innerHeight*.25) manualLaunch = null;
-    lastScroll = scrollY;
-    queueFrame();
-  }, {passive:true});
+  document.addEventListener('pitch:launchchange', queueFrame);
+  addEventListener('scroll', queueFrame, {passive:true});
   addEventListener('resize', () => {
     const nextReduced = preferredReduced || shortWindow();
     if (nextReduced !== reduced) updateMotion();
@@ -308,7 +268,6 @@
       write('rocketlight:variant',variant);
       renderVariant(true);
     }
-    manualLaunch = null;
     setMenu(false);
     queueMeasure();
   });
@@ -318,7 +277,6 @@
     if (document.hidden) {
       if (frameID) cancelAnimationFrame(frameID);
       frameID = 0;
-      if (manualLaunch) manualLaunch = {started:null,from:launchProgress};
     } else queueMeasure();
   });
   addEventListener('storage', event => {

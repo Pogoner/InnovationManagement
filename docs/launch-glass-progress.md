@@ -41,3 +41,9 @@ Durchgängiger NASA-Auszug (27 Sekunden) mit eigenem zuschaltbarem Sounddesign i
 - Pages-Veröffentlichung genau dieses Commits: Lauf `43646934532`, erfolgreich.
 - Die vorhandenen Dateien `film-launch.js` und `film-launch.css` enthalten noch den früheren Bildlayer-Controller. Dateiexistenz bedeutet hier nicht, dass der Film schon integriert ist.
 - Nächster kleiner Sicherungsschritt: Filmcontroller, Bedienelemente und gemeinsame Scroll-Anbindung. Danach gezielte Browserprüfung und eigene Pages-Veröffentlichung bestätigen.
+
+## Meilenstein 3: Film mit Oberfläche verbunden
+
+`pitch/film-launch.js` verwendet jetzt das gesicherte MP4 mit gemeinsamer Bild-/Tonzeit. Play/Pause, Wiederholung, Ton und native Zeitleiste stehen außerhalb der ausblendbaren Überschrift. Der bisherige 11-Sekunden-Timer und die Bildlayer entfallen. `pitch.js` und `film.js` übergeben den Scrollfortschritt an den Controller; nach manuellem Abspielen oder Seek wird die Scrollabbildung am aktuellen Filmbild fortgesetzt. Außerhalb der Ansicht und bei verborgenem Tab wird pausiert. Reduzierte Bewegung hält ein ruhiges Bild; bewusstes Abspielen bleibt möglich. Der Schluss hält das echte letzte Filmbild.
+
+Der veraltete `film-site.js`-Cacheverweis der eigenständigen Roadmap ist korrigiert. Syntax und eine isolierte Zustandsprüfung des Controllers sind bestanden; die tatsächliche Browser- und Live-Prüfung dieses Meilensteins folgt im nächsten Schritt.

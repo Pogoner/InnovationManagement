@@ -73,7 +73,7 @@
   document.body.classList.add('film-ready');
 
   let reduced = document.body.classList.contains('is-reduced');
-  let width=innerWidth, height=innerHeight, heroTop=0, heroRange=1, heroBottom=0, launchTop=0;
+  let width=innerWidth, height=innerHeight, heroTop=0, heroRange=1, heroBottom=0, launchTop=0, launchBottom=0;
   let cameraTop=0, cameraHeight=1, headerClearance=100;
   let dirty=true;
   const photo = world.querySelector('.film-landscape-image');
@@ -133,6 +133,7 @@
     heroRange=Math.max(1,prologue.offsetHeight-hero.offsetHeight);
     heroBottom=heroTop+prologue.offsetHeight;
     launchTop=launch.getBoundingClientRect().top+y;
+    launchBottom=launchTop+launch.offsetHeight;
     dirty=false;
   }
 
@@ -194,8 +195,11 @@
     world.style.setProperty('--landscape-strength',fmt(baseStrength+(1-baseStrength)*siteMix));
     world.style.setProperty('--water-drift',((reduced?0:y*.015)%150).toFixed(2)+'px');
     const ignition=frame.launchProgress||0;
-    launchCinema.update(ignition,{reduced,viewport:height,width});
-    launchStage.dataset.filmFlight=ignition>.08?'ignited':'ready';
+    return launchCinema.update(ignition,{
+      reduced,viewport:height,width,
+      visible:y+height>launchTop+height*.35 && y<launchBottom-height*.35,
+      near:y+height*2>launchTop && y<launchBottom+height
+    });
   }
 
   function setVariant(value) {

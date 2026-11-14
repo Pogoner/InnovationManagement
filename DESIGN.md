@@ -75,6 +75,14 @@ Die Roadmap zeigt die Methode: ruhiger Ausgangsort → Standortsuche → Auswahl
 
 ## 6. Bewegung als gemeinsame Sprache
 
+Die Pitch-Ansicht überträgt dieses Prinzip auf sieben zusammenhängende Szenen:
+ein kurzer Gedanke und eine sich entwickelnde Zeichnung pro Phase, die vollständigen
+Belege in einer direkt erreichbaren Vertiefung darunter. Die gemeinsame Landschaft
+bleibt räumlicher Bezugspunkt. Ihre Kamera, Architekturzeichnung und Gebäudefotos
+verwenden einen gemeinsamen Koordinatenraum; der Übergang in die nächste Szene
+blendet diesen Bildraum weich um. Der native Scrollfortschritt bestimmt den Zustand
+deterministisch, sodass Zurückscrollen dieselbe Entwicklung umkehrt.
+
 Bewegung zeigt **Fortschritt, Ursache, Beziehung oder räumliche Kontinuität**. Wähle für jede Übergangsart ein konsistentes Muster. Die Person behält Tempo und Richtung in der Hand.
 
 | Übergang | Ausgangspunkt für neue Komponenten |

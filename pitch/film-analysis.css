@@ -1,0 +1,97 @@
+/* Transparent technical drawings in the shared cinematic image space. */
+.fa-svg { width: 100%; height: 100%; overflow: visible; color: #a9d9d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+.fa-svg text { fill: #eff3ed; font-weight: 400; font-variant-numeric: tabular-nums; }
+.fa-svg path, .fa-svg ellipse, .fa-svg circle { vector-effect: non-scaling-stroke; }
+.fa-trace { fill: none; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fa-kicker { font-size: 14px; letter-spacing: 2px; fill: #a8b5bb !important; }
+.fa-small { font-size: 13px; letter-spacing: 1.4px; fill: #a8b5bb !important; }
+.fa-footnote { font-size: 15px; fill: #a8b5bb !important; }
+.fa-note-strong { font-size: 22px; fill: #efbd91 !important; }
+.fa-copper-text { fill: #efbd91 !important; }.fa-ice-text { fill: #a9d9d9 !important; }
+.fa-fill-copper { fill: #efbd91; }.fa-fill-ice { fill: #a9d9d9; }
+.fa-grid-line { fill: none; stroke: #a9d9d91b; stroke-width: 1; }
+.fa-track { fill: none; stroke: #a9d9d91c; stroke-width: 1; }
+.fa-tick { font-size: 15px; fill: #a8b5bb !important; }
+.fa-axis-label { font-size: 13px; letter-spacing: 1px; fill: #a8b5bb !important; }
+.fa-node-halo { fill: #a9d9d910; stroke: #a9d9d918; stroke-width: 1; }
+
+/* Mission: the same three orbital drawings expand from the shared center. */
+.fa-mission-grid { fill: none; stroke: #a9d9d914; stroke-width: 1; }
+.fa-mission-grid path { stroke-dasharray: 2 8; }
+.fa-orbit { stroke: #a9d9d9a6; stroke-width: 1.3; }
+.fa-orbit-0 { stroke: #efbd91d9; stroke-width: 1.5; }
+.fa-orbit-shadow { fill: none; stroke: #a9d9d916; stroke-width: 1; }
+.fa-mission-core { fill: #071119d6; stroke: #efbd9177; stroke-width: 1.2; }
+.fa-mission-name { font-size: 39px; letter-spacing: -1.8px; }
+.fa-segment-name { font-size: 28px; letter-spacing: -.7px; }
+.fa-satellite-dot { fill: #d9e9df; stroke: #a9d9d9; stroke-width: 1; }
+.fa-satellite-cross { fill: none; stroke: #a9d9d95c; stroke-width: 1; }
+.fa-mission-underbar { stroke: #a9d9d945; stroke-width: 1; }
+
+/* Innovation: a continuous sketch connects the four compared technologies. */
+.fa-audit-spine { stroke: #a9d9d937; stroke-width: 1; }
+.fa-audit-disc { fill: #071018dc; stroke: #a9d9d928; stroke-width: 1; }
+.fa-audit-icon { stroke: #a9d9d9; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.fa-audit-connector { stroke: #a9d9d94c; stroke-width: 1; }
+.fa-audit-name { font-size: 22px; letter-spacing: -.35px; }
+.fa-audit-value { font-size: 23px; }
+.fa-series-label { font-size: 12px; fill: #a8b5bb !important; }
+.fa-audit-legend text { font-size: 17px; fill: #a8b5bb; }
+.fa-audit-team { fill: url(#fa-audit-copper); }.fa-audit-ai { fill: url(#fa-audit-ice); }
+.fa-audit-zero { fill: #060b10; stroke: #efbd91; stroke-width: 1.5; }
+.fa-audit-note path { fill: none; stroke: #efbd9138; stroke-width: 1; }
+
+/* Trend positions retain the workbook axes; grouped markers preserve overlaps. */
+.fa-grid-border { stroke: #a9d9d952; stroke-width: 1; }
+.fa-trend-act { fill: #efbd910a; stroke: none; }
+.fa-threshold { fill: none; stroke: #a9d9d958; stroke-width: 1; stroke-dasharray: 3 5; }
+.fa-plot-callout { font-size: 12px; letter-spacing: 1.4px; fill: #efbd91 !important; }
+.fa-signal-web { fill: none; stroke: #a9d9d93d; stroke-width: 1; }
+.fa-signal-web path { stroke-dasharray: 3 6; }
+.fa-signal-count { font-size: 38px; stroke: none; }
+.fa-trend-dot { fill: #132831; stroke: #a9d9d9a6; stroke-width: 1; }
+.fa-dot-label { font-size: 15px; }
+.fa-trend-cluster .fa-trend-dot { fill: #3e342e; stroke: #efbd91b3; }
+.fa-trend-cluster .fa-node-halo { fill: #efbd9112; stroke: #efbd9126; }
+.fa-number-large { font-size: 68px; letter-spacing: -3px; fill: #efbd91 !important; }
+.fa-candidate-orbit { stroke: #a9d9d929; stroke-width: 1; }
+.fa-candidate-dot { fill: #a9d9d9; stroke: #a9d9d966; stroke-width: 1; }
+.fa-candidate.is-extra .fa-candidate-dot { fill: #efbd91; stroke: #efbd9177; }
+.fa-candidate.is-pitch .fa-candidate-dot { fill: #efbd91; stroke: #efbd91; }
+.fa-candidate-halo { fill: #efbd910d; stroke: #a9d9d92b; stroke-width: 1; }
+.fa-candidate-id { font-size: 17px; fill: #081218 !important; font-weight: 550 !important; }
+.fa-selection-tree { stroke: #a9d9d95e; stroke-width: 1; }
+.fa-finalist-name { font-size: 25px; letter-spacing: -.6px; }
+
+/* The financial contrast uses source values; the line follows actual A inputs. */
+.fa-score-link { stroke: #a9d9d961; stroke-width: 1; }
+.fa-benefit-value { font-size: 54px; letter-spacing: -2px; }
+.fa-ir { font-size: 95px; letter-spacing: -5px; }
+.fa-score-label { font-size: 17px; letter-spacing: 2.2px; }
+.fa-score-divider { stroke: #a9d9d92b; stroke-width: 1; }
+.fa-effort-label { font-size: 19px; fill: #a8b5bb !important; }
+.fa-effort-team { fill: #efbd91; }.fa-effort-ai { fill: #a9d9d9; }
+.fa-revenue-total { font-size: 76px; letter-spacing: -5px; fill: #efbd91 !important; }
+.fa-revenue-unit { font-size: 26px; }
+.fa-revenue-area { fill: url(#fa-revenue-fill); stroke: none; }
+.fa-revenue-line { stroke: #efbd91; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.fa-revenue-bar { fill: #a9d9d91f; stroke: #a9d9d936; stroke-width: 1; }
+.fa-revenue-point { fill: #efbd91; stroke: #060b10; stroke-width: 1.5; }
+.fa-revenue-value { font-size: 18px; fill: #efbd91 !important; }
+.fa-year-label { font-size: 18px; fill: #a8b5bb !important; }
+.fa-revenue-head { fill: #fff3db; }.fa-revenue-head-glow { fill: #efbd911a; stroke: #efbd9130; stroke-width: 1; }
+
+@media (max-width: 760px) {
+  .fa-kicker { font-size: 22px; letter-spacing: 1.1px; }
+  .fa-small, .fa-axis-label { font-size: 20px; letter-spacing: .6px; }
+  .fa-footnote { font-size: 22px; }
+  .fa-note-strong { font-size: 28px; }
+  .fa-audit-name { font-size: 28px; }
+  .fa-audit-value { font-size: 28px; }
+  .fa-series-label { font-size: 22px; }
+  .fa-tick { font-size: 22px; }
+  .fa-dot-label { font-size: 18px; }
+  .fa-finalist-name { font-size: 27px; }
+  .fa-trend-key text:last-child { display: none; }
+  .fa-revenue-phase .fa-footnote, .fa-selection-final .fa-footnote { font-size: 21px; }
+}

@@ -1,0 +1,94 @@
+/* Transparent, scroll-drawn scenes: the film's common landscape remains visible. */
+.fe-scene { width: 100%; height: 100%; position: relative; color: var(--paper, #eff3ed); isolation: isolate; }
+.fe-scene .fe-svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.fe-scene svg text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-weight: 400; fill: #eff3ed; }
+.fe-scene svg path, .fe-scene svg ellipse, .fe-scene svg circle { vector-effect: non-scaling-stroke; }
+.fe-scene .fe-experience-heading text { font-size: 15px; letter-spacing: 2.5px; fill: #b4c4c9; }
+.fe-heading-divider { fill: #efbd91; }
+.fe-table-shadow { fill: #03070b; opacity: .4; filter: blur(11px); }
+.fe-table-top { fill: url(#fe-table-surface); opacity: var(--fe-table-fill, 0); }
+.fe-table-ghost { fill: none; stroke: #a9d9d91c; stroke-width: 1; }
+.fe-table-outline { fill: none; stroke: #b6ddda; stroke-width: 1.25; }
+.fe-table-edge { fill: #060e15b8; stroke: #a9d9d94f; stroke-width: 1; }
+.fe-table-leg { fill: none; stroke: #a9d9d95c; stroke-width: 1; }
+.fe-table-runner { fill: none; stroke: #efbd916e; stroke-width: .7; }
+.fe-table-trace { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-place { opacity: 0; }
+.fe-chair { fill: #0a151dab; stroke: #a9d9d9a3; stroke-width: 1; }
+.fe-chair-inner { fill: #efbd910b; stroke: none; }
+.fe-plate-light { fill: url(#fe-place-glow); }
+.fe-plate { fill: #dce5df12; stroke: #eee7d3d9; stroke-width: .9; }
+.fe-plate-inner { fill: none; stroke: #efbd917d; stroke-width: .65; }
+.fe-cutlery { fill: none; stroke: #b7c7cd7d; stroke-width: .65; stroke-linecap: round; }
+.fe-candle { opacity: 0; }
+.fe-candle-halo { fill: url(#fe-candle-glow); }
+.fe-candle-base { fill: #efbd91b3; }
+.fe-candle-stem { fill: none; stroke: #e9d8b7; stroke-width: 1.6; }
+.fe-candle-flame { fill: #fff0c7; }
+.fe-courses { opacity: 0; }
+.fe-course-guide { fill: none; stroke: #a9d9d91e; stroke-width: 1; }
+.fe-course-line { fill: none; stroke: #efbd91; stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-course-ring { fill: #08131c; stroke: #a9d9d970; stroke-width: 1; opacity: calc(.35 + var(--fe-course-lit, 0) * .65); }
+.fe-course-dot { fill: #efbd91; opacity: var(--fe-course-lit, 0); }
+.fe-course text { font-size: 17px; letter-spacing: 1px; fill: #a8b5bb; opacity: calc(.4 + var(--fe-course-lit, 0) * .6); }
+.fe-scene .fe-course-caption { font-size: 14px; letter-spacing: 2px; fill: #a9b8be; }
+.fe-market { opacity: 0; }
+.fe-scene .fe-price-label { fill: #a9d9d9; font-size: 16px; letter-spacing: 2px; }
+.fe-scene .fe-price-target-label { fill: #efbd91; }
+.fe-scene .fe-price-value { font-size: 55px; letter-spacing: -3px; font-weight: 350; font-variant-numeric: tabular-nums; }
+.fe-scene .fe-price-unit { fill: #abbcc3; font-size: 14px; letter-spacing: 1px; }
+.fe-price-connector { fill: none; stroke: url(#fe-market-line); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-mix-track { fill: none; stroke: #a9d9d941; stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-mix-node { opacity: 0; }
+.fe-mix-node circle { fill: #efbd91; stroke: #060b10; stroke-width: 2; }
+.fe-mix-node path { stroke: #efbd9150; stroke-width: 1; }
+.fe-mix-labels { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); align-items: start; position: absolute; bottom: -4px; inset-inline: 0; gap: 8px; text-align: center; color: #d6e1e2; font-size: 13px; line-height: 1.3; opacity: 0; }
+.fe-mix-labels small { display: block; font-size: 10px; color: #a8b5bb; margin-top: 3px; }
+
+/* Four independent recommendations physically assemble into one grounded vehicle. */
+.fe-system .fe-svg { padding-bottom: 20px; }
+.fe-system-axis { stroke: #a9d9d91a; stroke-width: .75; stroke-dasharray: 3 7; }
+.fe-system-ground { stroke: #a9d9d95c; stroke-width: 1; }
+.fe-vehicle-ghost { fill: none; stroke: #a9d9d91e; stroke-width: 1; }
+.fe-engine-sockets { fill: none; stroke: #a9d9d9; stroke-width: 1; opacity: calc((1 - var(--fe-system-assembled, 0)) * .15); }
+.fe-rocket-skin { opacity: 0; }
+.fe-rocket-draft { fill: none; stroke: #a9d9d9ce; stroke-width: 1.1; }
+.fe-vehicle-trace { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-draft-guide { stroke-width: .6; }
+.fe-engine-wire { fill: none; stroke: #efbd91; stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: .23; }
+.fe-engine-unit { opacity: 0; }
+.fe-engine-halo { fill: url(#fe-engine-glow); opacity: calc(var(--fe-engine-heat, 0) * .6); }
+.fe-engine-frame { fill: #08131cdb; stroke: #a9d9d93b; stroke-width: 1; }
+.fe-engine-trace { fill: none; stroke: #a9d9d9d9; stroke-width: 1.3; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-engine-ribs { fill: none; stroke: #a9d9d966; stroke-width: 1; }
+.fe-engine-chamber { fill: #09141c; stroke: #efbd9180; stroke-width: 1; }
+.fe-engine-core { fill: url(#fe-engine-interior); opacity: calc(var(--fe-engine-heat, 0) * (.12 + var(--fe-system-assembled, 0) * .88)); }
+.fe-scene .fe-engine-number { fill: #e8f1ed; font-size: 20px; font-variant-numeric: tabular-nums; letter-spacing: 1px; }
+.fe-engine-label { opacity: .18; }
+.fe-scene .fe-engine-name { font-size: 25px; letter-spacing: -.5px; }
+.fe-scene .fe-engine-purpose { font-size: 16px; fill: #a8b5bb; }
+.fe-engine-label-rule { stroke: #a9d9d970; stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fe-scene .fe-system-foundation { font-size: 14px; letter-spacing: 1px; fill: #a9d9d990; }
+.fe-system-caption { position: absolute; bottom: -7px; inset-inline: 0; text-align: center; color: #a8b5bb; font-size: 12px; letter-spacing: .04em; }
+.fe-system-caption span { color: #efbd91; padding: 0 8px; }
+
+@media (max-width: 760px) {
+  .fe-scene .fe-experience-heading text { font-size: 20px; letter-spacing: 1px; }
+  .fe-scene .fe-price-label { font-size: 20px; letter-spacing: 1.3px; }
+  .fe-scene .fe-price-value { font-size: 58px; }
+  .fe-scene .fe-price-unit { font-size: 17px; letter-spacing: .4px; }
+  .fe-scene .fe-course-caption { font-size: 18px; letter-spacing: 1px; }
+  .fe-course text { font-size: 22px; }
+  .fe-mix-labels { font-size: 11px; gap: 3px; bottom: -2px; }
+  .fe-mix-labels small { font-size: 9px; }
+  .fe-scene .fe-engine-name { font-size: 29px; letter-spacing: -.8px; }
+  .fe-scene .fe-engine-purpose { font-size: 18px; }
+  .fe-scene .fe-system-foundation { font-size: 17px; letter-spacing: .5px; }
+  .fe-system-caption { font-size: 10px; bottom: -4px; }
+}
+
+@media print {
+  .fe-scene .fe-svg { max-height: 380px; }
+  .fe-table-trace,.fe-course-line,.fe-price-connector,.fe-mix-track,.fe-vehicle-trace,.fe-engine-wire,.fe-engine-trace,.fe-engine-label-rule { stroke-dashoffset: 0 !important; }
+  .fe-place,.fe-candle,.fe-market,.fe-mix-node,.fe-mix-labels,.fe-engine-unit,.fe-engine-label { opacity: 1 !important; }
+}

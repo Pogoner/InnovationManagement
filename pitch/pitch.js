@@ -13,6 +13,7 @@
   const writeHistory = (method, data, url) => { try { history[method](data,'',url); } catch (_) { /* Local file previews can restrict History API writes. */ } };
   const safeURL = value => /^https?:\/\//i.test(value) ? escape(value) : '#quellen';
   const revealTarget = target => {
+    if (target.tagName === 'DETAILS') target.open = true;
     for (let parent = target.parentElement; parent; parent = parent.parentElement) {
       if (parent.tagName === 'DETAILS') parent.open = true;
     }
@@ -99,6 +100,7 @@
     const alternativeNote = $('#decision-alternative');
     if (alternativeNote) alternativeNote.hidden = isA;
     if (announce) $('#variant-status').textContent = `${meta.short}. ${meta.budget} ${meta.budgetLabel}. ${meta.firstDinnerLabel}: ${meta.firstDinner}. Termine, Projekte und Links wurden angepasst.`;
+    window.PitchFilm?.setVariant(variant);
     queueMeasure();
   }
 
@@ -141,10 +143,11 @@
   function queueMeasure() { needsMeasure = true; queueFrame(); }
   function measure() {
     sectionTops = sections.map(section => section.getBoundingClientRect().top + scrollY);
-    engineTops = engines.map(engine => engine.getBoundingClientRect().top + scrollY);
+    engineTops = engines.map(engine => engine.closest('details:not([open])') ? Infinity : engine.getBoundingClientRect().top + scrollY);
     const launch = $('#start');
     launchTop = launch.getBoundingClientRect().top + scrollY;
     launchRange = Math.max(1, launch.offsetHeight - innerHeight);
+    window.PitchFilm?.measure();
     needsMeasure = false;
   }
   function setMenu(open) {
@@ -155,6 +158,7 @@
     reduced = preferredReduced || innerHeight < 560;
     document.body.classList.add('motion-ready');
     document.body.classList.toggle('is-reduced', reduced);
+    window.PitchFilm?.setReduced(reduced);
     motionButton.setAttribute('aria-pressed', String(preferredReduced));
     motionButton.setAttribute('aria-label', preferredReduced ? 'Bewegung aktivieren' : 'Bewegung reduzieren');
     motionButton.title = innerHeight < 560 ? 'Statische Darstellung bei geringer Fensterhöhe' : preferredReduced ? 'Bewegung aktivieren' : 'Bewegung reduzieren';
@@ -223,6 +227,7 @@
     const totalProgress = clamp((marker-(sectionTops[0] || 0))/Math.max(1,launchTop+launchRange-(sectionTops[0] || 0)));
     $('#rail-progress').style.transform = `scaleY(${progress >= .98 ? 1 : totalProgress})`;
     $('.hero-image').style.setProperty('--hero-shift', `${reduced ? 0 : Math.min(y*.12,100)}px`);
+    window.PitchFilm?.update({y,viewport:innerHeight,reduced,variant,launchProgress:progress});
   }
 
   document.addEventListener('click', event => {
@@ -303,6 +308,7 @@
     queueMeasure();
   });
   document.addEventListener('toggle', queueMeasure, true);
+  document.addEventListener('pitch:layout', queueMeasure);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       if (frameID) cancelAnimationFrame(frameID);

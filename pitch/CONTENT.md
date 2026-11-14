@@ -167,3 +167,25 @@ der Zündung, nicht erst nach dem Flug. Vier Triebwerke stehen für vier Empfehl
 die Inszenierung zeigt keine reale technische Triebwerkskonfiguration. Native
 Scrollsteuerung, Tastatur, reduzierte Bewegung und die statische Ersatzansicht
 unter 560 px Fensterhöhe bleiben verfügbar.
+
+## Filmische Darstellung
+
+Die sieben Originalkapitel bleiben vollständig im HTML. Die filmische Ebene
+verschiebt sie jeweils in ein natives, per Direktlink erreichbares `details`-Element
+und ergänzt eine kurze Scrollszene. Alle bestehenden IDs, Dokumente, Rechenwege und
+Interaktionen bleiben erhalten; ohne die Filmskripte bleibt die bisherige Kapitelansicht
+lesbar. Die Szenentexte stehen in `film-story.js`, die Visualisierung in den vier
+`film-*.js`-Dateien und dem gemeinsamen Controller `film.js`.
+
+Die Animationen zeigen keine zusätzlichen Messwerte: Technologiebalken, Trendpunkte,
+IR und Umsatz folgen den bestehenden Quellen. Die Umsatzsequenz nennt ausdrücklich
+Variante A, auch wenn für die Architektur Variante B gewählt ist. Die zwanzig
+Gedecke und sieben Gänge illustrieren das Dinner-Konzept. Die vier symbolischen
+Antriebe stehen für Struktur, Prozesse, Kultur und Kompetenzen.
+
+Die Architektur verwendet dasselbe Landschaftsbild und dieselben transparenten
+Gebäudebilder wie die Vision. SVG-Zeichnung und Foto teilen Abmessungen, Perspektive
+und Bodenanker; ein vertikaler Bildaufbau führt vom Entwurf zum Konzeptbild.
+Auf schmalen Bildschirmen erhält die Landschaft eine tiefere Bildbühne, damit
+das Gebäude vollständig im Ausschnitt bleibt. Gezeichnete Gates zeigen den
+Präsentationsfortschritt, keine tatsächlich erteilten Freigaben.

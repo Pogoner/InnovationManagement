@@ -141,7 +141,7 @@ function vDinExp(){
    <div class="copy"><div class="x-up" style="color:var(--gold)">Dinner mit Raketenstart · 20 Plätze</div>
     <h2>RocketLight<br>Dinner</h2>
     <p>Sieben Gänge Sterneküche, ein echter Raketenstart vor der Glasfront. Das exklusivste Dinner der Welt.</p>
-    <div class="row" style="gap:14px"><button class="xbtn solid" data-sub="menu">Menü ansehen</button><button class="xbtn" data-sub="book">Platz reservieren</button><button class="xbtn" data-act="launchfull">Start erleben</button></div></div></section>
+    <div class="row" style="gap:14px"><button class="xbtn solid" data-sub="menu">Menü ansehen</button><button class="xbtn" data-sub="book">Platz reservieren</button><button class="xbtn" data-act="launchfull">Start erleben</button><a class="pitch-dinner-link" href="./pitch/">Gesamten Pitch erleben <span aria-hidden="true">↗</span></a></div></div></section>
   <section class="xstats">
    <div><b>20</b><span>Plätze pro Abend</span></div><div><b>3</b><span>Menüs à 7 Gängen</span></div><div><b>1</b><span>Raketenstart</span></div><div><b>50.000</b><span>USD pro Platz</span></div></section>
   <section class="xsec"><h2>Der Abend</h2><p class="lead">Die Gänge folgen dem Countdown. Wenn die Triebwerke zünden, steht der Hauptgang auf dem Tisch.</p>

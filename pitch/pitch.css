@@ -70,6 +70,7 @@ html { scroll-padding-top: 0; }
 .chapter-menu a { display: flex; gap: 18px; align-items: center; min-height: 46px; padding: 10px; font-size: 14px; border-radius: 5px; }
 .chapter-menu a:hover, .chapter-menu a[aria-current] { background: #ffffff08; color: var(--copper); }
 .chapter-menu a span { width: 22px; font-size: 11px; color: var(--copper); font-variant-numeric: tabular-nums; }
+.chapter-menu .workbench-link { border-top: 1px solid var(--line); border-radius: 0; margin-top: 8px; padding-top: 16px; }
 
 /* The countdown is a chapter count, never a real launch clock. */
 .mission-rail { position: fixed; inset: 0 0 0 auto; width: var(--rail-width); z-index: 55; border-left: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; background: #080e14; }
@@ -262,7 +263,7 @@ html { scroll-padding-top: 0; }
 .variant-selector button > span { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--muted); font-size: 12px; border-radius: 50%; }
 .variant-selector button b { font-size: 16px; font-weight: 500; }.variant-selector button small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 3px; }.variant-selector button > i { font-size: 8px; letter-spacing: .07em; margin-left: auto; color: var(--muted); font-style: normal; }
 .variant-selector button[aria-pressed="true"] { background: #efbd910c; }.variant-selector button[aria-pressed="true"] > span { border-color: #efbd9160; color: var(--copper); }.variant-selector button[aria-pressed="true"] b { color: var(--copper); }
-.roadmap-scene { position: relative; aspect-ratio: 2.25; min-height: 370px; overflow: hidden; isolation: isolate; border-radius: 4px; background: #0b131d; }
+.roadmap-scene { position: relative; width: 100%; aspect-ratio: 2.25; min-height: 370px; overflow: hidden; isolation: isolate; border-radius: 4px; background: #0b131d; }
 .roadmap-scene > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; z-index: -3; }
 .roadmap-scene-shade { position: absolute; inset: 0; background: linear-gradient(90deg,#060b10dc,transparent 85%); z-index: -1; }
 .roadmap-scene-copy { max-width: 400px; padding: 50px 40px; }.roadmap-scene-copy h3 { font-size: 38px; margin: 18px 0; letter-spacing: -.04em; }.roadmap-scene-copy > p:last-child { font-size: 14px; max-width: 280px; color: #bdc9ce; }
@@ -307,6 +308,7 @@ html { scroll-padding-top: 0; }
 }
 @media (max-width: 1000px) {
   .pitch-page { --rail-width: 0px; --gutter: 36px; padding-bottom: 76px; }
+  .chapter-menu { max-height: calc(100svh - var(--header-height) - 90px); }
   .mission-rail { inset: auto 0 0; width: 100%; height: 66px; flex-direction: row; padding: 0 24px; gap: 24px; border-left: 0; border-top: 1px solid var(--line); background: #080e14f5; backdrop-filter: blur(16px); }
   .rail-count { font-size: 24px; margin: 0; white-space: nowrap; }.rail-eyebrow, .rail-footnote, .rail-flight { display: none; }.rail-chapters { display: flex; justify-content: space-between; width: min(530px,100%); gap: 0; }.rail-chapters a { flex: 1; flex-direction: column; gap: 5px; height: 48px; font-size: 10px; }.rail-chapters a span { text-align: center; }.rail-chapters b { display: none; }
   .section-heading { gap: 45px; }.hero-base > p { max-width: 210px; }.hero-facts { gap: 24px; }

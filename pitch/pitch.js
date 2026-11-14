@@ -174,8 +174,8 @@
     if (state === 'complete') {
       status.textContent = reduced ? 'Mission gestartet. Statische Darstellung mit reduzierter Bewegung.' : 'Liftoff. Aus einer Idee wird eine gemeinsame Mission.';
       launchButton.innerHTML = 'Start wiederholen <span aria-hidden="true">↻</span>';
-    } else if (state === 'starting') {
-      status.textContent = 'Zündung. Der Moment beginnt.';
+    } else if (state === 'starting' || state === 'ascent') {
+      status.textContent = state === 'ascent' ? 'Die Rakete hebt ab. Ein gemeinsamer Aufbruch.' : 'Zündung. Der Moment beginnt.';
       launchButton.innerHTML = 'Rakete starten <span aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></span>';
     } else {
       status.textContent = reduced ? 'Reduzierte Bewegung: Der Abschluss bleibt als ruhiges Bild sichtbar.' : 'Der Start folgt deinem Scrollfortschritt.';
@@ -219,7 +219,7 @@
     launchStage.style.setProperty('--ignition', ignition.toFixed(3));
     launchStage.style.setProperty('--rocket-rise', `${reduced ? (progress ? -95 : 0) : -eased * Math.max(650, innerHeight*.92)}px`);
     launchStage.style.setProperty('--smoke-scale', (1+progress*1.8).toFixed(3));
-    setLaunchState(progress >= .98 ? 'complete' : progress > .08 ? 'starting' : 'ready');
+    setLaunchState(progress >= .98 ? 'complete' : progress > .23 ? 'ascent' : progress > .065 ? 'starting' : 'ready');
     const nextRemaining = progress > .08 ? 0 : sections.length+1-Math.max(1,step);
     if (remaining !== nextRemaining) {
       remaining = nextRemaining;
@@ -258,7 +258,10 @@
         setMenu(false);
         revealTarget(target);
         writeHistory('pushState',{pitchVariant:variant},anchor.hash);
-        target.scrollIntoView({behavior: reduced ? 'instant' : 'smooth', block:'start'});
+        // A pinned hero sits at the end of its reel when approached from below.
+        // Returning to the beginning must target the reel, so its copy is visible.
+        const scrollTarget = target.id === 'auftakt' ? target.closest('.film-prologue') || target : target;
+        scrollTarget.scrollIntoView({behavior: reduced ? 'instant' : 'smooth', block:'start'});
         target.setAttribute('tabindex','-1');
         target.focus({preventScroll:true});
       }
@@ -364,7 +367,8 @@
   if (location.hash) requestAnimationFrame(() => {
     const target = document.getElementById(location.hash.slice(1));
     if (target) revealTarget(target);
-    target?.scrollIntoView({behavior:'instant',block:'start'});
+    const scrollTarget = target?.id === 'auftakt' ? target.closest('.film-prologue') || target : target;
+    scrollTarget?.scrollIntoView({behavior:'instant',block:'start'});
     queueMeasure();
   });
 })();

@@ -59,7 +59,7 @@
   .has-photoreal-launch .launch-copy > p:not(.eyebrow) { margin-top: 18px; font-size: 16px; }
   .has-photoreal-launch .launch-copy .eyebrow { margin-bottom: 16px; }
   .has-photoreal-launch .launch-controls { margin-top: 20px; }
-  .has-photoreal-launch .launch-copy .launch-status { margin-top: 16px; }
+  .has-photoreal-launch .launch-copy .launch-status { margin-top: 12px; max-width: 65ch; font-size: 10px !important; line-height: 1.4; }
   .launch-cinema-cue { width: 180px; bottom: calc(32px + var(--film-bottom,0px)); }
   .launch-cinema-cue > strong { font-size: 20px; }
 }

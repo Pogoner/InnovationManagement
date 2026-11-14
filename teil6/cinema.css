@@ -94,5 +94,6 @@ html{scroll-padding-top:90px}.cinematic-page{background:var(--cinema-bg);color:v
 
 /* The shared aerial layer owns the site comparison before the ground approach. */
 .cinema.has-site-flight .site-search{display:none}
+.cinema.has-site-flight[data-phase="scan"] .chef-panel{opacity:0;visibility:hidden;pointer-events:none}
 .cinema.is-reduced .site-flight{display:none}
 .cinema .site-flight-grade{background:linear-gradient(90deg,#060b108c,transparent 63%),linear-gradient(0deg,#060b1099,transparent 25%,transparent 74%,#060b1060)}

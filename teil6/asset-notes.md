@@ -1,5 +1,28 @@
 # Bildkonzepte für die Mission Roadmap
 
+## Umlaufende Erdgeschossverglasung · November 2026
+
+Die aktive Gebäudeansicht in Pitch und Roadmap verwendet `pavilion-glass.svg`
+(1774 × 887) und `lounge-glass.svg` (1846 × 852). Beide sind eigenständige,
+lokale SVG-Materialkompositionen aus den vorhandenen WebP-Konzeptbildern.
+Eine präzise Maske öffnet Vorderseite, Rückwand und seitliche Verglasung im
+Erdgeschoss. Der tatsächlich darunterliegende Landschaftsraum scheint durch;
+es wird kein zweites Landschaftsbild in die Fenster eingesetzt.
+
+Dach, Decke, Stützen, Pfosten, Boden sowie Tische und Stühle bleiben deckend.
+Bei der Lounge bleiben Obergeschoss und Terrasse erhalten. Die Durchlässigkeit
+beträgt in den großen Glasfeldern ungefähr 91 %, seitlich ungefähr 86 %;
+schwache Reflexe geben dem Glas weiterhin eine sichtbare Oberfläche.
+Der Generator `docs/pitch-review/build-glass-assets.mjs` enthält die
+nachvollziehbaren Materialmasken in den ursprünglichen Bildkoordinaten und
+lässt sich mit Node aus dem Repository-Hauptverzeichnis ausführen. Die
+WebP-Originale bleiben unverändert. Außenkontur, Maßstab, Zeichnungsanker und
+Kameraposition stimmen dadurch weiterhin mit den vorhandenen Blaupausen überein.
+
+Die SVGs enthalten ihre Quelldaten selbst, damit sie auch als `<img>` und ohne
+zusätzliche Netzabfragen geladen werden. Sie bleiben Konzeptvisualisierungen;
+die Materialkomposition ist kein Nachweis einer geprüften Gebäudeplanung.
+
 ## Aktueller Stand: gemeinsamer naher Startplatz und einzelne Tische
 
 Pitch und eigenständige Roadmap verwenden jetzt `launch-coast-close.webp`. Der zuvor sehr entfernte Start in `scene.webp` bleibt als frühere Fassung erhalten und wird von diesen beiden Ansichten nicht mehr geladen. Das neue Motiv verwendet die frühere Landschaft als Edit-Ziel und das aktuelle `pitch/assets/dining-panorama.webp` als Stil- und Größenreferenz. Der Bauplatz, die Kamera und die vordere Küstenkontur bleiben erhalten; Startplatz, Rakete und fernes Ufer sind deutlich präsenter.

@@ -24,3 +24,7 @@ Das Erdgeschoss beider Gebäudevarianten soll durchgängig verglast sein. Dach, 
 ## Sicherungsregel für diese Arbeit
 
 Jeden funktionsfähigen Teil unmittelbar committen und pushen. Diese Notiz bei jedem Meilenstein aktualisieren. Assets und die sie ladende Oberfläche gemeinsam sichern; eingebundene CSS-/JS-Hashes gemäß `AGENTS.md` erneuern. Keine ausstehenden Änderungen ausschließlich im Chat dokumentieren.
+
+## Meilenstein 1: Glasfassaden
+
+Beide Gebäudekomposite sind in `teil6/pavilion-glass.svg` und `teil6/lounge-glass.svg` gespeichert und in Pitch sowie eigenständiger Roadmap eingebunden. Die Glasebenen lassen die dahinterliegende Landschaft durch; Dach, Pfosten, Geschossdecke, Boden und Möblierung bleiben deckend. Herkunft und Reproduktion stehen in `teil6/asset-notes.md` und `docs/pitch-review/build-glass-assets.mjs`. SVG-Rendervergleich und JavaScript-Syntax geprüft. Prüfung in der veröffentlichten Oberfläche steht noch aus.

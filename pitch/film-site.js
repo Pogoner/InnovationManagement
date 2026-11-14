@@ -137,8 +137,8 @@
   window.PitchArchitecture = {
     aerialMarkup, mountAerial, aerialState,
     markup: function () {
-      return '<div class="film-building film-site-building" data-architecture="A"><img class="film-building-ghost" src="../teil6/pavilion-tables-cutout.webp" alt="" width="1774" height="887"><img class="film-building-photo" src="../teil6/pavilion-tables-cutout.webp" alt="" width="1774" height="887">'+blueprints.A+'</div>'+
-        '<div class="film-building film-site-building" data-architecture="B"><img class="film-building-ghost" src="../teil6/lounge-tables-cutout.webp" alt="" width="1846" height="852"><img class="film-building-photo" src="../teil6/lounge-tables-cutout.webp" alt="" width="1846" height="852">'+blueprints.B+'</div>'+
+      return '<div class="film-building film-site-building" data-architecture="A"><img class="film-building-ghost" src="../teil6/pavilion-glass.svg" alt="" width="1774" height="887"><img class="film-building-photo" src="../teil6/pavilion-glass.svg" alt="" width="1774" height="887">'+blueprints.A+'</div>'+
+        '<div class="film-building film-site-building" data-architecture="B"><img class="film-building-ghost" src="../teil6/lounge-glass.svg" alt="" width="1846" height="852"><img class="film-building-photo" src="../teil6/lounge-glass.svg" alt="" width="1846" height="852">'+blueprints.B+'</div>'+
         overlays()+'<div class="film-site-caption"><i></i><span>ROCKETLIGHT · RÄUMLICHE KONZEPTVISUALISIERUNG</span></div>';
     },
     mount: function (root) {

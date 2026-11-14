@@ -15,12 +15,13 @@
   const world = document.createElement('div');
   world.className = 'film-background';
   world.setAttribute('aria-hidden','true');
-  world.innerHTML = '<div class="film-camera"><img class="film-landscape-image" src="../teil6/launch-coast-close.webp" width="1672" height="941" alt=""><div class="film-water-light"></div><div class="film-world-architecture">' +
-    window.PitchArchitecture.markup() + '</div></div><div class="film-dining-world"><img src="assets/dining-panorama.webp" width="1672" height="941" alt=""><div></div></div><div class="film-world-grade"></div><div class="film-world-grain"></div>';
+  world.innerHTML = '<div class="film-camera"><img class="film-landscape-image" src="../teil6/launch-coast-near.webp" width="1672" height="941" alt=""><div class="film-water-light"></div><div class="film-world-architecture">' +
+    window.PitchArchitecture.markup() + '</div></div>' + window.PitchArchitecture.aerialMarkup() + '<div class="film-dining-world"><img src="assets/dining-facing-launch.webp" width="1672" height="941" alt=""><div></div></div><div class="film-world-grade"></div><div class="film-world-grain"></div>';
   document.body.prepend(world);
   const camera = world.querySelector('.film-camera');
   const architecture = world.querySelector('.film-world-architecture');
   const worldDrawing = window.PitchArchitecture.mount(architecture);
+  const siteFlight = window.PitchArchitecture.mountAerial(world.querySelector('.site-flight'));
   const hero = document.querySelector('.pitch-hero');
   const prologue = document.createElement('div');
   prologue.className = 'film-prologue';
@@ -68,19 +69,12 @@
   });
   const launch = document.querySelector('#start');
   const launchStage = launch.querySelector('.launch-stage');
-  const finalNumber=document.createElement('div');
-  finalNumber.className='film-final-number';
-  finalNumber.setAttribute('aria-hidden','true');
-  finalNumber.textContent='01';
-  launchStage.prepend(finalNumber);
-  const shockwave=document.createElement('div');
-  shockwave.className='film-launch-wave';
-  shockwave.setAttribute('aria-hidden','true');
-  launchStage.append(shockwave);
+  const launchCinema = window.PitchLaunch.mount(launchStage);
   document.body.classList.add('film-ready');
 
   let reduced = document.body.classList.contains('is-reduced');
   let width=innerWidth, height=innerHeight, heroTop=0, heroRange=1, heroBottom=0, launchTop=0;
+  let cameraTop=0, cameraHeight=1, headerClearance=100;
   let dirty=true;
   const photo = world.querySelector('.film-landscape-image');
 
@@ -116,7 +110,10 @@
     camera.style.width=masterWidth.toFixed(2)+'px';
     camera.style.height=masterHeight.toFixed(2)+'px';
     camera.style.left=(portrait?areaWidth/2-masterWidth*.56:(areaWidth-masterWidth)/2).toFixed(2)+'px';
-    camera.style.top=(portrait?height-masterHeight-66:(height-masterHeight)/2).toFixed(2)+'px';
+    cameraTop=portrait?height-masterHeight-66:(height-masterHeight)/2;
+    cameraHeight=masterHeight;
+    headerClearance=(document.querySelector('.pitch-header')?.getBoundingClientRect().height||80)+18;
+    camera.style.top=cameraTop.toFixed(2)+'px';
     const y=scrollY;
     records.forEach(record=>{
       if (reduced && !record.staticScene && window.PitchStatic && [3,4,5].includes(record.chapter.step)) {
@@ -182,18 +179,21 @@
     world.dataset.scene=String(step);
     architecture.style.opacity=fmt(siteMix);
     if(siteMix>0)worldDrawing.update(site.progress,context);
+    siteFlight.update(site.progress,{...context,visible:siteMix});
     const baseScale=1.02+Math.sin((step+p)*.7)*.012;
     const cameraScale=reduced?1.02:baseScale*(1-siteMix)+(1.01+site.progress*.035)*siteMix;
-    const panY=reduced?0:Math.sin((step+p)*.8)*height*.008*(1-siteMix)-site.progress*height*.005*siteMix;
+    let panY=reduced?0:Math.sin((step+p)*.8)*height*.008*(1-siteMix)-site.progress*height*.005*siteMix;
+    // Ground, drawings and building move together; the nearer rocket's nose
+    // remains below the fixed header at its measured y=20/941 image anchor.
+    const rocketTipY=cameraTop+cameraHeight*(.72+(20/941-.72)*cameraScale)+panY;
+    panY+=Math.max(0,headerClearance-rocketTipY)*siteMix;
     const panX=reduced?0:Math.cos((step+p)*.6)*width*.012;
     camera.style.transform='translate3d('+panX.toFixed(2)+'px,'+panY.toFixed(2)+'px,0) scale('+cameraScale.toFixed(4)+')';
     const baseStrength=.32;
     world.style.setProperty('--landscape-strength',fmt(baseStrength+(1-baseStrength)*siteMix));
     world.style.setProperty('--water-drift',((reduced?0:y*.015)%150).toFixed(2)+'px');
     const ignition=frame.launchProgress||0;
-    finalNumber.textContent=ignition>.08?'00':'01';
-    launchStage.style.setProperty('--flight-progress',fmt(ignition));
-    launchStage.style.setProperty('--launch-wave',fmt(Math.sin(Math.PI*clamp((ignition-.04)/.64))));
+    launchCinema.update(ignition,{reduced,viewport:height,width});
     launchStage.dataset.filmFlight=ignition>.08?'ignited':'ready';
   }
 

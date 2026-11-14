@@ -85,7 +85,7 @@
     const isA = variant === 'A';
     $$('[data-variant]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.variant === variant)));
     const image = $('#variant-image');
-    image.src = 'assets/dining-panorama.webp';
+    image.src = 'assets/dining-facing-launch.webp';
     image.alt = `Gemeinsames Innenraumkonzept für Variante ${variant}: einzelne Zweiertische auf versetzten Terrassen mit freier Sicht auf den Raketenstart. Künstlerische Visualisierung.`;
     $('#variant-location').textContent = meta.location.toLocaleUpperCase('de-DE');
     $('#variant-title').innerHTML = isA ? 'Ein Pavillon.<br>Mehr als ein Horizont.' : 'Ein fester Ort.<br>Für besondere Momente.';
@@ -208,7 +208,7 @@
     let progress = reduced ? (marker >= launchTop ? 1 : 0) : clamp((y - launchTop + 70) / launchRange);
     if (manualLaunch) {
       if (manualLaunch.started === null) manualLaunch.started = now;
-      const elapsed = reduced ? 1 : clamp((now - manualLaunch.started) / 4200);
+      const elapsed = reduced ? 1 : clamp((now - manualLaunch.started) / 11000);
       progress = manualLaunch.from + (1-manualLaunch.from) * elapsed;
       if (elapsed < 1) queueFrame();
     }

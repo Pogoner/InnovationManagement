@@ -94,7 +94,7 @@
 .fa-revenue-total { font-size: 76px; letter-spacing: -5px; fill: #efbd91 !important; }
 .fa-revenue-unit { font-size: 26px; }
 .fa-revenue-area { fill: url(#fa-revenue-fill); stroke: none; }
-.fa-revenue-line { stroke: #efbd91; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.fa-revenue-line { fill: none; stroke: #efbd91; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 .fa-revenue-bar { fill: #a9d9d91f; stroke: #a9d9d936; stroke-width: 1; }
 .fa-revenue-point { fill: #efbd91; stroke: #060b10; stroke-width: 1.5; }
 .fa-revenue-value { font-size: 18px; fill: #efbd91 !important; }

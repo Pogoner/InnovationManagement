@@ -55,6 +55,9 @@
           <radialGradient id="fe-launch-light"><stop stop-color="#ffe4b0" stop-opacity=".55"/><stop offset=".4" stop-color="#efbd91" stop-opacity=".12"/><stop offset="1" stop-color="#efbd91" stop-opacity="0"/></radialGradient>
           <linearGradient id="fe-rocket-metal"><stop stop-color="#5e727b"/><stop offset=".5" stop-color="#e6ece6"/><stop offset="1" stop-color="#526774"/></linearGradient>
           <linearGradient id="fe-market-line"><stop stop-color="#a9d9d9" stop-opacity=".55"/><stop offset="1" stop-color="#efbd91"/></linearGradient>
+          <clipPath id="fe-experience-window"><rect x="37" y="65" width="566" height="286"/></clipPath>
+          <clipPath id="fe-experience-launch"><rect data-fe-launch-clip x="603" y="65" width="0" height="286"/></clipPath>
+          <linearGradient id="fe-experience-shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".35" stop-color="#060b10" stop-opacity="0"/><stop offset="1" stop-color="#060b10" stop-opacity=".78"/></linearGradient>
         </defs>
         <g data-fe-layout>
           <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">10 TISCHE · 20 GÄSTE · FREIE SICHT</text>
@@ -77,6 +80,16 @@
         </g>
         <g data-fe-panorama class="fe-panorama">
           <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">EIN ABEND. EIN GEMEINSAMER BLICK.</text>
+          <g clip-path="url(#fe-experience-window)">
+            <image data-fe-menu class="fe-window-image" href="assets/mission-menu.webp" x="37" y="65" width="566" height="286" preserveAspectRatio="xMidYMid slice"/>
+            <image data-fe-service class="fe-window-image" href="../teil6/chef.webp" x="37" y="65" width="566" height="286" preserveAspectRatio="xMidYMid slice"/>
+            <g clip-path="url(#fe-experience-launch)"><image class="fe-window-image" href="assets/dining-facing-launch.webp" x="385" y="65" width="218" height="286" preserveAspectRatio="xMaxYMid slice"/></g>
+            <rect class="fe-window-shade" x="37" y="65" width="566" height="286" fill="url(#fe-experience-shade)"/>
+            <path data-fe-window-divider class="fe-window-divider" d="M603 65V351" opacity="0"/>
+            <text class="fe-window-label" x="57" y="325">MENÜ &amp; SERVICE</text>
+            <text data-fe-window-view-label class="fe-window-label fe-window-view-label" x="584" y="325" text-anchor="end" opacity="0">STARTBLICK</text>
+            <text class="fe-window-concept" x="57" y="88">KONZEPTVISUALISIERUNG</text>
+          </g>
           <path class="fe-window-frame" d="M37 65V351M603 65V351M37 65H603"/>
           <path class="fe-window-base" d="M37 351H603"/>
           <g class="fe-courses">
@@ -128,6 +141,11 @@
       const light = root.querySelector('[data-fe-launch-light]');
       const plume = root.querySelector('[data-fe-plume]');
       const panorama = root.querySelector('[data-fe-panorama]');
+      const menuImage = root.querySelector('[data-fe-menu]');
+      const serviceImage = root.querySelector('[data-fe-service]');
+      const launchClip = root.querySelector('[data-fe-launch-clip]');
+      const windowDivider = root.querySelector('[data-fe-window-divider]');
+      const windowViewLabel = root.querySelector('[data-fe-window-view-label]');
       const courses = Array.from(root.querySelectorAll('[data-fe-course]'));
       const courseLine = root.querySelector('.fe-course-line');
       const price = root.querySelector('[data-fe-price]');
@@ -159,6 +177,13 @@
           set(light,'opacity',n(smooth(.12,.27,p)));
           set(plume,'opacity',n(.12+.88*smooth(.17,.28,p)));
           set(panorama,'opacity',n(smooth(.29,.35,p)*(1-smooth(.55,.61,p))));
+          set(serviceImage,'opacity',n(1-smooth(.33,.385,p)));
+          const menuZoom=1+.065*(1-smooth(.34,.53,p));
+          menuImage.setAttribute('transform',`translate(320 208) scale(${n(menuZoom)}) translate(-320 -208)`);
+          const viewReveal=smooth(.43,.515,p),viewWidth=218*viewReveal,viewEdge=603-viewWidth;
+          launchClip.setAttribute('x',n(viewEdge));launchClip.setAttribute('width',n(viewWidth));
+          windowDivider.setAttribute('d',`M${n(viewEdge)} 65V351`);set(windowDivider,'opacity',n(viewReveal));
+          set(windowViewLabel,'opacity',n(smooth(.47,.52,p)));
           set(courseLine,'stroke-dashoffset',n(1-smooth(.35,.52,p)));
           courses.forEach((course,index)=>set(course,'--fe-course-lit',n(smooth(.34+index*.022,.39+index*.022,p))));
           set(price,'opacity',n(smooth(.57,.64,p)*(1-smooth(.76,.82,p))));

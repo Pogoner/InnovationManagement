@@ -88,6 +88,16 @@
     return;
   }
 
+  // Reuse the same image-registered aerial opening as the full pitch.
+  // The shared layer sits outside the ground camera, so the construction
+  // coordinates stay unchanged while the approach changes viewpoint.
+  let aerialController = null;
+  if (window.PitchArchitecture?.aerialMarkup && window.PitchArchitecture?.mountAerial) {
+    landscape.insertAdjacentHTML('beforeend', window.PitchArchitecture.aerialMarkup('site-aerial.webp'));
+    aerialController = window.PitchArchitecture.mountAerial(landscape.querySelector('.site-flight'));
+    cinema.classList.add('has-site-flight');
+  }
+
   const story = () => window.ROCKET_STORY[variant];
   const data = () => window.ROCKET_DATA[variant];
   const phaseIndex = value => {
@@ -379,10 +389,10 @@
     const phase = story().phases[activePhase];
     const local = phaseProgress(progress, activePhase);
     renderWorkstep(phase,local);
-    // The closer rocket reaches y=.114 in the master image. Keep its tip
+    // The near launch reaches y=20 in the 941px master image. Keep its tip
     // below the fixed header while all terrain/drawing anchors move together.
     const zoom = 1 + .025 * smooth(.08, .30, p) - .01 * smooth(.82, .99, p);
-    const rocketTipY = (layout.landscapeHeight-layout.worldHeight)/2 + layout.worldHeight*(.76+(.114-.76)*zoom);
+    const rocketTipY = (layout.landscapeHeight-layout.worldHeight)/2 + layout.worldHeight*(.76+(20/941-.76)*zoom);
     const panY = Math.max(0, layout.headerClearance-rocketTipY);
     const panBlend = smooth(.055, .24, p);
     const focusRatio = .773 + (layout.siteRatio - .773) * panBlend;
@@ -390,7 +400,7 @@
     const coverSlack = Math.max(0, (layout.worldWidth * zoom - layout.landscapeWidth) / 2);
     const targetPan = layout.worldWidth * (.5 - layout.originRatio + (layout.originRatio - focusRatio) * zoom);
     const pan = layout.portrait ? clamp(targetPan, -coverSlack - centerOffset, coverSlack - centerOffset) : 0;
-    const scan = smooth(.035, .09, p) * (1 - smooth(.22, .29, p));
+    const scan = aerialController ? 0 : smooth(.035, .09, p) * (1 - smooth(.22, .29, p));
     const blueprint = smooth(.20, .245, p) * (1 - smooth(.56, .69, p));
     const building = smooth(.49, .56, p);
     const permit = smooth(.35, .40, p) * (1 - smooth(.48, .54, p));
@@ -404,15 +414,16 @@
       '--camera-zoom': zoom, '--camera-x': `${pan.toFixed(2)}px`, '--camera-y': `${panY.toFixed(2)}px`, '--caption-opacity': caption,
       '--rocket-opacity': launch, '--rocket-progress': smooth(.80, .98, p),
       '--water-opacity': reduced ? 0 : .42, '--stars-opacity': reduced ? 0 : .7,
-      '--connections-opacity': reduced ? 0 : smooth(.09, .13, p)*(1-smooth(.80,.88,p)),
+      '--connections-opacity': reduced ? 0 : smooth(aerialController ? .22 : .09,aerialController ? .255 : .13,p)*(1-smooth(.80,.88,p)),
       '--interior-opacity': smooth(.80,.88,p),
-      '--sightline-opacity': smooth(.12,.17,p)*(1-smooth(.29,.35,p)),
+      '--sightline-opacity': smooth(aerialController ? .22 : .12,aerialController ? .25 : .17,p)*(1-smooth(.29,.35,p)),
       '--table-plan-opacity': smooth(.23,.27,p)*(1-smooth(.31,.37,p)),
       '--site-plan-progress': smooth(.12,.29,p),
       '--access-plan-opacity': smooth(.36,.40,p)*(1-smooth(.46,.51,p)),
       '--access-progress': smooth(.36,.46,p)
     };
     for (const [key, value] of Object.entries(values)) cinema.style.setProperty(key, typeof value === 'number' ? value.toFixed(4) : value);
+    aerialController?.update(p * (.205 / .235), { visible:1, reduced, mobile:window.innerWidth<=760 });
     activate('#scene-scan', scan > .01);
     activate('#building', blueprint > .01 || building > .01);
     activate('#permit-seal', permit > .01);

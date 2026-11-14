@@ -35,6 +35,11 @@
 .fe-scene .fe-layout-caption { font-size: 18px; letter-spacing: 1.5px; fill: #d2deda; }
 .fe-scene .fe-layout-note { font-size: 15px; letter-spacing: .2px; fill: #aebfc5; }
 .fe-panorama,.fe-price,.fe-marketing { opacity: 0; }
+.fe-window-image { pointer-events: none; }
+.fe-window-divider { fill: none; stroke: #eac49e; stroke-width: 1; }
+.fe-scene .fe-window-label { font-size: 17px; letter-spacing: 1.3px; fill: #f0e9db; }
+.fe-scene .fe-window-view-label { font-size: 16px; letter-spacing: .8px; }
+.fe-scene .fe-window-concept { font-size: 9px; letter-spacing: 1.3px; fill: #d6e0dd; }
 .fe-window-frame { fill: none; stroke: #a9d9d938; stroke-width: .9; }
 .fe-window-base { stroke: #efbd9170; stroke-width: 1; }
 .fe-course-guide { fill: none; stroke: #a9d9d93e; stroke-width: 1; }

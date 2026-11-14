@@ -95,3 +95,20 @@ Use case: stylized-concept. Asset type: full bleed cinematic website hero, archi
 ## Lounge Titusville — verwendeter Prompt
 
 Use case: stylized-concept. Asset type: full bleed cinematic website hero, architectural concept visualization for RocketLight Dinner. Create an exceptionally refined photorealistic architectural visualization, very wide landscape 16:9. On the RIGHT half and lower middle stands a sophisticated FIXED TWO-STORY LOUNGE on the Indian River in Titusville, minimalist black metal and glass architecture with a floating flat roof, panoramic glass front toward water and an elegant open roof terrace, warmly lit dining space for an intimate twenty-person dinner, luxury interior subtly visible. A quiet Florida coastal riverside landscape at blue hour fading into deep night. Very far away across the water on the RIGHT a slender orbital rocket lifts off vertically, with a subtle brilliant amber exhaust column and graceful distant smoke reflected in still water. Rocket must feel tiny and several miles away, never next to venue. Premium contemporary architecture editorial photograph, cinematic natural realism, sophisticated honest materials and extraordinary atmosphere, high-end tech launch campaign art direction. Foreground dark stone terraces and coastal grasses. Vast dark navy-black sky, sparse restrained stars, gentle amber atmospheric light on horizon. IMPORTANT COMPOSITION: upper-left and middle-left 55 percent is dark quiet negative space for large white website typography; architecture and lift-off concentrated lower-right; edges blend into near-black. Eye-level wide lens. Restrained copper, champagne, midnight blue, obsidian palette. Beautiful light, precise detail, subtle film grain, luxury and believable architecture rather than fantasy. No text, no typography, no logos, no watermarks, no fake interface, no close-up people, no giant moon, no neon cyberpunk. This is a concept image, not a real documented venue.
+# Aktualisierung · nähere Perspektive und Standortflug
+
+Seit 14.11.2026 nutzt die aktive Roadmap `launch-coast-near.webp` (1672 × 941,
+RGB). Das bestehende Vordergrundgelände und die Gebäudeanker bleiben erhalten;
+der Startkomplex rückt direkt hinter den schmalen Wasserlauf. Das Sichtziel liegt
+bei (1290,480), die Raketenspitze bei (1290,20). Die alte Küstenansicht bleibt
+als frühere Fassung erhalten.
+
+`site-aerial.webp` (1672 × 941, RGB) eröffnet die Standortphase von oben. Drei
+schematische Konzeptflächen werden als exakte SVG-Überlagerung markiert. Die
+ausgewählte Fläche liegt bei (775,680), das Startziel bei (1385,335); anschließend
+führt die Kamera zurück zum bestehenden Bauablauf. Diese Flächen sind keine
+nachgewiesenen oder verfügbaren Grundstücke. Das Dinner-Zielbild nutzt
+`../pitch/assets/dining-facing-launch.webp`; die sichtbaren Gäste schauen zum Start.
+
+Verfahren, Konzeptstatus und die exakten Bildprompts stehen in
+[den Bildnotizen zum Pitch](../pitch/assets/cinematic-notes.md).

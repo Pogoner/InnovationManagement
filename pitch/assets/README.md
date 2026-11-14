@@ -1,5 +1,11 @@
 # Bildmotiv · Mehrere Tische mit gemeinsamem Startblick
 
+Die aktuelle Ansicht verwendet `dining-facing-launch.webp` mit konsequent zum
+Start ausgerichteten Gästen. Die neue Bildserie für Menü, nähere Küstenansicht,
+Standortflug und fotorealistisches Finale ist mit exakten Prompts und Ankern in
+[cinematic-notes.md](cinematic-notes.md) dokumentiert. Das folgende Motiv bleibt
+als frühere Fassung erhalten.
+
 `dining-panorama.webp` ist die am 14.11.2026 neu erzeugte Konzeptvisualisierung
 für den Pitch. Referenz ist das vom Nutzer bereitgestellte `Konzept.jpg`.
 Das neue Motiv wird im Auftakt und als scrollabhängiger Bildraum in Kapitel 5

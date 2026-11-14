@@ -263,10 +263,28 @@
   const caseNames={9:'RocketLight Dinner',4:'Starlink Insights',8:'Launch Engineering Cloud'};
   const caseData=()=>[9,4,8].map(id=>({id,name:caseNames[id],items:data().E.assessments.filter(item=>item.assessment.idea===id)}));
   const casePoint=result=>({x:50+result.IA/5*350,y:408-result.IN/5*330});
+  const revenuePlot=()=>{
+    const series=data().E.financialA.revenue.map(value=>value/1e6),max=Math.max(1,...series),baseY=428;
+    const points=series.map((value,index)=>({x:94+index*111,y:baseY-value/max*258,value}));
+    const lengths=points.slice(1).map((point,index)=>Math.hypot(point.x-points[index].x,point.y-points[index].y));
+    return {max,baseY,points,lengths,totalLength:lengths.reduce((sum,value)=>sum+value,0),line:points.map((point,index)=>`${index?'L':'M'}${point.x} ${point.y}`).join(' ')};
+  };
+  // Grow the actual geometry instead of combining a normalized SVG dash with
+  // non-scaling-stroke. The visible path and its head always share one endpoint.
+  const revenueFrame=(plot,progress)=>{
+    const q=clamp(progress),visible=[plot.points[0]];
+    let remaining=q*plot.totalLength;
+    if(q>0)for(let i=0;i<plot.lengths.length;i++){
+      const a=plot.points[i],b=plot.points[i+1],length=plot.lengths[i];
+      if(q===1||remaining>=length){visible.push(b);remaining-=length;}
+      else{const local=length?remaining/length:0;visible.push({x:mix(a.x,b.x,local),y:mix(a.y,b.y,local)});break;}
+    }
+    const head=visible[visible.length-1];
+    return {x:head.x,y:head.y,d:visible.map((point,index)=>`${index?'L':'M'}${point.x.toFixed(3)} ${point.y.toFixed(3)}`).join(' ')};
+  };
   scenes[4] = {
     markup() {
-      const {E}=data(),cases=caseData(),[team,ai]=E.rocketlightAssessments,series=E.financialA.revenue.map(value=>value/1e6),max=Math.max(...series),baseY=428;
-      const points=series.map((value,index)=>({x:94+index*111,y:baseY-value/max*258,value})),line=points.map((point,index)=>`${index?'L':'M'}${point.x} ${point.y}`).join(' ');
+      const {E}=data(),cases=caseData(),[team,ai]=E.rocketlightAssessments,{points,line,max,baseY}=revenuePlot();
       const scores=cases.map(item=>`${item.name}: Team IR ${num(item.items[0].result.IR)}, KI IR ${num(item.items[1].result.IR)}`).join('. ');
       return svg('finance',`Drei Geschäftsideen im Nutzen-Aufwand-Portfolio nach Hube. ${scores}. Die sechs Bewertungen sind Mensch-KI-Einschätzungen und keine finanzielle Rendite. RocketLight erzielt bei gleichem Nutzen 2,20 unterschiedliche Aufwandswerte. Variante A plant 47,24 Millionen US-Dollar Umsatz 2027 bis 2031.`,`
         <defs><linearGradient id="fa-revenue-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#efbd91" stop-opacity=".22"/><stop offset="1" stop-color="#efbd91" stop-opacity=".015"/></linearGradient><clipPath id="fa-revenue-reveal"><rect class="fa-revenue-clip" x="70" y="145" width="0" height="290"/></clipPath><clipPath id="fa-score-reveal"><rect class="fa-score-clip" x="20" y="235" width="600" height="0"/></clipPath></defs>
@@ -297,10 +315,10 @@
           <rect class="fa-effort fa-effort-team" x="50" y="381" width="${team.result.IA/5*200}" height="12" rx="2"/><rect class="fa-effort fa-effort-ai" x="388" y="381" width="${ai.result.IA/5*200}" height="12" rx="2"/>
           <text class="fa-note-strong" x="320" y="456" text-anchor="middle">Der Unterschied liegt im Aufwand.</text><text class="fa-footnote" x="320" y="489" text-anchor="middle">Sicherheit · Zugang · zahlende Gäste zuerst prüfen</text>
         </g>
-        <g class="fa-revenue-phase">
+        <g class="fa-revenue-phase" opacity="0">
           <text class="fa-revenue-total" x="65" y="80">${num(E.financialA.R/1e6)}</text><text class="fa-revenue-unit" x="312" y="58">Mio. USD</text><text class="fa-footnote" x="312" y="84">Umsatz in fünf Jahren</text><text class="fa-kicker" x="65" y="120">VARIANTE A · PLANUNG 2027–2031</text>
           ${[0,10,20].map(value=>`<path class="fa-grid-line" d="M70 ${baseY-value/max*258}H580"/><text class="fa-tick" x="55" y="${baseY-value/max*258+6}" text-anchor="end">${value}</text>`).join('')}
-          <text class="fa-axis-label" x="65" y="157">MIO. USD / JAHR</text><g clip-path="url(#fa-revenue-reveal)"><path class="fa-revenue-area" d="${line}L538 ${baseY}H94Z"/></g><path class="fa-revenue-line fa-trace" pathLength="1" d="${line}"/>
+          <text class="fa-axis-label" x="65" y="157">MIO. USD / JAHR</text><g clip-path="url(#fa-revenue-reveal)"><path class="fa-revenue-area" d="${line}L538 ${baseY}H94Z"/></g><path class="fa-revenue-line" d="M${points[0].x} ${points[0].y}" opacity="0"/>
           ${points.map((point,index)=>`<g class="fa-revenue-year" data-revenue-year="${index}"><rect class="fa-revenue-bar" x="${point.x-17}" y="${point.y}" width="34" height="${baseY-point.y}" rx="2"/><circle class="fa-revenue-point" cx="${point.x}" cy="${point.y}" r="5"/><text class="fa-revenue-value" x="${point.x}" y="${point.y-17}" text-anchor="middle">${num(point.value,point.value===0?0:2)}</text><text class="fa-year-label" x="${point.x}" y="457" text-anchor="middle">${2027+index}</text></g>`).join('')}
           <circle class="fa-revenue-head-glow" r="15"/><circle class="fa-revenue-head" r="5"/><text class="fa-footnote" x="320" y="505" text-anchor="middle">Umsatz ≠ Gewinn · Annahmen im Pilot prüfen</text>
         </g>
@@ -309,14 +327,14 @@
     mount(root) {
       const {E}=data(),cases=root.querySelector('.fa-cases-phase'),caseBorder=root.querySelector('.fa-cases-border'),caseRows=[...root.querySelectorAll('[data-business-case]')].map(row=>({row,path:row.querySelector('.fa-case-journey'),ai:row.querySelector('.fa-case-ai')}));
       const score=root.querySelector('.fa-score-phase'),scoreClip=root.querySelector('.fa-score-clip'),links=[...root.querySelectorAll('.fa-score-link,.fa-score-divider')],effortTeam=root.querySelector('.fa-effort-team'),effortAI=root.querySelector('.fa-effort-ai'),teamWidth=E.rocketlightAssessments[0].result.IA/5*200,aiWidth=E.rocketlightAssessments[1].result.IA/5*200;
-      const finance=root.querySelector('.fa-revenue-phase'),series=E.financialA.revenue.map(value=>value/1e6),max=Math.max(...series),points=series.map((value,index)=>({x:94+index*111,y:428-value/max*258}));
-      const lengths=points.slice(1).map((point,index)=>Math.hypot(point.x-points[index].x,point.y-points[index].y)),totalLength=lengths.reduce((sum,value)=>sum+value,0),line=root.querySelector('.fa-revenue-line'),clip=root.querySelector('.fa-revenue-clip'),head=root.querySelector('.fa-revenue-head'),glow=root.querySelector('.fa-revenue-head-glow');
+      const finance=root.querySelector('.fa-revenue-phase'),plot=revenuePlot(),points=plot.points;
+      const line=root.querySelector('.fa-revenue-line'),clip=root.querySelector('.fa-revenue-clip'),head=root.querySelector('.fa-revenue-head'),glow=root.querySelector('.fa-revenue-head-glow');
       const bars=[...root.querySelectorAll('[data-revenue-year]')].map((el,index)=>({bar:el.querySelector('.fa-revenue-bar'),point:el.querySelector('.fa-revenue-point'),value:el.querySelector('.fa-revenue-value'),height:428-points[index].y}));
       return {update(progress,context) {
         const p=pose(progress,context);opacity(cases,1-smooth(.285,.32,p));draw(caseBorder,smooth(0,.12,p));caseRows.forEach((item,index)=>{opacity(item.row,mix(.2,1,smooth(index*.025,.09+index*.025,p)));draw(item.path,smooth(.09+index*.015,.20+index*.015,p));opacity(item.ai,smooth(.16+index*.015,.23+index*.015,p));});
         opacity(score,smooth(.30,.33,p)*(1-smooth(.58,.62,p)));const reveal=smooth(.32,.43,p);scoreClip.setAttribute('y',(300-130*reveal).toFixed(3));scoreClip.setAttribute('height',(130*reveal).toFixed(3));links.forEach((link,index)=>draw(link,smooth(.31+index*.035,.43+index*.035,p)));effortTeam.setAttribute('width',(teamWidth*smooth(.39,.53,p)).toFixed(3));effortAI.setAttribute('width',(aiWidth*smooth(.39,.53,p)).toFixed(3));
-        opacity(finance,smooth(.60,.635,p));const q=smooth(.64,.985,p);draw(line,q);clip.setAttribute('width',(q*530).toFixed(3));bars.forEach((item,index)=>{const growth=smooth(.64+index*.053,.73+index*.053,p),height=item.height*growth;item.bar.setAttribute('y',(428-height).toFixed(3));item.bar.setAttribute('height',height.toFixed(3));opacity(item.point,smooth(.80,1,growth));opacity(item.value,smooth(.85,1,growth));});
-        let distance=q*totalLength,segment=0;while(segment<lengths.length-1&&distance>lengths[segment])distance-=lengths[segment++];const local=lengths[segment]?distance/lengths[segment]:0,x=mix(points[segment].x,points[segment+1].x,local),y=mix(points[segment].y,points[segment+1].y,local);head.setAttribute('cx',x.toFixed(3));head.setAttribute('cy',y.toFixed(3));glow.setAttribute('cx',x.toFixed(3));glow.setAttribute('cy',y.toFixed(3));opacity(head,q>0&&q<1?1:0);opacity(glow,q>0&&q<1?.7:0);
+        opacity(finance,smooth(.60,.635,p));const q=smooth(.64,.985,p),frame=revenueFrame(plot,q);line.setAttribute('d',frame.d);opacity(line,q>0?1:0);clip.setAttribute('width',(q>0?frame.x-70:0).toFixed(3));bars.forEach((item,index)=>{const growth=smooth(.64+index*.053,.73+index*.053,p),height=item.height*growth;item.bar.setAttribute('y',(428-height).toFixed(3));item.bar.setAttribute('height',height.toFixed(3));opacity(item.bar,growth>0?1:0);opacity(item.point,smooth(.80,1,growth));opacity(item.value,smooth(.85,1,growth));});
+        head.setAttribute('cx',frame.x.toFixed(3));head.setAttribute('cy',frame.y.toFixed(3));glow.setAttribute('cx',frame.x.toFixed(3));glow.setAttribute('cy',frame.y.toFixed(3));opacity(head,q>0?1:0);opacity(glow,q>0?.7:0);
       }};
     }
   };

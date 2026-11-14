@@ -1,5 +1,42 @@
 # Bildkonzepte für die Mission Roadmap
 
+## Aktueller Stand: gemeinsamer naher Startplatz und einzelne Tische
+
+Pitch und eigenständige Roadmap verwenden jetzt `launch-coast-close.webp`. Der zuvor sehr entfernte Start in `scene.webp` bleibt als frühere Fassung erhalten und wird von diesen beiden Ansichten nicht mehr geladen. Das neue Motiv verwendet die frühere Landschaft als Edit-Ziel und das aktuelle `pitch/assets/dining-panorama.webp` als Stil- und Größenreferenz. Der Bauplatz, die Kamera und die vordere Küstenkontur bleiben erhalten; Startplatz, Rakete und fernes Ufer sind deutlich präsenter.
+
+| Aktuelle Datei | Abmessungen | Größe | Verwendung |
+| --- | --- | --- | --- |
+| `launch-coast-close.webp` | 1672 × 941 | 290.692 Byte | Gemeinsamer Bildraum, RGB WebP Q88 |
+| `pavilion-tables-cutout.webp` | 1774 × 887 | 150.550 Byte | A: einzelne Zweiertische, RGBA WebP Q90 |
+| `lounge-tables-cutout.webp` | 1846 × 852 | 198.922 Byte | B: einzelne Zweiertische, RGBA WebP Q90 |
+
+Erstellung: integriertes Imagegen-Werkzeug, anschließend nur Format-/Kompressionswechsel mit Pillow. Die Gebäudebilder wurden ausschließlich zur Änderung der Innenmöblierung bearbeitet, mit erhaltenem Alphakanal. Die äußersten Alpha-Grenzen ändern sich gegenüber der Vorfassung um ungefähr 2 px bei A und bis 8 px bei B; Kamerawinkel, Leinwand und konstruktive Linien bleiben übereinstimmend. Die genaue Kapazität von zehn Tischen und zwanzig Sitzen wird in der SVG-Raumplanung dargestellt; die Rasterbilder sind perspektivische Konzeptansichten.
+
+Aktuelle Raketenanker im Landschaftsmotiv: Mittelpunkt x=1292/1672≈0,773, Spitze y=107/941≈0,114, Unterkante des Flugkörpers y≈270/941≈0,287, Startbasis y≈532/941≈0,565. Die frühere Bauplatzposition x≈0,405/y≈0,73 und die Sockelbasis y≈0,79 bleiben gültig. Der Bildmaßstab ist gestalterisch; er definiert weder einen realen Standort noch einen genehmigten Abstand. Die Bildphase wechselt erst nach den Piloten in das gemeinsame Dinnerpanorama.
+
+Originale der aktuellen Bearbeitungen im Arbeitsverzeichnis `generated_images/`:
+- `exec-736b94bb-f393-42a0-807d-618076dabc3a.png` – nähere Startlandschaft
+- `exec-fc56a116-e9d1-4895-8f55-78c7368275ce.png` – Pavillon mit einzelnen Tischen
+- `exec-ba0e7ad5-3a1a-41b0-b92a-c0c52fbe819f.png` – Lounge mit einzelnen Tischen
+
+### Verwendete Prompts der aktuellen Bearbeitung
+
+**Landschaft** (`transparent_background: false`; Referenzen: frühere `scene.webp`, aktuelles Dinnerpanorama):
+
+> Use case: precise-object-edit. Asset type: cinematic exterior master landscape for the existing RocketLight pitch and animated architectural roadmap, 16:9 photorealistic architectural concept still. Input Image 1 is the EDIT TARGET: preserve its exact slightly elevated camera, foreground peninsula, empty flat buildable plot, tree and shoreline geometry. Input Image 2 is a STYLE AND SCALE REFERENCE: the updated restaurant looks toward a MUCH CLOSER, visually dramatic rocket and launch complex. Primary request: replace the tiny distant rocket and empty far shoreline of Image 1 with a closer, larger launch complex and dramatically prominent ascending stainless steel rocket, matching the visual proximity and atmosphere in Image 2. Do not add the restaurant, furniture, people, glass windows, or building to the foreground: it must remain an empty plot so code can build the architecture in this image. Preserve the foreground empty building footprint x19–62% y65–81%, its perspective and near shoreline. Rocket center x76% of canvas, rocket tip approximately y13%, spacecraft bottom y32%, luminous amber exhaust down to launch complex at y57%; rocket body conspicuous and metallic, roughly20% of canvas height, plume and towers clearly visible. New launch complex is on nearer opposite coastal marsh shore, with visible intervening low land and a modest channel, not the old vast far-away lake. Preserve the broad horizon around y57% and all foreground geometry so existing architectural overlays stay aligned. Elegant twilight / late blue hour with restrained cloud textures, deep navy and slate, cinematic amber launch light reflected on water and softly on the plot. Similar light and palette to Image2, with dark quiet upper-left and left space for white typography. Match physical photographic perspective, clear coherent scenery, original concept visualization; no actual distance scale, no claim of a real venue. Avoid tiny distant rocket, large empty sea separation, giant moon, sci-fi landscapes, neon, text, logos, watermarks, labels, diagrams, furniture, structures or people on the foreground plot. The sole compositional change is the closer and much more prominent launch spectacle and associated far-shore context; foreground anchors must stay fixed.
+
+**Pavillon** (`transparent_background: true`; Referenz: ursprünglicher Pavillon-Cutout):
+
+> Use case: precise-object-edit. Edit target: the provided transparent architectural pavilion cutout. Make a strictly localized interior furniture replacement: replace the TWO LONG BANQUET TABLES visible through the glass with TEN SEPARATE SMALL ROUND TWO-PERSON DINING TABLES, in two gently staggered rows, with twenty individual elegant chairs total, all oriented toward the outward panoramic glass view. Use ivory linen and restrained candles, clear circulation between tables. No people. CRITICAL INVARIANTS: preserve the exact entire exterior building silhouette, roof corners, facade mullions, all glass divisions, ceiling, back bar, stone platform, perspective, camera, scale, lighting and placement in the canvas. This image is aligned to an existing architectural line drawing: no redesign, no recentering, no zoom, no resizing of the building. Keep the same full canvas and existing large transparent space above the roof, and transparent margins around the building, not a tighter crop. The building must remain a single-storey dark slim steel and glass rectangular pavilion, same warm light and exact geometry. Change furniture only within existing glass walls, keeping mullions in front of tables. Return true alpha transparency outside the building, preserving contact shadow. No background scene, no water, grass, rocket, text, numbers, logos or watermark. Preserve original aspect ratio and canvas geometry; object positions must remain aligned with the input.
+
+**Lounge** (`transparent_background: true`; Referenz: ursprünglicher Lounge-Cutout):
+
+> Use case: precise-object-edit. Edit target: provided transparent TWO-STOREY glass lounge cutout. Make a strictly localized ground-floor furniture replacement only. Replace the ground-floor dining furniture with TEN DISTINCT SMALL ROUND TWO-PERSON DINING TABLES with ivory linen and restrained candles, arranged as two staggered rows of five with twenty chairs total, clear gaps and aisles between tables. Each table is for a couple, guests would both look out through the broad glazed front, no long communal table, no four-person table. No people. CRITICAL INVARIANTS: preserve exact entire exterior architecture silhouette, both roofs, all corners, fascia, terrace glass railing, terrace furniture, upper-floor lounge furniture, facade steel mullions, glass divisions, ceiling lighting, back bar/wine racks, stone platform, camera/perspective, scale, building location in full canvas and blue-hour/amber lighting. This asset is already traced by a precise line drawing: exterior coordinates must stay unchanged. Keep the same canvas, transparent margins, no tighter crop and no zoom. Only replace ground-floor dining tables and their chairs behind existing glazing. Return true alpha transparency outside building, preserving semitransparent contact shadow. No background scene, water, sky, grass, rocket, text, logos, numbers or watermark.
+
+---
+
+## Frühere Motive und ihre Herkunft
+
 Die beiden Motive sind KI-generierte Konzeptvisualisierungen, keine Aufnahmen realer Veranstaltungsorte. Sie wurden mit dem integrierten Imagegen-Werkzeug erstellt und anschließend ohne inhaltliche Änderungen als WebP für die Website komprimiert.
 
 Produktionsdateien: `teil6/pavilion.webp` und `teil6/lounge.webp`. Die Website bindet die Dateien lokal ein und verwendet keine externen Bilddienste oder Schriftbibliotheken.

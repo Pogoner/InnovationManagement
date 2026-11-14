@@ -26,7 +26,7 @@ window.ROCKET_STORY = {
         key: 'intro',
         eyebrow: 'Die Idee',
         title: 'Erst der Horizont. Dann der Plan.',
-        copy: 'Ein mobiler Glas-Pavillon bringt 20 Gäste an einen Nachtstart. Mit dem Projektauftrag beginnt der Weg zum ersten Pilot-Dinner im März 2028.',
+        copy: 'Ein mobiler Glas-Pavillon bringt 20 Gäste an zehn Zweiertischen an einen Nachtstart. Mit dem Projektauftrag beginnt der Weg zum ersten Pilot-Dinner im März 2028.',
         date: '30.11.2026',
         dateISO: '2026-11-30',
         year: '2026',
@@ -237,7 +237,7 @@ window.ROCKET_STORY = {
         key: 'intro',
         eyebrow: 'Die Idee',
         title: 'Ein Horizont wird zum Ziel.',
-        copy: 'Am Indian River ist eine Lounge für 20 Gäste geplant, mit Glasfront Richtung LC-39A. Der Projektauftrag setzt am 30.11.2026 den Anfang.',
+        copy: 'Am Indian River ist eine Lounge für 20 Gäste an zehn Zweiertischen geplant, mit Glasfront Richtung LC-39A. Der Projektauftrag setzt am 30.11.2026 den Anfang.',
         date: '30.11.2026',
         dateISO: '2026-11-30',
         year: '2026',
@@ -440,3 +440,36 @@ window.ROCKET_STORY = {
     ]
   }
 };
+
+/* Source-backed work packages paired with an editorial description of their
+ * visible scene layer. These are planned checks, not completed milestones.
+ * Within a chapter the steps explain a workstream; source dates may overlap. */
+(() => {
+  const detail = {
+    A: [
+      [['Projektauftrag · 30.11.2026','Der gemeinsame Horizont öffnet den Plan.'],['20 Gäste · zehn Zweiertische','Der Blick zum Start bestimmt das Raumkonzept.'],['Pilotziel · 15.03.2028','Der erste Abend gibt der Planung ein Ziel.']],
+      [['Stellplatzwahl · 01.12.2026–10.04.2027','Drei Konzeptflächen werden im Suchraster verglichen.'],['Blickrichtung, Lärm und Sicherheit prüfen','Die Sichtachse verbindet Fläche und Startplatz.'],['Parallel: Koch-Auswahl bis 20.04.2027','Standort- und Kulinarikspur laufen gemeinsam weiter.']],
+      [['Pavillon-Auftrag · geplant für 30.06.2027','Zehn Tische ordnen sich zur Panoramafront.'],['Gutachten · 10.04.–24.07.2027','Die Grundfläche wird zum räumlichen Entwurf.'],['Menü & Service · 10.05.–31.10.2027','Fassade und Raumraster werden aus Linien aufgebaut.']],
+      [['Gutachten · Ziel 31.07.2027','Zugang und Prüfraum werden eingezeichnet.'],['Parallel: Prototypbau · 10.07.–08.12.2027','Die Zeichnung bleibt mit der Bauspur verbunden.'],['Florida-Freigabe · Ziel 31.12.2027','Das Freigabetor bleibt eine geplante Entscheidung.']],
+      [['Prototyp-Abnahme · 20.12.2027','Der Bau wächst vom Sockel zur Glasfassade.'],['Testdinner · 15.11.2027; Schulung bis 20.02.2028','Licht und Serviceablauf kommen zur Architektur.'],['G2: Go Pilot · 31.01.2028','Gebäude, Freigaben und Team müssen zusammenpassen.']],
+      [['Pilot 1 · 15.03.2028','Der erste Abend erprobt den gemeinsamen Blick.'],['Pilot 2 · 15.05.2028','Gästeerfahrung und Zahlungsbereitschaft werden erhoben.'],['Pilot 3 · 15.10.2028','Das Raumkonzept wird zum Dinner-Erlebnis.'],['Pilot 4 · 15.11.2028','Vier Erfahrungen bilden die Grundlage für G3.']],
+      [['NPS & Zahlungsbereitschaft auswerten','Die Perspektive wechselt in den Gastraum.'],['Zielpreis von 50.000 USD prüfen','Zehn Zweiertische rahmen den gemeinsamen Start.'],['G3: Go Markteinführung · 15.12.2028','Erst die Pilot-Auswertung begründet den nächsten Schritt.']],
+      [['Texas-Freigabe · Ziel 28.02.2029','Das erprobte Raumkonzept soll mit dem Pavillon weiterziehen.'],['Geplanter Hochlauf: 10 → 16 → 24 Events','Das gemeinsame Erlebnis bleibt der Mittelpunkt.'],['G4: Übergabe an die Linie · 31.12.2030','Aus der Projektplanung wird geplanter Regelbetrieb.']]
+    ],
+    B: [
+      [['Projektauftrag · 30.11.2026','Der gemeinsame Horizont öffnet den Plan.'],['20 Gäste · zehn Zweiertische','Die Panoramafront richtet alle Plätze zum Start aus.'],['Piloten vor eigener Eröffnung','Nachfrage wird parallel zur Standortentwicklung erprobt.']],
+      [['Suche & LOI · ab 01.12.2026','Drei Konzeptflächen werden im Suchraster verglichen.'],['Sichtachse, Flutzone, Zoning und Altlasten','Blick und Zugangsraum werden sichtbar geprüft.'],['Kaufoption · Ziel 31.03.2027','Die Auswahl markiert eine Konzeptfläche, keinen Kauf.']],
+      [['Entwurf & Planung · 08.03.–31.08.2027','Zehn Tische ordnen sich zur Panoramafront.'],['Site Plan · Ziel 30.06.2027','Grundfläche und zwei Geschosse entstehen als Zeichnung.'],['Parallel: erster KSC-Pilot · 30.06.2027','Pilot-Erfahrungen fließen in Menü und Innenausbau.']],
+      [['G2: Baugenehmigung · 30.09.2027','Prüfraum und Zugangsweg werden eingezeichnet.'],['Grundstückskauf · danach am 15.10.2027','Die Zeichnung bleibt bis zur Freigabe ein Entwurf.'],['Zweite Budgetstufe für den Bau','Das Tor verknüpft Genehmigung, Kauf und Baubeginn.']],
+      [['Bau ab 01.11.2027 · mit 10 % Zeitpuffer','Die Architektur wächst vom Sockel zur Glasfassade.'],['Parallel: KSC-Piloten & Teamaufbau','Licht und Service kommen zum entstehenden Gebäude.'],['Übergabe · geplant für 31.08.2028','Der Bau führt zum Raum für zehn Zweiertische.']],
+      [['KSC-Pilot 1 · 30.06.2027','Die Auswertung beginnt vor dem Bau der eigenen Lounge.'],['KSC-Pilot 2 · 15.11.2027','Bau und Erprobung laufen parallel.'],['KSC-Pilot 3 · 15.03.2028','Feedback schärft Menü und Innenausbau.'],['KSC-Pilot 4 · 30.06.2028; G3 am 31.07.2028','Vier Abende bilden die Grundlage für die Eröffnung.']],
+      [['Übergabe & Betriebserlaubnis · 31.08.2028','Die Perspektive wechselt in den geplanten Gastraum.'],['Teamschulung bis 10.09.2028','Zehn Zweiertische und der Service kommen zusammen.'],['Eigene Lounge: Eröffnung · 01.10.2028','Der Start wird zum gemeinsamen Mittelpunkt des Abends.']],
+      [['Anlaufphase bis 15.03.2029','Das erprobte Erlebnis wird im Betrieb weitergeführt.'],['G4: Übergabe an den Betrieb · 31.03.2029','Das Team übernimmt den fertigen Raum.'],['Geplanter Hochlauf: 10 → 16 → 24 Events','Die Planung führt bis zum Zielbild 2031.']]
+    ]
+  };
+  for (const [variant,chapters] of Object.entries(detail)) {
+    window.ROCKET_STORY[variant].phases.forEach((phase,index)=>{
+      phase.steps=chapters[index].map(([work,scene])=>({work,scene}));
+    });
+  }
+})();

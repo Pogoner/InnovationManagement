@@ -1,43 +1,41 @@
-/* Scene 06: readable gates and a proportional six-lane implementation plan.
-   Load after film.css; architectural drawing and world coordinates stay untouched. */
-.film-stage[data-film-step="6"] .film-visual {
-  width: 100%; max-width: 650px; height: auto; max-height: none;
-}
-.film-stage[data-film-step="6"] .film-architecture-plan {
-  width: 100%; padding: 0; border: 0; position: relative;
-}
+/* Scene 06: eight picture phases with dated tasks, then the complete parallel plan.
+   The phase block stays above/right of the shared architectural picture. */
+.film-stage[data-film-step="6"] .film-visual { width: 100%; max-width: 650px; height: auto; max-height: none; }
+.film-stage[data-film-step="6"]:has([data-plan-view="phase"]) .film-visual { width: min(465px,100%); }
+.film-stage[data-film-step="6"] .film-architecture-plan { width: 100%; padding: 0; border: 0; position: relative; }
+.film-stage[data-film-step="6"] .film-visual::before { content: ""; position: absolute; z-index: -1; inset: -28px -32px -24px; pointer-events: none; background: radial-gradient(ellipse at 55% 35%,#060b10e8 15%,#060b1099 65%,transparent 100%); }
 .film-plan-header { display: flex; align-items: center; gap: 18px; }
-.film-stage[data-film-step="6"] .film-variant-switch {
-  flex: 1 1 auto; display: flex; min-width: 0; align-self: center;
-}
-.film-stage[data-film-step="6"] .film-variant-switch button {
-  min-height: 44px; padding: 8px 10px; font-size: 12px;
-}
-.film-stage[data-film-step="6"] .film-plan-budget {
-  position: static; flex: 0 0 auto; display: block; padding: 0; text-align: right;
-}
+.film-stage[data-film-step="6"] .film-variant-switch { flex: 1 1 auto; display: flex; min-width: 0; align-self: center; }
+.film-stage[data-film-step="6"] .film-variant-switch button { min-height: 44px; padding: 8px 10px; font-size: 12px; }
+.film-stage[data-film-step="6"] .film-plan-budget { position: static; flex: 0 0 auto; display: block; padding: 0; text-align: right; }
 .film-stage[data-film-step="6"] .film-plan-name { display: block; font-size: 8px; letter-spacing: .09em; }
 .film-stage[data-film-step="6"] .film-plan-total { font-size: 32px; line-height: 1.1; margin-top: 3px; }
 .film-stage[data-film-step="6"] .film-plan-unit { font-size: 10px; line-height: 1.35; }
-.film-plan-views { display: grid; margin-top: 20px; align-items: start; }
-.film-gates-view,.film-timeline-view { grid-area: 1 / 1; min-width: 0; }
-.film-gates-view { opacity: calc(1 - var(--roadmap-mix,0)); width: min(330px,100%); justify-self: end; }
-.film-timeline-view { opacity: var(--roadmap-mix,0); }
-.film-architecture-plan[data-plan-view="gates"] .film-timeline-view,
-.film-architecture-plan[data-plan-view="roadmap"] .film-gates-view { pointer-events: none; }
-.film-stage[data-film-step="6"] .film-plan-gates li { min-height: 57px; padding-block: 8px; }
-.film-stage[data-film-step="6"] .film-plan-gates strong { font-size: 13px; line-height: 1.35; }
-.film-stage[data-film-step="6"] .film-plan-gates time { font-size: 11px; }
-.film-stage[data-film-step="6"] .film-plan-gates li > span { font-size: 10px; }
-.film-stage[data-film-step="6"] .film-plan-note { font-size: 10px; line-height: 1.45; }
+.film-phase-position { display: flex; gap: 7px; margin: 18px 0 19px; }
+.film-phase-position i { flex: 1; height: 2px; background: #a9d9d925; }
+.film-phase-position .is-past { background: #a9d9d970; }
+.film-phase-position .is-active { background: #efbd91; box-shadow: 0 0 11px #efbd9133; }
+.film-current-phase { opacity: var(--phase-reveal,1); }
+.film-phase-card[hidden],.film-current-phase[hidden],.film-phase-sequence[hidden],.film-timeline-view[hidden] { display: none !important; }
+.film-phase-kicker { display: flex; align-items: baseline; justify-content: space-between; gap: 15px; margin-bottom: 11px; color: #a4bcc5; font-size: 10px; line-height: 1.4; letter-spacing: .05em; font-variant-numeric: tabular-nums; }
+.film-phase-kicker > span:first-child { color: #efbd91; white-space: nowrap; }
+.film-phase-kicker > span:last-child { text-align: right; }
+.pitch-page .film-phase-card h3 { margin: 0 0 16px; font-size: 21px; line-height: 1.2; font-weight: 450; letter-spacing: -.02em; text-transform: none; }
+.film-phase-tasks { margin: 0; padding: 0; list-style: none; }
+.film-phase-tasks li { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 14px; align-items: baseline; border-top: 1px solid #a9d9d925; padding: 11px 0; }
+.film-phase-tasks li > span { font-size: 14px; line-height: 1.4; color: #e0e9e8; }
+.film-phase-tasks time { color: #a9c3c9; font-size: 11px; line-height: 1.45; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pitch-page .film-phase-picture,.pitch-page .film-phase-result,.pitch-page .film-phase-parallel { display: grid; grid-template-columns: 66px minmax(0,1fr); column-gap: 12px; font-size: 13px; line-height: 1.5; margin: 14px 0 0; color: #c0d0d4; }
+.film-phase-picture > span,.film-phase-result > span,.film-phase-parallel > span { font-size: 9px; line-height: 1.6; letter-spacing: .08em; padding-top: 2px; }
+.film-phase-picture > span { color: #a9d9d9; }
+.film-phase-result > span { color: #efbd91; }
+.pitch-page .film-phase-parallel { color: #91abb6; font-size: 12px; }
+.film-phase-parallel > span { color: #91abb6; }
+.pitch-page .film-phase-plan-note { margin: 16px 0 0; color: #809ba7; font-size: 10px; line-height: 1.5; max-width: 580px; }
+.film-phase-sequence { display: none; }
 .film-plan-timeline { display: block; width: 100%; height: auto; overflow: visible; }
-.film-plan-timeline text {
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-  fill: #d7e4e4; font-weight: 400; font-variant-numeric: tabular-nums;
-}
-.film-plan-timeline path,.film-plan-timeline line,.film-plan-timeline rect,.film-plan-timeline circle {
-  vector-effect: non-scaling-stroke;
-}
+.film-plan-timeline text { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #d7e4e4; font-weight: 400; font-variant-numeric: tabular-nums; }
+.film-plan-timeline path,.film-plan-timeline line,.film-plan-timeline rect,.film-plan-timeline circle { vector-effect: non-scaling-stroke; }
 .film-plan-timeline .plan-chart-heading { fill: #a9c0c8; font-size: 16px; letter-spacing: 1.3px; }
 .plan-years line { stroke: #a9d9d91e; stroke-width: .8; }
 .film-plan-timeline .plan-years text { fill: #b2c5ca; font-size: 19px; }
@@ -54,13 +52,16 @@
 .plan-legend rect { fill: #a9d9d9; }
 .plan-legend circle { fill: #efbd91; }
 .film-plan-timeline .plan-legend text { fill: #abc0c7; font-size: 18px; }
-.film-roadmap-pilots {
-  display: flex; flex-wrap: wrap; gap: 3px 6px; align-items: baseline;
-  margin-top: 3px; padding-top: 9px; border-top: 1px solid #a9d9d929;
-  color: #c7d6db; font-size: 10px; line-height: 1.5; font-variant-numeric: tabular-nums;
-}
+.film-roadmap-pilots { display: flex; flex-wrap: wrap; gap: 3px 6px; align-items: baseline; margin-top: 3px; padding-top: 9px; border-top: 1px solid #a9d9d929; color: #c7d6db; font-size: 10px; line-height: 1.5; font-variant-numeric: tabular-nums; }
 .film-roadmap-pilots > span { color: #efbd91; font-size: 9px; letter-spacing: .07em; margin-right: 2px; }
 .film-roadmap-pilots > b { color: #78909b; font-weight: 400; }
+.film-gate-strip { margin-top: 13px; padding-top: 12px; border-top: 1px solid #a9d9d929; }
+.pitch-page .film-gate-strip > p { color: #93aeb9; font-size: 9px; letter-spacing: .09em; margin: 0 0 9px; }
+.film-gate-strip ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 12px; }
+.film-gate-strip li { display: flex; flex-wrap: wrap; gap: 4px 7px; align-content: start; border-top: 1px solid #efbd9160; padding-top: 6px; }
+.film-gate-strip b { color: #efbd91; font-size: 10px; font-weight: 500; }
+.film-gate-strip time { color: #c5d6da; font-size: 10px; font-variant-numeric: tabular-nums; }
+.film-gate-strip li > span { color: #b2c7ce; font-size: 11px; line-height: 1.35; flex-basis: 100%; }
 .film-mobile-roadmap,.film-mobile-critical { display: none; }
 
 @media (min-width: 761px) and (max-height: 800px) {
@@ -70,75 +71,94 @@
   .film-stage[data-film-step="6"] .film-plan-total { font-size: 28px; margin: 0; }
   .film-stage[data-film-step="6"] .film-plan-unit { font-size: 9px; padding: 0; }
   .film-stage[data-film-step="6"] .film-variant-switch button { padding-inline: 7px; font-size: 11px; }
-  .film-plan-views { margin-top: 8px; }
-  .film-stage[data-film-step="6"] .film-plan-gates li { min-height: 0; padding-block: 7px; }
-  .film-stage[data-film-step="6"] .film-plan-gates strong { font-size: 12px; }
-  .film-stage[data-film-step="6"] .film-plan-gates li > i { top: 14px; }
-  .film-stage[data-film-step="6"] .film-plan-note { font-size: 9px; margin-top: 9px; }
+  .film-phase-position { margin-block: 10px 12px; }
+  .film-phase-kicker { font-size: 9px; margin-bottom: 7px; }
+  .pitch-page .film-phase-card h3 { font-size: 18px; margin-bottom: 10px; }
+  .film-phase-tasks li { padding-block: 8px; gap: 10px; }
+  .film-phase-tasks li > span { font-size: 13px; }
+  .film-phase-tasks time { font-size: 10px; }
+  .pitch-page .film-phase-picture,.pitch-page .film-phase-result,.pitch-page .film-phase-parallel { margin-top: 9px; font-size: 12px; line-height: 1.45; }
+  .pitch-page .film-phase-parallel { font-size: 11px; }
+  .pitch-page .film-phase-plan-note { font-size: 9px; margin-top: 10px; }
   .film-roadmap-pilots { font-size: 9px; gap: 2px 5px; padding-top: 5px; line-height: 1.4; }
   .film-roadmap-pilots > span { font-size: 8px; }
+  .film-gate-strip { margin-top: 8px; padding-top: 7px; }
+  .pitch-page .film-gate-strip > p { margin-bottom: 5px; font-size: 8px; }
+  .film-gate-strip ol { gap: 7px; }
+  .film-gate-strip li { gap: 2px 6px; }
+  .film-gate-strip time { font-size: 9px; }
+  .film-gate-strip li > span { font-size: 10px; }
+  .film-architecture-plan[data-plan-view="roadmap"] .film-phase-plan-note { display: none; }
 }
 
-/* Narrow screens use ordinary page flow. Every gate, row and pilot stays visible;
-   source dates determine bar geometry exactly as in the desktop SVG. */
+/* A complete ordinary flow for reduced motion: no planning phase is only a
+   transient animation state. Dates and activity names remain real text. */
+.film-ready.is-reduced .film-stage[data-film-step="6"] { grid-template-columns: minmax(0,1fr); gap: 30px; min-height: 0; }
+.film-ready.is-reduced .film-stage[data-film-step="6"] .film-copy { max-width: 760px; }
+.film-ready.is-reduced .film-stage[data-film-step="6"] .film-visual { max-width: 100%; width: 100%; min-height: 0; max-height: none; aspect-ratio: auto; }
+.film-architecture-plan[data-plan-view="linear"] .film-plan-header { max-width: 650px; }
+.film-architecture-plan[data-plan-view="linear"] .film-phase-position { display: none; }
+.film-architecture-plan[data-plan-view="linear"] .film-phase-sequence { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px 40px; margin-top: 30px; }
+.film-phase-sequence-heading { grid-column: 1 / -1; font-size: 19px; line-height: 1.4; margin: 0; color: #c7dbde; }
+.film-phase-card.is-linear { border-top: 1px solid #a9d9d936; padding-top: 19px; }
+.film-architecture-plan[data-plan-view="linear"] .film-timeline-view { max-width: 900px; margin-top: 48px; padding-top: 35px; border-top: 1px solid #a9d9d936; }
+
 @media (max-width: 760px) {
   .film-chapter[data-step="6"] .film-reel { height: auto; }
-  .film-stage[data-film-step="6"],
-  .film-ready.is-reduced .film-stage[data-film-step="6"] {
-    position: relative; height: auto; min-height: 0; overflow: visible;
-    padding-top: 130px; padding-bottom: 155px; gap: 24px;
-  }
-  .film-stage[data-film-step="6"] .film-visual,
-  .film-ready.is-reduced .film-stage[data-film-step="6"] .film-visual {
-    width: 100%; max-width: none; height: auto; min-height: 0; max-height: none; aspect-ratio: auto;
-    flex: 0 0 auto; margin-top: 0;
-  }
+  .film-stage[data-film-step="6"],.film-ready.is-reduced .film-stage[data-film-step="6"] { position: relative; height: auto; min-height: 0; overflow: visible; padding-top: 130px; padding-bottom: 155px; gap: 24px; }
+  .film-stage[data-film-step="6"] .film-visual,.film-ready.is-reduced .film-stage[data-film-step="6"] .film-visual { width: 100%; max-width: none; height: auto; min-height: 0; max-height: none; aspect-ratio: auto; flex: 0 0 auto; margin-top: 0; }
   .film-plan-header { gap: 12px; }
   .film-stage[data-film-step="6"] .film-variant-switch button { min-height: 44px; padding-inline: 7px; font-size: 12px; }
   .film-stage[data-film-step="6"] .film-variant-switch button span { margin-left: 3px; }
   .film-stage[data-film-step="6"] .film-plan-name { display: none; }
   .film-stage[data-film-step="6"] .film-plan-total { font-size: 28px; margin: 0; }
   .film-stage[data-film-step="6"] .film-plan-unit { font-size: 10px; }
-  .film-plan-views { display: block; margin-top: 25px; }
-  .film-gates-view,.film-timeline-view { width: 100%; opacity: 1; }
-  .film-stage[data-film-step="6"] .film-plan-gates { display: block; margin: 0; }
-  .film-stage[data-film-step="6"] .film-plan-gates::before,
-  .film-stage[data-film-step="6"] .film-plan-gates::after {
-    left: 4px; right: auto; width: 1px; height: auto; top: 18px; bottom: 23px; transform: none;
-  }
-  .film-stage[data-film-step="6"] .film-plan-gates li {
-    display: grid; grid-template-columns: 1fr auto; padding: 8px 0 8px 28px; min-height: 56px; opacity: 1;
-  }
-  .film-stage[data-film-step="6"] .film-plan-gates li > i { left: 1px; top: 16px; }
-  .film-stage[data-film-step="6"] .film-plan-gates li > span { font-size: 11px; }
-  .film-stage[data-film-step="6"] .film-plan-gates time { font-size: 12px; }
-  .film-stage[data-film-step="6"] .film-plan-gates strong { display: block; font-size: 13px; line-height: 1.4; margin-top: 4px; }
-  .film-stage[data-film-step="6"] .film-plan-note { font-size: 11px; max-width: none; margin-top: 10px; }
-  .film-timeline-view { margin-top: 28px; padding-top: 23px; border-top: 1px solid #a9d9d933; }
+  .film-architecture-plan[data-plan-view="linear"] .film-phase-sequence { display: block; margin-top: 28px; }
+  .film-phase-sequence-heading { font-size: 18px; margin-bottom: 24px; }
+  .film-phase-card.is-linear { margin-bottom: 30px; }
+  .film-phase-kicker { font-size: 10px; gap: 10px; }
+  .pitch-page .film-phase-card h3 { font-size: 21px; margin-bottom: 16px; }
+  .film-phase-tasks li { gap: 10px; padding-block: 11px; }
+  .film-phase-tasks li > span { font-size: 14px; }
+  .film-phase-tasks time { font-size: 11px; }
+  .pitch-page .film-phase-picture,.pitch-page .film-phase-result,.pitch-page .film-phase-parallel { font-size: 13px; margin-top: 13px; line-height: 1.55; grid-template-columns: 67px minmax(0,1fr); }
+  .pitch-page .film-phase-plan-note { font-size: 11px; line-height: 1.6; margin-top: 20px; }
   .film-plan-timeline { display: none; }
   .film-mobile-roadmap { display: block; }
-  .film-mobile-chart-title { font-size: 17px; font-weight: 450; color: #dbe6e4; line-height: 1.4; margin-bottom: 20px; }
+  .film-mobile-chart-title { font-size: 18px; font-weight: 450; color: #dbe6e4; line-height: 1.4; margin-bottom: 20px; }
   .film-mobile-years { height: 22px; position: relative; font-size: 11px; color: #9bb5bf; font-variant-numeric: tabular-nums; }
   .film-mobile-years span { position: absolute; transform: translateX(-5%); }
   .film-mobile-lanes { list-style: none; margin: 0; padding: 0; }
-  .film-mobile-lane { padding: 10px 0 16px; border-top: 1px solid #a9d9d91c; }
+  .film-mobile-lane { padding: 13px 0 20px; border-top: 1px solid #a9d9d925; }
   .film-mobile-lane-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  .film-mobile-lane-head strong { font-size: 13px; font-weight: 450; line-height: 1.4; color: #d9e5e5; }
+  .film-mobile-lane-head strong { font-size: 14px; font-weight: 450; line-height: 1.4; color: #d9e5e5; }
   .film-mobile-lane-head > span { font-size: 10px; line-height: 1.4; color: #a5bdc5; white-space: nowrap; font-variant-numeric: tabular-nums; }
   .film-mobile-track { position: relative; height: 16px; margin-top: 8px; border-bottom: 1px solid #a9d9d93d; }
   .film-mobile-bar { position: absolute; height: 7px; top: 5px; border-radius: 1px; background: #a9d9d9; }
   .film-mobile-bar.is-track { height: 7px; border: 1px dashed #efbd91a1; background: #efbd9124; }
   .film-mobile-pilot { position: absolute; width: 6px; height: 6px; top: 5px; transform: translateX(-50%); border-radius: 50%; background: #efbd91; }
   .film-mobile-pilot b { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); color: #efbd91; font-size: 10px; font-style: normal; font-weight: 400; }
+  .film-mobile-activities { list-style: none; margin: 15px 0 0; padding: 0; }
+  .film-mobile-activities li { display: flex; justify-content: space-between; gap: 12px; padding-block: 5px; font-size: 12px; line-height: 1.5; color: #b2c8cf; }
+  .film-mobile-activities time { font-size: 10px; white-space: nowrap; color: #8facb8; font-variant-numeric: tabular-nums; }
   .film-mobile-chart-note { color: #a7bdc5; font-size: 11px; line-height: 1.6; margin-top: 15px; }
   .film-roadmap-pilots { gap: 4px 7px; font-size: 11px; line-height: 1.5; margin-top: 16px; padding-top: 14px; }
   .film-roadmap-pilots > span { font-size: 10px; flex-basis: 100%; }
   .film-mobile-critical { display: block; color: #c6d5d9; font-size: 12px; line-height: 1.7; margin-top: 17px; }
+  .film-gate-strip { margin-top: 22px; padding-top: 18px; }
+  .pitch-page .film-gate-strip > p { font-size: 10px; margin-bottom: 13px; }
+  .film-gate-strip ol { grid-template-columns: minmax(0,1fr); gap: 0; }
+  .film-gate-strip li { display: grid; grid-template-columns: 28px 90px minmax(0,1fr); gap: 12px; padding-block: 13px; }
+  .film-gate-strip b,.film-gate-strip time { font-size: 11px; }
+  .film-gate-strip li > span { font-size: 13px; line-height: 1.4; }
 }
-
 @media (max-width: 420px) {
   .film-plan-header { gap: 8px; }
   .film-stage[data-film-step="6"] .film-variant-switch button { font-size: 11px; padding-inline: 5px; }
   .film-stage[data-film-step="6"] .film-plan-total { font-size: 25px; }
   .film-stage[data-film-step="6"] .film-plan-unit { font-size: 9px; }
+  .film-phase-tasks li { grid-template-columns: minmax(0,1fr); gap: 3px; }
+  .film-phase-tasks time { white-space: normal; }
+  .film-mobile-activities li { display: block; }
+  .film-mobile-activities time { display: block; }
 }

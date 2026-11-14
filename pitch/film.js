@@ -6,15 +6,16 @@
   if (!story || !scenes || story.some(s => !scenes[s.step])) return;
   // Read the existing shared selection before adding a second set of controls.
   let variant = document.querySelector('[data-variant][aria-pressed="true"]')?.dataset.variant || 'A';
+  story.find(chapter=>chapter.step===6).beats=window.PitchRoadmapPhases[variant];
   const clamp = n => Math.min(1,Math.max(0,n));
   const smooth = (a,b,n) => { const p=clamp((n-a)/(b-a)); return p*p*(3-2*p); };
   const fmt = n => n.toFixed(4);
   const arrow = '<svg class="arrow-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12 12 4M4 4h8v8"/></svg>';
-  const stillPoints = {1:[.35,.70,1],2:[.40,.81,1],3:[.10,.28,.44,.60,.80,1],4:[.27,.57,1],5:[.28,.53,.74,1],6:[.14,.40,.74,1],7:[.18,.46,.68,1],8:[.25,.60,1]};
+  const stillPoints = {1:[.35,.70,1],2:[.40,.81,1],3:[.10,.28,.44,.60,.80,1],4:[.27,.57,1],5:[.28,.53,.74,1],6:[.10,.22,.34,.46,.58,.70,.84,1],7:[.18,.46,.68,1],8:[.25,.60,1]};
   const world = document.createElement('div');
   world.className = 'film-background';
   world.setAttribute('aria-hidden','true');
-  world.innerHTML = '<div class="film-camera"><img class="film-landscape-image" src="../teil6/scene.webp" width="1672" height="941" alt=""><div class="film-water-light"></div><div class="film-world-architecture">' +
+  world.innerHTML = '<div class="film-camera"><img class="film-landscape-image" src="../teil6/launch-coast-close.webp" width="1672" height="941" alt=""><div class="film-water-light"></div><div class="film-world-architecture">' +
     window.PitchArchitecture.markup() + '</div></div><div class="film-dining-world"><img src="assets/dining-panorama.webp" width="1672" height="941" alt=""><div></div></div><div class="film-world-grade"></div><div class="film-world-grain"></div>';
   document.body.prepend(world);
   const camera = world.querySelector('.film-camera');
@@ -112,7 +113,7 @@
     const masterHeight=masterWidth*941/1672;
     camera.style.width=masterWidth.toFixed(2)+'px';
     camera.style.height=masterHeight.toFixed(2)+'px';
-    camera.style.left=(portrait?areaWidth/2-masterWidth*.405:(areaWidth-masterWidth)/2).toFixed(2)+'px';
+    camera.style.left=(portrait?areaWidth/2-masterWidth*.56:(areaWidth-masterWidth)/2).toFixed(2)+'px';
     camera.style.top=(portrait?height-masterHeight-66:(height-masterHeight)/2).toFixed(2)+'px';
     const y=scrollY;
     records.forEach(record=>{
@@ -168,7 +169,7 @@
     const siteMix=smooth(site.top-height*.58,site.top+height*.08,y)*(1-smooth(site.top+site.height-height*.65,site.top+site.height+height*.1,y));
     const experienceMix=smooth(dining.top-height*.5,dining.top+height*.08,y)*(1-smooth(dining.top+dining.height-height*.65,dining.top+dining.height+height*.1,y));
     // The architectural reveal ends inside the same room introduced in Part 5.
-    const interiorReveal=siteMix*smooth(.80,.98,site.progress);
+    const interiorReveal=siteMix*smooth(.90,.98,site.progress);
     const diningMix=Math.max(experienceMix,interiorReveal);
     const diningFocus=smooth(.28,.38,dining.progress)*(1-smooth(.54,.65,dining.progress));
     world.style.setProperty('--dining-opacity',fmt(diningMix));
@@ -179,12 +180,12 @@
     world.dataset.scene=String(step);
     architecture.style.opacity=fmt(siteMix);
     if(siteMix>0)worldDrawing.update(site.progress,context);
-    const baseScale=1.10+Math.sin((step+p)*.7)*.045;
-    const cameraScale=reduced?1.02:baseScale*(1-siteMix)+(1.04+site.progress*.13)*siteMix;
-    const panY=reduced?0:Math.sin((step+p)*.8)*height*.023*(1-siteMix)-site.progress*height*.015*siteMix;
+    const baseScale=1.02+Math.sin((step+p)*.7)*.012;
+    const cameraScale=reduced?1.02:baseScale*(1-siteMix)+(1.01+site.progress*.035)*siteMix;
+    const panY=reduced?0:Math.sin((step+p)*.8)*height*.008*(1-siteMix)-site.progress*height*.005*siteMix;
     const panX=reduced?0:Math.cos((step+p)*.6)*width*.012;
     camera.style.transform='translate3d('+panX.toFixed(2)+'px,'+panY.toFixed(2)+'px,0) scale('+cameraScale.toFixed(4)+')';
-    const baseStrength=step===5?.34:.25;
+    const baseStrength=.32;
     world.style.setProperty('--landscape-strength',fmt(baseStrength+(1-baseStrength)*siteMix));
     world.style.setProperty('--water-drift',((reduced?0:y*.015)%150).toFixed(2)+'px');
     const ignition=frame.launchProgress||0;
@@ -196,6 +197,10 @@
 
   function setVariant(value) {
     variant=value;
+    const roadmap=records.find(record=>record.chapter.step===6);
+    roadmap.chapter.beats=window.PitchRoadmapPhases[value];
+    roadmap.beat=-1;
+    roadmap.buttons.forEach((button,index)=>button.setAttribute('aria-label',roadmap.chapter.beats[index].cue));
     records.forEach(r=>{r.lastP=-1;r.staticScene?.updateVariant(value);});
     document.dispatchEvent(new Event('pitch:layout'));
   }

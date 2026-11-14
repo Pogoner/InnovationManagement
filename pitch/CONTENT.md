@@ -241,3 +241,10 @@ Fenstern eine eigene, per Tastatur bedienbare horizontale Scrollfläche; die Sei
 selbst bleibt vertikal. Die 5P-Zeilen, Roadmap und Methodenevaluation verwenden
 auf schmalen Ansichten lesbare HTML-Darstellungen. Die Kennzahlen und Quelltermine
 stimmen mit den animierten Fassungen überein.
+
+
+## Räumliche Roadmap · näherer Raketenstart
+
+Die acht Bildphasen in Kapitel 6 werden in `roadmap-phases.js` definiert und für beide Varianten aus den unveränderten Aktivitäten in `teil6/data.js` mit konkreten Terminen verbunden. Die räumlichen Ebenen in `film-site.js` folgen denselben Phasengrenzen. Die Auswahl dreier schematischer Standorte, der schematische Prüfbereich und die Servicewege sind illustrative Planungshilfen; sie stellen keine vermessenen Grundstücke oder freigegebenen Schutzabstände dar. Das Hintergrundmotiv ist eine gekennzeichnete Konzeptvisualisierung.
+
+Die Arbeitspakete bleiben parallel: Die acht Bildphasen ordnen die Erklärung, keine acht streng aufeinanderfolgenden Kalenderabschnitte. Variante B zeigt die externen KSC-Piloten vom 30.06.2027 bis 30.06.2028 vor der geplanten Lounge-Eröffnung am 01.10.2028. Die letzte Phase enthält weiterhin den vollständigen Maßnahmenplan mit sechs Spuren, allen vier Pilotterminen und fünf datierten Gates. In reduzierter bzw. schmaler Ansicht stehen alle acht Planungsphasen im normalen Lesefluss.

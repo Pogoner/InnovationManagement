@@ -176,38 +176,9 @@ window.PitchFilmStory = [
   {
     "step": 6,
     "label": "Roadmap & Umsetzung",
-    "detail": "Varianten A/B, Teilprojekte, Budgets & Termine",
-    "length": 3.6,
-    "beats": [
-      {
-        "at": 0,
-        "tag": "DER ORT FÜR DIE IDEE",
-        "title": "Ein Horizont.<br><em>Eine Möglichkeit.</em>",
-        "copy": "Am Anfang steht eine Fläche. Sichtachse, Zugang und Genehmigungen entscheiden darüber, ob sie zum Standort werden kann.",
-        "cue": "Suchen und prüfen"
-      },
-      {
-        "at": 0.24,
-        "tag": "DER ENTWURF",
-        "title": "Eine Linie wird<br><em>zum Entwurf.</em>",
-        "copy": "Die Architektur entsteht auf derselben Fläche. Pavillon und Lounge zeigen zwei unterschiedliche Wege zum Erlebnis.",
-        "cue": "Den Entwurf entstehen sehen"
-      },
-      {
-        "at": 0.51,
-        "tag": "ROADMAP & MASSNAHMENPLAN",
-        "title": "Sechs Teilprojekte.<br><em>Parallel zum Ziel.</em>",
-        "copy": "Standort, Architektur, Team und Vertrieb entstehen nicht nacheinander. Die gemeinsame Zeitachse zeigt ihre Überlappungen und die vier geplanten Piloten.",
-        "cue": "Alle sechs Teilprojekte auf einer Zeitachse"
-      },
-      {
-        "at": 0.77,
-        "tag": "VOM ENTWURF ZUM ERLEBNIS",
-        "title": "Die Idee bekommt<br><em>einen Ort.</em>",
-        "copy": "Der mobile Pavillon beginnt mit kleinerem Budget. Die feste Lounge schafft einen dauerhaften Standort. Beide Varianten bleiben Planungen.",
-        "cue": "Planung → Pilot → Betrieb"
-      }
-    ]
+    "detail": "Acht Planungsphasen, parallele Maßnahmen, Gates & Varianten A/B",
+    "length": 7.8,
+    "beats": []
   },
   {
     "step": 7,
@@ -275,3 +246,5 @@ window.PitchFilmStory = [
     ]
   }
 ];
+// Roadmap copy and source work packages share the same eight phase definitions.
+window.PitchFilmStory.find(chapter => chapter.step === 6).beats = window.PitchRoadmapPhases.A;

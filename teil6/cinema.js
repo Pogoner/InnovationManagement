@@ -46,7 +46,8 @@
   let variant = (params.get('variante') || read('rocketlight:variant')) === 'B' ? 'B' : 'A';
   const motionPreference = read('rocketlight:motion');
   let preferredReduced = motionPreference === 'reduced' || (motionPreference !== 'full' && media.matches);
-  let compact = window.innerHeight < 560;
+  const compactWindow = () => window.innerHeight < 560 || (window.innerWidth <= 760 && window.innerHeight < 800);
+  let compact = compactWindow();
   let reduced = preferredReduced || compact;
   let destroyed = false;
   let raf = 0;
@@ -55,6 +56,7 @@
   let inView = true;
   let progress = 0;
   let activePhase = -1;
+  let activeWorkstep = '';
   let ambientTime = 0;
   let lastAmbient = 0;
   let lastFrameTime = 0;
@@ -156,6 +158,7 @@
       `<article class="story-static-chapter" id="chapter-${escape(phase.key)}" data-static-chapter="${index}">` +
       `<p class="story-static-eyebrow">${escape(phase.eyebrow)}</p><h2>${escape(phase.title)}</h2><p>${escape(phase.copy)}</p>` +
       `<p class="story-static-date"><time datetime="${escape(phase.dateISO)}">${escape(phase.date)}</time>${phase.gate ? ` · ${escape(phase.gate)}` : ''} · ${escape(phase.master)}</p>` +
+      `<ol class="story-static-worksteps">${(phase.steps || []).map(step => `<li><strong>${escape(step.work)}</strong><span>${escape(step.scene)}</span></li>`).join('')}</ol>` +
       `<div class="story-static-lanes">${phase.laneIds.map(id => laneMarkup(id, phase, true)).join('')}</div>` +
       (phase.chef.state === 'off' ? '' : `<aside class="story-static-chef"><h3>${escape(phase.chef.title)}</h3><p>${escape(phase.chef.copy)}</p><p>${escape(phase.chef.date)}</p></aside>`) +
       '</article>'
@@ -203,6 +206,7 @@
   function renderPhase(index) {
     if (index === activePhase) return;
     activePhase = index;
+    activeWorkstep = '';
     connectionRefreshPending = true;
     const phase = story().phases[index];
     cinema.dataset.phase = phase.key;
@@ -217,6 +221,8 @@
     text('chef-title', phase.chef.title);
     text('chef-copy', phase.chef.copy);
     text('chef-date', phase.chef.date);
+    const track = $('#scene-workstep-track');
+    if (track) track.innerHTML=(phase.steps || []).map(()=>'<i></i>').join('');
     const chef = $('#chef-panel');
     if (chef) {
       chef.dataset.chefState = phase.chef.state;
@@ -228,6 +234,22 @@
       if (active) button.setAttribute('aria-current', 'step');
       else button.removeAttribute('aria-current');
     });
+  }
+
+  function renderWorkstep(phase, local) {
+    const steps = phase.steps || [];
+    const index = Math.min(steps.length - 1, Math.floor(local * steps.length));
+    const step = steps[index];
+    if (!step) return;
+    const key = `${variant}:${activePhase}:${index}`;
+    if (key !== activeWorkstep) {
+      activeWorkstep = key;
+      text('scene-workstep-title', step.work);
+      text('scene-workstep-copy', step.scene);
+      text('scene-workstep-count', `${String(index + 1).padStart(2,'0')} / ${String(steps.length).padStart(2,'0')}`);
+      $$('#scene-workstep-track i').forEach((node,i)=>node.classList.toggle('is-current',i===index));
+      cinema.dataset.workstep = String(index);
+    }
   }
 
   function resizeCanvas(canvas, width) {
@@ -310,6 +332,8 @@
     const sy = pinRect.top + pinRect.height / 2 - stageRect.top;
     const master = $('.master-lane', $('#lane-panel'));
     const targets = [...(master ? [master] : []), ...$$('.cinema-lane', laneList)];
+    const track = $('#scene-workstep-track');
+    if (track) track.innerHTML=(phase.steps || []).map(()=>'<i></i>').join('');
     const chef = $('#chef-panel');
     if (chef?.classList.contains('is-visible')) targets.push(chef);
     connections.setAttribute('viewBox', `0 0 ${layout.stageWidth} ${layout.stageHeight}`);
@@ -353,9 +377,10 @@
     const p = reduced ? 0 : progress;
     const phase = story().phases[activePhase];
     const local = phaseProgress(progress, activePhase);
+    renderWorkstep(phase,local);
     const zoom = 1 + .14 * smooth(.08, .30, p) - .07 * smooth(.82, .99, p);
     const panBlend = smooth(.055, .24, p);
-    const focusRatio = .760 + (layout.siteRatio - .760) * panBlend;
+    const focusRatio = .773 + (layout.siteRatio - .773) * panBlend;
     const centerOffset = layout.worldWidth * (layout.originRatio - .5) * (1 - zoom);
     const coverSlack = Math.max(0, (layout.worldWidth * zoom - layout.landscapeWidth) / 2);
     const targetPan = layout.worldWidth * (.5 - layout.originRatio + (layout.originRatio - focusRatio) * zoom);
@@ -374,7 +399,13 @@
       '--camera-zoom': zoom, '--camera-x': `${pan.toFixed(2)}px`, '--caption-opacity': caption,
       '--rocket-opacity': launch, '--rocket-progress': smooth(.80, .98, p),
       '--water-opacity': reduced ? 0 : .42, '--stars-opacity': reduced ? 0 : .7,
-      '--connections-opacity': reduced ? 0 : smooth(.09, .13, p)
+      '--connections-opacity': reduced ? 0 : smooth(.09, .13, p)*(1-smooth(.80,.88,p)),
+      '--interior-opacity': smooth(.80,.88,p),
+      '--sightline-opacity': smooth(.12,.17,p)*(1-smooth(.29,.35,p)),
+      '--table-plan-opacity': smooth(.23,.27,p)*(1-smooth(.31,.37,p)),
+      '--site-plan-progress': smooth(.12,.29,p),
+      '--access-plan-opacity': smooth(.36,.40,p)*(1-smooth(.46,.51,p)),
+      '--access-progress': smooth(.36,.46,p)
     };
     for (const [key, value] of Object.entries(values)) cinema.style.setProperty(key, typeof value === 'number' ? value.toFixed(4) : value);
     activate('#scene-scan', scan > .01);
@@ -456,7 +487,7 @@
     const previousCompact = compact;
     const previousPhase = activePhase;
     preferredReduced = Boolean(next);
-    compact = window.innerHeight < 560;
+    compact = compactWindow();
     reduced = preferredReduced || compact;
     root.classList.toggle('reduced-motion', reduced);
     root.classList.toggle('motion-ready', !reduced);
@@ -604,7 +635,7 @@
   disclosure.addEventListener('toggle', () => requestFrame(true), { signal });
   window.addEventListener('scroll', () => requestFrame(), { passive: true, signal });
   window.addEventListener('resize', () => {
-    if ((window.innerHeight < 560) !== compact) setMotion(preferredReduced, false);
+    if (compactWindow() !== compact) setMotion(preferredReduced, false);
     else requestFrame(true);
   }, { passive: true, signal });
   window.addEventListener('pageshow', () => requestFrame(true), { signal });

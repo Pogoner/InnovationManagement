@@ -221,6 +221,7 @@
       r.stage.style.setProperty('--film-progress',fmt(p));
       r.stage.dataset.progress=p.toFixed(3);
       r.lastP=p;
+      r.stage.scrollIntoView({block:'start',behavior:'instant'});
     } else scrollTo({top:r.top+Number(control.dataset.filmPoint)*r.range,behavior:'smooth'});
   });
   photo.addEventListener('load',()=>document.dispatchEvent(new Event('pitch:layout')));

@@ -11,7 +11,7 @@ window.PitchFilmStory = [
   {
     step: 2, label: 'Der Innovationsprüfstand', detail: 'Alle Team-/KI-Werte & Rechenwege', length: 2.7,
     beats: [
-      { at: 0, tag: 'DIE SICHT DES TEAMS', title: 'Fortschritt ist sichtbar.<br><em>Potenzial wird messbar.</em>', copy: 'Vier Innovationen. Ein gemeinsamer Maßstab. Im Teamvergleich liegt Raptor 3 vorn.', cue: 'Technologien treten in den Vergleich' },
+      { at: 0, tag: 'DIE SICHT DES TEAMS', title: 'Vier Technologien.<br><em>Ein Prüfstand.</em>', copy: 'Vier Innovationen. Ein gemeinsamer Maßstab. Im Teamvergleich liegt Raptor 3 vorn.', cue: 'Technologien treten in den Vergleich' },
       { at: .45, tag: 'EIN ZWEITER BLICK', title: 'Gleiche Technologie.<br><em>Anderes Urteil.</em>', copy: 'Die KI gewichtet Reife und Nutzen anders. Die Gegenüberstellung macht diese Unterschiede sichtbar.', cue: 'Team und KI gegenüberstellen' },
       { at: .85, tag: 'DIE METHODE ENTSCHEIDET', title: 'Null Punkte.<br><em>Nicht null Nutzen.</em>', copy: 'Starlink erhält im Team Reifegrad 0, weil der Betrieb bereits etabliert ist. Der Hube-Wert braucht Einordnung.', cue: 'Bewertungen richtig lesen' }
     ]
@@ -53,7 +53,7 @@ window.PitchFilmStory = [
   {
     step: 7, label: 'Ganzheitliches Innovationsmanagement', detail: 'Sechs Analysefelder, vier Empfehlungen & Gate-Kriterien', length: 2.8,
     beats: [
-      { at: 0, tag: 'AUS DEM PROJEKT WIRD EIN SYSTEM', title: 'Gute Ideen brauchen<br><em>gemeinsamen Antrieb.</em>', copy: 'RocketLight ist unser Testfall. Vier Veränderungen machen aus einer einzelnen Idee wiederholbare Innovation.', cue: 'Vier Empfehlungen finden zusammen' },
+      { at: 0, tag: 'AUS DEM PROJEKT WIRD EIN SYSTEM', title: 'Vier Kräfte.<br><em>Eine Mission.</em>', copy: 'RocketLight ist unser Testfall. Vier Veränderungen machen aus einer einzelnen Idee wiederholbare Innovation.', cue: 'Vier Empfehlungen finden zusammen' },
       { at: .20, tag: 'STRUKTUR & PROZESSE', title: 'Verantwortung klären.<br><em>Früh prüfen.</em>', copy: 'Das Portfolio gemeinsam steuern. Kundenbedürfnisse testen und fachübergreifend über die nächsten Schritte entscheiden.', cue: 'Steuern · prüfen · weiterlernen' },
       { at: .48, tag: 'KULTUR & KOMPETENZEN', title: 'Beteiligung ermöglichen.<br><em>Wissen verbinden.</em>', copy: 'Ideen und sachliche Kritik aktiv einfordern. Erfahrungen zwischen Bereichen teilen und Fähigkeiten gemeinsam aufbauen.', cue: 'Beteiligen · lernen · verändern' },
       { at: .74, tag: 'VIER TRIEBWERKE FÜR DEN WANDEL', title: 'Eine Mission.<br><em>Ein gemeinsamer Start.</em>', copy: 'Struktur, Prozesse, Kultur und Kompetenzen greifen ineinander. Jetzt wird aus dem Pitch eine gemeinsame Bewegung.', cue: 'Der Countdown geht in die Zündung über' }

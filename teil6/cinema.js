@@ -273,6 +273,9 @@
       stageHeight: stage.clientHeight || rect.height || 1,
       worldWidth,
       landscapeWidth: frame.width || 1,
+      landscapeHeight: frame.height || 1,
+      worldHeight: world.clientHeight || worldRect.height || 1,
+      headerClearance: headerHeight() + 18,
       siteRatio: pin && worldRect.width ? clamp((pin.left + pin.width / 2 - worldRect.left) / worldRect.width) : .405,
       originRatio: Number.isFinite(originRatio) ? clamp(originRatio) : .405,
       portrait: frame.height > frame.width || window.innerWidth <= 760
@@ -332,8 +335,6 @@
     const sy = pinRect.top + pinRect.height / 2 - stageRect.top;
     const master = $('.master-lane', $('#lane-panel'));
     const targets = [...(master ? [master] : []), ...$$('.cinema-lane', laneList)];
-    const track = $('#scene-workstep-track');
-    if (track) track.innerHTML=(phase.steps || []).map(()=>'<i></i>').join('');
     const chef = $('#chef-panel');
     if (chef?.classList.contains('is-visible')) targets.push(chef);
     connections.setAttribute('viewBox', `0 0 ${layout.stageWidth} ${layout.stageHeight}`);
@@ -378,7 +379,11 @@
     const phase = story().phases[activePhase];
     const local = phaseProgress(progress, activePhase);
     renderWorkstep(phase,local);
-    const zoom = 1 + .14 * smooth(.08, .30, p) - .07 * smooth(.82, .99, p);
+    // The closer rocket reaches y=.114 in the master image. Keep its tip
+    // below the fixed header while all terrain/drawing anchors move together.
+    const zoom = 1 + .025 * smooth(.08, .30, p) - .01 * smooth(.82, .99, p);
+    const rocketTipY = (layout.landscapeHeight-layout.worldHeight)/2 + layout.worldHeight*(.76+(.114-.76)*zoom);
+    const panY = Math.max(0, layout.headerClearance-rocketTipY);
     const panBlend = smooth(.055, .24, p);
     const focusRatio = .773 + (layout.siteRatio - .773) * panBlend;
     const centerOffset = layout.worldWidth * (layout.originRatio - .5) * (1 - zoom);
@@ -396,7 +401,7 @@
       '--scan-angle': `${(p * 1050).toFixed(2)}deg`, '--blueprint-progress': smooth(.21, .40, p),
       '--blueprint-opacity': blueprint, '--building-progress': smooth(.49, .69, p), '--building-opacity': building,
       '--permit-opacity': permit, '--crane-opacity': smooth(.48, .53, p) * (1 - smooth(.64, .70, p)),
-      '--camera-zoom': zoom, '--camera-x': `${pan.toFixed(2)}px`, '--caption-opacity': caption,
+      '--camera-zoom': zoom, '--camera-x': `${pan.toFixed(2)}px`, '--camera-y': `${panY.toFixed(2)}px`, '--caption-opacity': caption,
       '--rocket-opacity': launch, '--rocket-progress': smooth(.80, .98, p),
       '--water-opacity': reduced ? 0 : .42, '--stars-opacity': reduced ? 0 : .7,
       '--connections-opacity': reduced ? 0 : smooth(.09, .13, p)*(1-smooth(.80,.88,p)),

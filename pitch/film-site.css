@@ -1,4 +1,5 @@
 /* The same source-coordinate plot progresses through eight planning layers. */
+.film-background[data-scene="6"] .film-world-grade { opacity: .35; }
 .film-site-overlays { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; overflow: visible; }
 .film-site-building { z-index: 1; }
 .film-site-overlays .fs-trace { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--fs-layer-draw,1)); }

@@ -98,8 +98,10 @@
     }
     const beat=record.chapter.beats[index];
     const next=record.chapter.beats[index+1];
-    const enter=index===0||reduced?1:smooth(beat.at,beat.at+.045,p);
-    const leave=next&&!reduced?1-smooth(next.at-.035,next.at,p):1;
+    const enterRange=record.chapter.step===6?.018:.045;
+    const leaveRange=record.chapter.step===6?.012:.035;
+    const enter=index===0||reduced?1:smooth(beat.at,beat.at+enterRange,p);
+    const leave=next&&!reduced?1-smooth(next.at-leaveRange,next.at,p):1;
     record.copyBox.style.setProperty('--copy-opacity',fmt(enter*leave));
     record.copyBox.style.setProperty('--copy-shift',((1-enter)*24-(1-leave)*18).toFixed(2)+'px');
   }
@@ -217,6 +219,11 @@
         record.staticScene.phases.forEach((phase,index)=>{if(phase.getBoundingClientRect().top<=height*.45)selected=index;});
         point=stillPoints[record.chapter.step][selected];
       }
+      if((reduced||record.linear) && record.chapter.step===6) {
+        let selected=0;
+        record.visual.querySelectorAll('.film-phase-sequence [data-roadmap-phase]').forEach((phase,index)=>{if(phase.getBoundingClientRect().top<=height*.45)selected=index;});
+        point=stillPoints[6][selected];
+      }
       return {record,point};
     }
     let node=record.disclosure;
@@ -228,8 +235,17 @@
     reduced=value; dirty=true;
     records.forEach(r=>{r.lastP=-1;});
     if(anchor) {
+      // Resolve the roadmap's linear/film layout before measuring its new height.
+      const roadmap=records.find(record=>record.chapter.step===6);
+      roadmap.renderer.update(anchor.record===roadmap?anchor.point:roadmap.progress??1,{reduced:value,variant,mobile:width<=760});
       measure();
-      const top=anchor.record?anchor.record.top+(value?0:anchor.point*anchor.record.range):anchor.node.getBoundingClientRect().top+scrollY+anchor.offset;
+      let top=anchor.record?anchor.record.top+(value?0:anchor.point*anchor.record.range):anchor.node.getBoundingClientRect().top+scrollY+anchor.offset;
+      if(anchor.record===roadmap && (value||roadmap.linear)) {
+        let index=0;
+        roadmap.chapter.beats.forEach((phase,i)=>{if(anchor.point>=phase.at)index=i;});
+        const card=roadmap.visual.querySelector('.film-phase-sequence [data-roadmap-phase="'+index+'"]');
+        if(card)top=card.getBoundingClientRect().top+scrollY-110;
+      }
       scrollTo({top,behavior:'instant'});
     }
   }

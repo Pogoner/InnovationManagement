@@ -89,6 +89,13 @@
   .film-gate-strip time { font-size: 9px; }
   .film-gate-strip li > span { font-size: 10px; }
   .film-architecture-plan[data-plan-view="roadmap"] .film-phase-plan-note { display: none; }
+  .film-architecture-plan[data-plan-view="roadmap"] .film-phase-position { display: none; }
+  .film-architecture-plan[data-plan-view="roadmap"] .film-timeline-view { margin-top: 12px; }
+  .film-architecture-plan[data-plan-view="roadmap"] .film-plan-timeline { height: min(300px,calc(100svh - 394px)); }
+  .film-stage[data-film-step="6"]:has([data-plan-view="phase"],[data-plan-view="roadmap"]) .film-stage-bottom { right: auto; gap: 0; }
+  .film-stage[data-film-step="6"]:has([data-plan-view="phase"],[data-plan-view="roadmap"]) .film-stage-bottom > .film-local-progress,
+  .film-stage[data-film-step="6"]:has([data-plan-view="phase"],[data-plan-view="roadmap"]) .film-stage-bottom > .film-scene-cue { display: none; }
+  .film-stage[data-film-step="6"]:has([data-plan-view="phase"],[data-plan-view="roadmap"]) .film-beat-nav { margin-left: 0; }
 }
 
 /* A complete ordinary flow for reduced motion: no planning phase is only a
@@ -98,6 +105,7 @@
 .film-ready.is-reduced .film-stage[data-film-step="6"] .film-visual { max-width: 100%; width: 100%; min-height: 0; max-height: none; aspect-ratio: auto; }
 .film-architecture-plan[data-plan-view="linear"] .film-plan-header { max-width: 650px; }
 .film-architecture-plan[data-plan-view="linear"] .film-phase-position { display: none; }
+.film-stage[data-film-step="6"]:has([data-plan-view="linear"]) .film-stage-bottom { display: none; }
 .film-architecture-plan[data-plan-view="linear"] .film-phase-sequence { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px 40px; margin-top: 30px; }
 .film-phase-sequence-heading { grid-column: 1 / -1; font-size: 19px; line-height: 1.4; margin: 0; color: #c7dbde; }
 .film-phase-card.is-linear { border-top: 1px solid #a9d9d936; padding-top: 19px; }

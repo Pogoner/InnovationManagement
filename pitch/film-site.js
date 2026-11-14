@@ -53,8 +53,8 @@
     '</g>'+
     '<g class="fs-design-layer">'+
       '<path class="fs-dimension fs-trace" pathLength="1" d="M354 789 1000 775M354 781v16M1000 767v16M1023 731 1036 565M1016 731h15M1029 565h15"/>'+
-      '<path class="fs-leader" d="M714 565 745 522 830 522"/>'+
-      '<text class="fs-label" x="748" y="507">Tragwerk &amp; Verglasung</text>'+
+      '<path class="fs-leader" d="M570 565 540 522 430 522"/>'+
+      '<text class="fs-label" x="430" y="507">Tragwerk &amp; Verglasung</text>'+
       '<text class="fs-label-sub" x="490" y="822">RAUMRASTER · ANSCHLÜSSE · DETAILPLANUNG</text>'+
     '</g>'+
     '<g class="fs-build-layer">'+

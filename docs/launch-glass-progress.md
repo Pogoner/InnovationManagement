@@ -28,3 +28,7 @@ Jeden funktionsfähigen Teil unmittelbar committen und pushen. Diese Notiz bei j
 ## Meilenstein 1: Glasfassaden
 
 Beide Gebäudekomposite sind in `teil6/pavilion-glass.svg` und `teil6/lounge-glass.svg` gespeichert und in Pitch sowie eigenständiger Roadmap eingebunden. Die Glasebenen lassen die dahinterliegende Landschaft durch; Dach, Pfosten, Geschossdecke, Boden und Möblierung bleiben deckend. Herkunft und Reproduktion stehen in `teil6/asset-notes.md` und `docs/pitch-review/build-glass-assets.mjs`. SVG-Rendervergleich und JavaScript-Syntax geprüft. Prüfung in der veröffentlichten Oberfläche steht noch aus.
+
+## Meilenstein 2: Startfilm gesichert
+
+Durchgängiger NASA-Auszug (27 Sekunden) mit eigenem zuschaltbarem Sounddesign ist lokal im Projekt gespeichert: `pitch/assets/starship-launch-27s.mp4` (3,94 MB). Poster: erstes Filmbild, kein fremdes Motiv. Herkunft und Bearbeitung: `pitch/assets/launch-media.md`. Filmzeit enthält bereits die synchronisierte AAC-Spur. Controller/Bedienelemente und Browserprüfung sind noch offen.

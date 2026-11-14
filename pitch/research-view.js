@@ -11,7 +11,7 @@
   let selectedTrend = R.trends[0].id;
   const sourceLinks = ids => (ids || []).map(id => {
     const source = R.sources.find(item => item.id === id);
-    return source ? `<a href="#source-${esc(id)}">${esc(source.publisher || source.title || id)} ↗</a>` : '';
+    return source ? `<a href="#source-${esc(id)}">${esc(source.publisher || source.title || id)} <svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></a>` : '';
   }).join('');
 
   function renderAudit() {
@@ -60,7 +60,7 @@
     $('#research-source-list').innerHTML = R.sources.map(source => {
       const origin = source.provenance?.file === 'part2' ? 'Schritt 2' : source.provenance?.file === 'part3' ? 'Schritt 3' : source.checkedAt ? 'Primärquelle · geprüft' : 'Matrixquelle';
       const label = [origin, source.label].filter(Boolean).join(' · ');
-      return `<li id="source-${esc(source.id)}"><span class="source-label">${esc(label)}</span><strong>${esc(source.title)}</strong><p>${esc(source.scope || '')}</p>${source.limitations?`<p class="source-limit">${esc(source.limitations)}</p>`:''}${source.verification?`<p class="source-verification">${esc(source.verification)}</p>`:''}${/^https?:\/\//i.test(source.url || '')?`<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.publisher || 'Originalquelle')} ↗</a>`:''}</li>`;
+      return `<li id="source-${esc(source.id)}"><span class="source-label">${esc(label)}</span><strong>${esc(source.title)}</strong><p>${esc(source.scope || '')}</p>${source.limitations?`<p class="source-limit">${esc(source.limitations)}</p>`:''}${source.verification?`<p class="source-verification">${esc(source.verification)}</p>`:''}${/^https?:\/\//i.test(source.url || '')?`<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.publisher || 'Originalquelle')} <svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></a>`:''}</li>`;
     }).join('');
   }
 

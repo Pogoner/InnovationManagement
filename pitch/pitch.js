@@ -29,7 +29,7 @@
     const idea = E.ideas.find(item => item.id === id);
     if (!idea) return;
     selectedIdea = id;
-    $('#selected-idea').innerHTML = `<span class="eyebrow">IDEE ${String(id).padStart(2,'0')} · ${escape(idea.trend)}</span><h3>${escape(displayName(idea))}</h3><p>${escape(idea.d)}</p><div class="idea-scores"><span>Machbarkeit <b>${idea.m[matrixIndex]}/5</b></span><span>Originalität <b>${idea.o[matrixIndex]}/5</b></span><span><b>${escape(idea.c[matrixIndex])}</b></span></div><p class="idea-rationale">${escape(idea.rationale?.[matrixIndex === 1 ? 'team' : 'ai'] || '')}</p><div class="inline-sources">${(idea.sources || []).map((id,index)=>`<a href="#source-${escape(id)}">Beleg ${index+1} ↗</a>`).join('')}</div>`;
+    $('#selected-idea').innerHTML = `<span class="eyebrow">IDEE ${String(id).padStart(2,'0')} · ${escape(idea.trend)}</span><h3>${escape(displayName(idea))}</h3><p>${escape(idea.d)}</p><div class="idea-scores"><span>Machbarkeit <b>${idea.m[matrixIndex]}/5</b></span><span>Originalität <b>${idea.o[matrixIndex]}/5</b></span><span><b>${escape(idea.c[matrixIndex])}</b></span></div><p class="idea-rationale">${escape(idea.rationale?.[matrixIndex === 1 ? 'team' : 'ai'] || '')}</p><div class="inline-sources">${(idea.sources || []).map((id,index)=>`<a href="#source-${escape(id)}">Beleg ${index+1} <svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></a>`).join('')}</div>`;
     $$('[data-idea]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.idea) === id)));
     $$('[data-idea-group]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.ideaGroup.split(',').map(Number).includes(id))));
   }
@@ -103,7 +103,7 @@
   }
 
   function renderSources() {
-    $('#source-list').innerHTML = E.sources.map(source => `<li><p>${escape(source.fact)}</p>${source.links.map(link => /^https?:\/\//i.test(link.url || '') ? `<a href="${safeURL(link.url)}" target="_blank" rel="noopener noreferrer">${escape(link.by || 'Originalquelle')} ↗</a>` : `<p>${escape(link.by || 'Projektinterne Quelle')} (ohne externe URL)</p>`).join('')}</li>`).join('');
+    $('#source-list').innerHTML = E.sources.map(source => `<li><p>${escape(source.fact)}</p>${source.links.map(link => /^https?:\/\//i.test(link.url || '') ? `<a href="${safeURL(link.url)}" target="_blank" rel="noopener noreferrer">${escape(link.by || 'Originalquelle')} <svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></a>` : `<p>${escape(link.by || 'Projektinterne Quelle')} (ohne externe URL)</p>`).join('')}</li>`).join('');
   }
 
   // Read dimensions only when layout changes; scroll frames only update transforms.
@@ -170,10 +170,10 @@
       launchButton.innerHTML = 'Start wiederholen <span aria-hidden="true">↻</span>';
     } else if (state === 'starting') {
       status.textContent = 'Zündung. Der Moment beginnt.';
-      launchButton.innerHTML = 'Rakete starten <span aria-hidden="true">↗</span>';
+      launchButton.innerHTML = 'Rakete starten <span aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></span>';
     } else {
       status.textContent = reduced ? 'Reduzierte Bewegung: Der Abschluss bleibt als ruhiges Bild sichtbar.' : 'Der Start folgt deinem Scrollfortschritt.';
-      launchButton.innerHTML = 'Rakete starten <span aria-hidden="true">↗</span>';
+      launchButton.innerHTML = 'Rakete starten <span aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></span>';
     }
   }
   function frame(now) {

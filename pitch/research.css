@@ -265,3 +265,6 @@
   .engine-light { border-color: #999; }
   .source-archive { grid-template-columns: 1fr; }
 }
+
+/* Decorative direction marks use vectors so their shape is font-independent. */
+.pitch-page .arrow-icon { display: inline-block; width: 14px; height: 14px; flex: 0 0 14px; vertical-align: -2px; }

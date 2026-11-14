@@ -10,7 +10,9 @@
   color-scheme: dark;
 }
 .pitch-page *, .pitch-page *::before, .pitch-page *::after { box-sizing: border-box; }
-html { scroll-padding-top: 100px; }
+/* Chapter padding already clears the fixed header; a second anchor offset
+   would leave the previous chapter above every direct chapter jump. */
+html { scroll-padding-top: 0; }
 .pitch-page [hidden] { display: none !important; }
 .pitch-page button, .pitch-page a, .pitch-page summary { -webkit-tap-highlight-color: transparent; }
 .pitch-page a { color: inherit; text-decoration: none; }
@@ -29,7 +31,7 @@ html { scroll-padding-top: 100px; }
 .pitch-page h1 em, .pitch-page h2 em { color: var(--copper); font-style: normal; }
 .pitch-page p { color: var(--muted); }
 .pitch-page strong, .pitch-page b { font-weight: 550; }
-.pitch-page section[id] { scroll-margin-top: 100px; }
+.pitch-page section[id] { scroll-margin-top: 0; }
 .page-width { width: min(1140px, calc(100% - var(--gutter) * 2)); margin-inline: auto; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .skip-link { position: fixed; top: -80px; left: 24px; z-index: 100; background: var(--paper); color: var(--bg) !important; padding: 14px 24px; border-radius: 6px; }

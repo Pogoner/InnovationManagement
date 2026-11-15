@@ -69,3 +69,17 @@ In einem tatsächlichen Iframe-Viewport von 1280 × 720 wurden die drei HTML-Pha
 Variante B wurde mit ihrer eigenen Roadmap und den vier Originalfeldern geprüft. Platzhalter für unbesetzte Rollen werden ausdrücklich als „zu besetzen“ wiedergegeben. Der Rotakzent wurde live als einmaliger Farbwechsel des passenden Faktorrahmens beobachtet, der Vergleichskicker ist entzerrt.
 
 Letzte Bedienkorrektur: Ein direkter Kapitelanker beginnt am Aufbau der ersten Szene. Der neue Button „Aufbauen“ führt erst zu deren vollständigem Bild; dadurch wird die erste Methode nicht übersprungen. Auch der Sprung zum Finale gibt den Fokus gezielt an den manuellen Startbutton weiter. Abschließend werden diese zwei Wege auf dem veröffentlichten Stand geprüft.
+
+
+## Abgeschlossen · verifizierter Code-Stand
+
+**Code-Commit:** `d1b7f7ed726be4039f38f9d35f83071541786fa3`. Pages-Lauf 43699207130: completed/success, exakt für diesen Commit; HTML und `film.js` live bytegleich. Die nachfolgende Abschluss-Sicherung ändert nur dieses Protokoll und README.
+
+Die letzten Bedienprüfungen wurden auf diesem Live-Stand erfolgreich abgeschlossen:
+
+- Direkteinstieg in Kapitel 2: „Aufbauen“ führt auf Stillpunkt 0,200 und zeigt die vollständige Formel; erst das nächste Enter führt zu Raptor bei 0,480.
+- Rückwärtsnavigation: Management → 4W-Projektauftrag → letzte Roadmap-Phase; Tastaturfokus jeweils am passenden Zielbutton.
+- Ende von Kapitel 8 → Startfinale: Fokus auf „Mit Ton erleben“, Video bei 0 Sekunden angehalten; Start bleibt manuell.
+- Der vollständige Pitch wurde anschließend am Anfang geöffnet und als Live-Ergebnis bereitgestellt.
+
+Originalzahlen, Datenmodelle, A/B-Varianten, Dossiers und das bestehende immersive Finale sind erhalten. Es bestehen keine offenen Umsetzungsschritte aus diesem Auftrag. Die Prüfung umfasst Chromium-Seitenfenster und den reproduzierbaren Iframe-Prüfrahmen; keine Tests auf physischen Mobilgeräten oder in anderen Browserengines. Aktuelle Screenshots wurden im Browserlauf erfasst; ältere Repo-Bilder gelten nicht als Bildnachweis dieser Revision.

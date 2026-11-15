@@ -20,7 +20,7 @@
 
 ## Aktueller Sicherungsstand
 
-Die Regie ist dokumentiert. Umsetzung und neue Browserprüfung sind noch offen. Der vorherige Funktionsstand ist vollständig auf GitHub erhalten. Nächster Sicherungsschritt: die zusammen funktionierenden HTML-/CSS-/Controlleränderungen samt Versionsparametern.
+Umsetzung, gezielte Korrekturen und Browserabnahme sind abgeschlossen. Der zuletzt visuell geprüfte Funktionsstand ist `e4fcbc63bbfd58ec484b356e7aa6f9fa10839d8a`; Pages-Run `43693937117` ist erfolgreich. Die folgenden Abschnitte dokumentieren die einzelnen gesicherten Schritte und ihre jeweils damaligen offenen Punkte.
 
 ## Erster funktionsfähiger Zwischenstand
 
@@ -45,3 +45,29 @@ Die Regie ist dokumentiert. Umsetzung und neue Browserprüfung sind noch offen. 
 - 909 × 624: Auftakt füllt den Viewport, Header und untere Rail zurückgezogen, Scrollhinweis korrekt klein, kein horizontaler Überstand.
 - 545 × 374: reduzierte Darstellung im normalen Dokumentfluss; Film steht zunächst still. Bewusster Start mit Ton läuft bis zum tatsächlichen Schlussbild. 780px Stage trennt Masthead und Schlussaussage räumlich, Inhalte bleiben über natives Scrollen erreichbar.
 - Beim ersten Direktaufruf #start wurde in dieser sehr flachen Ansicht ein Initialisierungsfehler sichtbar: später fertig aufgebaute statische Kapitel verschoben das Sprungziel. Hash-Wiederherstellung wartet nun auf alle defer-Skripte und zwei stabile Layoutintervalle; Nutzereingaben brechen die einmalige Wiederherstellung ab. Isolierte Ablaufprüfung und Syntaxprüfung bestanden; neuer Browser-Direktaufruf wird nach Veröffentlichung geprüft.
+
+## Abschließende Abnahme
+
+Geprüfter Funktionsstand: [`e4fcbc63bbfd58ec484b356e7aa6f9fa10839d8a`](https://github.com/Pogoner/InnovationManagement/commit/e4fcbc63bbfd58ec484b356e7aa6f9fa10839d8a). Zugehörige Veröffentlichung: [Pages-Run 43693937117](https://github.com/Pogoner/InnovationManagement/actions/runs/43693937117), `completed / success`. Live-HTML und `pitch.js` waren bytegleich mit dem Checkout; die geänderten Finale-Dateien wurden bereits auf dem vorigen Funktionsstand bytegleich bestätigt.
+
+[Geprüfter Direkteinstieg](https://pogoner.github.io/InnovationManagement/pitch/?variante=A&v=e4fcbc63#start) – der Versionsparameter verhindert einen alten HTML-Cache.
+
+| Ansicht | Beobachtetes Ergebnis |
+| --- | --- |
+| 1363 × 936 | Randfüllender Auftakt, freie Zündung/Aufstieg, Schlussaussage im tatsächlichen letzten Frame; Header und Rail treten zurück. Kein horizontaler Überstand. |
+| 909 × 624 | Randfüllende Szene mit korrekt kleiner Scrollhilfe und vollständig erreichbarer Randbedienung. Untere Kapitelrail tritt während des Finales zurück. |
+| 545 × 374 | Reduzierter Modus im normalen Dokumentfluss. Frischer Direktaufruf liegt nach fertigem Aufbau exakt am Finale (Abweichung unter 1 CSS-Pixel). Kein automatisches Abspielen; bewusst gestarteter Film erreicht das Schlussbild. Kein horizontaler Überstand. |
+
+- „Mit Ton erleben“ startet vom Anfang mit `muted=false`. Der laufende Film lässt die Intro-Schrift verschwinden.
+- Abschluss bei `currentTime=26.966666`, `paused=true`, Zustand `complete`: tatsächliches letztes Filmbild, sichtbare und zugängliche Schlussaussage.
+- Aufklappbare Steuerung, Seek und Pause im Browser geprüft. Nativer Scrollschritt übernimmt den pausierten Medienfortschritt und führt ihn weiter.
+- Schlusslink führt zum Auftakt des Pitchs. Header/Rail erscheinen wieder; der Film wird auf Zeit 0 zurückgesetzt. Erneuter Einstieg zeigt „Jetzt.“ mit aktivem Startknopf und ohne hängenden Schlusszustand.
+- Screenshots von Auftakt, Aufstieg, Schluss, offener Steuerung und kompakten Ansichten im Prüflauf visuell kontrolliert. Die neuen Screenshots liegen nicht als dauerhafte Bilddateien in diesem Repository; vorhandene ältere Bilder sind kein Nachweis dieser Revision.
+
+### Prüfgrenzen
+
+Chromium-Desktop; die kompakten CSS-Größen entstanden über Browserzoom. Keine Abnahme auf physischen Mobilgeräten, Safari oder Firefox. Hochformat- und sehr breite Zuschnitte wurden anhand echter Videoframes beurteilt, nicht als zusätzliche Live-Browsergrößen. Keine erneute komplette Prüfung aller acht fachlichen Kapitel oder Fassaden: diese Revision verändert die Finale-Inszenierung und die einmalige initiale Ankerwiederherstellung. Finanzdaten, Varianten, Originalunterlagen und Gebäudegrafiken bleiben unverändert.
+
+### Fortsetzen nach einer Unterbrechung
+
+Nicht neu aufbauen. Code, Medien und Fortschritt liegen auf `main`. Zuerst den aktuellen Main-Commit und den zugehörigen Pages-Lauf bestätigen. Diese Revision ist abgeschlossen; weitere gestalterische Änderungen auf konkretes neues Feedback ausrichten.

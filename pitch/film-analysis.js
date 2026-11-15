@@ -111,7 +111,7 @@
           <g class="fa-audit-example-explanation"><text class="fa-method-note-strong" x="40" y="386">${raptor.team.benefits} statt ${raptor.ai.benefits} Nutzenpunkte.</text><text class="fa-method-note" x="40" y="426">Team: Lernen ${raptor.team.benefitBreakdown.learning} · Umwelt ${raptor.team.benefitBreakdown.environment} · Wirtschaft ${raptor.team.benefitBreakdown.economic}</text><text class="fa-method-note" x="40" y="456">KI: nur Lernnutzen als hinreichend belegt bewertet.</text><text class="fa-method-footnote" x="40" y="501">Gleiche Neuheit und Testreife · unterschiedliche Nutzenbewertung</text></g>
         </g>
         <g class="fa-audit-compare-phase" opacity="0">
-          <text class="fa-kicker" x="210" y="24">3 PROJEKTE + VERGLEICH</text><text class="fa-small" x="210" y="48">HUBE-PUNKTE</text>
+          <text class="fa-kicker" x="40" y="24">3 PROJEKTE + VERGLEICH</text><text class="fa-small" x="210" y="48">HUBE-PUNKTE</text>
           <g class="fa-audit-legend"><circle class="fa-fill-copper" cx="422" cy="18" r="4"/><text x="436" y="24">Team</text><circle class="fa-fill-ice" cx="521" cy="18" r="4"/><text x="535" y="24">KI</text></g>
           <path class="fa-audit-spine fa-trace" pathLength="1" d="M83 62V424"/>
           ${audit.map((item,index)=>{const y=92+index*96,drivers=auditFactors.filter(f=>item.team[f.key]!==item.ai[f.key]).map(f=>f.label.join(' '));return `<g class="fa-audit-row" data-audit-row="${index}">

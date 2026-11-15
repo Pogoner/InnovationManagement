@@ -49,3 +49,12 @@ Quellen- und Architekturprüfung abgeschlossen. Szenen2/4, Szenen5/7 und die vol
 Alle acht Kapitel sind verbunden: 44 Bildphasen, dazu der 4W-Projektauftrag im Hauptfluss. Zurück/Weiter und Phasenpunkte führen auf stabile Ansichten; Kapitelwechsel geben den Tastaturfokus weiter. Ein einmaliger, begrenzter Lichtakzent lenkt auf benannte Differenzen oder ausgewählte Evidenz. Alle Methodenphasen sind bei reduzierter Bewegung oder kompakter Ansicht als Lesefolge verfügbar. Die Moderationshilfe enthält den 20-Minuten-Ablauf.
 
 Originaldaten, Szenenverträge, Stillpunkte, JavaScript-Syntax und Whitespace wurden geprüft. Browserlayout und die Veröffentlichung dieses Checkpoints stehen als nächstes an; die Umsetzung ist noch nicht visuell abgenommen.
+
+
+### Browserprüfung und Feinschliff · 15.11.2026
+
+Funktionscheckpoint `f55fa3a665694193cd6536f9fb1677842d2145df` wurde erfolgreich durch Pages veröffentlicht (Lauf43697677381); HTML und beide neuen/geänderten Steuerdateien waren live bytegleich.
+
+Im Browser bei1363×936 geprüft: Hube-Formel, Raptor/Starlink-Rechnung, Gesamtvergleich, Auswahltrichter, Originalitätsdifferenz, Kriteriengewichte, Aufwandsbeiträge, IR-Brüche, Umsatzmodell, KI-Vergleich, Synthese, 5P-Mix, 4W-Zwischenhalt, Managementdiagnose/Empfehlungen/Gates und Testkarte. Die Weiter-Steuerung funktioniert per Enter auch über Kapitelgrenzen. Bewegung reduzieren erhält die gewählte Testkarte und zeigt alle36 Methodenbilder in sieben Lesefolgen; Kapitel6 behält seine acht bestehenden Planungsphasen. Bei909×624 und545×374 werden diese Methoden ebenfalls linear dargestellt, ohne Seitenüberbreite; die KI-Tabellenköpfe bleiben ungeclippt. Diese schmalen Größen wurden mit Browserzoom geprüft, nicht als physische Mobilgeräte.
+
+Aus der Prüfung: Vergleichskicker und LEC-Achsenbeschriftung entzerrt, Auswahltrichter-Abstand vergrößert, Rotpuls direkt auf den benannten Differenzrahmen gelegt, Hintergrund in Analysekapiteln gedämpft. Ergänzte Höhenregeln für5/7 verdichten Abstände; unter680px Fensterhöhe hat vollständige Lesbarkeit Vorrang. Neue Höhenregeln werden im nächsten Checkpoint kontrolliert.

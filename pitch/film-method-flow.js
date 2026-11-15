@@ -24,7 +24,7 @@
       ${label('VON DER SUCHE ZUR VERTIEFUNG',24,30,'fm-kicker')}
       <g data-flow-reveal="0">${label('19',60,103,'fm-big')}${label('Trendideen',62,133,'fm-copy')}<path class="fm-join" pathLength="1" d="M137 89H241m-8-7 8 7-8 7" data-flow-trace/>${label('8',274,103,'fm-big')}${label('Favoriten',274,133,'fm-copy')}</g>
       <g data-flow-reveal=".12">${label('+ 4',434,103,'fm-big fm-ice')}${label('Open Innovation',434,133,'fm-copy')}${label('separat entstanden',434,157,'fm-note')}<path class="fm-join" pathLength="1" d="M295 150V191H350V219M493 178V191H350" data-flow-trace/></g>
-      <g data-flow-reveal=".24"><rect class="fm-total-box" x="244" y="222" width="368" height="92" rx="12"/>${label('12',270,281,'fm-big')}${lines(['Ideen in der','Now/How/Wow-Matrix'],341,260,'fm-copy',24)}<path class="fm-join" pathLength="1" d="M350 317V348m-7-8 7 8 7-8" data-flow-trace/></g>
+      <g data-flow-reveal=".24"><rect class="fm-total-box" x="244" y="222" width="368" height="92" rx="12"/>${label('12',270,281,'fm-big')}${lines(['Ideen in der','Now/How/Wow-Matrix'],356,260,'fm-copy',24)}<path class="fm-join" pathLength="1" d="M350 317V348m-7-8 7 8 7-8" data-flow-trace/></g>
       <g data-flow-reveal=".35">${label('3',278,398,'fm-big')}${lines(['Business Cases','für die Vertiefung'],340,377,'fm-copy',24)}</g>
       <g data-flow-reveal=".46"><path class="fm-rule" d="M24 438H612"/>${label('DIE VORAUSWAHL FRAGT',24,468,'fm-kicker')}${label('Problem belegt? · Wer zahlt? · SpaceX-Beitrag?',24,499,'fm-copy')}</g>`);
   }
@@ -38,7 +38,7 @@
       ${label('EIN PUNKT. EINE ANDERE KATEGORIE.',24,30,'fm-kicker')}
       ${label('08 / Launch Engineering Cloud',24,68,'fm-heading')}
       <g data-flow-reveal="0"><rect class="fm-quadrant" x="371.5" y="80" width="166.5" height="115.5"/><path class="fm-grid" d="M94 80V388H538M94 195.5H538M371.5 80V388"/>
-      ${label('WOW',496,111,'fm-kicker','middle')}${label('NOW',496,368,'fm-kicker','middle')}${label('ORIGINALITÄT',94,105,'fm-note')}${label('MACHBARKEIT',538,423,'fm-note','end')}
+      ${label('WOW',496,111,'fm-kicker','middle')}${label('NOW',496,368,'fm-kicker','middle')}${label('ORIGINALITÄT',94,105,'fm-note')}${label('MACHBARKEIT',538,438,'fm-note','end')}
       ${[1,2,3,4,5].map(n=>`${label(n,78,y(n)+5,'fm-tick','end')}${label(n,x(n),414,'fm-tick','middle')}`).join('')}</g>
       <g data-flow-reveal=".10"><circle class="fm-team-dot" cx="${x(team.feasibility)}" cy="${y(team.originality)}" r="12"/>${label(`Team · ${team.category}`,x(team.feasibility)-23,y(team.originality)+35,'fm-copy','end')}</g>
       <g class="method-attention" data-flow-reveal=".23"><path class="fm-difference-line" pathLength="1" d="M${x(team.feasibility)} ${y(team.originality)-15}V${y(ai.originality)+15}m-5 6 5-6 5 6" data-flow-trace/><circle class="fm-ai-dot" cx="${x(ai.feasibility)}" cy="${y(ai.originality)}" r="12"/>${label(`KI · ${ai.category}`,x(ai.feasibility)-24,y(ai.originality)-12,'fm-copy','end')}${label('3 → 4',x(ai.feasibility)+22,(y(ai.originality)+y(team.originality))/2+4,'fm-difference-label')}</g>
@@ -77,7 +77,7 @@
 
   window.PitchPlanningMethod={markup(variant){
     const data=window.PitchEvidence.variants[variant].data;
-    const fields=[['Was?','Das Vorhaben',data.w4.was[0]],['Wer?','Die Verantwortung',data.w4.wer[1]],['Wann?','Termine und Freigabepunkte',data.w4.wann[1]],['Wie?','Das Vorgehen',data.w4.wie[0]]];
+    const fields=[['Was?','Das Vorhaben',data.w4.was[0]],['Wer?','Die Verantwortung',data.w4.wer[1].replace(/\[Name\]/g,'(zu besetzen)')],['Wann?','Termine und Freigabepunkte',data.w4.wann[1]],['Wie?','Das Vorgehen',data.w4.wie[0]]];
     return `<div class="fm-planning-intro"><p class="eyebrow">DIE 4W-METHODE / VARIANTE ${esc(variant)}</p><h3 id="planning-method-title">Aus einer Idee wird<br>ein <em>Projektauftrag.</em></h3><p>Vier Fragen verknüpfen Leistungsumfang, Verantwortung, Termine und Vorgehen. Daraus entstehen die parallelen Teilprojekte der Roadmap.</p></div><div class="fm-planning-fields">${fields.map((field,index)=>`<section data-planning-reveal="${index}"><span class="fm-planning-question">${field[0]}</span><h4>${field[1]}</h4><p>${esc(field[2])}</p></section>`).join('')}</div><div class="film-present-controls fm-planning-controls"><button type="button" data-film-chapter="6" data-film-planning="previous">Zurück zur Roadmap</button><button type="button" data-film-chapter="6" data-film-planning="next">Weiter zum Management <span aria-hidden="true">→</span></button></div><p class="fm-planning-note">Auszug aus der Teil-6-Planung. Rollen, Partner, Termine und Freigaben beschreiben den vorgeschlagenen Projektauftrag.</p>`;
   }};
 })();

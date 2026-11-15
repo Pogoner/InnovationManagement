@@ -133,11 +133,15 @@
     const roots=Array.from(record.visual.querySelectorAll(beat.view));
     const markers=roots.flatMap(root=>[...(root.matches('.method-attention')?[root]:[]),...root.querySelectorAll('.method-attention')]);
     record.attentionBeat=record.beat;
-    record.attention=markers.map(node=>node.animate([
-      {filter:'drop-shadow(0 0 0 transparent)'},
-      {filter:'drop-shadow(0 0 9px '+color+') brightness(1.35)',offset:.24},
-      {filter:'drop-shadow(0 0 0 transparent)'}
-    ],{duration:1050,easing:'ease-out'}));
+    record.attention=markers.map(node=>{
+      const frame=node.matches('rect')&&beat.tone==='difference';
+      const style=frame?getComputedStyle(node):null;
+      const rest={filter:'drop-shadow(0 0 0 transparent)',...(frame?{stroke:style.stroke,fill:style.fill}:{})};
+      return node.animate([rest,
+        {filter:'drop-shadow(0 0 10px '+color+') brightness(1.3)',...(frame?{stroke:color,fill:'#f19c9428'}:{}),offset:.24},
+        rest
+      ],{duration:1050,easing:'ease-out'});
+    });
   }
 
   function measure() {
@@ -157,7 +161,7 @@
     camera.style.top=cameraTop.toFixed(2)+'px';
     const y=scrollY;
     records.forEach(record=>{
-      record.methodLinear=methodSteps.has(record.chapter.step)&&(width<=760||(width<=1100&&height<760));
+      record.methodLinear=methodSteps.has(record.chapter.step)&&(width<=760||height<680||(width<=1100&&height<760));
       record.useStatic=methodSteps.has(record.chapter.step)&&(reduced||record.methodLinear);
       record.section.classList.toggle('is-method-linear',record.methodLinear);
       if (record.useStatic && !record.staticScene && window.PitchStatic) {

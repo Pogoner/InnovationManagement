@@ -101,6 +101,16 @@ Die Zeitangaben sind Startwerte, keine Wartezeiten vor der Bedienung. Vorhandene
 - Atmosphärische Animation pausiert außerhalb des sichtbaren Bereichs und bei verborgenem Tab. Canvas-Auflösung und Bildrate begrenzen. Die Roadmap verwendet für Atmosphäre maximal 30 fps und begrenzte Zeichenflächen; neue Effekte dürfen diese Kosten nicht unbemerkt vervielfachen.
 - Dauerhaft bewegte Texte, hektische Partikel, dauernd pulsierende Aktionen und voneinander unabhängige Einfluganimationen passen nicht zur ruhigen Bildsprache. Kein Autoplay-Ton.
 
+### Studienpitch · Methoden und 20-Minuten-Regie
+
+Der Hauptpitch verbindet Produktidee und Arbeitsweise in 44 stabilen Bildphasen über acht Kapitel. Nach der Roadmap folgt ein zusätzlicher 4W-Zwischenhalt zu Was, Wer, Wann und Wie. Der Zeitplan umfasst 19:15 Minuten einschließlich Finale und 0:45 Minuten Reserve; er ist eine Moderationshilfe, keine automatische Vortragsuhr. Methoden entwickeln sich von Kriterien und Annahmen über Rechnung oder Vergleich zur Einordnung des Ergebnisses.
+
+Zurück/Weiter und die Phasenpunkte führen auf vollständig aufgebaute Bilder. Native Scroll- und Tastaturbedienung bleiben erhalten. Bei reduzierter Bewegung oder kompaktem Viewport erscheinen alle Methoden als vollständige statische Folge im Seitenfluss; die Roadmap behält ihre acht lesbaren Planungsphasen. Die automatische Ersatzansicht verändert die gespeicherte Bewegungseinstellung nicht.
+
+Ein kurzer, einmaliger Akzent pro Phasenaufruf darf ein konkret benanntes Element hervorheben: gedämpftes Rot steht für eine beschriftete Differenz, Kupfer für Auswahl und Eisblau für Evidenz. Rot behauptet keinen Fehler. Danach bleibt die Darstellung ruhig; kein Dauerblinken. Die bestehende Zuordnung Team/Kupfer und KI/Eisblau bleibt davon unabhängig lesbar. Bei reduzierter Bewegung entfällt der Akzent.
+
+Originalwerte und dokumentierte Team-/KI-Urteile bleiben von redaktionellen Ableitungen und vorgeschlagenen Tests unterscheidbar. Fehlende Team-Begründungen werden nicht erfunden; eine vorgeschlagene Testkarte ist kein durchgeführter Nachweis. Die konkrete Regie steht in der [Moderationshilfe](docs/pitch-presenter-guide.md), der Umsetzungs- und Prüfstand im [Fortschrittsdokument](docs/pitch-review/methods-flow-progress.md).
+
 ## 7. Bedienbarkeit, schmale Ansichten und reduzierte Bewegung
 
 - Auf schmalen oder flachen Ansichten neu komponieren: Prioritäten, Bildausschnitt, Text und Bedienelemente anpassen. Keine verkleinerte Desktop-Gesamtfläche und keine abgeschnittenen Pflichtinformationen.

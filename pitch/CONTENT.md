@@ -234,7 +234,7 @@ Bildprompt stehen in `assets/README.md`.
 
 ### Reduzierte Bewegung und schmale Ansichten
 
-Bei reduzierter Bewegung erscheinen die Kerngrafiken der Teile 3, 4 und 5 als
+Bei reduzierter Bewegung erscheinen alle Methodenphasen der Teile 1–5, 7 und 8 als
 vollständige, ruhige Bildfolge im normalen Seitenfluss. Sie benötigen weder
 Phasenauswahl noch ein geöffnetes Dossier. Dichte Diagramme erhalten bei schmalen
 Fenstern eine eigene, per Tastatur bedienbare horizontale Scrollfläche; die Seite
@@ -248,3 +248,15 @@ stimmen mit den animierten Fassungen überein.
 Die acht Bildphasen in Kapitel 6 werden in `roadmap-phases.js` definiert und für beide Varianten aus den unveränderten Aktivitäten in `teil6/data.js` mit konkreten Terminen verbunden. Die räumlichen Ebenen in `film-site.js` folgen denselben Phasengrenzen. Die Auswahl dreier schematischer Standorte, der schematische Prüfbereich und die Servicewege sind illustrative Planungshilfen; sie stellen keine vermessenen Grundstücke oder freigegebenen Schutzabstände dar. Das Hintergrundmotiv ist eine gekennzeichnete Konzeptvisualisierung.
 
 Die Arbeitspakete bleiben parallel: Die acht Bildphasen ordnen die Erklärung, keine acht streng aufeinanderfolgenden Kalenderabschnitte. Variante B zeigt die externen KSC-Piloten vom 30.06.2027 bis 30.06.2028 vor der geplanten Lounge-Eröffnung am 01.10.2028. Die letzte Phase enthält weiterhin den vollständigen Maßnahmenplan mit sechs Spuren, allen vier Pilotterminen und fünf datierten Gates. In reduzierter bzw. schmaler Ansicht stehen alle acht Planungsphasen im normalen Lesefluss.
+
+## 20-Minuten-Regie · Methoden im Hauptfluss
+
+Die Erweiterung vom 15.11.2026 umfasst **44 stabile Bildphasen**: 4 / 4 / 8 / 5 / 6 / 8 / 5 / 4 in den Kapiteln 1–8. Der zusätzliche **4W-Zwischenhalt nach der Roadmap** erklärt Was, Wer, Wann und Wie. Der Sprechplan sieht 18:30 Minuten für die acht Kapitel, 0:45 Minuten für Abschluss und Startfilm sowie 0:45 Minuten Reserve vor. Die Seite übernimmt keine automatische Zeitsteuerung des Vortrags.
+
+Der Hauptfluss zeigt jetzt den Untersuchungsweg, die Hube-Faktoren, konkrete Team-/KI-Abweichungen, die Auswahl 19 → 8 plus 4 → 12 → 3, Kriterien und Gewichte, die IR-Rechnung und das Jahresmodell. Hinzu kommen der Vergleich der drei KI-Marketingentwürfe samt Synthese, Managementdiagnose und Gatefragen sowie eine vorgeschlagene Testkarte. Vollständige Originaltabellen, Quellen und Dossiers bleiben erreichbar.
+
+**Zurück/Weiter, Phasenpunkte und natives Scrollen** erschließen dieselbe Reihenfolge; die expliziten Phasenschritte landen auf vollständig aufgebauten Bildern. Alle Methodenphasen stehen bei reduzierter Bewegung oder kompaktem Viewport statisch im Lesefluss: für die Methodenkapitel bis 760 px Breite sowie bis 1100 px Breite bei weniger als 760 px Höhe. Die Roadmap ergänzt ihre eigene lineare Planungsfolge. Ein einmaliger kurzer Akzent kann die benannte Differenz in Rot, eine Auswahl in Kupfer oder Evidenz in Eisblau hervorheben; anschließend bleibt das Bild ruhig. Kein Dauerblinken und keine Gleichsetzung von Rot mit einem Fehlerurteil.
+
+Originaldaten und redaktionelle Arbeit bleiben getrennt. Gleiche Nutzensummen bedeuten keine gleichen Einzelurteile; fehlende Team-Begründungen werden nicht erfunden. Die ausgearbeiteten Stufenmodell-Zwischenschritte, Methodenevaluation und vorgeschlagene Testkarte sind gekennzeichnete redaktionelle Ergänzungen. Die Testkarte dokumentiert keine bereits durchgeführte Erhebung und keine feststehende Erfolgsschwelle.
+
+Der Ablauf mit Sprechhinweisen steht in der [Moderationshilfe für 20 Minuten](../docs/pitch-presenter-guide.md). Inhaltliche Regie, Sicherungen und tatsächlicher Prüfstand stehen im [Fortschrittsdokument](../docs/pitch-review/methods-flow-progress.md).

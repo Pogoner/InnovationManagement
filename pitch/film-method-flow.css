@@ -26,6 +26,9 @@
 .film-static-art .fm-flow { height: 100%; }
 
 /* Each settled picture is a speaking position; progression remains deliberate. */
+.film-background::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg,transparent 22%,#060b1038 48%,#060b1070 90%); opacity: 0; transition: opacity .5s ease; }
+.film-background:is([data-scene="2"],[data-scene="3"],[data-scene="4"],[data-scene="7"],[data-scene="8"])::after { opacity: 1; }
+.is-reduced .film-background::after { transition: none; }
 .film-stage-bottom { display: grid; grid-template-columns: 64px minmax(80px,1fr) auto auto; column-gap: 18px; }
 .film-local-progress { width: 64px; }
 .film-stage-bottom .film-scene-cue { line-height: 1.5; margin: 0; }

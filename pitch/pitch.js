@@ -321,12 +321,48 @@
     resizeObserver = new ResizeObserver(queueMeasure);
     resizeObserver.observe(document.querySelector('main'));
   }
-  // Rendering all evidence precedes restoration of a shared chapter link.
-  if (location.hash) requestAnimationFrame(() => {
-    const target = document.getElementById(location.hash.slice(1));
-    if (target) revealTarget(target);
-    const scrollTarget = target?.id === 'auftakt' ? target.closest('.film-prologue') || target : target;
-    scrollTarget?.scrollIntoView({behavior:'instant',block:'start'});
-    queueMeasure();
-  });
+  // Later defer scripts mount the reels and reduced-motion sequences. Restore
+  // a shared link only after that work and its first layout passes have settled.
+  if (location.hash) {
+    const initialHash = location.hash;
+    const inputEvents = ['pointerdown','wheel','touchstart','keydown','hashchange','popstate'];
+    let restoreFrame = 0, cancelled = false, attempts = 0, stable = 0, lastTop = NaN;
+    function cancelRestore() {
+      cancelled = true;
+      if (restoreFrame) cancelAnimationFrame(restoreFrame);
+      restoreFrame = 0;
+      document.removeEventListener('DOMContentLoaded', startRestore);
+      inputEvents.forEach(name => removeEventListener(name, cancelRestore, true));
+    }
+    function restoreWhenSettled() {
+      restoreFrame = 0;
+      if (cancelled || destroyed || location.hash !== initialHash) { cancelRestore(); return; }
+      const target = document.getElementById(initialHash.slice(1));
+      if (!target) { cancelRestore(); return; }
+      revealTarget(target);
+      measure();
+      const scrollTarget = target.id === 'auftakt' ? target.closest('.film-prologue') || target : target;
+      const top = scrollTarget.getBoundingClientRect().top + scrollY;
+      stable = Math.abs(top - lastTop) < .5 ? stable + 1 : 0;
+      lastTop = top;
+      // Two stable intervals include the scene renderer's first update. The
+      // bounded check never becomes a later scroll correction during reading.
+      if (stable >= 2 || ++attempts >= 12) {
+        scrollTarget.scrollIntoView({behavior:'instant',block:'start'});
+        queueMeasure();
+        cancelRestore();
+      } else {
+        queueFrame();
+        restoreFrame = requestAnimationFrame(restoreWhenSettled);
+      }
+    }
+    function startRestore() {
+      if (!cancelled) restoreFrame = requestAnimationFrame(restoreWhenSettled);
+    }
+    inputEvents.forEach(name => addEventListener(name, cancelRestore, {capture:true,passive:true}));
+    // During defer execution readyState may already be "interactive", while
+    // subsequent defer scripts still have not run. DOMContentLoaded waits for them.
+    if (document.readyState === 'complete') startRestore();
+    else document.addEventListener('DOMContentLoaded', startRestore, {once:true});
+  }
 })();

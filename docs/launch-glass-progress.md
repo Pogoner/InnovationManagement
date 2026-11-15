@@ -48,7 +48,7 @@ Durchgängiger NASA-Auszug (27 Sekunden) mit eigenem zuschaltbarem Sounddesign i
 
 Der veraltete `film-site.js`-Cacheverweis der eigenständigen Roadmap ist korrigiert. Syntax und eine isolierte Zustandsprüfung des Controllers sind bestanden; die tatsächliche Browser- und Live-Prüfung dieses Meilensteins folgt im nächsten Schritt.
 
-## Abschluss: veröffentlicht und im Browser geprüft
+## Abschluss der ersten Fassung: veröffentlicht und im Browser geprüft
 
 - Funktionsstand: `2be4001a36dae97c736b5fade6287c1937c9b053`. Pages-Lauf `43647907299` ist erfolgreich; die ausgelieferten HTML-/JS-/CSS-Dateien waren bytegleich mit dem Commit.
 - Im Live-Browser geprüft: echte MP4-Wiedergabe, Ende bei 26,9667 s mit tatsächlichem Schlussbild, Wiederholung ab Anfang, Pause, Seek über die native Zeitleiste und opt-in Ton. Nach Pause führte ein kleiner Scrollschritt von 3,49 s auf 5,09 s, ohne zum bisherigen Scrollzeitpunkt zurückzuspringen. Rückwärtsscrollen führt die Aufnahme wieder zurück.
@@ -60,8 +60,16 @@ Der veraltete `film-site.js`-Cacheverweis der eigenständigen Roadmap ist korrig
 
 ### Bei einer erneuten Unterbrechung
 
-Nicht von vorn beginnen. Film, Poster, Glas-SVGs, Controller und Bedienelemente liegen auf `main`. Den neuesten Commit und seinen Pages-Lauf lesen; nur konkret offene neue Befunde weiterbearbeiten. Der Auftrag ist funktional abgeschlossen.
+Nicht von vorn beginnen. Film, Poster, Glas-SVGs, Controller und Bedienelemente liegen auf `main`. Den neuesten Commit und seinen Pages-Lauf lesen; nur konkret offene neue Befunde weiterbearbeiten. Der erste Funktionsauftrag ist abgeschlossen. Für die anschließende gestalterische Revision gelten der folgende Abschnitt und das dort verlinkte Revisionsprotokoll.
 
 ## Gestalterische Revision vom 15. November 2026
 
-Der Nutzer wünscht eine stärkere Integration des Starts in die Website. Der bisherige Funktionsabschluss bleibt dokumentiert; die neue Inszenierung ist ein zusätzlicher Auftrag. Aktueller Plan und Sicherungsstand: [immersive-finale-progress.md](pitch-review/immersive-finale-progress.md).
+Der Nutzer empfand den funktionierenden Startfilm als eingebetteten Player und wünschte einen überzeugenderen Höhepunkt der Website. Die Nachbesserung verwendet dieselbe durchgängige Aufnahme in einem randfüllenden Bildraum ohne Playerrahmen und gliedert das Finale in drei Phasen:
+
+1. **Erwartung:** „Jetzt.“ bündelt den Abschluss der acht Kapitel; „Mit Ton erleben“ startet Bild und Sounddesign bewusst gemeinsam.
+2. **Ereignis:** Große Schrift, Kopfzeile und Kapitelleiste treten zurück. Zündung und Aufstieg bleiben ohne zusätzlichen Raketenzoom aus derselben Aufnahme sichtbar.
+3. **Nachklang:** Die RocketLight-Schlussaussage erscheint über dem tatsächlichen letzten Filmbild.
+
+Pause und Ton bleiben am Bildrand erreichbar; Zeitregler, Zeitcode und Wiederholung liegen im aufklappbaren Menü „Steuerung“. Navigation kehrt außerhalb des Finales zurück und bleibt per Tastatur erreichbar. Nativer Scrollfluss und gemeinsame Medienzeit bleiben erhalten. Reduzierte Bewegung hält zunächst ein ruhiges Bild; kurze Fenster verwenden den normalen Dokumentfluss. Beim Verlassen nach oben wird der Film für einen erneuten Pitchdurchlauf zurückgesetzt.
+
+Gesicherte Funktionsstände: [`90d4d707`](https://github.com/Pogoner/InnovationManagement/commit/90d4d7077368f9c61c988206c7176e86ba380daa) und die Bedienungs-/Rückkehrkorrekturen in [`78228de9`](https://github.com/Pogoner/InnovationManagement/commit/78228de9ebee8aed11559d80d1e40190eeea6cb8). Die neue Browserabnahme ist noch nicht abgeschlossen; die oben dokumentierten Prüfungen gelten für die erste Fassung. Aktuelle Befunde, offene Prüfungen und Veröffentlichungsnachweise stehen in [immersive-finale-progress.md](pitch-review/immersive-finale-progress.md).

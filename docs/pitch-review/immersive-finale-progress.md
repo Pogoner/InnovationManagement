@@ -38,3 +38,10 @@ Die Regie ist dokumentiert. Umsetzung und neue Browserprüfung sind noch offen. 
 - Kurze reduzierte Fenster erhalten mehr natürliche Dokumenthöhe, damit Abschluss und Masthead sich nicht überschneiden.
 - Beim Verlassen des Finales nach oben wird der Film zurückgesetzt; ein erneuter Pitchdurchlauf beginnt wieder am Anfang. Die Scrollanker innerhalb der Stage bleiben erhalten. Gezielte Zustandsproben und JS-Syntax bestanden.
 - Browserprüfung des schmalen/kurzen und reduzierten Modus sowie der erneuten Einfahrt folgt auf diesem korrigierten Stand.
+
+## Direkteinstieg bei sehr flachen Fenstern
+
+- Korrigierter Stand `78228de9ebee8aed11559d80d1e40190eeea6cb8` über Pages-Run `43693385812` erfolgreich und bytegleich ausgeliefert.
+- 909 × 624: Auftakt füllt den Viewport, Header und untere Rail zurückgezogen, Scrollhinweis korrekt klein, kein horizontaler Überstand.
+- 545 × 374: reduzierte Darstellung im normalen Dokumentfluss; Film steht zunächst still. Bewusster Start mit Ton läuft bis zum tatsächlichen Schlussbild. 780px Stage trennt Masthead und Schlussaussage räumlich, Inhalte bleiben über natives Scrollen erreichbar.
+- Beim ersten Direktaufruf #start wurde in dieser sehr flachen Ansicht ein Initialisierungsfehler sichtbar: später fertig aufgebaute statische Kapitel verschoben das Sprungziel. Hash-Wiederherstellung wartet nun auf alle defer-Skripte und zwei stabile Layoutintervalle; Nutzereingaben brechen die einmalige Wiederherstellung ab. Isolierte Ablaufprüfung und Syntaxprüfung bestanden; neuer Browser-Direktaufruf wird nach Veröffentlichung geprüft.

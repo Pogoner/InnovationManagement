@@ -29,3 +29,12 @@ Die Regie ist dokumentiert. Umsetzung und neue Browserprüfung sind noch offen. 
 - Zurückhaltende Bedienung am Bildrand; Zeitregler und Wiederholung im aufklappbaren Menü „Steuerung“. Nativer Scrollfluss, Filmzeit und Reduced-Motion-Verhalten bleiben erhalten.
 - Fester Bildausschnitt 52 % / 25 % wurde anhand echter Filmframes für Desktop, Hochformat und breite Fenster gewählt. Extrem breite Fenster erhalten das gesamte Fahrzeug mit seitlich auslaufendem Bild.
 - JavaScript-Syntax und Patch-Whitespace geprüft. Browserprüfung und endgültige Veröffentlichungskontrolle stehen für diesen Zwischenstand noch aus.
+
+## Browserdurchlauf und gezielte Korrekturen
+
+- Erster Funktionsstand `90d4d7077368f9c61c988206c7176e86ba380daa` über Pages-Run `43693119647` erfolgreich ausgeliefert; HTML und die drei geänderten CSS/JS-Dateien bytegleich live bestätigt.
+- Chromium bei 1363 × 936: randfüllende Bühne ohne horizontalen Überstand, zurücktretende Navigation, bewusster Start mit Ton, laufender Aufstieg und tatsächliches letztes Bild mit Schlussaussage beobachtet. Zeitregler im aufklappbaren Menü pausiert und wechselt das Filmbild.
+- Feinkorrekturen: Scrollhinweis erhält eindeutig seine kleine Schrift; Pfeile als konsistente SVGs; Mausklick erzwingt keine dauerhaft helle Steuerung.
+- Kurze reduzierte Fenster erhalten mehr natürliche Dokumenthöhe, damit Abschluss und Masthead sich nicht überschneiden.
+- Beim Verlassen des Finales nach oben wird der Film zurückgesetzt; ein erneuter Pitchdurchlauf beginnt wieder am Anfang. Die Scrollanker innerhalb der Stage bleiben erhalten. Gezielte Zustandsproben und JS-Syntax bestanden.
+- Browserprüfung des schmalen/kurzen und reduzierten Modus sowie der erneuten Einfahrt folgt auf diesem korrigierten Stand.

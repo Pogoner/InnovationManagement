@@ -184,12 +184,20 @@
           const nextRaw = clamp(value);
           const nextReduced = Boolean(context.reduced);
           const scrollChanged = previousRaw !== null && Math.abs(nextRaw - previousRaw) > .00001;
+          const wasVisible = visible;
           visible = context.visible ?? visible;
           near = context.near ?? visible;
           immersive = Boolean(context.immersive);
           entry = clamp(context.entry);
           if (near) load();
           if (mode === 'playing' && (document.hidden || !visible || (nextReduced && !reduced))) hold();
+          // Returning to the pitch starts a fresh finale on the next visit.
+          // Keep the current anchor for pauses and scrolling within the stage.
+          if (wasVisible && !visible && nextRaw === 0) {
+            desired = 0;
+            anchor = null;
+            mode = 'scroll';
+          }
           if (scrollChanged && !nextReduced) {
             if (mode === 'playing') hold();
             mode = 'scroll';

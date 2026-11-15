@@ -139,3 +139,47 @@
   .fa-selection .fa-kicker, .fa-finance .fa-kicker { font-size: 16px; letter-spacing: 1px; }
   .fa-selection .fa-axis-label, .fa-cases-phase .fa-axis-label { font-size: 16px; }
 }
+
+/* Method scenes for Parts 2 and 4. Fixed evidence values appear in causal order;
+   the shared chapter controller owns any one-time .method-attention emphasis. */
+.fa-method-kicker { font-size: 14px; letter-spacing: 1.15px; fill: #a8b5bb !important; }
+.fa-method-heading { font-size: 31px; letter-spacing: -.8px; }
+.fa-method-group-label { font-size: 16px; letter-spacing: 1.4px; fill: #a8b5bb !important; }
+.fa-method-note { font-size: 19px; fill: #c8d3d5 !important; }
+.fa-method-note-strong { font-size: 25px; letter-spacing: -.5px; fill: #eff3ed !important; }
+.fa-method-footnote { font-size: 14px; fill: #a8b5bb !important; }
+.fa-method-link { fill: none; stroke: #a9d9d986; stroke-width: 1.3; stroke-linecap: round; }
+.fa-method-rule { fill: none; stroke: #a9d9d93b; stroke-width: 1; }
+.fa-method-difference { fill: #efbd9108; stroke: #efbd9180; stroke-width: 1.4; }
+.fa-factor-card { fill: #08121bca; stroke: #a9d9d956; stroke-width: 1.1; }
+.fa-formula-label { font-size: 21px; letter-spacing: -.35px; }
+.fa-formula-detail { font-size: 12px; fill: #a8b5bb !important; }
+.fa-formula-times { font-size: 25px; fill: #efbd91 !important; }
+.fa-factor-label { font-size: 16px; fill: #a8b5bb !important; }
+.fa-factor-perspective { font-size: 18px; letter-spacing: 1.4px; }
+.fa-factor-number { font-size: 38px; letter-spacing: -1.3px; }
+.fa-factor-score { font-size: 44px; letter-spacing: -1.7px; }
+.fa-factor-operator { font-size: 24px; fill: #a8b5bb !important; }
+.fa-factor-team .fa-factor-perspective,.fa-factor-team .fa-factor-number,.fa-factor-team .fa-factor-score { fill: #efbd91; }
+.fa-factor-ai .fa-factor-perspective,.fa-factor-ai .fa-factor-number,.fa-factor-ai .fa-factor-score { fill: #a9d9d9; }
+.fa-factor-difference { font-size: 14px; fill: #efbd91 !important; }
+.fa-audit-driver { font-size: 13.5px; fill: #b8c6ca !important; }
+.fa-weight-heading { font-size: 16px; letter-spacing: 1.2px; }
+.fa-weight-name { font-size: 18px; fill: #c8d3d5 !important; }
+.fa-weight-value { font-size: 21px; }
+.fa-weight-example-value { font-size: 27px; letter-spacing: -.5px; fill: #efbd91 !important; }
+.fa-weight-sums .fa-method-note { font-size: 16px; }
+.fa-effort-table-head { font-size: 15px; fill: #a8b5bb !important; }
+.fa-effort-criterion-name { font-size: 17px; }
+.fa-effort-weight { font-size: 16px; fill: #a8b5bb !important; }
+.fa-effort-contribution { font-size: 17px; }
+.fa-effort-delta { font-size: 18px; }
+.fa-effort-total-label,.fa-effort-total-value { font-size: 25px; letter-spacing: -.4px; }
+.fa-effort-explanation .fa-method-note-strong { font-size: 24px; }
+.fa-score-factor { font-size: 52px; letter-spacing: -1.8px; }
+.fa-score-fraction { fill: none; stroke: #a9d9d980; stroke-width: 1.4; }
+.fa-score-equals { font-size: 28px; fill: #a8b5bb !important; }
+.fa-score-equation .fa-ir { font-size: 78px; letter-spacing: -4px; }
+.fa-score-interpretation-copy { font-size: 22px; letter-spacing: -.35px; }
+.fa-revenue-input { font-size: 12.5px; fill: #a8b5bb !important; }
+.fa-finance .fa-revenue-phase .fa-footnote { font-size: 14px; }

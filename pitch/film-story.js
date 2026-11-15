@@ -1,250 +1,409 @@
-/* Editorial beats share the evidence and the scene’s continuous scroll value. */
+/* Source-backed narrative for a 20-minute study pitch.
+ * at, still and view keep spoken beats, graphics and the reading flow together. */
 window.PitchFilmStory = [
   {
     "step": 1,
     "label": "Das Unternehmen",
     "detail": "Geschäftsfelder, Kennzahlen & Quellen",
-    "length": 2.4,
+    "length": 4.6,
     "beats": [
       {
         "at": 0,
         "tag": "EINE MISSION",
         "title": "Große Mission.<br><em>Neue Möglichkeiten.</em>",
         "copy": "SpaceX erweitert den Zugang zum All. Wir fragen, welches neue Geschäft daraus entstehen kann.",
-        "cue": "Die Mission wird zum System"
+        "cue": "Die Mission wird zum System",
+        "still": 0.2,
+        "view": ".fa-mission"
       },
       {
-        "at": 0.42,
+        "at": 0.22,
         "tag": "DREI GESCHÄFTSFELDER",
         "title": "Raumfahrt.<br>Verbindung.<br><em>Intelligenz.</em>",
         "copy": "Space, Connectivity und AI verbinden physische und digitale Infrastruktur. Hier beginnt unser Suchfeld.",
-        "cue": "Verbindungen werden sichtbar"
+        "cue": "Verbindungen werden sichtbar",
+        "still": 0.42,
+        "view": ".fa-mission"
       },
       {
-        "at": 0.78,
+        "at": 0.44,
         "tag": "UNSER AUSGANGSPUNKT",
         "title": "Technologie schafft<br><em>Möglichkeiten.</em>",
         "copy": "Die Mission gibt die Richtung vor. Im nächsten Schritt machen wir das Innovationspotenzial vergleichbar.",
-        "cue": "Von der Mission zum Potenzial"
+        "cue": "Von der Mission zum Potenzial",
+        "still": 0.65,
+        "view": ".fa-mission"
+      },
+      {
+        "at": 0.68,
+        "still": 1,
+        "view": "[data-flow-panel=\"workflow\"]",
+        "tag": "UNSER UNTERSUCHUNGSWEG",
+        "title": "Eine Geschäftsidee.<br><em>Ein nachvollziehbarer Weg.</em>",
+        "copy": "Wir prüfen Innovationen, wählen Ideen aus und vertiefen einen Case. Team- und KI-Urteile helfen, Annahmen und offenen Belegbedarf sichtbar zu machen.",
+        "cue": "Prüfen → auswählen → bewerten → umsetzen"
       }
-    ]
+    ],
+    "seconds": 90
   },
   {
     "step": 2,
     "label": "Der Innovationsprüfstand",
     "detail": "Alle Team-/KI-Werte & Rechenwege",
-    "length": 2.7,
+    "length": 4.6,
     "beats": [
       {
         "at": 0,
-        "tag": "DREI PROJEKTE · MENSCH & KI",
-        "title": "Drei Innovationen.<br><em>Zwei Perspektiven.</em>",
-        "copy": "Raptor 3, Starship und orbitale Betankung bilden den geforderten Prüfstand. Starlink ergänzt den Vergleich als etablierter Dienst.",
-        "cue": "Drei Projekte und ein ergänzender Vergleich"
+        "still": 0.2,
+        "view": ".fa-audit-formula-phase",
+        "tag": "SO FUNKTIONIERT DER PRÜFSTAND",
+        "title": "Vier Faktoren.<br><em>Ein Produkt.</em>",
+        "copy": "Neu für wen, wie neu, Reifegrad und Nutzen werden multipliziert. Wir legen die Faktoren offen, bevor wir die Ergebnisse von Team und KI vergleichen.",
+        "cue": "Die Hube-Formel nachvollziehen"
       },
       {
-        "at": 0.45,
-        "tag": "EIN ZWEITER BLICK",
-        "title": "Gleiche Technologie.<br><em>Anderes Urteil.</em>",
-        "copy": "Die KI bewertet Reife und Nutzen anders. Die Gegenüberstellung macht diese Unterschiede sichtbar.",
-        "cue": "Team und KI gegenüberstellen"
+        "at": 0.23,
+        "still": 0.48,
+        "view": ".fa-audit-example-phase",
+        "tag": "RAPTOR 3 · DIE ABWEICHUNG LOKALISIEREN",
+        "title": "64 oder 16?<br><em>Ein Faktor entscheidet.</em>",
+        "copy": "Drei Faktoren stimmen überein. Das Team bewertet den Nutzen mit 4, die KI mit 1. Dieser Unterschied erklärt den gesamten Abstand zwischen 64 und 16 Punkten.",
+        "cue": "Nutzenurteil 4 ↔ 1 erklärt den Score",
+        "tone": "difference"
       },
       {
-        "at": 0.85,
-        "tag": "DIE METHODE ENTSCHEIDET",
-        "title": "Null Punkte.<br><em>Nicht null Nutzen.</em>",
-        "copy": "Starlink erhält im Team Reifegrad 0, weil der Betrieb bereits etabliert ist. Der Hube-Wert braucht Einordnung.",
-        "cue": "Bewertungen richtig lesen"
+        "at": 0.51,
+        "still": 0.73,
+        "view": ".fa-audit-compare-phase",
+        "tag": "DREI PROJEKTE · EIN ERGÄNZENDER VERGLEICH",
+        "title": "Die Urteile stehen<br><em>nebeneinander.</em>",
+        "copy": "Raptor, Starship und Betankung gehören zu einem gemeinsamen System. Starlink ergänzt den Vergleich. Die Werte werden eingeordnet, nicht zu einem Konsensscore gemittelt.",
+        "cue": "Alle Team-/KI-Ergebnisse vergleichen"
+      },
+      {
+        "at": 0.76,
+        "still": 1,
+        "view": ".fa-audit-zero-phase",
+        "tag": "DIE GRENZE DES MULTIPLIKATIVEN MODELLS",
+        "title": "Null Punkte.<br><em>Vier Nutzenpunkte.</em>",
+        "copy": "Starlink erhält im Team Reifegrad 0 für etablierten Betrieb. Dieser Nullfaktor setzt den gesamten Score auf null – obwohl der Nutzen mit 4 bewertet wird.",
+        "cue": "Den Nullfaktor vom Nutzen unterscheiden",
+        "tone": "difference"
       }
-    ]
+    ],
+    "seconds": 150
   },
   {
     "step": 3,
     "label": "Trends & Ideenauswahl",
     "detail": "Trendportfolio, zwölf Matrixideen & alle 19 Trendideen",
-    "length": 5.2,
+    "length": 8.2,
     "beats": [
       {
         "at": 0,
         "tag": "360° · ACHT TRENDS",
         "title": "Acht Signale.<br><em>Ein weites Suchfeld.</em>",
         "copy": "Gesellschaft, Technologie, Wirtschaft und Politik verändern das Umfeld. Acht Trends eröffnen unterschiedliche Wege zu neuen Geschäften.",
-        "cue": "Alle acht Trends im 360°-Blick"
+        "cue": "Alle acht Trends im 360°-Blick",
+        "still": 0.1,
+        "view": ".fa-radar-labels"
       },
       {
-        "at": 0.15,
+        "at": 0.12,
         "tag": "DAS DIFFERENZIERTE TRENDPORFOLIO",
         "title": "Alle sind relevant.<br><em>Doch nicht gleich.</em>",
         "copy": "Einfluss und Handlungsdruck zeigen die Unterschiede. Die exakten Teamwerte bestimmen die Positionen; gleiche Bewertungen teilen einen Punkt.",
-        "cue": "Einfluss × Handlungsdruck"
+        "cue": "Einfluss × Handlungsdruck",
+        "still": 0.23,
+        "view": ".fa-trend-grid, .fa-trend-key"
       },
       {
-        "at": 0.32,
+        "at": 0.25,
         "tag": "STUFENMODELL · TRENDS 01–04",
         "title": "Ein Trend wird<br><em>zur Geschäftsidee.</em>",
         "copy": "Vom Trend über die Herausforderung und den Zukunftsmarkt zur Geschäftsidee. Die ersten vier Favoriten erhalten eine nachvollziehbare Ableitung.",
-        "cue": "Trends 01–04: vom Signal zum Geschäftsmodell"
+        "cue": "Trends 01–04: vom Signal zum Geschäftsmodell",
+        "still": 0.345,
+        "view": "[data-stufen-phase=\"0\"]"
       },
       {
-        "at": 0.48,
+        "at": 0.36,
         "tag": "STUFENMODELL · TRENDS 05–08",
         "title": "Acht Trends.<br><em>Acht konkrete Ideen.</em>",
         "copy": "Die nächsten vier Ableitungen vervollständigen die Auswahl. Die Zwischenschritte sind eine redaktionelle Ausarbeitung zu den Favoriten der Arbeitsmappe.",
-        "cue": "Trends 05–08: die acht Ableitungen vervollständigen"
+        "cue": "Trends 05–08: die acht Ableitungen vervollständigen",
+        "still": 0.455,
+        "view": "[data-stufen-phase=\"1\"]"
       },
       {
-        "at": 0.64,
+        "at": 0.47,
+        "still": 0.585,
+        "view": "[data-flow-panel=\"funnel\"]",
+        "tag": "QUALITATIVE AUSWAHL · GETRENNTE IDEENHERKUNFT",
+        "title": "19 Ideen.<br><em>Eine begründete Auswahl.</em>",
+        "copy": "Acht Trendfavoriten und vier separat entstandene Open-Innovation-Ideen bilden die Zwölfermatrix. Die Vorauswahl fragt nach Problembeleg, zahlender Nachfrage und dem SpaceX-Beitrag.",
+        "cue": "19 → 8 plus 4 → 12 → 3"
+      },
+      {
+        "at": 0.6,
         "tag": "DIE NOW/HOW/WOW-MATRIX",
         "title": "Originell genug?<br><em>Machbar genug?</em>",
         "copy": "Acht Trendfavoriten und vier zusätzliche Open-Innovation-Ideen werden eingeordnet. Die Matrix zeigt die Teamurteile – keine nachgewiesene Machbarkeit.",
-        "cue": "Alle zwölf Ideen in Now/How/Wow"
+        "cue": "Alle zwölf Ideen in Now/How/Wow",
+        "still": 0.715,
+        "view": ".fa-matrix-phase"
       },
       {
-        "at": 0.84,
-        "tag": "DIE DREI BESTEN GESCHÄFTSIDEEN",
+        "at": 0.73,
+        "still": 0.845,
+        "view": "[data-flow-panel=\"matrix-difference\"]",
+        "tag": "LAUNCH ENGINEERING CLOUD · TEAM ↔ KI",
+        "title": "Ein Punkt verschiebt<br><em>die Kategorie.</em>",
+        "copy": "Die Machbarkeit liegt bei beiden bei 4. Die Originalität steigt von Team 3 auf KI 4: Aus NOW wird WOW. Das zeigt eine andere Einschätzung, keinen neuen Machbarkeitsnachweis.",
+        "cue": "Originalität 3 ↔ 4: NOW wird WOW",
+        "tone": "difference"
+      },
+      {
+        "at": 0.86,
+        "tag": "DREI IDEEN FÜR DIE VERTIEFUNG",
         "title": "Drei Wege weiter.<br><em>Ein Pitch-Case.</em>",
-        "copy": "Starlink Insights, Launch Engineering Cloud und RocketLight Dinner gehen in die vertiefte Bewertung. RocketLight stammt aus Open Innovation.",
-        "cue": "Die drei Finalisten stehen fest"
+        "copy": "Insights, Launch Engineering Cloud und RocketLight werden vertieft. Die Dreierauswahl ist eine zusätzliche Teamentscheidung. RocketLight stammt aus Open Innovation.",
+        "cue": "Die drei Finalisten stehen fest",
+        "still": 1,
+        "view": ".fa-selection-final"
       }
-    ]
+    ],
+    "seconds": 195
   },
   {
     "step": 4,
     "label": "Bewertung & Kalkulation",
     "detail": "Sechs Bewertungen, drei Business Cases & Jahresrechnung",
-    "length": 3.4,
+    "length": 5.5,
     "beats": [
       {
         "at": 0,
-        "tag": "DREI IDEEN · MENSCH & KI",
-        "title": "Drei Ideen.<br><em>Sechs Bewertungen.</em>",
-        "copy": "Das Team setzt RocketLight an die Spitze; die KI bevorzugt die Launch Engineering Cloud. Das Nutzen-Aufwand-Portfolio macht diesen Unterschied sichtbar.",
-        "cue": "Drei Business Cases im Nutzen-Aufwand-Portfolio"
+        "still": 0.15,
+        "view": ".fa-finance-method-phase",
+        "tag": "KRITERIEN · GEWICHTE · BEWERTUNG",
+        "title": "Erst der Maßstab.<br><em>Dann das Ergebnis.</em>",
+        "copy": "Sechs Nutzen- und sechs Aufwandskriterien werden mit den Projektgewichten verrechnet. Die Innovationsrendite teilt beide Summen: ein Bewertungsscore, keine finanzielle Rendite.",
+        "cue": "Bewertung × Gewicht → Beitrag → Summe"
       },
       {
-        "at": 0.3,
-        "tag": "ROCKETLIGHT · DER ENTSCHEIDENDE UNTERSCHIED",
-        "title": "Gleicher Nutzen.<br><em>Anderer Aufwand.</em>",
-        "copy": "Bei RocketLight sieht das Team einen Quick win. Die KI bewertet den Aufwand höher: Die Innovationsrendite fällt von 1,83 auf 0,73.",
-        "cue": "Die Aufwandsschätzung verändert das Ergebnis"
+        "at": 0.18,
+        "still": 0.35,
+        "view": ".fa-effort-phase",
+        "tag": "ROCKETLIGHT · DIE ANNAHME HINTER DEM SCORE",
+        "title": "Woher kommt<br><em>der höhere Aufwand?</em>",
+        "copy": "Technische Umsetzbarkeit: Team 1, KI 4 bei 30 % Gewicht. Allein daraus entstehen 0,90 der insgesamt 1,80 Punkte Aufwandsdifferenz. Die Originalwerte bleiben sichtbar.",
+        "cue": "Den größten Bewertungsunterschied erklären",
+        "tone": "difference"
       },
       {
-        "at": 0.6,
-        "tag": "VARIANTE A · FÜNF JAHRE ALS MODELL",
-        "title": "47,24 Millionen.<br><em>Die Annahmen zählen.</em>",
-        "copy": "964 verkaufte Plätze ergeben den geplanten Umsatz für 2027–2031. Umsatz ist kein Gewinn: Preis, Auslastung und vollständige Betriebskosten bleiben zu prüfen.",
-        "cue": "Die fünf Projektjahre bauen sich auf"
+        "at": 0.38,
+        "still": 0.54,
+        "view": ".fa-score-phase",
+        "tag": "GLEICHE NUTZENSUMME · VERSCHIEDENER AUFWAND",
+        "title": "2,20 bleibt.<br><em>Der Nenner verändert sich.</em>",
+        "copy": "Die Nutzensumme beträgt jeweils 2,20, trotz verschiedener Einzelurteile. Mit Aufwand 1,20 ergibt sich IR 1,83; mit Aufwand 3,00 nur 0,73. Hier liegt der Prüfbedarf.",
+        "cue": "Aus zwei Aufwandsurteilen entstehen zwei IR-Werte"
+      },
+      {
+        "at": 0.57,
+        "still": 0.73,
+        "view": ".fa-cases-phase",
+        "tag": "DREI BUSINESS CASES · SECHS ORIGINALBEWERTUNGEN",
+        "title": "Ein Favorit.<br><em>Keine automatische Wahrheit.</em>",
+        "copy": "Das Team priorisiert RocketLight. Bei der KI liegt die Cloud mit 1,13 nur knapp vor Insights mit 1,10. Die Rangfolge bleibt von Kriterien und Annahmen abhängig.",
+        "cue": "Rangfolge und ihren Abstand einordnen"
+      },
+      {
+        "at": 0.76,
+        "still": 1,
+        "view": ".fa-revenue-phase",
+        "tag": "VARIANTE A · VOM PILOT ZUR JAHRESPLANUNG",
+        "title": "Plätze mal Preis.<br><em>So entsteht Umsatz.</em>",
+        "copy": "Vier Pilotabende × 20 Plätze × 80 % Auslastung ergeben 64 verkaufte Plätze. Bei 35.000 USD sind das 2,24 Mio. USD Pilotumsatz. Umsatz ist noch kein Gewinn.",
+        "cue": "Vom Pilotjahr zur Fünfjahresplanung"
       }
-    ]
+    ],
+    "seconds": 180
   },
   {
     "step": 5,
     "label": "5P-Marketingmix & Erlebnis",
     "detail": "Der finale Marketingmix · alle 25 Felder",
-    "length": 3.4,
+    "length": 6.4,
     "beats": [
       {
         "at": 0,
         "tag": "DAS RAUMKONZEPT",
         "title": "Zehn Tische.<br><em>Ein gemeinsamer Blick.</em>",
         "copy": "20 Gäste sitzen an zehn Zweiertischen. Versetzte, leicht terrassierte Reihen richten jeden Platz auf das Startpanorama aus.",
-        "cue": "Die Tische entstehen. Die Sichtachsen öffnen sich."
+        "cue": "Die Tische entstehen. Die Sichtachsen öffnen sich.",
+        "still": 0.13,
+        "view": "[data-fe-layout]"
       },
       {
-        "at": 0.31,
+        "at": 0.16,
         "tag": "DAS ERLEBNIS",
         "title": "Sieben Gänge.<br><em>Ein großer Moment.</em>",
         "copy": "Missionsbriefing, Fine Dining und persönlicher Concierge verdichten den Abend. Die Rakete wird zum gemeinsamen Mittelpunkt.",
-        "cue": "Das Raumkonzept wird zum Erlebnis."
+        "cue": "Das Raumkonzept wird zum Erlebnis.",
+        "still": 0.29,
+        "view": "[data-fe-panorama]",
+        "art": "panorama"
       },
       {
-        "at": 0.57,
+        "at": 0.32,
         "tag": "DIE PREISANNAHME",
         "title": "Selten ist wertvoll.<br><em>Vertrauen schafft Zugang.</em>",
         "copy": "35.000 USD je Gast im Pilot; langfristig bis zu 50.000 USD als Ziel. Erst reale Buchungen zeigen, ob diese Zahlungsbereitschaft trägt.",
-        "cue": "Der Pilot prüft die Preisannahme."
+        "cue": "Der Pilot prüft die Preisannahme.",
+        "still": 0.45,
+        "view": "[data-fe-price]"
       },
       {
-        "at": 0.77,
+        "at": 0.48,
+        "still": 0.62,
+        "view": "[data-fe-compare]",
+        "tag": "UNSERE ARBEIT MIT DREI KI-ENTWÜRFEN",
+        "title": "Gleicher Prompt.<br><em>Unterschiedliche Stärken.</em>",
+        "copy": "Fable, ChatGPT und Copilot bearbeiteten dieselben 25 Felder. Das Team bewertete die Entwürfe entlang der fünf Ps. Die Noten beschreiben Entwurfsqualität, keine Marktnachfrage.",
+        "cue": "Drei KI-Entwürfe am gleichen Raster vergleichen",
+        "tone": "selection"
+      },
+      {
+        "at": 0.65,
+        "still": 0.79,
+        "view": "[data-fe-synthesis]",
+        "tag": "VOM VERGLEICH ZUR BEGRÜNDETEN SYNTHESE",
+        "title": "Übernehmen.<br>Einordnen.<br><em>Offen lassen.</em>",
+        "copy": "Konkrete Produkt- und Kommunikationsideen verbinden sich mit dem vorsichtigeren Pilotansatz. Standort, Preis, Partner und Ersatztermine bleiben vor der Umsetzung zu prüfen.",
+        "cue": "Die Auswahl in den finalen Mix überführen",
+        "tone": "selection"
+      },
+      {
+        "at": 0.82,
         "tag": "DER 5P-MARKETING-MIX",
         "title": "Fünf Entscheidungen.<br><em>Ein stimmiges Angebot.</em>",
         "copy": "Zielgruppe, Produkt, Preis, Zugang und Kommunikation greifen ineinander. Der finale Mix zeigt den Weg vom besonderen Abend zum Gast.",
-        "cue": "Alle fünf Ps verbinden sich zum Marktzugang."
+        "cue": "Alle fünf Ps verbinden sich zum Marktzugang.",
+        "still": 1,
+        "view": "[data-fe-marketing]"
       }
-    ]
+    ],
+    "seconds": 135
   },
   {
     "step": 6,
     "label": "Roadmap & Umsetzung",
     "detail": "Acht Planungsphasen, parallele Maßnahmen, Gates & Varianten A/B",
     "length": 7.8,
-    "beats": []
+    "beats": [],
+    "seconds": 120
   },
   {
     "step": 7,
     "label": "Ganzheitliches Innovationsmanagement",
     "detail": "Sechs Analysefelder, vier Empfehlungen & Gate-Kriterien",
-    "length": 2.8,
+    "length": 5.5,
     "beats": [
       {
         "at": 0,
-        "tag": "AUS DEM PROJEKT WIRD EIN SYSTEM",
-        "title": "Vier Kräfte.<br><em>Eine Mission.</em>",
-        "copy": "RocketLight ist unser Testfall. Vier Veränderungen machen aus einer einzelnen Idee wiederholbare Innovation.",
-        "cue": "Vier Empfehlungen finden zusammen"
+        "still": 0.18,
+        "view": "[data-fe-diagnosis]",
+        "tag": "UNSERE AUSSENANALYSE · SECHS FELDER",
+        "title": "Erst die Diagnose.<br><em>Dann die Empfehlung.</em>",
+        "copy": "Die Projektgruppe sieht drei Stärken und drei Felder mit Handlungsbedarf. Vier Empfehlungen entstehen daraus; die Prozessempfehlung ergänzt ausdrücklich eine bereits starke Dimension.",
+        "cue": "Sechs Projekturteile als Ausgangspunkt"
       },
       {
-        "at": 0.2,
+        "at": 0.21,
         "tag": "STRUKTUR & PROZESSE",
         "title": "Verantwortung klären.<br><em>Früh prüfen.</em>",
         "copy": "Das Portfolio gemeinsam steuern. Kundenbedürfnisse testen und fachübergreifend über die nächsten Schritte entscheiden.",
-        "cue": "Steuern · prüfen · weiterlernen"
+        "cue": "Steuern · prüfen · weiterlernen",
+        "still": 0.39,
+        "view": "[data-fe-structure-process]"
       },
       {
-        "at": 0.48,
+        "at": 0.42,
         "tag": "KULTUR & KOMPETENZEN",
         "title": "Beteiligung ermöglichen.<br><em>Wissen verbinden.</em>",
         "copy": "Ideen und sachliche Kritik aktiv einfordern. Erfahrungen zwischen Bereichen teilen und Fähigkeiten gemeinsam aufbauen.",
-        "cue": "Beteiligen · lernen · verändern"
+        "cue": "Beteiligen · lernen · verändern",
+        "still": 0.6,
+        "view": "[data-fe-culture-skills]"
       },
       {
-        "at": 0.74,
+        "at": 0.63,
+        "still": 0.79,
+        "view": "[data-fe-gates]",
+        "tag": "SIEBEN FRAGEN VOR DER FREIGABE",
+        "title": "Ein Gate braucht<br><em>mehr als einen Termin.</em>",
+        "copy": "Kundennutzen, Markt und Differenzierung treffen auf Reife, Wirtschaftlichkeit und Umsetzbarkeit. Die Kriterien bündeln eine Entscheidung über Weiterführen, Anpassen oder Stoppen.",
+        "cue": "Gatefragen in eine prüfbare Entscheidung übersetzen"
+      },
+      {
+        "at": 0.82,
         "tag": "VIER TRIEBWERKE FÜR DEN WANDEL",
         "title": "Eine Mission.<br><em>Ein gemeinsamer Antrieb.</em>",
         "copy": "Struktur, Prozesse, Kultur und Kompetenzen greifen ineinander. Vor dem Start prüfen wir, wie belastbar unsere Entscheidungen sind.",
-        "cue": "Vom Management zur kritischen Evaluation"
+        "cue": "Vom Management zur kritischen Evaluation",
+        "still": 1,
+        "view": "[data-fe-engines]"
       }
-    ]
+    ],
+    "seconds": 120
   },
   {
     "step": 8,
     "label": "Kritische Methodenevaluation",
     "detail": "Strukturierte Evaluation, Grenzen & alternative Instrumente",
-    "length": 3.4,
+    "length": 4.6,
     "beats": [
       {
         "at": 0,
         "tag": "BEWERTUNG IST EIN ANFANG",
         "title": "Was zeigt der Score?<br><em>Was lässt er offen?</em>",
         "copy": "Prüfstand, Trendportfolio und Inno-Rendite ordnen unsere Entscheidungen. Ihre Ergebnisse bleiben abhängig von Kriterien, Quellen und Annahmen.",
-        "cue": "Beitrag · Grenze · Ergänzung"
+        "cue": "Beitrag · Grenze · Ergänzung",
+        "still": 0.21,
+        "view": "[data-fq-panel=\"0\"]"
       },
       {
-        "at": 0.34,
+        "at": 0.24,
         "tag": "VOM PLAN ZUM NACHWEIS",
         "title": "Ein Plan wird stark,<br><em>wenn er überprüfbar ist.</em>",
         "copy": "5P, Roadmap und Managementempfehlungen geben Struktur. Bezahlte Piloten, klare Verantwortungen und messbare Reviews prüfen die Wirkung.",
-        "cue": "Die Umsetzung kritisch prüfen"
+        "cue": "Die Umsetzung kritisch prüfen",
+        "still": 0.45,
+        "view": "[data-fq-panel=\"1\"]"
       },
       {
-        "at": 0.68,
+        "at": 0.48,
+        "still": 0.7,
+        "view": "[data-fq-panel=\"2\"]",
+        "tag": "VORGESCHLAGENE TESTKARTE · NOCH NICHT DURCHGEFÜHRT",
+        "title": "Aus einer Annahme<br><em>wird eine prüfbare Frage.</em>",
+        "copy": "Für den Pilotpreis formulieren wir einen Testvorschlag: Hypothese, bezahlter Pilot, Messgrößen und vorab definierte Erfolgsschwelle. Einen belastbaren Zielwert müssen wir erst festlegen.",
+        "cue": "Annahme → Test → Messung → Entscheidung",
+        "tone": "evidence"
+      },
+      {
+        "at": 0.73,
         "tag": "DIE ENTSCHEIDUNG",
         "title": "Drei Nachweise.<br><em>Dann der nächste Schritt.</em>",
         "copy": "Nachfrage, Betrieb und Wirtschaftlichkeit bleiben offen. Vor dem Pilot definieren wir Messgrößen und Erfolgsschwellen; danach wird freigegeben, angepasst oder gestoppt.",
-        "cue": "Annahme → Test → Entscheidung"
+        "cue": "Annahme → Test → Entscheidung",
+        "still": 1,
+        "view": "[data-fq-panel=\"3\"]"
       }
-    ]
+    ],
+    "seconds": 120
   }
 ];
-// Roadmap copy and source work packages share the same eight phase definitions.
+// Roadmap phases retain their original, variant-specific planning data.
 window.PitchFilmStory.find(chapter => chapter.step === 6).beats = window.PitchRoadmapPhases.A;

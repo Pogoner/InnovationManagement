@@ -46,6 +46,23 @@
 .fq-decision strong { display: block; color: #eff3ed; font-weight: 450; }
 .fq-decision span { display: block; color: #a9b9c0; font-size: 11px; margin-top: 2px; }
 
+/* One proposed test, built in four readable steps by the shared scroll value. */
+.fq-test-steps { list-style: none; padding: 0; margin: 0; }
+.fq-test-step { position: relative; display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 15px; padding: 11px 0; }
+.fq-test-number { width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid #a9d9d977; border-radius: 50%; color: #a9d9d9; font-size: 10px; opacity: calc(.3 + var(--fq-trace,0) * .7); }
+.fq-test-step:not(:last-child)::after { content: ""; position: absolute; left: 12px; top: 42px; bottom: -5px; width: 1px; background: #a9d9d966; transform: scaleY(var(--fq-trace,0)); transform-origin: top; }
+.fq-test-step > div { opacity: calc(.22 + var(--fq-trace,0) * .78); transform: translateY(calc((1 - var(--fq-trace,0)) * 6px)); }
+.fq-test-step h4 { margin: 0 0 5px; color: #eff3ed; font-size: 14px; line-height: 1.35; font-weight: 500; }
+.pitch-page .fq-test-step p { margin: 0; color: #bdcdd2; font-size: 13px; line-height: 1.5; }
+.pitch-page .fq-test-threshold { margin: 18px 0 0; padding: 11px 14px; border-left: 2px solid #efbd91; background: #efbd9109; color: #cbd6d8; font-size: 13px; line-height: 1.5; opacity: calc(.35 + var(--fq-trace,0) * .65); }
+.fq-test-threshold strong { display: block; color: #efbd91; font-weight: 500; margin-bottom: 3px; }
+.pitch-page .fq-test-source { margin: 12px 0 0; color: #95aab4; font-size: 10px; line-height: 1.6; }
+.fq-test-source a { color: #a9d9d9; text-decoration: underline; text-underline-offset: 3px; }
+.fq-test-source a:focus-visible { outline: 2px solid #a9d9d9; outline-offset: 4px; }
+.fq-scene[data-fq-mode="static"] { height: auto; }
+.fq-scene[data-fq-mode="static"] .fq-panel { position: relative; opacity: 1 !important; transform: none !important; margin-block: 0 !important; }
+.fq-scene[data-fq-mode="static"] .fq-panel[aria-hidden="true"] { display: none !important; }
+
 /* Complete review in the original, directly linked source chapter. */
 .fq-detail-table-wrap { overflow-x: auto; margin-top: 30px; }
 .fq-detail-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.7; }
@@ -57,6 +74,10 @@
 .fq-detail-table td { color: #aebfc6; width: 40%; }
 .fq-detail-sources { display: flex; gap: 6px 14px; flex-wrap: wrap; margin-top: 14px; }
 .fq-detail-sources a { font-size: 11px; color: #a9d9d9; text-decoration: underline; text-underline-offset: 3px; }
+.fq-detail-test { max-width: 900px; margin-top: 34px; padding-top: 25px; border-top: 1px solid #a9d9d933; }
+.fq-detail-test h3 { margin: 0 0 16px; }
+.fq-detail-test ol { padding-left: 22px; color: #bdcdd2; }
+.fq-detail-test li { padding-block: 6px; line-height: 1.6; }
 
 @media (min-width: 761px) and (max-height: 800px) {
   .film-stage[data-film-step="8"] .film-visual { height: calc(100svh - 250px); min-height: 315px; }
@@ -76,6 +97,12 @@
   .pitch-page .fq-gate-measure { margin-top: 5px; font-size: 9px; }
   .fq-decision { margin-top: 12px; gap: 12px; }
   .pitch-page .fq-decision p { font-size: 12px; }
+  .fq-test-step { padding-block: 6px; gap: 12px; }
+  .fq-test-step h4 { margin-bottom: 3px; font-size: 12px; }
+  .pitch-page .fq-test-step p { font-size: 12px; line-height: 1.4; }
+  .fq-test-step:not(:last-child)::after { top: 35px; }
+  .pitch-page .fq-test-threshold { margin-top: 11px; padding: 8px 11px; font-size: 12px; line-height: 1.4; }
+  .pitch-page .fq-test-source { margin-top: 8px; font-size: 9px; }
 }
 
 /* Small screens and reduced motion show the whole review as a readable flow.
@@ -110,5 +137,10 @@
   .pitch-page .fq-gate-pair p { font-size: 12px; }
   .fq-gate-label h4 { font-size: 15px; }
   .fq-validation-legend { font-size: 7px; letter-spacing: .07em; gap: 8px; }
+  .fq-test-step { padding-block: 12px; gap: 13px; }
+  .fq-test-step h4 { font-size: 15px; }
+  .pitch-page .fq-test-step p { font-size: 14px; line-height: 1.55; }
+  .pitch-page .fq-test-threshold { font-size: 14px; line-height: 1.55; }
+  .pitch-page .fq-test-source { font-size: 11px; }
   .fq-detail-table { min-width: 730px; }
 }

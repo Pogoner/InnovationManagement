@@ -76,6 +76,40 @@
     {label:'Wirtschaftlichkeit',assumption:'90 % Auslastung nach Pilot',test:'Szenarien + Projekt-Cashflow',measure:'Vollkosten · Ausfälle · Liquidität'}
   ];
 
+  // An editorial test proposal derived from the existing 5P review. No target
+  // value or completed customer evidence is implied by this example.
+  const pilotMethod = methods.find(method => method.part === '05');
+  const pilotTest = {
+    title: 'Werden aus Interesse Buchungen?',
+    steps: [
+      {label:'Annahme',copy:'Zielgäste buchen das Pilot-Erlebnis für 35.000 USD je Gast.'},
+      {label:'Test',copy:'Vorgeschlagener bezahlter Pilot; Kundeninterviews schärfen zuvor das Bedürfnis.'},
+      {label:'Messung',copy:gates[0].measure},
+      {label:'Entscheidung',copy:'Ergebnisse mit vorab festgelegten Erfolgsschwellen vergleichen: freigeben, anpassen oder stoppen.'}
+    ],
+    threshold:'Erfolgsschwellen vor dem Test festlegen. Ein belastbarer Zielwert ist noch offen.',
+    source:pilotMethod.sources.find(source => source.label === 'Strategyzer · Test Card')
+  };
+
+  function testCardMarkup() {
+    return `<div class="fq-panel fq-test-card" data-fq-panel="2">
+      <header class="fq-panel-heading"><span>VORGESCHLAGENE TESTKARTE · NACHFRAGE</span><h3>${escape(pilotTest.title)}</h3></header>
+      <ol class="fq-test-steps">${pilotTest.steps.map((step,index)=>`<li class="fq-test-step" data-fq-test-step="${index}">
+        <span class="fq-test-number" aria-hidden="true">0${index+1}</span>
+        <div><h4>${escape(step.label)}</h4><p>${escape(step.copy)}</p></div>
+      </li>`).join('')}</ol>
+      <p class="fq-test-threshold method-attention" data-method-attention="pilot-success-threshold"><strong>Der offene Maßstab</strong>${escape(pilotTest.threshold)}</p>
+      <p class="fq-test-source">Redaktioneller Vorschlag · noch nicht durchgeführt.<br><a href="${escape(pilotTest.source.url)}">${escape(pilotTest.source.label)}</a></p>
+    </div>`;
+  }
+
+  function testCardDetailMarkup() {
+    return `<section class="fq-detail-test"><h3>Vorgeschlagene Testkarte: Nachfrage im Pilot</h3><p>${escape(pilotMethod.next)}</p>
+      <ol>${pilotTest.steps.map(step=>`<li><strong>${escape(step.label)}:</strong> ${escape(step.copy)}</li>`).join('')}</ol>
+      <p><strong>${escape(pilotTest.threshold)}</strong> Die Karte ist eine redaktionelle Konkretisierung; der Test wurde noch nicht durchgeführt.</p>
+      <div class="fq-detail-sources"><a href="${escape(pilotTest.source.url)}">${escape(pilotTest.source.label)}</a></div></section>`;
+  }
+
   function methodRows(items) {
     return items.map(method => `<li class="fq-method" data-fq-row>
       <div class="fq-method-name"><span>${method.part}</span><h4>${escape(method.name)}</h4></div>
@@ -101,7 +135,8 @@
     markup: () => `<div class="fq-scene" aria-label="Strukturierte kritische Methodenevaluation mit vorgeschlagenen ergänzenden Instrumenten">
       ${matrixMarkup(methods.slice(0,3),0,'Was die Auswahl trägt.','Mensch & KI: Abweichungen begründen. Bewertungen nicht zu scheinbarer Gewissheit mitteln.')}
       ${matrixMarkup(methods.slice(3),1,'Was die Umsetzung braucht.','Planung schafft Orientierung. Kundenverhalten und Wirkung müssen danach beobachtet werden.')}
-      <div class="fq-panel fq-validation" data-fq-panel="2">
+      ${testCardMarkup()}
+      <div class="fq-panel fq-validation" data-fq-panel="3">
         <header class="fq-panel-heading"><span>NÄCHSTE NACHWEISE</span><h3>Von der Annahme zur Evidenz.</h3></header>
         <div class="fq-validation-legend"><span>ANNAHME</span><svg viewBox="0 0 40 12" aria-hidden="true"><path d="M1 6H38M32 1L38 6 32 11"/></svg><span>VORGESCHLAGENER TEST</span></div>
         <ol class="fq-gates">${gates.map((gate,index)=>`<li class="fq-gate" data-fq-gate="${index}">
@@ -118,37 +153,49 @@
       const scene = root.querySelector('.fq-scene');
       const panels = Array.from(root.querySelectorAll('[data-fq-panel]'));
       const rows = panels.slice(0,2).map(panel=>Array.from(panel.querySelectorAll('[data-fq-row]')));
+      const testSteps = Array.from(root.querySelectorAll('[data-fq-test-step]'));
+      const threshold = root.querySelector('.fq-test-threshold');
       const gateRows = Array.from(root.querySelectorAll('[data-fq-gate]'));
       const decision = root.querySelector('.fq-decision');
       let last = '';
       return {
         update(progress, context = {}) {
-          const p = context.reduced ? 1 : clamp(progress);
-          const all = Boolean(context.reduced || context.mobile || document.body.classList.contains('is-reduced'));
-          const key = `${n(p)}|${all}`;
+          const isStatic = Boolean(context.static);
+          const p = context.reduced && !isStatic ? 1 : clamp(progress);
+          const all = !isStatic && Boolean(context.reduced || context.mobile || document.body.classList.contains('is-reduced'));
+          const settled = all || isStatic;
+          const key = `${n(p)}|${all}|${isStatic}`;
           if (key === last) return;
           last = key;
-          scene.dataset.fqMode = all ? 'all' : 'animated';
-          const first = 1-smooth(.30,.36,p);
-          const second = smooth(.30,.36,p)*(1-smooth(.64,.70,p));
-          const third = smooth(.64,.70,p);
-          [first,second,third].forEach((opacity,index)=>{
+          scene.dataset.fqMode = isStatic ? 'static' : all ? 'all' : 'animated';
+          const boundaries = [0,.24,.48,.73,1.1];
+          panels.forEach((panel,index)=>{
+            const enter = index === 0 ? 1 : smooth(boundaries[index]-.014,boundaries[index]+.018,p);
+            const leave = index === panels.length-1 ? 1 : 1-smooth(boundaries[index+1]-.014,boundaries[index+1]+.018,p);
+            const opacity = enter * leave;
             set(panels[index],'--fq-opacity',all?1:n(opacity));
-            set(panels[index],'--fq-shift',all?'0px':`${n((1-opacity)*16)}px`);
+            set(panels[index],'--fq-shift',settled?'0px':`${n((1-opacity)*16)}px`);
             // Invisible pages leave the accessibility tree; their complete text
             // remains in the main scene during static/reduced presentation.
-            panels[index].setAttribute('aria-hidden',String(!all && opacity < .5));
+            const hidden = !all && opacity < .5;
+            panel.setAttribute('aria-hidden',String(hidden));
+            panel.inert = hidden;
           });
           rows.forEach((group,groupIndex)=>group.forEach((row,index)=>{
-            const start=groupIndex*.34+.025+index*.045;
-            const trace=all?1:smooth(start,start+.13,p);
+            const start=groupIndex*.24+.025+index*.045;
+            const trace=settled?1:smooth(start,start+.08,p);
             set(row,'--fq-trace',n(trace));
           }));
+          testSteps.forEach((row,index)=>{
+            const start=[.49,.54,.585,.63][index];
+            set(row,'--fq-trace',settled?1:n(smooth(start,start+.04,p)));
+          });
+          set(threshold,'--fq-trace',settled?1:n(smooth(.65,.70,p)));
           gateRows.forEach((row,index)=>{
-            const trace=all?1:smooth(.68+index*.065,.78+index*.065,p);
+            const trace=settled?1:smooth(.76+index*.055,.84+index*.055,p);
             set(row,'--fq-trace',n(trace));
           });
-          set(decision,'--fq-trace',all?1:n(smooth(.88,.98,p)));
+          set(decision,'--fq-trace',settled?1:n(smooth(.90,.98,p)));
         }
       };
     }
@@ -159,6 +206,6 @@
   window.PitchMethodReview = Object.freeze({
     origin:'Redaktionelle Methodenevaluation auf Basis der Projektunterlagen 2–7; ergänzende Instrumente sind Vorschläge.',
     methods: Object.freeze(methods.map(method=>Object.freeze(method))),
-    fullMarkup: () => `<p class="section-note">Redaktionelle Methodenevaluation auf Basis der Projektunterlagen 2–7. Die ergänzenden Instrumente sind Vorschläge; die Prüfungen wurden noch nicht durchgeführt.</p><div class="fq-detail-table-wrap"><table class="fq-detail-table"><caption>Beitrag, Grenzen und alternative Instrumente der verwendeten Methoden</caption><thead><tr><th scope="col">Methode</th><th scope="col">Beitrag und kritische Bewertung</th><th scope="col">Ergänzung / Alternative</th></tr></thead><tbody>${methods.map(method=>`<tr><th scope="row">${escape(method.name)}</th><td>${escape(method.detail)}</td><td>${escape(method.next)}<div class="fq-detail-sources">${method.sources.map(source=>`<a href="${escape(source.url)}">${escape(source.label)}</a>`).join('')}</div></td></tr>`).join('')}</tbody></table></div><p class="section-note">Mensch &amp; KI sind zwei Bewertungsperspektiven, keine unabhängigen Marktbelege. Unterschiede werden auf Kriterien, Quellen und Annahmen zurückgeführt; sie werden nicht durch einen Mittelwert verdeckt.</p>`
+    fullMarkup: () => `<p class="section-note">Redaktionelle Methodenevaluation auf Basis der Projektunterlagen 2–7. Die ergänzenden Instrumente sind Vorschläge; die Prüfungen wurden noch nicht durchgeführt.</p><div class="fq-detail-table-wrap"><table class="fq-detail-table"><caption>Beitrag, Grenzen und alternative Instrumente der verwendeten Methoden</caption><thead><tr><th scope="col">Methode</th><th scope="col">Beitrag und kritische Bewertung</th><th scope="col">Ergänzung / Alternative</th></tr></thead><tbody>${methods.map(method=>`<tr><th scope="row">${escape(method.name)}</th><td>${escape(method.detail)}</td><td>${escape(method.next)}<div class="fq-detail-sources">${method.sources.map(source=>`<a href="${escape(source.url)}">${escape(source.label)}</a>`).join('')}</div></td></tr>`).join('')}</tbody></table></div>${testCardDetailMarkup()}<p class="section-note">Mensch &amp; KI sind zwei Bewertungsperspektiven, keine unabhängigen Marktbelege. Unterschiede werden auf Kriterien, Quellen und Annahmen zurückgeführt; sie werden nicht durch einen Mittelwert verdeckt.</p>`
   });
 })();

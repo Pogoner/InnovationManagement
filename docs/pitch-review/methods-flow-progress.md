@@ -42,3 +42,10 @@ Stand: 15. November 2026. Ausgangspunkt `fd5f8064351951a367b80e1e2fefbfa928321de
 ## Sicherung und nächste Schritte
 
 Quellen- und Architekturprüfung abgeschlossen. Szenen2/4, Szenen5/7 und die vollständige statische Darstellung werden parallel in getrennten Dateien umgesetzt. Root integriert Untersuchungsweg/Auswahl, Kapitel8, Story/Phasensteuerung und Timing. Jeder zusammen funktionsfähige Stand wird auf main gesichert. Danach gezielte Browserprüfung und exakte Pages-Veröffentlichung verifizieren.
+
+
+### Funktionscheckpoint · 15.11.2026
+
+Alle acht Kapitel sind verbunden: 44 Bildphasen, dazu der 4W-Projektauftrag im Hauptfluss. Zurück/Weiter und Phasenpunkte führen auf stabile Ansichten; Kapitelwechsel geben den Tastaturfokus weiter. Ein einmaliger, begrenzter Lichtakzent lenkt auf benannte Differenzen oder ausgewählte Evidenz. Alle Methodenphasen sind bei reduzierter Bewegung oder kompakter Ansicht als Lesefolge verfügbar. Die Moderationshilfe enthält den 20-Minuten-Ablauf.
+
+Originaldaten, Szenenverträge, Stillpunkte, JavaScript-Syntax und Whitespace wurden geprüft. Browserlayout und die Veröffentlichung dieses Checkpoints stehen als nächstes an; die Umsetzung ist noch nicht visuell abgenommen.

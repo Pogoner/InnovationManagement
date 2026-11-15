@@ -11,6 +11,16 @@
   const lerp = (a, b, t) => a + (b - a) * t;
   const n = value => Number(value.toFixed(3));
   const set = (node, property, value) => node.style.setProperty(property, String(value));
+  const phaseAt = (progress, stops) => stops.reduce((active, stop, index) => progress >= stop ? index : active, 0);
+  function showPhase(scene, views, names, index, opacity) {
+    scene.dataset.feView = names[index];
+    views.forEach((view, current) => {
+      const active = current === index;
+      view.style.display = active ? '' : 'none';
+      view.setAttribute('aria-hidden', String(!active));
+      set(view, 'opacity', active ? opacity : 0);
+    });
+  }
 
   // Editorial room concept: ten separate two-person tables. Every pair sits
   // landward and faces the same launch panorama; the plan is not a site survey.
@@ -24,6 +34,25 @@
     {title:'Price',lines:['35.000 USD im Pilot','bis 50.000 USD als Zielpreis']},
     {title:'Place',lines:['Direktvertrieb & Family Offices','USA-Pilot · Fläche noch offen']},
     {title:'Promotion',lines:['Einladungen & Empfehlungen','Ausgewählte Medien & Partner']}
+  ];
+  // Team judgments of the three drafts, transposed from the original 5P table.
+  // Scores assess the drafts; they do not validate demand or a market outcome.
+  const draftScores = [
+    {name:'People',values:[5,4,4]},
+    {name:'Product',values:[5,4,5]},
+    {name:'Price',values:[4,4,3]},
+    {name:'Place',values:[3,3,5]},
+    {name:'Promotion',values:[5,4,4]}
+  ];
+  const diningPhases = [0,.16,.32,.48,.65,.82];
+  const diningViews = ['layout','panorama','price','compare','synthesis','marketing'];
+  const diningDescriptions = [
+    'Raumkonzept: zehn versetzte Zweiertische mit zwanzig Plätzen, alle auf das Startpanorama ausgerichtet. Konzeptvisualisierung ohne Standort- oder Entfernungszusage.',
+    'Erlebniskonzept: sieben Gänge, Missionsbriefing, Service und gemeinsamer Blick auf den Launch.',
+    'Preisannahmen: 35.000 US-Dollar je Gast im Pilot, langfristig bis zu 50.000 US-Dollar. Die Zahlungsbereitschaft ist noch zu prüfen.',
+    'Teamvergleich der fünf Ps aus den Entwürfen von Fable, ChatGPT und Copilot.',
+    'Auswahl des finalen Mixes aus konkreten Produktideen und vorsichtigem Pilotansatz.',
+    'Finaler 5P-Mix: People, Product, Price, Place und Promotion. Preise, Partner und Standort bleiben zu validieren.'
   ];
 
   function tableMarkup(table,index) {
@@ -46,7 +75,7 @@
   }
 
   scenes[5] = {
-    markup: () => `<div class="fe-scene fe-dining" role="group" aria-label="Raumkonzept: zehn versetzte Zweiertische mit zwanzig Plätzen, alle auf das Startpanorama ausgerichtet. Sieben Gänge begleiten das Erlebnis. Der sichtbare 5P-Mix: People – vermögende Raumfahrtfans, Unternehmer und Firmenkunden. Product – Dinner, Launch, Missionsbriefing und Concierge. Price – 35.000 US-Dollar im Pilot, langfristig bis zu 50.000 US-Dollar als zu validierender Zielpreis. Place – Direktvertrieb und Family Offices, US-Pilot mit noch offenem Standort. Promotion – Einladungen, Empfehlungen, ausgewählte Medien und mögliche Partner. Konzeptvisualisierung, keine Standort- oder Partnerzusage.">
+    markup: () => `<div class="fe-scene fe-dining" role="group" aria-label="Vom Raumkonzept zum begründeten 5P-Mix.">
       <svg class="fe-svg" viewBox="0 0 640 520" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="fe-table-surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9d9d9" stop-opacity=".08"/><stop offset=".6" stop-color="#efbd91" stop-opacity=".19"/><stop offset="1" stop-color="#efbd91" stop-opacity=".04"/></linearGradient>
@@ -111,25 +140,36 @@
           <text class="fe-price-validation" x="320" y="401" text-anchor="middle">ZAHLUNGSBEREITSCHAFT IM PILOT PRÜFEN</text>
           <text class="fe-layout-note" x="320" y="432" text-anchor="middle">Modellannahmen · kein buchbares Angebot</text>
         </g>
-        <g data-fe-marketing class="fe-marketing">
-          <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">5P · VOM ERLEBNIS ZUM GAST</text>
-          <path class="fe-mix-guide" d="M43 75V435"/>
-          <path class="fe-mix-track" pathLength="1" d="M43 75V435"/>
-          ${marketingMix.map((part,index)=>`<g class="fe-mix-row" data-fe-mix-row="${index}" transform="translate(0 ${73+index*87})">
-            <circle class="fe-mix-circle" cx="43" cy="10" r="19"/><text class="fe-mix-number" x="43" y="16" text-anchor="middle">${index+1}</text>
-            <text class="fe-mix-name" x="80" y="11">${part.title}</text>${part.sub?`<text class="fe-mix-sub" x="80" y="35">${part.sub}</text>`:''}
-            <path class="fe-mix-connector" d="M237 10H267M261 5 267 10 261 15"/>
-            <text class="fe-mix-content" x="286" y="1">${part.lines[0]}<tspan x="286" dy="27">${part.lines[1]}</tspan></text>
-            <path class="fe-mix-rule" d="M80 52H619"/>
-          </g>`).join('')}
-          <text class="fe-layout-note" x="320" y="509" text-anchor="middle">Finaler 5P-Mix · Partner, Fläche und Preise zu validieren</text>
-        </g>
       </svg>
-      <div class="fe-mobile-marketing" data-fe-mobile-marketing aria-hidden="true">
-        <p class="fe-mobile-mix-heading">5P · Vom Erlebnis zum Gast</p>
-        <ol>${marketingMix.map((part,index)=>`<li data-fe-mobile-row="${index}"><span class="fe-mobile-mix-index">${index+1}</span><h3>${part.title}${part.sub?`<small>${part.sub}</small>`:''}</h3><p>${part.lines.map(line=>`<span>${line}</span>`).join('')}</p></li>`).join('')}</ol>
-        <p class="fe-mobile-mix-note">Preise, Partner und Fläche sind zu validieren.</p>
-      </div>
+      <section class="fe-method-panel fe-compare" data-fe-compare aria-hidden="true">
+        <p class="fe-method-kicker">Gleicher Prompt · 25 Felder · drei Entwürfe</p>
+        <h3>Welche Vorschläge tragen?</h3>
+        <table class="fe-draft-table">
+          <caption>Teamwertung · 1 schwach bis 5 sehr stark</caption>
+          <thead><tr><th scope="col">5P</th><th scope="col">Fable</th><th scope="col">ChatGPT</th><th scope="col">Copilot</th></tr></thead>
+          <tbody>${draftScores.map(row=>`<tr${row.name==='Place'?' class="fe-comparison-focus"':''}><th scope="row">${row.name}</th>${row.values.map((score,index)=>`<td${score===5?' class="fe-rating-strong"':''}><span${row.name==='Place'&&index===2?' class="method-attention"':''}>${score}</span></td>`).join('')}</tr>`).join('')}</tbody>
+          <tfoot><tr><th scope="row">Mittelwert</th><td>4,4</td><td>3,8</td><td>4,2</td></tr></tfoot>
+        </table>
+        <p class="fe-method-note">Copilot liegt bei <strong>Place</strong> vorn. Fable führt bei <strong>People</strong> und <strong>Promotion</strong>. Die Werte beurteilen Entwürfe; sie belegen keine Nachfrage.</p>
+      </section>
+      <section class="fe-method-panel fe-synthesis" data-fe-synthesis aria-hidden="true">
+        <p class="fe-method-kicker">Auswahl des Teams</p>
+        <h3>Produktideen und Pilotansatz verbinden.</h3>
+        <div class="fe-synthesis-inputs">
+          <article><p class="fe-source-label">Fable</p><h4>Konkretes Erlebnis</h4><p>Stark bei Zielgruppe, Produktinszenierung und Promotion. Standort und Entfernung teils zu verbindlich.</p></article>
+          <article><p class="fe-source-label">Copilot</p><h4>Vorsichtiger Pilot</h4><p>Stark bei Pilotansatz und offenen Standortfragen. Beim Preis weniger konkret.</p></article>
+        </div>
+        <p class="fe-comparator-note"><strong>ChatGPT:</strong> vollständig und gut lesbar, inhaltlich nahe an Fable.</p>
+        <div class="fe-synthesis-join" aria-hidden="true"><span></span><span></span></div>
+        <div class="fe-synthesis-result"><span class="fe-source-label">Finaler Mix</span><p>Konkrete Produktideen <span aria-hidden="true">+</span> vorsichtiger Pilotansatz</p></div>
+        <p class="fe-method-note">Persona und Standort bleiben prüfbar. Preis, Ersatztermine, Partner und Zahlungsbedingungen sind vor der Umsetzung zu validieren.</p>
+      </section>
+      <section class="fe-method-panel fe-marketing" data-fe-marketing aria-hidden="true">
+        <p class="fe-method-kicker">Finaler 5P-Mix</p>
+        <h3>Vom Erlebnis zum Gast.</h3>
+        <ol class="fe-final-mix">${marketingMix.map((part,index)=>`<li data-fe-mix-row="${index}"><span class="fe-final-mix-index" aria-hidden="true">0${index+1}</span><h4>${part.title}${part.sub?`<small>${part.sub}</small>`:''}</h4><p>${part.lines.map(line=>`<span>${line}</span>`).join('')}</p></li>`).join('')}</ol>
+        <p class="fe-method-note">People meint die Kundschaft. Preise, Partner und Fläche sind Annahmen des Konzepts und noch zu validieren.</p>
+      </section>
     </div>`,
     mount(root) {
       const scene = root.querySelector('.fe-dining');
@@ -151,52 +191,49 @@
       const price = root.querySelector('[data-fe-price]');
       const priceLine = root.querySelector('.fe-price-connector');
       const marketing = root.querySelector('[data-fe-marketing]');
-      const mobileMarketing = root.querySelector('[data-fe-mobile-marketing]');
-      const mobileMixRows = Array.from(root.querySelectorAll('[data-fe-mobile-row]'));
-      const mixTrack = root.querySelector('.fe-mix-track');
+      const views = [layout, panorama, price, root.querySelector('[data-fe-compare]'), root.querySelector('[data-fe-synthesis]'), marketing];
       const mixRows = Array.from(root.querySelectorAll('[data-fe-mix-row]'));
       let last = '';
       return {
         update(progress, context = {}) {
           const p = context.reduced ? 1 : clamp(progress);
-          const key = `${n(p)}|${Boolean(context.reduced)}|${Boolean(context.mobile)}`;
+          const key = `${n(p)}|${Boolean(context.reduced)}|${Boolean(context.mobile)}|${Boolean(context.static)}`;
           if (key === last) return;
           last = key;
-          scene.dataset.feView = p>=.77?'marketing':p>=.57?'price':p>=.31?'panorama':'layout';
-          mobileMarketing.setAttribute('aria-hidden',String(!context.mobile || p<.77));
-          set(layout,'opacity',n(1-smooth(.29,.35,p)));
-          set(scene,'--fe-table-fill',n(.2+.8*smooth(0,.21,p)));
+          const phase = phaseAt(p, diningPhases);
+          const reveal = context.static || phase===0 ? 1 : smooth(diningPhases[phase], diningPhases[phase]+.025, p);
+          showPhase(scene, views, diningViews, phase, n(reveal));
+          scene.setAttribute('aria-label', diningDescriptions[phase]);
+          // Keep the original room and experience choreography in their shorter
+          // slots. All content has settled by the navigation's fixed still point.
+          const roomP = .28*clamp(p/.13);
+          const experienceP = .31+.24*clamp((p-.16)/.13);
+          const priceP = .57+.17*clamp((p-.32)/.13);
+          set(scene,'--fe-table-fill',n(.2+.8*smooth(0,.21,roomP)));
           tables.forEach((table,index)=>{
-            const arrival = smooth(index*.012,.07+index*.012,p);
+            const arrival = smooth(index*.012,.07+index*.012,roomP);
             set(table,'opacity',n(arrival));
             table.setAttribute('transform',`translate(0 ${n(13*(1-arrival))})`);
           });
-          traces.forEach((trace,index)=>set(trace,'stroke-dashoffset',n(1-smooth(index*.009,.13+index*.009,p))));
-          places.forEach((place,index)=>set(place,'opacity',n(smooth(.045+index*.006,.11+index*.006,p))));
-          rays.forEach((ray,index)=>set(ray,'stroke-dashoffset',n(1-smooth(.12+index*.005,.23+index*.005,p))));
-          set(light,'opacity',n(smooth(.12,.27,p)));
-          set(plume,'opacity',n(.12+.88*smooth(.17,.28,p)));
-          set(panorama,'opacity',n(smooth(.29,.35,p)*(1-smooth(.55,.61,p))));
-          set(serviceImage,'opacity',n(1-smooth(.33,.385,p)));
-          const menuZoom=1+.065*(1-smooth(.34,.53,p));
+          traces.forEach((trace,index)=>set(trace,'stroke-dashoffset',n(1-smooth(index*.009,.13+index*.009,roomP))));
+          places.forEach((place,index)=>set(place,'opacity',n(smooth(.045+index*.006,.11+index*.006,roomP))));
+          rays.forEach((ray,index)=>set(ray,'stroke-dashoffset',n(1-smooth(.12+index*.005,.23+index*.005,roomP))));
+          set(light,'opacity',n(smooth(.12,.27,roomP)));
+          set(plume,'opacity',n(.12+.88*smooth(.17,.28,roomP)));
+          set(serviceImage,'opacity',n(1-smooth(.33,.385,experienceP)));
+          const menuZoom=1+.065*(1-smooth(.34,.53,experienceP));
           menuImage.setAttribute('transform',`translate(320 208) scale(${n(menuZoom)}) translate(-320 -208)`);
-          const viewReveal=smooth(.43,.515,p),viewWidth=218*viewReveal,viewEdge=603-viewWidth;
+          const viewReveal=smooth(.43,.515,experienceP),viewWidth=218*viewReveal,viewEdge=603-viewWidth;
           launchClip.setAttribute('x',n(viewEdge));launchClip.setAttribute('width',n(viewWidth));
           windowDivider.setAttribute('d',`M${n(viewEdge)} 65V351`);set(windowDivider,'opacity',n(viewReveal));
-          set(windowViewLabel,'opacity',n(smooth(.47,.52,p)));
-          set(courseLine,'stroke-dashoffset',n(1-smooth(.35,.52,p)));
-          courses.forEach((course,index)=>set(course,'--fe-course-lit',n(smooth(.34+index*.022,.39+index*.022,p))));
-          set(price,'opacity',n(smooth(.57,.64,p)*(1-smooth(.76,.82,p))));
-          set(priceLine,'stroke-dashoffset',n(1-smooth(.63,.73,p)));
-          const mixOpacity = n(smooth(.77,.83,p));
-          set(marketing,'opacity',mixOpacity);
-          set(mobileMarketing,'opacity',mixOpacity);
-          mobileMixRows.forEach((row,index)=>set(row,'opacity',n(smooth(.78+index*.025,.84+index*.025,p))));
-          set(mixTrack,'stroke-dashoffset',n(1-smooth(.78,.96,p)));
+          set(windowViewLabel,'opacity',n(smooth(.47,.52,experienceP)));
+          set(courseLine,'stroke-dashoffset',n(1-smooth(.35,.52,experienceP)));
+          courses.forEach((course,index)=>set(course,'--fe-course-lit',n(smooth(.34+index*.022,.39+index*.022,experienceP))));
+          set(priceLine,'stroke-dashoffset',n(1-smooth(.63,.73,priceP)));
           mixRows.forEach((row,index)=>{
-            const arrival = smooth(.78+index*.025,.84+index*.025,p);
+            const arrival = context.static ? 1 : smooth(.82+index*.016,.895+index*.016,p);
             set(row,'opacity',n(arrival));
-            row.setAttribute('transform',`translate(${n(18*(1-arrival))} ${73+index*87})`);
+            set(row,'transform',`translateY(${n(8*(1-arrival))}px)`);
           });
         }
       };
@@ -209,15 +246,80 @@
     {x:115,y:351,tx:328,ty:351,labelX:60,labelY:433,title:'Kultur',line:'Beteiligung ermöglichen'},
     {x:525,y:351,tx:344,ty:351,labelX:414,labelY:433,title:'Kompetenzen',line:'Wissen teilen'}
   ];
+  const systemPhases = [0,.21,.42,.63,.82];
+  const systemViews = ['diagnosis','structure-process','culture-skills','gates','engines'];
+  const analysisGroups = [
+    {title:'3 Stärken',kind:'strength',fields:[
+      {name:'Strategie',verb:'SOLLEN',reason:'Langfristige Mission verbindet die Geschäftsfelder.'},
+      {name:'Foresight',verb:'SEHEN',reason:'KI und Daten früh aufgegriffen; Abhängigkeit vom Gründer.'},
+      {name:'Prozesse',verb:'MACHEN',reason:'Schnelle Build-Test-Learn-Schleifen mit realen Daten.'}
+    ]},
+    {title:'3 Felder mit Handlungsbedarf',kind:'development',fields:[
+      {name:'Struktur',verb:'HABEN',reason:'Über Geschäftsfelder hinweg besser koordinieren.'},
+      {name:'Führung / Kultur',verb:'DÜRFEN / WOLLEN',reason:'Beteiligung und psychologische Sicherheit stärken.'},
+      {name:'Kompetenzen / Methoden',verb:'KÖNNEN',reason:'Wissen gemeinsam teilen und gezielt weiterlernen.'}
+    ]}
+  ];
+  // The seven source questions are grouped editorially for reading. The grouping
+  // adds no scoring, thresholds or claim that a project has passed the gates.
+  const gateGroups = [
+    {title:'Kunde & Markt',questions:[
+      ['Kundennutzen','Mit Kunden oder einem Prototyp validiert?'],
+      ['Markt','Nachfrage, Wachstum und Zahlungsbereitschaft plausibel?'],
+      ['Differenzierung','Erkennbar besser oder anders?']
+    ]},
+    {title:'Machbarkeit',questions:[
+      ['Reifegrad','Technische und operative Risiken verstanden?'],
+      ['Synergien','Vorhandene Fähigkeiten und Infrastruktur genutzt?']
+    ]},
+    {title:'Tragfähigkeit & Umsetzung',questions:[
+      ['Wirtschaftlichkeit','Investition, Kosten und Amortisation belastbar?'],
+      ['Umsetzung','Ressourcen und Zeit bis zum Markteintritt passend?']
+    ]}
+  ];
 
   scenes[7] = {
-    markup: () => `<div class="fe-scene fe-system" role="img" aria-label="Vier Empfehlungen – Struktur, Prozesse, Kultur und Kompetenzen – bilden beim Scrollen metaphorisch den gemeinsamen Antrieb. Die Rakete bleibt bis zum Finale am Boden.">
+    markup: () => `<div class="fe-scene fe-system" role="group" aria-label="Von sechs Analysefeldern zu vier Empfehlungen für das Innovationsmanagement.">
+      <section class="fe-method-panel fe-diagnosis" data-fe-diagnosis>
+        <p class="fe-method-kicker">Projekturteil · Modell nach Hube</p>
+        <h3>Sechs Felder. Ein differenziertes Bild.</h3>
+        <div class="fe-analysis-groups">${analysisGroups.map(group=>`<section class="fe-analysis-group fe-analysis-${group.kind}"><h4>${group.title}</h4><dl>${group.fields.map(field=>`<div><dt><span>${field.verb}</span><strong>${field.name}</strong></dt><dd>${field.reason}</dd></div>`).join('')}</dl></section>`).join('')}</div>
+        <p class="fe-method-note"><strong>Vier Empfehlungen ergänzen auch die starke Prozessdimension.</strong> Begründetes Urteil aus öffentlichen Quellen; keine interne Unternehmensprüfung.</p>
+      </section>
+      <section class="fe-method-panel fe-structure-process" data-fe-structure-process aria-hidden="true">
+        <p class="fe-method-kicker">Empfehlungen 01 + 02</p>
+        <h3>Verantwortung und Prüfung verbinden.</h3>
+        <section class="fe-recommendation">
+          <h4><span>HABEN · Struktur</span>Das Portfolio gemeinsam steuern.</h4>
+          <p class="fe-portfolio-root">Gemeinsame Portfoliosicht</p>
+          <div class="fe-portfolio-branches"><p><strong>Kerninnovationen</strong><span>Responsible Engineers<br>in der Linie</span></p><p><strong>Radikale Ideen</strong><span>Eigenes Projektteam<br>mit klarem Auftrag</span></p></div>
+        </section>
+        <section class="fe-recommendation">
+          <h4><span>MACHEN · Prozesse</span>Schnelle Iteration gezielt ergänzen.</h4>
+          <div class="fe-process-complement"><p><span class="fe-source-label">Stärke erhalten</span><strong>Build-Test-Learn</strong><span>Mit realen Daten weiterlernen.</span></p><span class="fe-complement-plus" aria-hidden="true">+</span><p><span class="fe-source-label">Früh ergänzen</span><strong>Design Thinking<br>&amp; Go-/No-go-Gates</strong><span>Kundennutzen fachübergreifend prüfen.</span></p></div>
+        </section>
+      </section>
+      <section class="fe-method-panel fe-culture-skills" data-fe-culture-skills aria-hidden="true">
+        <p class="fe-method-kicker">Empfehlungen 03 + 04</p>
+        <h3>Beteiligung und gemeinsames Lernen stärken.</h3>
+        <div class="fe-learning-pair">
+          <section><h4><span>DÜRFEN / WOLLEN</span>Kultur</h4><div class="fe-retain"><span class="fe-source-label">Bewahren</span><p>Eigenverantwortung und Testkultur.</p></div><div class="fe-addition"><span class="fe-source-label">Ergänzen</span><p>Ideen aktiv erfragen. Sachliche Kritik ohne Bestrafungsangst ermöglichen. Umgesetzte Ideen sichtbar würdigen.</p></div><p class="fe-recommendation-outcome">Beteiligung &amp; psychologische Sicherheit</p></section>
+          <section><h4><span>KÖNNEN</span>Kompetenzen</h4><div class="fe-retain"><span class="fe-source-label">Bewahren</span><p>Selbstgesteuertes Lernen.</p></div><div class="fe-addition"><span class="fe-source-label">Ergänzen</span><p>Austausch zwischen Bereichen, feste Lernformate und gemeinsame Weiterbildung. Change-Kompetenz aufbauen.</p></div><p class="fe-recommendation-outcome">Wissenstransfer &amp; gemeinsame Kompetenz</p></section>
+        </div>
+      </section>
+      <section class="fe-method-panel fe-gates" data-fe-gates aria-hidden="true">
+        <p class="fe-method-kicker">Fachübergreifende Go-/No-go-Gates</p>
+        <h3>Sieben Fragen vor der Freigabe.</h3>
+        <div class="fe-gate-groups">${gateGroups.map((group,index)=>`<section><h4><span aria-hidden="true">0${index+1}</span>${group.title}</h4><dl>${group.questions.map(([label,question])=>`<div><dt>${label}</dt><dd>${question}</dd></div>`).join('')}</dl></section>`).join('')}</div>
+        <p class="fe-method-note">Für RocketLight besonders relevant: Standortzugang, Sicherheit, Zahlungsbereitschaft und belastbarer Pilotbetrieb. Kriterien dem Projekt anpassen.</p>
+      </section>
       <svg class="fe-svg" viewBox="0 0 640 520" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="fe-vehicle-metal"><stop stop-color="#647782"/><stop offset=".38" stop-color="#eff3ed"/><stop offset=".64" stop-color="#a9b6bc"/><stop offset="1" stop-color="#40535f"/></linearGradient>
           <radialGradient id="fe-engine-glow"><stop stop-color="#fff2d1" stop-opacity=".75"/><stop offset=".26" stop-color="#efbd91" stop-opacity=".3"/><stop offset="1" stop-color="#efbd91" stop-opacity="0"/></radialGradient>
           <radialGradient id="fe-engine-interior"><stop stop-color="#fff0d3"/><stop offset=".34" stop-color="#efbd91"/><stop offset="1" stop-color="#b36e43" stop-opacity=".1"/></radialGradient>
         </defs>
+        <g data-fe-engines>
         <path class="fe-system-axis" d="M320 25V467M222 361H418"/>
         <path class="fe-system-ground" d="M220 361H420M250 367H390"/>
         <path class="fe-vehicle-ghost" d="M295 326V130C295 102 300 78 320 55C340 78 345 102 345 130V326H295ZM295 130H345"/>
@@ -248,11 +350,14 @@
         </g>`).join('')}
         ${enginePositions.map((engine,index)=>`<g class="fe-engine-label" data-fe-engine-label="${index}"><text class="fe-engine-name" x="${engine.labelX}" y="${engine.labelY}">${engine.title}</text><text class="fe-engine-purpose" x="${engine.labelX}" y="${engine.labelY+27}">${engine.line}</text><path class="fe-engine-label-rule" pathLength="1" d="M${engine.labelX} ${engine.labelY+40}H${engine.labelX+160}"/></g>`).join('')}
         <text class="fe-system-foundation" x="320" y="499" text-anchor="middle">KLARE MISSION + FRÜHE TRENDERKENNUNG</text>
+        </g>
       </svg>
       <div class="fe-system-caption" aria-hidden="true">Vier Empfehlungen <span>·</span> Ein gemeinsamer Antrieb</div>
     </div>`,
     mount(root) {
       const scene = root.querySelector('.fe-system');
+      const views = systemViews.map(name => root.querySelector(`[data-fe-${name}]`));
+      const caption = root.querySelector('.fe-system-caption');
       const traces = Array.from(root.querySelectorAll('.fe-vehicle-trace'));
       const vehicle = root.querySelector('[data-fe-vehicle]');
       const pods = Array.from(root.querySelectorAll('[data-fe-engine]'));
@@ -265,38 +370,45 @@
       return {
         update(progress, context = {}) {
           const p = context.reduced ? 1 : clamp(progress);
-          const key = `${n(p)}|${Boolean(context.reduced)}|${Boolean(context.mobile)}`;
+          const key = `${n(p)}|${Boolean(context.reduced)}|${Boolean(context.mobile)}|${Boolean(context.static)}`;
           if (key === last) return;
           last = key;
-          const assembly = smooth(.62,.95,p);
-          const vehicleReveal = smooth(.65,.96,p);
+          const phase = phaseAt(p, systemPhases);
+          const reveal = context.static || phase===0 ? 1 : smooth(systemPhases[phase], systemPhases[phase]+.025, p);
+          showPhase(scene, views, systemViews, phase, n(reveal));
+          caption.style.display = phase===4 ? '' : 'none';
+          scene.setAttribute('aria-label', phase===4 ? 'Vier Empfehlungen – Struktur, Prozesse, Kultur und Kompetenzen – bilden metaphorisch den gemeinsamen Antrieb. Die Rakete bleibt bis zum Finale am Boden.' : views[phase].querySelector('h3').textContent);
+          // Only the closing phase assembles the four previously explained
+          // recommendations. All motion is derived from the shared progress.
+          const engineP = clamp((p-.82)/.18);
+          const assembly = smooth(.08,.95,engineP);
+          const vehicleReveal = smooth(.15,.96,engineP);
           set(scene,'--fe-system-assembled',n(assembly));
           set(vehicle,'opacity',n(vehicleReveal));
           traces.forEach((trace,index) => {
-            set(trace,'stroke-dashoffset',n(1-smooth(.01+index*.035,.29+index*.035,p)));
+            set(trace,'stroke-dashoffset',0);
             set(trace,'opacity',n(index===2?.32:(1-.62*vehicleReveal)));
           });
           pods.forEach((pod,index) => {
             const original = enginePositions[index];
-            const appear = smooth(.07+index*.125,.23+index*.125,p);
-            const localAssembly = smooth(.62+index*.016,.91+index*.016,p);
+            const localAssembly = smooth(.08+index*.025,.88+index*.025,engineP);
             const x = lerp(original.x,original.tx,localAssembly);
             const y = lerp(original.y,original.ty,localAssembly);
             const scale = lerp(1,.205,localAssembly);
-            set(pod,'opacity',n(appear));
-            set(pod,'--fe-engine-heat',n(appear));
+            set(pod,'opacity',1);
+            set(pod,'--fe-engine-heat',1);
             pod.setAttribute('transform',`translate(${n(x)} ${n(y)}) scale(${n(scale)})`);
-            set(rings[index],'stroke-dashoffset',n(1-appear));
-            set(numbers[index],'opacity',n(1-smooth(.64,.82,p)));
+            set(rings[index],'stroke-dashoffset',0);
+            set(numbers[index],'opacity',n(1-smooth(.15,.7,engineP)));
             const left = index%2===0;
             const labelX = original.labelX + (left?160:0);
             const labelY = original.labelY + 40;
             const bendX = left ? Math.min(x-38,272) : Math.max(x+38,368);
             wires[index].setAttribute('d',`M${labelX} ${labelY}C${n(bendX)} ${labelY} ${n(bendX)} ${n(y)} ${n(x)} ${n(y)}`);
-            set(wires[index],'stroke-dashoffset',n(1-smooth(.1+index*.125,.3+index*.125,p)));
+            set(wires[index],'stroke-dashoffset',0);
             set(wires[index],'opacity',n(.23+.53*assembly));
-            set(labels[index],'opacity',n(.18+.82*appear));
-            set(labelRules[index],'stroke-dashoffset',n(1-appear));
+            set(labels[index],'opacity',1);
+            set(labelRules[index],'stroke-dashoffset',0);
           });
         }
       };

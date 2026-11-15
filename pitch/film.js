@@ -11,7 +11,9 @@
   const smooth = (a,b,n) => { const p=clamp((n-a)/(b-a)); return p*p*(3-2*p); };
   const fmt = n => n.toFixed(4);
   const arrow = '<svg class="arrow-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12 12 4M4 4h8v8"/></svg>';
-  const stillPoints = {1:[.35,.70,1],2:[.40,.81,1],3:[.10,.28,.44,.60,.80,1],4:[.27,.57,1],5:[.28,.53,.74,1],6:[.10,.22,.34,.46,.58,.70,.84,1],7:[.18,.46,.68,1],8:[.25,.60,1]};
+  const stillPoints = Object.fromEntries(story.map(chapter=>[chapter.step,chapter.beats.map(beat=>beat.still??beat.point??1)]));
+  const methodSteps = new Set([1,2,3,4,5,7,8]);
+  const duration = seconds=>Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0');
   const world = document.createElement('div');
   world.className = 'film-background';
   world.setAttribute('aria-hidden','true');
@@ -49,6 +51,7 @@
     section.setAttribute('aria-labelledby','film-title-'+chapter.step);
     section.append(reel,disclosure);
     const stage = reel.querySelector('.film-stage');
+    stage.querySelector('.film-chapter-meta > span:last-child').textContent='ZEITRAHMEN '+duration(chapter.seconds)+' MIN';
     const visual = stage.querySelector('.film-visual');
     visual.innerHTML = scenes[chapter.step].markup();
     const nav = stage.querySelector('.film-beat-nav');
@@ -59,12 +62,29 @@
       button.dataset.filmChapter=chapter.step;
       button.dataset.filmPoint=stillPoints[chapter.step][index];
       button.dataset.filmStill=stillPoints[chapter.step][index];
+      button.dataset.filmIndex=index;
       button.innerHTML='<span></span>';
       nav.append(button);
     });
-    return {chapter,section,reel,stage,visual,disclosure,source,renderer:scenes[chapter.step].mount(visual),
+    const transport=document.createElement('div');
+    transport.className='film-present-controls';
+    transport.innerHTML='<button type="button" data-film-chapter="'+chapter.step+'" data-film-direction="-1" aria-label="Vorheriges Bild">Zurück</button><span class="film-phase-count" aria-label="Aktuelle Phase"></span><button type="button" data-film-chapter="'+chapter.step+'" data-film-direction="1" aria-label="Nächstes Bild">Weiter <span aria-hidden="true">→</span></button>';
+    nav.after(transport);
+    const status=document.createElement('span');
+    status.className='film-phase-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.setAttribute('aria-atomic','true');
+    transport.append(status);
+    let planning=null;
+    if(chapter.step===6 && window.PitchPlanningMethod) {
+      planning=document.createElement('aside');
+      planning.className='fm-planning-method';
+      planning.setAttribute('aria-labelledby','planning-method-title');
+      planning.innerHTML=window.PitchPlanningMethod.markup(variant);
+      disclosure.before(planning);
+    }
+    return {chapter,section,reel,stage,visual,disclosure,source,planning,renderer:scenes[chapter.step].mount(visual),
       tag:stage.querySelector('.film-beat-tag'),title:stage.querySelector('h2'),copy:stage.querySelector('.film-beat-copy'),
       copyBox:stage.querySelector('.film-copy'),cue:stage.querySelector('.film-scene-cue'),buttons:Array.from(nav.children),
+      count:transport.querySelector('.film-phase-count'),status,attention:[],attentionBeat:-1,
       beat:-1,lastP:-1,staticPoint:null,top:0,height:0,range:1};
   });
   const launch = document.querySelector('#start');
@@ -82,22 +102,42 @@
     let index=0;
     record.chapter.beats.forEach((beat,i)=>{if(p>=beat.at)index=i;});
     if(index!==record.beat) {
+      record.attention.forEach(animation=>animation.cancel());
+      record.attention=[];record.attentionBeat=-1;
       record.beat=index;
       const beat=record.chapter.beats[index];
       record.tag.textContent=beat.tag;
       record.title.innerHTML=beat.title;
       record.copy.textContent=beat.copy;
       record.cue.textContent=beat.cue;
+      record.count.textContent=String(index+1).padStart(2,'0')+' / '+String(record.chapter.beats.length).padStart(2,'0');
+      if(!record.useStatic&&scrollY+innerHeight>record.top&&scrollY<record.top+record.height)record.status.textContent='Phase '+(index+1)+' von '+record.chapter.beats.length+': '+beat.cue;
       record.buttons.forEach((b,i)=>{b.setAttribute('aria-pressed',String(i===index));});
     }
     const beat=record.chapter.beats[index];
     const next=record.chapter.beats[index+1];
-    const enterRange=record.chapter.step===6?.018:.045;
-    const leaveRange=record.chapter.step===6?.012:.035;
+    const phaseWidth=(next?.at??1)-beat.at;
+    const enterRange=Math.min(.025,phaseWidth*.13);
+    const leaveRange=Math.min(.018,phaseWidth*.09);
     const enter=index===0||reduced?1:smooth(beat.at,beat.at+enterRange,p);
     const leave=next&&!reduced?1-smooth(next.at-leaveRange,next.at,p):1;
     record.copyBox.style.setProperty('--copy-opacity',fmt(enter*leave));
     record.copyBox.style.setProperty('--copy-shift',((1-enter)*24-(1-leave)*18).toFixed(2)+'px');
+  }
+
+  function guideAttention(record,p,visible) {
+    if(reduced||record.methodLinear||!visible||document.hidden||record.attentionBeat===record.beat)return;
+    const beat=record.chapter.beats[record.beat],next=record.chapter.beats[record.beat+1];
+    if(!beat.tone||!beat.view||p<beat.at+((next?.at??1)-beat.at)*.80)return;
+    const color=beat.tone==='difference'?'#f19c94':beat.tone==='selection'?'#efbd91':'#a9d9d9';
+    const roots=Array.from(record.visual.querySelectorAll(beat.view));
+    const markers=roots.flatMap(root=>[...(root.matches('.method-attention')?[root]:[]),...root.querySelectorAll('.method-attention')]);
+    record.attentionBeat=record.beat;
+    record.attention=markers.map(node=>node.animate([
+      {filter:'drop-shadow(0 0 0 transparent)'},
+      {filter:'drop-shadow(0 0 9px '+color+') brightness(1.35)',offset:.24},
+      {filter:'drop-shadow(0 0 0 transparent)'}
+    ],{duration:1050,easing:'ease-out'}));
   }
 
   function measure() {
@@ -117,16 +157,20 @@
     camera.style.top=cameraTop.toFixed(2)+'px';
     const y=scrollY;
     records.forEach(record=>{
-      if (reduced && !record.staticScene && window.PitchStatic && [3,4,5].includes(record.chapter.step)) {
+      record.methodLinear=methodSteps.has(record.chapter.step)&&(width<=760||(width<=1100&&height<760));
+      record.useStatic=methodSteps.has(record.chapter.step)&&(reduced||record.methodLinear);
+      record.section.classList.toggle('is-method-linear',record.methodLinear);
+      if (record.useStatic && !record.staticScene && window.PitchStatic) {
         record.staticScene=window.PitchStatic.create(record.chapter,scenes[record.chapter.step],stillPoints[record.chapter.step],{variant,mobile:width<=760});
         record.reel.append(record.staticScene.element);
       }
       if(record.staticScene)record.staticScene.updateContext({variant,mobile:width<=760});
-      record.section.setAttribute('aria-labelledby',reduced&&record.staticScene?record.staticScene.headingId:'film-title-'+record.chapter.step);
+      record.section.setAttribute('aria-labelledby',record.useStatic&&record.staticScene?record.staticScene.headingId:'film-title-'+record.chapter.step);
       record.top=record.reel.getBoundingClientRect().top+y;
       record.height=record.reel.offsetHeight;
       record.range=Math.max(1,record.height-record.stage.offsetHeight);
-      record.linear=width<=760 && (record.chapter.step===6 || record.chapter.step===8);
+      record.linear=width<=760 && record.chapter.step===6;
+      if(record.planning){record.planningTop=record.planning.getBoundingClientRect().top+y;record.planningCards=Array.from(record.planning.querySelectorAll('[data-planning-reveal]'));}
       record.lastP=-1;
     });
     heroTop=prologue.getBoundingClientRect().top+y;
@@ -149,18 +193,23 @@
     hero.style.setProperty('--hero-copy-opacity',fmt(1-smooth(.58,1,intro)));
     let current=records[0];
     records.forEach(record=>{
-      const p=(reduced||record.linear)?(record.staticPoint??1):clamp((y-record.top)/record.range);
+      const p=(reduced||record.linear||record.methodLinear)?(record.staticPoint??1):clamp((y-record.top)/record.range);
       record.progress=p;
       const visible=y+height>=record.top&&y<=record.top+record.height;
       if(visible||record.lastP<0||reduced) {
         if(Math.abs(p-record.lastP)>.00005||dirty||record.variant!==variant||record.reduced!==reduced) {
-          record.renderer.update(p,{...context,reduced:reduced&&record.staticPoint===null});
+          record.renderer.update(p,{...context,reduced:reduced&&record.staticPoint===null,visible});
           paintCopy(record,p);
           record.stage.style.setProperty('--film-progress',fmt(p));
           record.stage.dataset.progress=p.toFixed(3);
           record.lastP=p; record.variant=variant;record.reduced=reduced;
         }
+        guideAttention(record,p,visible&&y>record.top-height*.15);
       }
+      if(record.planningCards)record.planningCards.forEach((card,index)=>{
+        const reveal=reduced?1:smooth(index*.11,index*.11+.40,(y+height*.87-record.planningTop)/(height*.65));
+        card.style.opacity=fmt(.22+.78*reveal);card.style.transform='translateY('+((1-reveal)*18).toFixed(2)+'px)';
+      });
       if(y+Math.min(height*.35,270)>=record.top) current=record;
     });
     const step=current.chapter.step;
@@ -172,7 +221,7 @@
     // The architectural reveal ends inside the same room introduced in Part 5.
     const interiorReveal=siteMix*smooth(.90,.98,site.progress);
     const diningMix=Math.max(experienceMix,interiorReveal);
-    const diningFocus=smooth(.28,.38,dining.progress)*(1-smooth(.54,.65,dining.progress));
+    const diningFocus=smooth(.16,.19,dining.progress)*(1-smooth(.29,.32,dining.progress));
     world.style.setProperty('--dining-opacity',fmt(diningMix));
     world.style.setProperty('--dining-image-opacity',fmt(.34+Math.max(diningFocus*experienceMix,interiorReveal*.35)*.55));
     const worldIn=smooth(heroBottom-height*.7,heroBottom-height*.08,y);
@@ -210,6 +259,7 @@
     roadmap.chapter.beats=window.PitchRoadmapPhases[value];
     roadmap.beat=-1;
     roadmap.buttons.forEach((button,index)=>button.setAttribute('aria-label',roadmap.chapter.beats[index].cue));
+    if(roadmap.planning)roadmap.planning.innerHTML=window.PitchPlanningMethod.markup(value);
     records.forEach(r=>{r.lastP=-1;r.staticScene?.updateVariant(value);});
     document.dispatchEvent(new Event('pitch:layout'));
   }
@@ -221,7 +271,7 @@
     records.forEach(r=>{if(y+Math.min(height*.2,130)>=r.top)record=r;});
     if(y<record.top+record.height) {
       let point=record.progress??0;
-      if(reduced && record.staticScene) {
+      if(record.useStatic && record.staticScene) {
         let selected=0;
         record.staticScene.phases.forEach((phase,index)=>{if(phase.getBoundingClientRect().top<=height*.45)selected=index;});
         point=stillPoints[record.chapter.step][selected];
@@ -240,13 +290,17 @@
   function setReduced(value,anchor) {
     if(reduced===value)return;
     reduced=value; dirty=true;
-    records.forEach(r=>{r.lastP=-1;});
+    records.forEach(r=>{r.lastP=-1;r.attention.forEach(animation=>animation.cancel());});
     if(anchor) {
       // Resolve the roadmap's linear/film layout before measuring its new height.
       const roadmap=records.find(record=>record.chapter.step===6);
       roadmap.renderer.update(anchor.record===roadmap?anchor.point:roadmap.progress??1,{reduced:value,variant,mobile:width<=760});
       measure();
       let top=anchor.record?anchor.record.top+(value?0:anchor.point*anchor.record.range):anchor.node.getBoundingClientRect().top+scrollY+anchor.offset;
+      if(anchor.record?.useStatic&&anchor.record.staticScene) {
+        let index=0;anchor.record.chapter.beats.forEach((beat,i)=>{if(anchor.point>=beat.at)index=i;});
+        top=anchor.record.staticScene.phases[index].getBoundingClientRect().top+scrollY-headerClearance;
+      }
       if(anchor.record===roadmap && (value||roadmap.linear)) {
         let index=0;
         roadmap.chapter.beats.forEach((phase,i)=>{if(anchor.point>=phase.at)index=i;});
@@ -262,9 +316,36 @@
     if(dirty)measure();
     const r=records.find(item=>item.chapter.step===Number(control.dataset.filmChapter));
     if(!r)return;
+    const fromPlanning=control.dataset.filmPlanning;
+    let target=r,index=fromPlanning?(fromPlanning==='next'?r.chapter.beats.length:r.chapter.beats.length-1):(control.dataset.filmDirection?r.beat+Number(control.dataset.filmDirection):Number(control.dataset.filmIndex));
+    if(!fromPlanning&&((r.chapter.step===6&&index>=r.chapter.beats.length)||(r.chapter.step===7&&index<0))) {
+      const planning=records.find(record=>record.chapter.step===6).planning;
+      if(planning){
+        const direction=r.chapter.step===6?'next':'previous';
+        planning.querySelector('[data-film-planning="'+direction+'"]').focus({preventScroll:true});
+        scrollTo({top:planning.getBoundingClientRect().top+scrollY-headerClearance,behavior:reduced?'instant':'smooth'});return;
+      }
+    }
+    if(index<0){target=records[records.indexOf(r)-1];index=target?.chapter.beats.length-1;}
+    if(index>=r.chapter.beats.length&&target===r){target=records[records.indexOf(r)+1];index=0;}
+    if(!target){(Number(control.dataset.filmDirection)<0?hero:launch).scrollIntoView({behavior:reduced?'instant':'smooth'});return;}
+    const point=stillPoints[target.chapter.step][index];
+    if(target!==r||fromPlanning){
+      const heading=target.useStatic?target.staticScene?.phases[index].querySelector('h3'):null;
+      if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}
+      else target.stage.querySelector('[data-film-direction="'+(Number(control.dataset.filmDirection)<0||fromPlanning==='previous'?-1:1)+'"]').focus({preventScroll:true});
+    }
+    if(target.useStatic&&target.staticScene){
+      scrollTo({top:target.staticScene.phases[index].getBoundingClientRect().top+scrollY-headerClearance,behavior:reduced?'instant':'smooth'});return;
+    }
+    if(target.linear&&target.chapter.step===6){
+      const card=target.visual.querySelector('.film-phase-sequence [data-roadmap-phase="'+index+'"]');
+      if(card){scrollTo({top:card.getBoundingClientRect().top+scrollY-headerClearance,behavior:'smooth'});return;}
+    }
+    if(target!==r){scrollTo({top:target.top+point*target.range,behavior:reduced?'instant':'smooth'});return;}
     if(reduced||r.linear) {
       // A deliberate phase choice remains available without moving imagery.
-      const p=Number(control.dataset.filmStill);
+      const p=point;
       r.staticPoint=p;
       r.renderer.update(p,{reduced:false,variant,mobile:width<=760});
       paintCopy(r,p);
@@ -273,7 +354,7 @@
       r.stage.dataset.progress=p.toFixed(3);
       r.lastP=p;
       r.stage.scrollIntoView({block:'start',behavior:'instant'});
-    } else scrollTo({top:r.top+Number(control.dataset.filmPoint)*r.range,behavior:'smooth'});
+    } else scrollTo({top:r.top+point*r.range,behavior:'smooth'});
   });
   photo.addEventListener('load',()=>document.dispatchEvent(new Event('pitch:layout')));
   window.PitchFilm={measure,update,setVariant,setReduced,captureMotionPosition};

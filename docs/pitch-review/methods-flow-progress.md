@@ -58,3 +58,14 @@ Funktionscheckpoint `f55fa3a665694193cd6536f9fb1677842d2145df` wurde erfolgreich
 Im Browser bei1363×936 geprüft: Hube-Formel, Raptor/Starlink-Rechnung, Gesamtvergleich, Auswahltrichter, Originalitätsdifferenz, Kriteriengewichte, Aufwandsbeiträge, IR-Brüche, Umsatzmodell, KI-Vergleich, Synthese, 5P-Mix, 4W-Zwischenhalt, Managementdiagnose/Empfehlungen/Gates und Testkarte. Die Weiter-Steuerung funktioniert per Enter auch über Kapitelgrenzen. Bewegung reduzieren erhält die gewählte Testkarte und zeigt alle36 Methodenbilder in sieben Lesefolgen; Kapitel6 behält seine acht bestehenden Planungsphasen. Bei909×624 und545×374 werden diese Methoden ebenfalls linear dargestellt, ohne Seitenüberbreite; die KI-Tabellenköpfe bleiben ungeclippt. Diese schmalen Größen wurden mit Browserzoom geprüft, nicht als physische Mobilgeräte.
 
 Aus der Prüfung: Vergleichskicker und LEC-Achsenbeschriftung entzerrt, Auswahltrichter-Abstand vergrößert, Rotpuls direkt auf den benannten Differenzrahmen gelegt, Hintergrund in Analysekapiteln gedämpft. Ergänzte Höhenregeln für5/7 verdichten Abstände; unter680px Fensterhöhe hat vollständige Lesbarkeit Vorrang. Neue Höhenregeln werden im nächsten Checkpoint kontrolliert.
+
+
+### Reproduzierbare Prüfung der Fensterhöhe
+
+Der Prüfrahmen `viewport-preview.html` wurde mit Commit `2bcbda4326c02e22e5eab237b2431003c4b33f7d` gespeichert und über Pages-Lauf 43698822079 erfolgreich ausgeliefert. Er lädt denselben Pitch in ein eigenes Seitenfenster; er emuliert kein Gerät.
+
+In einem tatsächlichen Iframe-Viewport von 1280 × 720 wurden die drei HTML-Phasen des Marketingkapitels, alle vier HTML-Phasen des Managementkapitels sowie die Testkarte geprüft: Inhaltshöhe überschreitet die verfügbare Panelhöhe nicht, Fußnavigation und Quellenlink bleiben erreichbar. Im Hochformat 390 × 844 (375 px nutzbare Dokumentbreite neben der Scrollleiste) sind alle sieben Methodenkapitel linear verfügbar; die vollständige KI-Tabelle hat keine abgeschnittenen Spaltenköpfe und keine Seitenüberbreite.
+
+Variante B wurde mit ihrer eigenen Roadmap und den vier Originalfeldern geprüft. Platzhalter für unbesetzte Rollen werden ausdrücklich als „zu besetzen“ wiedergegeben. Der Rotakzent wurde live als einmaliger Farbwechsel des passenden Faktorrahmens beobachtet, der Vergleichskicker ist entzerrt.
+
+Letzte Bedienkorrektur: Ein direkter Kapitelanker beginnt am Aufbau der ersten Szene. Der neue Button „Aufbauen“ führt erst zu deren vollständigem Bild; dadurch wird die erste Methode nicht übersprungen. Auch der Sprung zum Finale gibt den Fokus gezielt an den manuellen Startbutton weiter. Abschließend werden diese zwei Wege auf dem veröffentlichten Stand geprüft.

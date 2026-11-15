@@ -84,7 +84,7 @@
     return {chapter,section,reel,stage,visual,disclosure,source,planning,renderer:scenes[chapter.step].mount(visual),
       tag:stage.querySelector('.film-beat-tag'),title:stage.querySelector('h2'),copy:stage.querySelector('.film-beat-copy'),
       copyBox:stage.querySelector('.film-copy'),cue:stage.querySelector('.film-scene-cue'),buttons:Array.from(nav.children),
-      count:transport.querySelector('.film-phase-count'),status,attention:[],attentionBeat:-1,
+      count:transport.querySelector('.film-phase-count'),forward:transport.querySelector('[data-film-direction="1"]'),status,attention:[],attentionBeat:-1,
       beat:-1,lastP:-1,staticPoint:null,top:0,height:0,range:1};
   });
   const launch = document.querySelector('#start');
@@ -116,6 +116,12 @@
     }
     const beat=record.chapter.beats[index];
     const next=record.chapter.beats[index+1];
+    const unsettled=p<stillPoints[record.chapter.step][index]-.008;
+    if(record.unsettled!==unsettled){
+      record.unsettled=unsettled;
+      record.forward.innerHTML=unsettled?'Aufbauen <span aria-hidden="true">→</span>':'Weiter <span aria-hidden="true">→</span>';
+      record.forward.setAttribute('aria-label',unsettled?'Aktuelles Bild vollständig aufbauen':'Nächstes Bild');
+    }
     const phaseWidth=(next?.at??1)-beat.at;
     const enterRange=Math.min(.025,phaseWidth*.13);
     const leaveRange=Math.min(.018,phaseWidth*.09);
@@ -321,7 +327,8 @@
     const r=records.find(item=>item.chapter.step===Number(control.dataset.filmChapter));
     if(!r)return;
     const fromPlanning=control.dataset.filmPlanning;
-    let target=r,index=fromPlanning?(fromPlanning==='next'?r.chapter.beats.length:r.chapter.beats.length-1):(control.dataset.filmDirection?r.beat+Number(control.dataset.filmDirection):Number(control.dataset.filmIndex));
+    const direction=Number(control.dataset.filmDirection);
+    let target=r,index=fromPlanning?(fromPlanning==='next'?r.chapter.beats.length:r.chapter.beats.length-1):(control.dataset.filmDirection?r.beat+(direction>0&&r.unsettled?0:direction):Number(control.dataset.filmIndex));
     if(!fromPlanning&&((r.chapter.step===6&&index>=r.chapter.beats.length)||(r.chapter.step===7&&index<0))) {
       const planning=records.find(record=>record.chapter.step===6).planning;
       if(planning){
@@ -332,7 +339,11 @@
     }
     if(index<0){target=records[records.indexOf(r)-1];index=target?.chapter.beats.length-1;}
     if(index>=r.chapter.beats.length&&target===r){target=records[records.indexOf(r)+1];index=0;}
-    if(!target){(Number(control.dataset.filmDirection)<0?hero:launch).scrollIntoView({behavior:reduced?'instant':'smooth'});return;}
+    if(!target){
+      const destination=direction<0?hero:launch;
+      destination.querySelector(direction<0?'.button':'#launch-begin')?.focus({preventScroll:true});
+      destination.scrollIntoView({behavior:reduced?'instant':'smooth'});return;
+    }
     const point=stillPoints[target.chapter.step][index];
     if(target!==r||fromPlanning){
       const heading=target.useStatic?target.staticScene?.phases[index].querySelector('h3'):null;

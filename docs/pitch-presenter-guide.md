@@ -88,3 +88,7 @@ Für Bedienung, einen kurzen Hänger oder eine Rückfrage nutzen. Bei Zeitverzug
 ---
 
 Arbeitsgrundlage: [aktuelle Szenenfolge](../pitch/film-story.js) und [Regie-/Zeitplan](pitch-review/methods-flow-progress.md). Die Methoden- und Projektaussagen folgen den dort dokumentierten Originalwerten und gekennzeichneten redaktionellen Ergänzungen.
+
+## Direkter Kapiteleinstieg
+
+Wer über das Kapitelmenü in eine noch nicht aufgebaute Szene springt, sieht zunächst **Aufbauen**. Der erste Klick vervollständigt dieses Bild. Danach führt **Weiter** zur nächsten vollständig aufgebauten Ansicht. So wird auch die erste Erklärung eines Kapitels beim Vortragen mit den Tasten gezeigt.

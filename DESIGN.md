@@ -160,3 +160,5 @@ Nicht verfügbare Prüfungen offen benennen. Die Richtlinie beschreibt den Quali
 ## 10. Gemeinsame Weiterentwicklung
 
 Änderungen an der übergreifenden Designsprache hier dokumentieren und die betroffenen Komponenten konsistent anpassen. Bereichsspezifische Ausnahmen mit ihrem fachlichen Grund festhalten. Die Einstiegspunkte für Coding-Agenten sind [AGENTS.md](AGENTS.md) und [CLAUDE.md](CLAUDE.md); die Orientierung für Mitbearbeitende steht in der [README](README.md).
+
+Beim direkten Kapiteleinstieg vervollständigt **Aufbauen** zuerst die aktuelle Grafik. Erst am stabilen Bild wechselt der Button zu **Weiter**. Kapitelwechsel und der Übergang ins Finale übernehmen den Tastaturfokus; der Start mit Ton bleibt eine bewusste Aktion.

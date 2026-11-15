@@ -61,3 +61,7 @@ Der veraltete `film-site.js`-Cacheverweis der eigenständigen Roadmap ist korrig
 ### Bei einer erneuten Unterbrechung
 
 Nicht von vorn beginnen. Film, Poster, Glas-SVGs, Controller und Bedienelemente liegen auf `main`. Den neuesten Commit und seinen Pages-Lauf lesen; nur konkret offene neue Befunde weiterbearbeiten. Der Auftrag ist funktional abgeschlossen.
+
+## Gestalterische Revision vom 15. November 2026
+
+Der Nutzer wünscht eine stärkere Integration des Starts in die Website. Der bisherige Funktionsabschluss bleibt dokumentiert; die neue Inszenierung ist ein zusätzlicher Auftrag. Aktueller Plan und Sicherungsstand: [immersive-finale-progress.md](pitch-review/immersive-finale-progress.md).

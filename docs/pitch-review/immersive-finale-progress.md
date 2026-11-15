@@ -21,3 +21,11 @@
 ## Aktueller Sicherungsstand
 
 Die Regie ist dokumentiert. Umsetzung und neue Browserprüfung sind noch offen. Der vorherige Funktionsstand ist vollständig auf GitHub erhalten. Nächster Sicherungsschritt: die zusammen funktionierenden HTML-/CSS-/Controlleränderungen samt Versionsparametern.
+
+## Erster funktionsfähiger Zwischenstand
+
+- Bühne über die gesamte Fensterbreite und -höhe; Kopfzeile und Kapitelleiste ziehen sich für das Finale zurück und bleiben per Tastatur erreichbar.
+- Auftakt „Jetzt.“ mit bewusstem Start inklusive Ton, freier Bildraum während Zündung/Aufstieg und RocketLight-Schlussaussage aus dem letzten Filmbild.
+- Zurückhaltende Bedienung am Bildrand; Zeitregler und Wiederholung im aufklappbaren Menü „Steuerung“. Nativer Scrollfluss, Filmzeit und Reduced-Motion-Verhalten bleiben erhalten.
+- Fester Bildausschnitt 52 % / 25 % wurde anhand echter Filmframes für Desktop, Hochformat und breite Fenster gewählt. Extrem breite Fenster erhalten das gesamte Fahrzeug mit seitlich auslaufendem Bild.
+- JavaScript-Syntax und Patch-Whitespace geprüft. Browserprüfung und endgültige Veröffentlichungskontrolle stehen für diesen Zwischenstand noch aus.

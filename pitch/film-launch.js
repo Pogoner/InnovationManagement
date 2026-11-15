@@ -28,17 +28,24 @@
       stage.prepend(cinema);
       stage.classList.add('has-video-launch');
       const controls = {
+        begin: stage.querySelector('#launch-begin'),
         play: stage.querySelector('#launch-button'),
         replay: stage.querySelector('#launch-replay'),
         sound: stage.querySelector('#launch-sound'),
         timeline: stage.querySelector('#launch-timeline'),
         time: stage.querySelector('#launch-time'),
-        status: stage.querySelector('#launch-status')
+        status: stage.querySelector('#launch-status'),
+        phase: stage.querySelector('#launch-phase'),
+        tools: stage.querySelector('.launch-tools'),
+        ending: stage.querySelector('.launch-ending')
       };
+      const endingFocus = Array.from(controls.ending?.querySelectorAll('a,button,input,select,textarea,[tabindex]') || [])
+        .map(node => ({node, tabIndex: node.getAttribute('tabindex')}));
       let mode = 'scroll', reduced = document.body.classList.contains('is-reduced');
       let duration = 27, desired = 0, raw = 0, previousRaw = null, anchor = null;
       let loaded = false, failed = false, waiting = false, destroyed = false;
       let visible = false, near = false, lastStatus = '', playRequest = 0;
+      let immersive = false, entry = 0, endingActive = null, introActive = null;
       const removers = [];
       const on = (node, name, callback, options) => {
         if (!node) return;
@@ -89,11 +96,35 @@
         stage.classList.toggle('is-launch-playing', isPlaying);
         stage.classList.toggle('is-launch-loading', !failed && (near || isPlaying) && loaded && (video.readyState < 2 || waiting));
         stage.classList.toggle('is-launch-error', failed);
+        document.body.classList.toggle('is-launch-immersive', immersive && !reduced);
         stage.style.setProperty('--launch-film-progress', p.toFixed(4));
+        stage.style.setProperty('--launch-entry', entry.toFixed(4));
         // The heading leaves the image to the actual ignition and ascent.
-        stage.style.setProperty('--launch-copy-opacity', (1 - smooth(.035, .16, p)).toFixed(4));
+        const copyOpacity = 1 - smooth(.035, .16, p);
+        const endingOpacity = smooth(.91, 1, p);
+        stage.style.setProperty('--launch-copy-opacity', copyOpacity.toFixed(4));
+        stage.style.setProperty('--launch-ending-opacity', endingOpacity.toFixed(4));
+        const showIntro = copyOpacity > .05 && !failed;
+        if (controls.begin && showIntro !== introActive) {
+          if (!showIntro && document.activeElement === controls.begin) controls.play?.focus({preventScroll: true});
+          controls.begin.disabled = !showIntro;
+          controls.begin.tabIndex = showIntro ? 0 : -1;
+          introActive = showIntro;
+        }
+        const showEnding = endingOpacity > .5;
+        if (controls.ending && showEnding !== endingActive) {
+          if (!showEnding && controls.ending.contains(document.activeElement)) controls.play?.focus({preventScroll: true});
+          controls.ending.inert = !showEnding;
+          controls.ending.setAttribute('aria-hidden', String(!showEnding));
+          endingFocus.forEach(({node, tabIndex}) => {
+            if (!showEnding) node.tabIndex = -1;
+            else if (tabIndex === null) node.removeAttribute('tabindex');
+            else node.setAttribute('tabindex', tabIndex);
+          });
+          endingActive = showEnding;
+        }
         if (controls.play) {
-          controls.play.textContent = isPlaying ? 'Film pausieren' : complete ? 'Film erneut abspielen' : p > .01 ? 'Film fortsetzen' : 'Film abspielen';
+          controls.play.textContent = isPlaying ? 'Pause' : complete ? 'Noch einmal' : p > .01 ? 'Fortsetzen' : 'Start erleben';
           controls.play.setAttribute('aria-pressed', String(isPlaying));
           controls.play.disabled = failed;
         }
@@ -108,17 +139,22 @@
           controls.timeline.disabled = failed;
         }
         if (controls.time) controls.time.textContent = `${timeLabel(p * duration)} / ${timeLabel(duration)}`;
-        const phase = p < .16 ? 'Bereit zum Start.' : p < .43 ? 'Zündung.' : p < .8 ? 'Liftoff.' : 'Ein neuer Horizont.';
+        const phase = p < .16 ? 'Der Moment beginnt' : p < .43 ? 'Zündung' : p < .8 ? 'Abheben' : 'Ein neuer Horizont';
+        if (controls.phase && controls.phase.textContent !== phase) controls.phase.textContent = phase;
         const status = failed ? 'Der Film konnte nicht geladen werden. Bitte die Seite neu laden.' :
-          isPlaying ? (waiting ? 'Film lädt …' : `${phase} Film läuft${video.muted ? ' ohne Ton' : ' mit Sounddesign'}.`) :
+          isPlaying ? (waiting ? 'Film lädt …' : `${phase}. Film läuft${video.muted ? ' ohne Ton' : ' mit Sounddesign'}.`) :
           complete ? 'Der Start ist abgeschlossen. Das letzte Filmbild bleibt stehen.' :
-          mode === 'paused' ? (reduced ? 'Film pausiert. Mit Film fortsetzen geht es weiter.' : 'Film pausiert. Abspielen oder weiterscrollen.') :
-          reduced ? 'Ruhige Darstellung. Du kannst den Film bewusst abspielen.' : `${phase} Scrollen oder den Film abspielen.`;
+          mode === 'paused' ? (reduced ? 'Pausiert. Mit Fortsetzen geht es weiter.' : 'Pausiert. Fortsetzen oder weiterscrollen.') :
+          reduced ? 'Ruhige Darstellung. Du kannst den Film bewusst abspielen.' : `${phase}. Scrollen oder den Film abspielen.`;
         if (controls.status && status !== lastStatus) { controls.status.textContent = status; lastStatus = status; }
         return p;
       }
       async function play(restart = false) {
         if (failed || destroyed) return;
+        if (controls.tools?.open) {
+          if (controls.tools.contains(document.activeElement)) controls.play?.focus({preventScroll: true});
+          controls.tools.open = false;
+        }
         load();
         const p = effectiveProgress();
         if (restart || p >= .999) desired = 0;
@@ -150,6 +186,8 @@
           const scrollChanged = previousRaw !== null && Math.abs(nextRaw - previousRaw) > .00001;
           visible = context.visible ?? visible;
           near = context.near ?? visible;
+          immersive = Boolean(context.immersive);
+          entry = clamp(context.entry);
           if (near) load();
           if (mode === 'playing' && (document.hidden || !visible || (nextReduced && !reduced))) hold();
           if (scrollChanged && !nextReduced) {
@@ -175,9 +213,11 @@
           playRequest++;
           video.pause();
           removers.forEach(remove => remove());
+          document.body.classList.remove('is-launch-immersive');
           delete stage._launchCinemaController;
         }
       };
+      on(controls.begin, 'click', () => { setMuted(false); play(true); });
       on(controls.play, 'click', () => mode === 'playing' ? pause() : play());
       on(controls.replay, 'click', () => play(true));
       on(controls.sound, 'click', () => setMuted(!video.muted));

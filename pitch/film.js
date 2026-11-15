@@ -198,7 +198,9 @@
     return launchCinema.update(ignition,{
       reduced,viewport:height,width,
       visible:y+height>launchTop+height*.35 && y<launchBottom-height*.35,
-      near:y+height*2>launchTop && y<launchBottom+height
+      near:y+height*2>launchTop && y<launchBottom+height,
+      immersive:y>=launchTop-height*.12 && y<launchBottom-height*.65,
+      entry:smooth(launchTop-height*.8,launchTop,y)
     });
   }
 

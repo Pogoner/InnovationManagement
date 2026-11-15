@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#060b10">
-  <meta name="pitch-source-version" content="2026-11-14-continuous-launch-film">
+  <meta name="pitch-source-version" content="2026-11-15-immersive-launch-finale">
   <meta name="description" content="RocketLight Dinner: von der ersten Idee bis zum Start. Der gesamte Innovationspitch in acht Kapiteln – mit Bewertung, Geschäftsmodell und Roadmap.">
   <title>RocketLight · Der Pitch in acht Schritten</title>
   <link rel="preload" href="assets/dining-facing-launch.webp" as="image" fetchpriority="high">
@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="film-site.css?v=c297342ba3b8">
   <link rel="stylesheet" href="film-roadmap.css?v=4ba1b37e6f38">
   <link rel="stylesheet" href="film-static.css?v=b71c4ec023d4">
-  <link rel="stylesheet" href="film-launch.css?v=a9aa868c5ffe">
+  <link rel="stylesheet" href="film-launch.css?v=a78ead315802">
   <script defer src="../assets/js/model.js?v=d27ddb623a93"></script>
   <script defer src="../assets/js/data.js?v=d79ed574f157"></script>
   <script defer src="../teil6/data.js?v=6f8fac073f5e"></script>
@@ -34,8 +34,8 @@
   <script defer src="film-architecture.js?v=cff512785051"></script>
   <script defer src="film-evaluation.js?v=9ab03f3e32af"></script>
   <script defer src="film-static.js?v=2c96a3518bee"></script>
-  <script defer src="film-launch.js?v=2af1afd1a9a6"></script>
-  <script defer src="film.js?v=b2fe13423863"></script>
+  <script defer src="film-launch.js?v=c93779df4d49"></script>
+  <script defer src="film.js?v=010ee34e67b3"></script>
 </head>
 <body class="pitch-page">
   <a class="skip-link" href="#schritt-1">Zum ersten Kapitel</a>
@@ -434,30 +434,38 @@
 
     <section class="launch-section" id="start" aria-labelledby="launch-title">
       <div class="launch-stage">
-        <div class="launch-copy page-width">
-          <p class="eyebrow">ACHT SCHRITTE. EINE IDEE.</p>
-          <h2 id="launch-title">Bereit für<br><em>einen neuen Horizont.</em></h2>
-          <p>RocketLight Dinner.<br>Dinieren, wenn die Zukunft abhebt.</p>
-          <div class="launch-engine-status" aria-label="Vier Empfehlungen: Struktur, Prozesse, Kultur und Kompetenzen"><span><i></i>Struktur</span><span><i></i>Prozesse</span><span><i></i>Kultur</span><span><i></i>Kompetenzen</span></div>
+        <div class="launch-masthead"><span>ROCKETLIGHT / DER MOMENT</span><a href="#schritt-8">Zurück zum Pitch <span aria-hidden="true">↗</span></a></div>
+        <div class="launch-copy">
+          <p class="eyebrow">ACHT SCHRITTE. EIN MOMENT.</p>
+          <h2 id="launch-title" aria-label="RocketLight Dinner: Jetzt beginnt der Start.">Jetzt.</h2>
+          <p>Dinieren, wenn die Zukunft abhebt.</p>
+          <button id="launch-begin" class="launch-begin" type="button"><span class="launch-play-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="m9 5 11 7-11 7Z"/></svg></span><span>Mit Ton erleben</span></button>
+          <p class="launch-scroll-hint">Oder weiter scrollen.</p>
         </div>
-        <div class="launch-panel">
-          <div class="launch-timeline-row">
-            <label for="launch-timeline" class="sr-only">Position im Startfilm</label>
-            <input type="range" id="launch-timeline" min="0" max="1000" step="1" value="0" aria-valuetext="0:00 von 0:27">
-            <span id="launch-time" class="launch-time" aria-hidden="true">0:00 / 0:27</span>
-          </div>
-          <div class="launch-controls" aria-label="Startfilm steuern">
-            <button class="button button-primary" type="button" id="launch-button" aria-pressed="false">Film abspielen</button>
-            <button class="launch-tool" type="button" id="launch-replay" aria-label="Startfilm von vorn abspielen">Von vorn ↻</button>
-            <button class="launch-tool" type="button" id="launch-sound" aria-pressed="false">Ton einschalten</button>
-            <a class="text-link launch-return" href="#auftakt">Pitch wiederholen ↑</a>
-          </div>
-          <div class="launch-caption-row">
-            <p id="launch-status" class="launch-status" aria-live="polite">Scrollen oder den Film abspielen.</p>
-            <a class="launch-credit" href="assets/launch-media.md">Aufnahme: NASA · Eigenes Sounddesign</a>
+        <div class="launch-ending" aria-hidden="true" inert>
+          <p class="eyebrow">AUS EINER IDEE WIRD EIN MOMENT.</p>
+          <h3>RocketLight<span>Dinner.</span></h3>
+          <p>Dinieren, wenn die Zukunft abhebt.</p>
+          <a href="#auftakt" class="launch-end-link">Die Geschichte noch einmal erleben <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="launch-horizon-controls">
+          <p id="launch-phase" class="launch-phase">Der Moment beginnt</p>
+          <div class="launch-actions" aria-label="Raketenstart steuern">
+            <button id="launch-button" class="launch-action" type="button" aria-pressed="false">Start erleben</button>
+            <button id="launch-sound" class="launch-action" type="button" aria-pressed="false">Ton einschalten</button>
+            <details class="launch-tools">
+              <summary>Steuerung <span aria-hidden="true">＋</span></summary>
+              <div class="launch-panel">
+                <div class="launch-timeline-row"><label for="launch-timeline">Dein Moment.</label><span id="launch-time" class="launch-time" aria-hidden="true">0:00 / 0:27</span></div>
+                <input type="range" id="launch-timeline" min="0" max="1000" step="1" value="0" aria-label="Position im Startfilm" aria-valuetext="0:00 von 0:27">
+                <button class="launch-action" type="button" id="launch-replay" aria-label="Startfilm von vorn abspielen">Von vorn erleben ↻</button>
+              </div>
+            </details>
           </div>
         </div>
-        <noscript><p class="launch-nojs"><a class="button" href="assets/starship-launch-27s.mp4">Startfilm ansehen</a></p></noscript>
+        <p id="launch-status" class="launch-status sr-only" aria-live="polite">Scrollen oder den Start erleben.</p>
+        <a class="launch-credit" href="assets/launch-media.md">Aufnahme: NASA · Eigenes Sounddesign</a>
+        <noscript><p class="launch-nojs"><a class="button" href="assets/starship-launch-27s.mp4">Start ansehen</a></p></noscript>
       </div>
     </section>
 

@@ -66,83 +66,60 @@
     }
   };
 
-  // 2 · The source factors precede their scores: method, one worked comparison,
-  // the complete audit, then the model's zero rule. No judgement is overwritten.
-  const auditOrder = ['raptor-3', 'starship-v3', 'orbital-refuelling', 'starlink'];
-  const auditNames = {'raptor-3': 'Raptor 3', 'starship-v3': 'Starship V3', 'orbital-refuelling': 'Orbitale Betankung', starlink: 'Starlink · Vergleich'};
-  const auditFactors = [
-    {key:'noveltyFor',label:['Neu für wen'],detail:'Bezugsgruppe'},
-    {key:'noveltyType',label:['Wie neu'],detail:'Art der Neuheit'},
-    {key:'maturity',label:['Reifegrad'],detail:'Entwicklungsstand'},
-    {key:'benefits',label:['Nutzen'],detail:'Nutzenpunkte'}
-  ];
+  // 2 · The three headline innovations with the team's final Hube scores. The factor
+  // derivation and the team/AI comparison stay in the dossier of this chapter.
   const auditIcons = [
     'M-9-28H9L12-10H20L12 0L24 32H-24L-12 0L-20-10H-12ZM-9-28V-38H9V-28M-12 0H12M-18 23H18',
     'M0-39C-14-26-15-17-15-4V32H15V-4C15-17 14-26 0-39ZM-15 18L-28 35H-15M15 18L28 35H15M-15 5H15M-15 28H15',
     'M-29-20C-29-30-7-30-7-20V20C-7 30-29 30-29 20ZM7-20C7-30 29-30 29-20V20C29 30 7 30 7 20ZM-7 0H7M-29-14H-7M7-14H29M-18-29V-37M18-29V-37',
     'M-11-13H11V13H-11ZM-11-7H-37V7H-11M11-7H37V7H11M-28-7V7M28-7V7M0-13V-28M-8-28H8M0 13V28M-7 28H7'
   ];
+  const hubeRows = [
+    {id: 'starship-v3', name: 'Starship V3', note: 'Angetrieben vom Raptor-3-Triebwerk', icon: 1},
+    {id: 'orbital-refuelling', name: 'Orbitale Betankung', note: 'Treibstoff-Logistik im Orbit', icon: 2},
+    {id: 'starlink', name: 'Starlink', note: 'Reifegrad 0: bereits etablierter Betrieb', icon: 3}
+  ];
   const methodLocal = (p, start, end) => clamp((p-start)/(end-start));
   const methodVisible = (p, start, end) => (start===0?1:smooth(start-.008,start+.008,p))*(end===1?1:1-smooth(end-.008,end+.008,p));
   const methodReveal = (items,q,step=.09) => items.forEach((item,index)=>opacity(item,smooth(.04+index*step,.22+index*step,q)));
-  const auditEquation = (item, highlight) => `
-    <g class="fa-factor-headings">${auditFactors.map((factor,index)=>lines(factor.label,190+index*95,105,'fa-factor-label',21,'middle')).join('')}<text class="fa-factor-label" x="589" y="105" text-anchor="middle">Wert</text></g>
-    <g class="fa-factor-attention"><rect class="fa-method-difference method-attention" x="${159+highlight*95}" y="131" width="62" height="182" rx="8"/><text class="fa-factor-difference" x="${190+highlight*95}" y="337" text-anchor="middle">Differenz</text></g>
-    ${['team','ai'].map((perspective,row)=>{const y=190+row*99,values=item[perspective];return `<g class="fa-factor-row fa-factor-${perspective}"><text class="fa-factor-perspective" x="40" y="${y}">${row?'KI':'TEAM'}</text>${auditFactors.map((factor,index)=>`<g class="fa-factor-cell"><text class="fa-factor-number" x="${190+index*95}" y="${y}" text-anchor="middle">${values[factor.key]}</text>${index<3?`<text class="fa-factor-operator" x="${237+index*95}" y="${y-3}" text-anchor="middle">×</text>`:''}</g>`).join('')}<g class="fa-factor-result"><text class="fa-factor-operator" x="535" y="${y-3}" text-anchor="middle">=</text><text class="fa-factor-score" x="589" y="${y}" text-anchor="middle">${values.score}</text></g></g>`;}).join('')}`;
+  const hubeScores = () => hubeRows.map(row => ({...row, score: data().R.audit.find(item => item.id === row.id).team.score}));
   scenes[2] = {
     markup() {
-      const {R} = data();
-      const audit = auditOrder.map(id => R.audit.find(item => item.id === id));
-      const raptor=audit[0],starlink=audit[3];
-      const summary=audit.map(item=>`${auditNames[item.id]}: Team ${item.team.score}, KI ${item.ai.score}`).join('. ');
-      return svg('audit', `${R.method.audit.formula}. ${summary}. Die Team-Null bei Starlink entsteht durch Reifegrad 0 bei ${starlink.team.benefits} Nutzenpunkten.`, `
-        <defs><linearGradient id="fa-audit-copper"><stop stop-color="#efbd91" stop-opacity=".35"/><stop offset="1" stop-color="#efbd91"/></linearGradient><linearGradient id="fa-audit-ice"><stop stop-color="#a9d9d9" stop-opacity=".25"/><stop offset="1" stop-color="#a9d9d9"/></linearGradient></defs>
-        <g class="fa-audit-formula-phase">
-          <text class="fa-method-kicker" x="320" y="34" text-anchor="middle">DER INNOVATIONSPRÜFSTAND NACH HUBE</text>
-          <text class="fa-method-heading" x="320" y="82" text-anchor="middle">Vier Faktoren. Ein Produkt.</text>
-          <text class="fa-method-group-label" x="173" y="133" text-anchor="middle">NEUHEIT</text><text class="fa-method-group-label" x="467" y="133" text-anchor="middle">REALISIERUNG</text>
-          ${auditFactors.map((factor,index)=>{const x=38+index*147;return `<g class="fa-formula-factor"><rect class="fa-factor-card" x="${x}" y="157" width="123" height="116" rx="7"/>${lines(factor.label,x+61.5,203,'fa-formula-label',23,'middle')}<text class="fa-formula-detail" x="${x+61.5}" y="239" text-anchor="middle">${factor.detail}</text>${index<3?`<text class="fa-formula-times" x="${x+135}" y="221" text-anchor="middle">×</text>`:''}</g>`;}).join('')}
-          <path class="fa-method-link fa-trace" pathLength="1" d="M99 285V309H541V285M320 309V341"/>
-          <g class="fa-formula-output"><text class="fa-method-heading" x="320" y="384" text-anchor="middle">Hube-Wert in Punkten</text><text class="fa-method-note" x="320" y="430" text-anchor="middle">Ein Faktor 0 setzt das gesamte Produkt auf 0.</text><text class="fa-method-footnote" x="320" y="481" text-anchor="middle">Bewertungen nach Kriterien · keine wirtschaftliche Rangliste</text></g>
-        </g>
-        <g class="fa-audit-example-phase" opacity="0">
-          <text class="fa-method-kicker" x="320" y="32" text-anchor="middle">RAPTOR 3 · EINE RECHNUNG, ZWEI PERSPEKTIVEN</text>
-          ${auditEquation(raptor,3)}
-          <g class="fa-audit-example-explanation"><text class="fa-method-note-strong" x="40" y="386">${raptor.team.benefits} statt ${raptor.ai.benefits} Nutzenpunkte.</text><text class="fa-method-note" x="40" y="426">Team: Lernen ${raptor.team.benefitBreakdown.learning} · Umwelt ${raptor.team.benefitBreakdown.environment} · Wirtschaft ${raptor.team.benefitBreakdown.economic}</text><text class="fa-method-note" x="40" y="456">KI: nur Lernnutzen als hinreichend belegt bewertet.</text><text class="fa-method-footnote" x="40" y="501">Gleiche Neuheit und Testreife · unterschiedliche Nutzenbewertung</text></g>
-        </g>
-        <g class="fa-audit-compare-phase" opacity="0">
-          <text class="fa-kicker" x="40" y="24">3 PROJEKTE + VERGLEICH</text><text class="fa-small" x="210" y="48">HUBE-PUNKTE</text>
-          <g class="fa-audit-legend"><circle class="fa-fill-copper" cx="422" cy="18" r="4"/><text x="436" y="24">Team</text><circle class="fa-fill-ice" cx="521" cy="18" r="4"/><text x="535" y="24">KI</text></g>
-          <path class="fa-audit-spine fa-trace" pathLength="1" d="M83 62V424"/>
-          ${audit.map((item,index)=>{const y=92+index*96,drivers=auditFactors.filter(f=>item.team[f.key]!==item.ai[f.key]).map(f=>f.label.join(' '));return `<g class="fa-audit-row" data-audit-row="${index}">
-            <circle class="fa-audit-disc" cx="83" cy="${y+12}" r="43"/><g transform="translate(83 ${y+12})"><path class="fa-audit-icon fa-trace" pathLength="1" d="${auditIcons[index]}"/></g><path class="fa-audit-connector fa-trace" pathLength="1" d="M128 ${y+12}H172L187 ${y-2}H200"/>
-            <text class="fa-audit-name" x="210" y="${y-14}">${auditNames[item.id]}</text>
-            <text class="fa-series-label" x="210" y="${y+14}">T</text><path class="fa-track" d="M236 ${y+8}H552"/><rect class="fa-audit-bar fa-audit-team" x="236" y="${y+2}" height="12" width="${item.team.score/72*316}" rx="2"/>${item.team.score===0?`<circle class="fa-audit-zero" cx="236" cy="${y+8}" r="4"/>`:''}<text class="fa-audit-value fa-team-value" x="572" y="${y+16}">${item.team.score}</text>
-            <text class="fa-series-label" x="210" y="${y+41}">KI</text><path class="fa-track" d="M236 ${y+35}H552"/><rect class="fa-audit-bar fa-audit-ai" x="236" y="${y+29}" height="12" width="${item.ai.score/72*316}" rx="2"/><text class="fa-audit-value fa-ai-value" x="572" y="${y+43}">${item.ai.score}</text>
-            <text class="fa-audit-driver" x="210" y="${y+64}">Differenz: ${esc(drivers.join(' · '))}</text>
+      const rows = hubeScores();
+      const summary = rows.map(row => `${row.name}: ${row.score}`).join(', ');
+      return svg('audit', `Hube-Score der Teambewertung in Punkten. ${summary}. Starship nutzt das Raptor-Triebwerk. Starlink erhält 0 Punkte, weil der Reifegrad 0 für etablierten Betrieb steht.`, `
+        <defs><linearGradient id="fa-audit-copper"><stop stop-color="#efbd91" stop-opacity=".35"/><stop offset="1" stop-color="#efbd91"/></linearGradient></defs>
+        <g class="fa-hube-rows">
+          <text class="fa-kicker" x="40" y="30">DREI INNOVATIONEN</text><text class="fa-small" x="210" y="66">HUBE-PUNKTE · NEUHEIT × UMSETZUNG</text>
+          <path class="fa-audit-spine fa-trace" pathLength="1" d="M83 96V460"/>
+          ${rows.map((row,index)=>{const y=140+index*124;return `<g class="fa-audit-row" data-audit-row="${index}">
+            <circle class="fa-audit-disc" cx="83" cy="${y+12}" r="43"/><g transform="translate(83 ${y+12})"><path class="fa-audit-icon fa-trace" pathLength="1" d="${auditIcons[row.icon]}"/></g><path class="fa-audit-connector fa-trace" pathLength="1" d="M128 ${y+12}H172L187 ${y-2}H200"/>
+            <text class="fa-audit-name" x="210" y="${y-14}">${esc(row.name)}</text>
+            <path class="fa-track" d="M210 ${y+16}H552"/><rect class="fa-audit-bar fa-audit-team" x="210" y="${y+10}" height="12" width="${row.score/72*342}" rx="2"/>${row.score===0?`<circle class="fa-audit-zero" cx="210" cy="${y+16}" r="4"/>`:''}
+            <text class="fa-audit-value fa-team-value" x="572" y="${y+22}">${row.score}</text>
+            <text class="fa-audit-driver" x="210" y="${y+50}">${esc(row.note)}</text>
           </g>`;}).join('')}
-          <text class="fa-method-footnote" x="320" y="492" text-anchor="middle">Zwei Bewertungsperspektiven · kein gemeinsamer Mittelwert</text>
-        </g>
-        <g class="fa-audit-zero-phase" opacity="0">
-          <text class="fa-method-kicker" x="320" y="32" text-anchor="middle">STARLINK · DIE NULL RICHTIG LESEN</text>
-          ${auditEquation(starlink,2)}
-          <g class="fa-audit-zero-explanation"><text class="fa-method-note-strong" x="40" y="386">Reifegrad 0 → Produkt 0.</text><text class="fa-method-note" x="40" y="426">Team: etablierter Betrieb, zugleich ${starlink.team.benefits} Nutzenpunkte.</text><text class="fa-method-note" x="40" y="456">KI: Reife ${starlink.ai.maturity} und Nutzen ${starlink.ai.benefits} → ${starlink.ai.score} Punkte.</text><text class="fa-method-footnote" x="40" y="501">Die Hube-Einordnung entscheidet. 0 bedeutet hier nicht fehlenden Nutzen.</text></g>
+          <text class="fa-method-footnote" x="320" y="498" text-anchor="middle">Bewertung des Teams · Balkenskala bis 72 · Punkte, keine Prozente</text>
         </g>
       `);
     },
     mount(root) {
-      const audit=auditOrder.map(id=>data().R.audit.find(item=>item.id===id));
-      const phases=['formula','example','compare','zero'].map(name=>root.querySelector(`.fa-audit-${name}-phase`));
-      const boundaries=[0,.23,.51,.76,1];
-      const formulaFactors=[...phases[0].querySelectorAll('.fa-formula-factor')],formulaLink=phases[0].querySelector('.fa-method-link'),formulaOutput=phases[0].querySelector('.fa-formula-output');
-      const equations=[phases[1],phases[3]].map(phase=>({rows:[...phase.querySelectorAll('.fa-factor-row')].map(row=>({cells:[...row.querySelectorAll('.fa-factor-cell')],result:row.querySelector('.fa-factor-result')})),attention:phase.querySelector('.fa-factor-attention'),explanation:phase.querySelector('[class$="-explanation"]')}));
-      const spine=root.querySelector('.fa-audit-spine');
-      const rows=[...root.querySelectorAll('[data-audit-row]')].map((row,index)=>({row,icon:row.querySelector('.fa-audit-icon'),connector:row.querySelector('.fa-audit-connector'),team:row.querySelector('.fa-audit-team'),ai:row.querySelector('.fa-audit-ai'),teamValue:row.querySelector('.fa-team-value'),aiValue:row.querySelector('.fa-ai-value'),zero:row.querySelector('.fa-audit-zero'),teamWidth:audit[index].team.score/72*316,aiWidth:audit[index].ai.score/72*316}));
-      return {update(progress,context) {
-        const p=pose(progress,context);phases.forEach((phase,index)=>opacity(phase,methodVisible(p,boundaries[index],boundaries[index+1])));
-        const f=methodLocal(p,0,.23);methodReveal(formulaFactors,f,.11);draw(formulaLink,smooth(.48,.69,f));opacity(formulaOutput,smooth(.62,.8,f));
-        equations.forEach((equation,index)=>{const q=index?methodLocal(p,.76,1):methodLocal(p,.23,.51);equation.rows.forEach((row,rowIndex)=>{methodReveal(row.cells,clamp(q-rowIndex*.13),.055);opacity(row.result,smooth(.35+rowIndex*.13,.54+rowIndex*.13,q));});opacity(equation.attention,smooth(.45,.62,q));opacity(equation.explanation,smooth(.61,.78,q));});
-        const q=methodLocal(p,.51,.76);draw(spine,smooth(0,.48,q));rows.forEach((item,index)=>{const base=index*.075,team=smooth(base+.03,base+.24,q),ai=smooth(.43+index*.065,.63+index*.065,q);opacity(item.row,mix(.18,1,smooth(base,base+.14,q)));draw(item.icon,mix(.08,1,smooth(base,base+.25,q)));draw(item.connector,smooth(base+.06,base+.25,q));item.team.setAttribute('width',(item.teamWidth*team).toFixed(3));item.ai.setAttribute('width',(item.aiWidth*ai).toFixed(3));opacity(item.teamValue,smooth(.86,1,team));opacity(item.aiValue,smooth(.86,1,ai));if(item.zero)opacity(item.zero,smooth(.25,.9,team));});
+      const rows = hubeScores();
+      const spine = root.querySelector('.fa-audit-spine');
+      const items = [...root.querySelectorAll('[data-audit-row]')].map((row,index) => ({row,icon:row.querySelector('.fa-audit-icon'),connector:row.querySelector('.fa-audit-connector'),bar:row.querySelector('.fa-audit-bar'),value:row.querySelector('.fa-team-value'),note:row.querySelector('.fa-audit-driver'),zero:row.querySelector('.fa-audit-zero'),width:rows[index].score/72*342}));
+      return {update(progress, context) {
+        const p = pose(progress, context);
+        draw(spine, smooth(0, .5, p));
+        items.forEach((item,index) => {
+          const base = index*.16, grow = smooth(base+.12, base+.56, p);
+          opacity(item.row, mix(.18, 1, smooth(base, base+.2, p)));
+          draw(item.icon, mix(.08, 1, smooth(base, base+.3, p)));
+          draw(item.connector, smooth(base+.08, base+.3, p));
+          item.bar.setAttribute('width', (item.width*grow).toFixed(3));
+          opacity(item.value, smooth(.86, 1, grow));
+          opacity(item.note, smooth(base+.4, base+.68, p));
+          if (item.zero) opacity(item.zero, smooth(.25, .9, grow));
+        });
       }};
     }
   };

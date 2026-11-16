@@ -12,6 +12,9 @@
 .fm-flow-svg .fm-small,.fm-flow-svg .fm-tick { font-size: 14px; fill: #a8b5bb; }
 .fm-flow-svg .fm-big { font-size: 58px; fill: #efbd91; letter-spacing: -2px; }
 .fm-flow-svg .fm-ice { fill: #a9d9d9; }
+.fm-tile { fill: #efbd9109; stroke: #a9d9d933; stroke-width: 1; }
+.fm-flow-svg .fm-stat { font-size: 38px; fill: #efbd91; letter-spacing: -1.2px; }
+.fm-flow-svg .fm-unit { font-size: 15px; fill: #a8b5bb; letter-spacing: 0; }
 .fm-node { fill: #101d24; stroke: #a9d9d966; stroke-width: 1; }
 .fm-spine,.fm-join { fill: none; stroke: #a9d9d9; stroke-width: 1.3; stroke-dasharray: 1; stroke-dashoffset: 1; }
 .fm-rule { fill: none; stroke: #a9d9d933; stroke-width: 1; }

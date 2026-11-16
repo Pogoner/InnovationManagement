@@ -7,8 +7,8 @@
   const fragmentURL = /url\(\s*(['"]?)#([^\s)'"\u005c]+)\1\s*\)/g;
   const idReferences = new Set(['aria-labelledby', 'aria-describedby', 'aria-controls', 'aria-owns', 'aria-activedescendant', 'headers', 'for']);
   const phaseSelectors = {
-    1: ['.fa-mission-name, .fa-kicker', '.fa-mission-label', '.fa-mission-label, .fa-footnote'],
-    2: ['.fa-audit-name, .fa-team-value', '[data-audit-row]', '[data-audit-row], .fa-audit-note'],
+    1: ['.fa-mission', '[data-flow-panel="facts"]'],
+    2: ['.fa-hube-rows'],
     3: ['.fa-radar-labels', '.fa-trend-grid, .fa-trend-key', '[data-stufen-phase="0"]', '[data-stufen-phase="1"]', '.fa-matrix-phase', '.fa-selection-final'],
     4: ['.fa-cases-phase', '.fa-score-phase', '.fa-revenue-phase'],
     5: ['[data-fe-layout]', '[data-fe-panorama]', '[data-fe-price]', '[data-fe-marketing]'],

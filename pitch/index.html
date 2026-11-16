@@ -11,14 +11,15 @@
   <link rel="preload" href="../teil6/launch-coast-near.webp" as="image">
   <link rel="stylesheet" href="pitch.css?v=3ec38244b00f">
   <link rel="stylesheet" href="research.css?v=c9068e3d3c58">
-  <link rel="stylesheet" href="film-analysis.css?v=a9fc779a4582">
+  <link rel="stylesheet" href="film-analysis.css?v=64f4f85f07e8">
   <link rel="stylesheet" href="film-experience.css?v=97ddf01c32ff">
   <link rel="stylesheet" href="film-evaluation.css?v=6823c63425aa">
-  <link rel="stylesheet" href="film.css?v=0f8ab29dcb9a">
+  <link rel="stylesheet" href="film.css?v=e51de1c782bb">
   <link rel="stylesheet" href="film-site.css?v=c297342ba3b8">
   <link rel="stylesheet" href="film-roadmap.css?v=4ba1b37e6f38">
   <link rel="stylesheet" href="film-static.css?v=aef6ac7b06a4">
-  <link rel="stylesheet" href="film-method-flow.css?v=5c01b7a0ee9a">
+  <link rel="stylesheet" href="film-method-flow.css?v=65407855b32e">
+  <link rel="stylesheet" href="film-intro.css?v=0e8746f1a25a">
   <link rel="stylesheet" href="film-launch.css?v=f2ca2488ae34">
   <script defer src="../assets/js/model.js?v=d27ddb623a93"></script>
   <script defer src="../assets/js/data.js?v=d79ed574f157"></script>
@@ -28,21 +29,22 @@
   <script defer src="research-view.js?v=38c6fa49cafc"></script>
   <script defer src="pitch.js?v=fad03959b758"></script>
   <script defer src="roadmap-phases.js?v=b8ae599dcff1"></script>
-  <script defer src="film-story.js?v=6efbf647b51b"></script>
-  <script defer src="film-analysis.js?v=5d19418f3b09"></script>
-  <script defer src="film-method-flow.js?v=6df348e9df4d"></script>
+  <script defer src="film-story.js?v=4dd718a036ba"></script>
+  <script defer src="film-analysis.js?v=59fb9effb887"></script>
+  <script defer src="film-method-flow.js?v=0a5ef20d337c"></script>
   <script defer src="film-experience.js?v=eb226a6db4fc"></script>
   <script defer src="film-site.js?v=d8a08f2d0d5c"></script>
   <script defer src="film-architecture.js?v=cff512785051"></script>
   <script defer src="film-evaluation.js?v=a8645c76765d"></script>
-  <script defer src="film-static.js?v=f1f4ba734a8f"></script>
+  <script defer src="film-static.js?v=414230ee6c9a"></script>
   <script defer src="film-launch.js?v=4db39dd732be"></script>
+  <script defer src="film-intro.js?v=455d2c884098"></script>
   <script defer src="film.js?v=3895b504271c"></script>
 </head>
 <body class="pitch-page">
   <a class="skip-link" href="#schritt-1">Zum ersten Kapitel</a>
   <header class="pitch-header">
-    <a class="pitch-brand" href="#auftakt" aria-label="RocketLight – zum Anfang">
+    <a class="pitch-brand" href="#einstieg" aria-label="RocketLight – zum Anfang">
       <svg viewBox="0 0 32 36" fill="none" aria-hidden="true"><path d="M5 30V5h11c8 0 11 12 3 15l8 10M5 20h12" stroke="currentColor" stroke-width="2.3"/><path d="M12 30 26 5" stroke="currentColor" stroke-width="1.1"/></svg>
       <span>RocketLight<small>INNOVATIONCALCULATOR</small></span>
     </a>
@@ -86,7 +88,35 @@
   </aside>
 
   <main>
-    <section class="pitch-hero" id="auftakt" aria-labelledby="hero-title">
+    <section class="film-intro" id="einstieg" data-state="ready" aria-labelledby="intro-title">
+      <video class="intro-video" poster="assets/starship-catch-poster.webp" preload="metadata" playsinline muted aria-label="Starship-Flug 15: Der Startturm in Starbase fängt das Raumschiff nach seiner Rückkehr aus dem All."><source src="assets/starship-catch.mp4" type="video/mp4"></video>
+      <div class="intro-grade" aria-hidden="true"></div>
+      <div class="intro-masthead"><span>ROCKETLIGHT / EINSTIEG</span><span>Video: Cobra Emergency · Starbase, 14.11.2026</span></div>
+      <div class="intro-ready page-width">
+        <p class="eyebrow"><span class="signal-dot"></span> STARSHIP · FLUG 15</p>
+        <h2 id="intro-title">Ein Turm fängt<br><em>ein Raumschiff.</em></h2>
+        <p class="intro-lead">Zum ersten Mal kehrt ein Starship aus dem All zurück und wird vom Startturm gefangen.</p>
+        <div class="intro-actions">
+          <button class="intro-begin" type="button" data-intro="sound"><span class="launch-play-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="m9 5 11 7-11 7Z"/></svg></span><span>Mit Ton starten</span></button>
+          <button class="intro-quiet" type="button" data-intro="silent">Ohne Ton starten</button>
+        </div>
+      </div>
+      <div class="intro-live" role="group" aria-label="Video steuern">
+        <button class="intro-chip" type="button" data-intro="mute" aria-pressed="false">Ton an</button>
+        <button class="intro-chip" type="button" data-intro="skip">Überspringen</button>
+      </div>
+      <figure class="intro-quote page-width">
+        <p class="eyebrow">ELON MUSK · GRÜNDER VON SPACEX</p>
+        <blockquote lang="en"><p>“There’s a silly notion that failure is not an option at NASA. Failure is an option here. <em>If things are not failing, you are not innovating enough.</em>”</p></blockquote>
+      </figure>
+      <div class="intro-after">
+        <button class="intro-chip" type="button" data-intro="replay">Noch einmal ansehen ↻</button>
+        <a class="intro-scroll" href="#auftakt">Weiter <span aria-hidden="true">↓</span></a>
+      </div>
+      <p class="sr-only" role="status" aria-live="polite" lang="en" id="intro-status"></p>
+    </section>
+
+        <section class="pitch-hero" id="auftakt" aria-labelledby="hero-title">
       <img class="hero-image" src="assets/dining-facing-launch.webp" width="1672" height="941" alt="Konzeptvisualisierung: mehrere Zweiertische in versetzten Reihen vor einer Panoramafront. Alle Paare blicken auf einen dramatischen Raketenstart jenseits der Küstenlandschaft." fetchpriority="high">
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-copy page-width">

@@ -10,13 +10,18 @@
   const label = (text,x,y,cls='fm-label',anchor='start') => `<text class="${cls}" x="${x}" y="${y}" text-anchor="${anchor}">${esc(text)}</text>`;
   const lines = (items,x,y,cls='fm-copy',space=24) => items.map((t,i)=>label(t,x,y+i*space,cls)).join('');
 
-  function workflow() {
-    const steps=[['01','Prüfen','Innovationen und Urteile'],['02','Auswählen','Trends und Geschäftsideen'],['03','Bewerten','Nutzen, Aufwand, Annahmen'],['04','Umsetzen','Mix, Roadmap, Organisation']];
-    return svg('workflow','Unser Untersuchungsweg: Innovationen prüfen, Ideen auswählen, bewerten und ihre Umsetzung planen. Team- und KI-Urteile vergleichen, Abweichungen erklären und offene Nachweise benennen.',`
-      ${label('UNSER UNTERSUCHUNGSWEG',24,30,'fm-kicker')}
-      <path class="fm-spine" pathLength="1" d="M55 76V376" data-flow-trace/>
-      ${steps.map((s,i)=>`<g data-flow-reveal="${i*.1}"><circle class="fm-node" cx="55" cy="${86+i*92}" r="22"/>${label(s[0],55,92+i*92,'fm-small','middle')}${label(s[1],100,85+i*92,'fm-heading')}${label(s[2],100,116+i*92,'fm-copy')}</g>`).join('')}
-      <g data-flow-reveal=".42"><path class="fm-rule" d="M24 438H612"/>${label('TEAM ↔ KI',24,472,'fm-kicker')}${label('Urteile vergleichen. Abweichungen lokalisieren.',176,472,'fm-copy')}${label('Was ist belegt? Was müssen wir noch prüfen?',176,505,'fm-note')}</g>`);
+  function factsPanel() {
+    const tile=(x,y,w,h,delay,kicker,body)=>`<g data-flow-reveal="${delay}"><rect class="fm-tile" x="${x}" y="${y}" width="${w}" height="${h}" rx="9"/>${label(kicker,x+16,y+30,'fm-kicker')}${body}</g>`;
+    const stat=(x,y,value,unit='')=>`<text class="fm-stat" x="${x}" y="${y}">${esc(value)}${unit?`<tspan class="fm-unit" dx="8">${esc(unit)}</tspan>`:''}</text>`;
+    return svg('facts','SpaceX in Zahlen: gegründet 2002, mehr als 22.000 Mitarbeitende, Börsengang im Juni 2026, Konzernumsatz 2025 von 18,67 Milliarden US-Dollar bei einem Nettoverlust von 4,94 Milliarden. Das Segment Connectivity, zu dem Starlink gehört, erzielte 11,39 Milliarden Umsatz und 4,42 Milliarden operativen Gewinn.',`
+      ${label('SPACEX IN ZAHLEN',24,30,'fm-kicker')}
+      ${tile(24,48,189,124,0,'GEGRÜNDET',stat(40,132,'2002')+label('Starbase, Texas',40,158,'fm-note'))}
+      ${tile(225,48,189,124,.08,'MITARBEITENDE',stat(241,132,'22.000+')+label('Stand 31.03.2026',241,158,'fm-note'))}
+      ${tile(426,48,190,124,.16,'BÖRSENGANG',stat(442,132,'2026')+label('seit 12. Juni',442,158,'fm-note'))}
+      ${tile(24,184,290,124,.28,'UMSATZ 2025',stat(40,268,'18,67','Mrd. USD')+label('Konzern, inkl. xAI und X',40,294,'fm-note'))}
+      ${tile(326,184,290,124,.36,'NETTOERGEBNIS 2025',stat(342,268,'−4,94','Mrd. USD')+label('−26 % Umsatzrendite',342,294,'fm-note'))}
+      ${tile(24,320,592,150,.5,'CONNECTIVITY (U. A. STARLINK) · 2025',stat(40,408,'11,39','Mrd. USD')+label('Umsatz',40,434,'fm-note')+stat(342,408,'4,42','Mrd. USD')+label('Operativer Gewinn',342,434,'fm-note')+label('Die Gewinnquelle des Konzerns',40,458,'fm-small'))}
+      <g data-flow-reveal=".62">${label('Quelle: SEC-Unterlagen von SpaceX (2026)',24,500,'fm-note')}</g>`);
   }
 
   function selectionFunnel() {
@@ -71,7 +76,7 @@
     };
   }
 
-  wrap(1,[{key:'workflow',index:3,markup:workflow}],[0,.22,.44,.68],[[0,.4],[.42,.76],[.78,1],null]);
+  wrap(1,[{key:'facts',index:1,markup:factsPanel}],[0,.5],[[0,1],null]);
   wrap(3,[{key:'funnel',index:4,markup:selectionFunnel},{key:'matrix-difference',index:6,markup:matrixDifference}],
     [0,.12,.25,.36,.47,.60,.73,.86],[[0,.145],[.15,.30],[.335,.465],[.495,.625],null,[.66,.825],null,[.855,1]]);
 

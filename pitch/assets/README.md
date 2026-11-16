@@ -1,5 +1,14 @@
 # Bildmotiv · Mehrere Tische mit gemeinsamem Startblick
 
+## Einstiegsvideo · Fang von Starship (Flug 15)
+
+`starship-catch.mp4` und `starship-catch-poster.webp` bilden den Einstieg ganz oben im Pitch (`#einstieg`).
+
+- Quelle: vom Team bereitgestellte Datei `docs/pitch-review/starship catch.mp4` (Wasserzeichen „Cobra Emergency“, Aufnahme vom 14.11.2026 in Starbase). **Nutzungsrechte vom Team zu klären**; die Urheberangabe steht in der Kopfzeile des Einstiegs.
+- Schnitt: 1:41–2:00 der Quelle (19 s), ohne die schwarzen Randzeilen zugeschnitten (1916 × 1064), 30 fps, H.264 + AAC, ca. 3,9 MB. Das Standbild ist der Frame bei 2 s.
+- Neu schneiden (ffmpeg): `ffmpeg -ss 101 -t 19 -i "starship catch.mp4" -map 0:v:0 -map 0:a:0 -vf "crop=1916:1064:2:8,fps=30" -c:v libx264 -preset slow -crf 24 -pix_fmt yuv420p -g 60 -c:a aac -b:a 112k -movflags +faststart starship-catch.mp4`
+- Die 95-MB-Originaldatei gehört nicht ins Repository.
+
 Die aktuelle Ansicht verwendet `dining-facing-launch.webp` mit konsequent zum
 Start ausgerichteten Gästen. Die neue Bildserie für Menü, nähere Küstenansicht,
 Standortflug und fotorealistisches Finale ist mit exakten Prompts und Ankern in

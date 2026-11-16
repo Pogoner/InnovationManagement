@@ -5,93 +5,46 @@ window.PitchFilmStory = [
     "step": 1,
     "label": "Das Unternehmen",
     "detail": "Geschäftsfelder, Kennzahlen & Quellen",
-    "length": 4.6,
+    "length": 3,
     "beats": [
       {
         "at": 0,
-        "tag": "EINE MISSION",
-        "title": "Große Mission.<br><em>Neue Möglichkeiten.</em>",
-        "copy": "SpaceX erweitert den Zugang zum All. Wir fragen, welches neue Geschäft daraus entstehen kann.",
-        "cue": "Die Mission wird zum System",
-        "still": 0.2,
-        "view": ".fa-mission"
-      },
-      {
-        "at": 0.22,
+        "still": 0.45,
+        "view": ".fa-mission",
         "tag": "DREI GESCHÄFTSFELDER",
         "title": "Raumfahrt.<br>Verbindung.<br><em>Intelligenz.</em>",
-        "copy": "Space, Connectivity und AI verbinden physische und digitale Infrastruktur. Hier beginnt unser Suchfeld.",
-        "cue": "Verbindungen werden sichtbar",
-        "still": 0.42,
-        "view": ".fa-mission"
+        "copy": "Space, Connectivity und AI: Neben den Raketen betreibt SpaceX ein Satellitennetz und ein KI-Geschäft.",
+        "cue": "Drei Geschäftsfelder, eine Mission"
       },
       {
-        "at": 0.44,
-        "tag": "UNSER AUSGANGSPUNKT",
-        "title": "Technologie schafft<br><em>Möglichkeiten.</em>",
-        "copy": "Die Mission gibt die Richtung vor. Im nächsten Schritt machen wir das Innovationspotenzial vergleichbar.",
-        "cue": "Von der Mission zum Potenzial",
-        "still": 0.65,
-        "view": ".fa-mission"
-      },
-      {
-        "at": 0.68,
+        "at": 0.5,
         "still": 1,
-        "view": "[data-flow-panel=\"workflow\"]",
-        "tag": "UNSER UNTERSUCHUNGSWEG",
-        "title": "Eine Geschäftsidee.<br><em>Ein nachvollziehbarer Weg.</em>",
-        "copy": "Wir prüfen Innovationen, wählen Ideen aus und vertiefen einen Case. Team- und KI-Urteile helfen, Annahmen und offenen Belegbedarf sichtbar zu machen.",
-        "cue": "Prüfen → auswählen → bewerten → umsetzen"
+        "view": "[data-flow-panel=\"facts\"]",
+        "tag": "ZAHLEN UND FAKTEN",
+        "title": "18,67 Mrd. USD.<br><em>Und noch Verluste.</em>",
+        "copy": "Connectivity mit Starlink ist die Gewinnquelle. Der Konzern schreibt 2025 trotzdem noch Verluste.",
+        "cue": "Eine Gewinnquelle, ein Konzernverlust"
       }
     ],
-    "seconds": 90
+    "seconds": 55
   },
   {
     "step": 2,
     "label": "Der Innovationsprüfstand",
     "detail": "Alle Team-/KI-Werte & Rechenwege",
-    "length": 4.6,
+    "length": 2.4,
     "beats": [
       {
         "at": 0,
-        "still": 0.2,
-        "view": ".fa-audit-formula-phase",
-        "tag": "SO FUNKTIONIERT DER PRÜFSTAND",
-        "title": "Vier Faktoren.<br><em>Ein Produkt.</em>",
-        "copy": "Neu für wen, wie neu, Reifegrad und Nutzen werden multipliziert. Wir legen die Faktoren offen, bevor wir die Ergebnisse von Team und KI vergleichen.",
-        "cue": "Die Hube-Formel nachvollziehen"
-      },
-      {
-        "at": 0.23,
-        "still": 0.48,
-        "view": ".fa-audit-example-phase",
-        "tag": "RAPTOR 3 · DIE ABWEICHUNG LOKALISIEREN",
-        "title": "64 oder 16?<br><em>Ein Faktor entscheidet.</em>",
-        "copy": "Drei Faktoren stimmen überein. Das Team bewertet den Nutzen mit 4, die KI mit 1. Dieser Unterschied erklärt den gesamten Abstand zwischen 64 und 16 Punkten.",
-        "cue": "Nutzenurteil 4 ↔ 1 erklärt den Score",
-        "tone": "difference"
-      },
-      {
-        "at": 0.51,
-        "still": 0.73,
-        "view": ".fa-audit-compare-phase",
-        "tag": "DREI PROJEKTE · EIN ERGÄNZENDER VERGLEICH",
-        "title": "Die Urteile stehen<br><em>nebeneinander.</em>",
-        "copy": "Raptor, Starship und Betankung gehören zu einem gemeinsamen System. Starlink ergänzt den Vergleich. Die Werte werden eingeordnet, nicht zu einem Konsensscore gemittelt.",
-        "cue": "Alle Team-/KI-Ergebnisse vergleichen"
-      },
-      {
-        "at": 0.76,
         "still": 1,
-        "view": ".fa-audit-zero-phase",
-        "tag": "DIE GRENZE DES MULTIPLIKATIVEN MODELLS",
-        "title": "Null Punkte.<br><em>Vier Nutzenpunkte.</em>",
-        "copy": "Starlink erhält im Team Reifegrad 0 für etablierten Betrieb. Dieser Nullfaktor setzt den gesamten Score auf null – obwohl der Nutzen mit 4 bewertet wird.",
-        "cue": "Den Nullfaktor vom Nutzen unterscheiden",
-        "tone": "difference"
+        "view": ".fa-hube-rows",
+        "tag": "DREI INNOVATIONEN · HUBE-SCORE",
+        "title": "Starship. Betankung.<br><em>Starlink.</em>",
+        "copy": "Der Hube-Score bewertet Neuheit mal Umsetzung. Starship fliegt mit dem Raptor-Triebwerk, Starlink ist längst im Betrieb.",
+        "cue": "Die Hube-Scores der drei Innovationen"
       }
     ],
-    "seconds": 150
+    "seconds": 40
   },
   {
     "step": 3,

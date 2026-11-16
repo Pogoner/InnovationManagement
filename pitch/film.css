@@ -5,7 +5,7 @@
 .film-background { position: fixed; inset: 0 var(--rail-width) 0 0; overflow: hidden; pointer-events: none; z-index: 0; opacity: 0; background: #060b10; }
 .film-camera { position: absolute; transform-origin: 40.5% 72%; will-change: transform; }
 .film-landscape-image { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none !important; opacity: var(--landscape-strength,.25); }
-.film-world-grade { position: absolute; inset: 0; background: linear-gradient(90deg,#060b10c4 0%,#060b1060 39%,#060b1012 66%,#060b1047 100%),linear-gradient(0deg,#060b10c4,transparent 27%,transparent 70%,#060b1070); }
+.film-world-grade { position: absolute; inset: 0; background: linear-gradient(#060b1038,#060b1038),linear-gradient(90deg,#060b10c4 0%,#060b1060 39%,#060b1012 66%,#060b1047 100%),linear-gradient(0deg,#060b10c4,transparent 27%,transparent 70%,#060b1070); }
 .film-world-grain { position: absolute; inset: 0; opacity: .16; background-image: repeating-linear-gradient(0deg,transparent 0 3px,#a9d9d90b 3px 4px); }
 .film-dining-world { position: absolute; inset: 0; background: #060b10; opacity: var(--dining-opacity,0); }
 .film-dining-world > img { width: 100%; height: calc(100% - var(--header-height,80px)); margin-top: var(--header-height,80px); object-fit: cover; object-position: 66% top; opacity: var(--dining-image-opacity,.34); transform: scale(1.01); transform-origin: 66% top; }

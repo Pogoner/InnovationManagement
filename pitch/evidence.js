@@ -79,11 +79,8 @@ const state = seed();
     rocketlightAssessments: assessments.filter(item => item.assessment.idea === 9),
     financialAssessmentA,
     financialA: calcFY(financialAssessmentA.fy, state.base),
-    // B contains the original planning variant only. There is no B financial
-    // forecast or independent B Hube assessment in the source workbook.
     variants: {
-      A: { data: window.ROCKET_DATA.A, meta: window.ROCKET_META.A },
-      B: { data: window.ROCKET_DATA.B, meta: window.ROCKET_META.B }
+      A: { data: window.ROCKET_DATA.A, meta: window.ROCKET_META.A }
     },
     sources,
     provenance: {

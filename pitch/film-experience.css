@@ -34,7 +34,7 @@
 .fe-scene .fe-view-label { font-size: 13px; letter-spacing: 1px; fill: #b9cbc9; }
 .fe-scene .fe-layout-caption { font-size: 18px; letter-spacing: 1.5px; fill: #d2deda; }
 .fe-scene .fe-layout-note { font-size: 15px; letter-spacing: .2px; fill: #aebfc5; }
-.fe-panorama,.fe-price,.fe-marketing { opacity: 0; }
+.fe-panorama,.fe-price,.fe-marketing,.fe-econ,.fe-scale { opacity: 0; }
 .fe-window-image { pointer-events: none; }
 .fe-window-divider { fill: none; stroke: #eac49e; stroke-width: 1; }
 .fe-scene .fe-window-label { font-size: 17px; letter-spacing: 1.3px; fill: #f0e9db; }
@@ -55,6 +55,29 @@
 .fe-scene .fe-price-unit { fill: #bdccd0; font-size: 18px; letter-spacing: 1px; }
 .fe-scene .fe-price-validation { fill: #dce5dd; font-size: 18px; letter-spacing: .9px; }
 .fe-price-connector { fill: none; stroke: url(#fe-market-line); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+/* Kosten und Gewinne: Kupfer = Gewinn, Eis = Kosten, wie die Preis- und Methodenflächen. */
+.fe-scene .fe-econ-label { font-size: 15px; letter-spacing: 1.5px; fill: #b9cbc9; }
+.fe-scene .fe-econ-total { font-size: 58px; letter-spacing: -3px; font-weight: 350; font-variant-numeric: tabular-nums; }
+.fe-scene .fe-econ-unit { font-size: 13px; letter-spacing: 1.4px; fill: #aebfc5; }
+.fe-scene .fe-econ-year { font-size: 14px; letter-spacing: 1.2px; fill: #b9cbc9; }
+.fe-scene .fe-econ-revenue { font-size: 21px; font-variant-numeric: tabular-nums; fill: #dbe5e1; }
+.fe-scene .fe-econ-legend { font-size: 14px; letter-spacing: 1.1px; fill: #c4d4d8; }
+.fe-scene .fe-econ-gain-label { fill: #efbd91; }
+.fe-scene .fe-econ-cost-label { fill: #a9d9d9; }
+.fe-econ-axis { stroke: #a9d9d95c; stroke-width: 1; }
+.fe-econ-gain { fill: #efbd91; }
+.fe-econ-cost { fill: #a9d9d9; opacity: .8; }
+.fe-econ-line { fill: none; stroke: #eff3ed; stroke-width: 1.6; stroke-dasharray: 1 2; stroke-dashoffset: 1; vector-effect: none !important; }
+.fe-econ-dot { fill: #060b10; stroke: #eff3ed; stroke-width: 1.4; opacity: 0; }
+.fe-econ-key { stroke: #eff3ed; stroke-width: 1.6; }
+.fe-econ-breakeven { opacity: 0; }
+.fe-econ-breakeven circle { fill: #efbd9133; stroke: #efbd91; stroke-width: 1.2; }
+.fe-scene .fe-econ-breakeven text { font-size: 13px; letter-spacing: 1.2px; fill: #efbd91; }
+.fe-scale-track { fill: #a9d9d914; stroke: #a9d9d93a; stroke-width: .8; }
+.fe-scale-ring { fill: none; stroke: #efbd91; stroke-width: 1.2; opacity: 0; }
+.fe-scale-ring-cost { stroke: #a9d9d9; }
+.fe-scene .fe-scale-callout { font-size: 16px; letter-spacing: .8px; opacity: 0; }
 
 /* Four independent recommendations physically assemble into one grounded vehicle. */
 .fe-system .fe-svg { padding-bottom: 20px; }
@@ -129,37 +152,7 @@
   letter-spacing: .06em; text-transform: uppercase;
 }
 
-/* The table exposes every original score, with Ps as rows so all three drafts
-   fit on a phone. Colour is supplementary; names and exact numbers remain. */
-.fe-draft-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-variant-numeric: tabular-nums; }
-.fe-method-panel .fe-draft-table caption { text-align: left; color: #b5c8ce; font-size: 14px; line-height: 1.4; margin: 0; padding: 0 0 10px; }
-.fe-draft-table :is(th,td) { padding: 8px 5px; text-align: center; border-bottom: 1px solid #a9d9d921; line-height: 1.25; }
-.fe-draft-table th:first-child { width: 31%; padding-left: 0; text-align: left; }
-.fe-draft-table thead th { color: #a9d9d9; font-size: 14px; font-weight: 450; white-space: nowrap; }
-.fe-draft-table tbody th { color: #d4e0e1; font-size: 16px; font-weight: 400; }
-.fe-draft-table tbody td { color: #eff3ed; font-size: 18px; }
-.fe-draft-table td > span { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; min-height: 27px; border-radius: 5px; }
-.fe-draft-table .fe-rating-strong { color: #efbd91; font-weight: 550; }
-.fe-draft-table .fe-comparison-focus { background: #a9d9d909; }
-.fe-draft-table .fe-comparison-focus th { color: #a9d9d9; }
-.fe-draft-table tfoot :is(th,td) { padding-top: 12px; border: 0; font-size: 16px; font-weight: 500; color: #efbd91; }
 
-.fe-synthesis-inputs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
-.fe-synthesis-inputs article { border-left: 1px solid #a9d9d95e; padding-left: 14px; min-width: 0; }
-.fe-synthesis-inputs article:last-child { border-color: #efbd9175; }
-.fe-synthesis-inputs .fe-source-label { margin: 0 0 5px; }
-.fe-synthesis-inputs article:last-child .fe-source-label { color: #efbd91; }
-.fe-synthesis-inputs h4 { font-size: 20px; }
-.fe-synthesis-inputs article > p:last-child { font-size: 15px; line-height: 1.5; margin: 8px 0 0; }
-.fe-method-panel .fe-comparator-note { font-size: 14px; color: #b7c7cd; line-height: 1.5; margin: 15px 0 12px; }
-.fe-synthesis-join { position: relative; display: grid; grid-template-columns: 1fr 1fr; height: 13px; margin: 0 25% 13px; border-bottom: 1px solid #efbd9180; }
-.fe-synthesis-join span:first-child { border-left: 1px solid #a9d9d980; }
-.fe-synthesis-join span:last-child { border-right: 1px solid #efbd9180; }
-.fe-synthesis-join::after { content: ""; position: absolute; left: 50%; top: 100%; height: 13px; border-left: 1px solid #efbd9180; }
-.fe-synthesis-result { padding: 12px 15px; border: 1px solid #efbd9166; border-radius: 10px; background: #efbd9108; text-align: center; }
-.fe-synthesis-result .fe-source-label { color: #efbd91; }
-.fe-synthesis-result p { margin: 4px 0 0; font-size: 19px; line-height: 1.35; color: #eff3ed; }
-.fe-synthesis-result p > span { color: #efbd91; padding-inline: 3px; }
 
 .fe-final-mix { list-style: none; padding: 0; margin: 0; }
 .fe-final-mix li { display: grid; grid-template-columns: 24px 110px minmax(0,1fr); gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #a9d9d92b; }
@@ -169,51 +162,22 @@
 .fe-final-mix li > p { font-size: 16px; line-height: 1.45; margin: 0; }
 .fe-final-mix li > p span { display: block; }
 
-.fe-analysis-groups { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
-.fe-analysis-group > h4 { min-height: 2.6em; color: #a9d9d9; font-size: 16px; }
-.fe-analysis-development > h4 { color: #efbd91; }
-.fe-analysis-group dl { display: grid; gap: 12px; padding: 0; margin: 4px 0 0; }
-.fe-analysis-group dl > div { padding-top: 10px; border-top: 1px solid #a9d9d936; }
-.fe-analysis-development dl > div { border-top-color: #efbd913f; }
-.fe-analysis-group dt span { display: block; margin: 0 0 3px; font-size: 11px; line-height: 1.35; letter-spacing: .05em; color: #a9d9d9; }
-.fe-analysis-development dt span { color: #efbd91; }
-.fe-analysis-group dt strong { display: block; font-size: 18px; line-height: 1.25; font-weight: 450; color: #eff3ed; }
-.fe-analysis-group dd { margin: 5px 0 0; font-size: 15px; line-height: 1.4; }
-
-.fe-recommendation + .fe-recommendation { border-top: 1px solid #a9d9d92b; margin-top: 20px; padding-top: 18px; }
-.fe-recommendation h4 > span, .fe-learning-pair h4 > span { display: block; margin-bottom: 5px; color: #a9d9d9; font-size: 12px; letter-spacing: .05em; line-height: 1.35; }
-.fe-recommendation .fe-portfolio-root { border-bottom: 1px solid #a9d9d966; text-align: center; color: #a9d9d9; font-size: 16px; padding: 12px 0 8px; margin: 0 10%; }
-.fe-portfolio-branches { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-.fe-portfolio-branches p { position: relative; margin: 0; padding-top: 16px; font-size: 15px; line-height: 1.45; }
-.fe-portfolio-branches p::before { content: ""; position: absolute; top: 0; left: 40%; height: 9px; border-left: 1px solid #a9d9d966; }
-.fe-portfolio-branches strong { display: block; color: #eff3ed; margin-bottom: 4px; font-weight: 450; }
-.fe-portfolio-branches p > span { display: block; }
-.fe-process-complement { display: grid; grid-template-columns: minmax(0,1fr) 20px minmax(0,1fr); gap: 12px; align-items: center; margin-top: 14px; }
-.fe-process-complement p { margin: 0; font-size: 15px; line-height: 1.4; }
-.fe-process-complement strong { display: block; margin-block: 4px 6px; color: #eff3ed; font-size: 17px; font-weight: 450; line-height: 1.3; }
-.fe-process-complement p > span:last-child { display: block; }
-.fe-process-complement p:last-child .fe-source-label { color: #efbd91; }
-.fe-complement-plus { color: #efbd91; font-size: 24px; text-align: center; }
-
-.fe-learning-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
-.fe-learning-pair > section { display: flex; flex-direction: column; min-width: 0; }
-.fe-learning-pair h4 { font-size: 23px; margin-bottom: 16px; }
-.fe-learning-pair .fe-retain, .fe-learning-pair .fe-addition { border-top: 1px solid #a9d9d94d; padding-top: 12px; }
-.fe-learning-pair .fe-retain { min-height: 91px; }
-.fe-learning-pair .fe-addition { border-color: #efbd914d; margin-top: 12px; }
-.fe-learning-pair .fe-addition .fe-source-label { color: #efbd91; }
-.fe-learning-pair .fe-retain p, .fe-learning-pair .fe-addition p { margin: 5px 0 0; font-size: 16px; line-height: 1.5; }
-.fe-learning-pair .fe-recommendation-outcome { margin: auto 0 0; padding-top: 20px; color: #efbd91; font-size: 16px; line-height: 1.4; }
-
-.fe-gate-groups { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px 24px; }
-.fe-gate-groups > section { border-top: 1px solid #a9d9d947; padding-top: 10px; min-width: 0; }
-.fe-gate-groups > section:first-child { grid-column: 1 / -1; }
-.fe-gate-groups h4 { display: flex; align-items: baseline; gap: 9px; font-size: 17px; color: #a9d9d9; }
-.fe-gate-groups h4 > span { font-size: 12px; color: #efbd91; font-variant-numeric: tabular-nums; }
-.fe-gate-groups dl { margin: 10px 0 0; display: grid; gap: 12px; }
-.fe-gate-groups > section:first-child dl { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
-.fe-gate-groups dt { margin: 0 0 4px; font-size: 14px; font-weight: 500; color: #eff3ed; line-height: 1.3; }
-.fe-gate-groups dd { margin: 0; font-size: 15px; line-height: 1.4; }
+.fe-approach-body { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 28px; align-items: center; }
+.fe-model { width: 100%; height: auto; display: block; overflow: visible; }
+.fe-scene .fe-model-ring { fill: none; stroke: #a9d9d94d; stroke-width: 1.4; }
+.fe-scene .fe-model-link { stroke: #a9d9d933; stroke-width: 1; fill: none; }
+.fe-scene .fe-model-field circle { fill: #151f27; stroke: #a9d9d933; stroke-width: 1; }
+.fe-scene .fe-model-field text { fill: #8ea3ab; font-size: 11.5px; }
+.fe-scene .fe-model-field.is-active circle { fill: #efbd91; stroke: #fff0d3; stroke-width: 1.6; filter: drop-shadow(0 0 14px #efbd9199); }
+.fe-scene .fe-model-field.is-active text { fill: #1a1008; font-weight: 600; }
+.fe-scene .fe-model-core { fill: #060b10; stroke: #eff3ed; stroke-width: 1.6; }
+.fe-scene .fe-model-core-title { font-size: 13px; font-weight: 600; }
+.fe-scene .fe-model-core-formula { font-size: 11px; fill: #a9d9d9; }
+.fe-approach-idea { margin: 0 0 22px; font-size: 18px; line-height: 1.4; color: #eff3ed; }
+.fe-chips { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.fe-chips li { padding: 9px 0 9px 14px; border-left: 2px solid #efbd91; background: linear-gradient(90deg, #efbd9112, transparent); }
+.fe-chips strong { display: block; color: #efbd91; font-size: 17px; font-weight: 450; line-height: 1.3; }
+.fe-chips span { display: block; font-size: 15px; line-height: 1.35; color: #c3d2d6; }
 
 /* No rule keyed to the global motion setting reveals hidden sibling phases. */
 .fe-scene.film-static-flow { height: auto; }
@@ -222,17 +186,9 @@
 @media (min-width: 761px) and (max-width: 1100px) {
   .fe-scene .fe-method-panel { padding: 18px; }
   .fe-method-panel h3 { font-size: 23px; margin-bottom: 15px; }
-  .fe-analysis-groups, .fe-learning-pair { gap: 17px; }
-  .fe-analysis-group dt strong { font-size: 17px; }
-  .fe-analysis-group dd { font-size: 14px; }
-  .fe-synthesis-inputs { gap: 16px; }
-  .fe-synthesis-inputs article { padding-left: 10px; }
-  .fe-synthesis-inputs h4 { font-size: 18px; }
   .fe-final-mix li { grid-template-columns: 22px 90px minmax(0,1fr); gap: 9px; }
   .fe-final-mix h4 { font-size: 18px; }
   .fe-final-mix li > p { font-size: 15px; }
-  .fe-gate-groups { gap: 14px 18px; }
-  .fe-gate-groups > section:first-child dl { gap: 12px; }
 }
 
 /* Short desktop stages retain every method statement within the space between
@@ -249,90 +205,25 @@
   .film-stage .fe-method-panel .fe-method-note { margin-top: 8px; font-size: 13px; line-height: 1.35; }
   .film-stage .fe-method-panel .fe-source-label { font-size: 13px; line-height: 1.3; letter-spacing: .025em; }
 
-  .film-stage .fe-method-panel .fe-draft-table caption { font-size: 13px; line-height: 1.35; padding-bottom: 6px; }
-  .film-stage .fe-draft-table :is(th,td) { padding-block: 4px; }
-  .film-stage .fe-draft-table thead th { font-size: 13px; }
-  .film-stage .fe-draft-table tbody th { font-size: 14px; }
-  .film-stage .fe-draft-table tbody td { font-size: 16px; }
-  .film-stage .fe-draft-table td > span { min-height: 24px; min-width: 26px; }
-  .film-stage .fe-draft-table tfoot :is(th,td) { padding-top: 7px; font-size: 14px; }
 
-  .film-stage .fe-synthesis-inputs { gap: 16px; }
-  .film-stage .fe-synthesis-inputs article { padding-left: 10px; }
-  .film-stage .fe-synthesis-inputs .fe-source-label { margin-bottom: 3px; }
-  .film-stage .fe-synthesis-inputs article > p:last-child { font-size: 14px; line-height: 1.35; margin-top: 5px; }
-  .film-stage .fe-method-panel .fe-comparator-note { font-size: 13px; line-height: 1.35; margin-block: 10px 8px; }
-  .film-stage .fe-synthesis-join { height: 8px; margin-bottom: 8px; flex-shrink: 0; }
-  .film-stage .fe-synthesis-join::after { height: 8px; }
-  .film-stage .fe-synthesis-result { padding: 8px 12px; }
-  .film-stage .fe-synthesis-result p { margin-top: 3px; font-size: 17px; line-height: 1.3; }
   .film-stage .fe-final-mix li { grid-template-columns: 24px 102px minmax(0,1fr); gap: 10px; padding-block: 7px; }
   .film-stage .fe-final-mix h4 small { font-size: 13px; line-height: 1.3; }
   .film-stage .fe-final-mix li > p { font-size: 14px; line-height: 1.35; }
 
-  .film-stage .fe-analysis-groups { gap: 18px; }
-  .film-stage .fe-analysis-group > h4 { min-height: 0; font-size: 14px; line-height: 1.25; }
-  .film-stage .fe-analysis-group dl { gap: 6px; margin-top: 3px; }
-  .film-stage .fe-analysis-group dl > div { padding-top: 5px; }
-  .film-stage .fe-analysis-group dt span { font-size: 13px; line-height: 1.2; margin-bottom: 2px; letter-spacing: .02em; }
-  .film-stage .fe-analysis-group dt strong { font-size: 16px; line-height: 1.2; }
-  .film-stage .fe-analysis-group dd { font-size: 14px; line-height: 1.32; margin-top: 3px; }
-
-  .film-stage .fe-recommendation + .fe-recommendation { margin-top: 12px; padding-top: 10px; }
-  .film-stage .fe-recommendation h4 > span, .film-stage .fe-learning-pair h4 > span { font-size: 13px; line-height: 1.3; margin-bottom: 3px; letter-spacing: .02em; }
-  .film-stage .fe-recommendation .fe-portfolio-root { font-size: 14px; line-height: 1.35; padding-block: 8px 5px; }
-  .film-stage .fe-portfolio-branches { gap: 18px; }
-  .film-stage .fe-portfolio-branches p { padding-top: 10px; font-size: 14px; line-height: 1.35; }
-  .film-stage .fe-portfolio-branches p::before { height: 6px; }
-  .film-stage .fe-portfolio-branches strong { margin-bottom: 3px; }
-  .film-stage .fe-process-complement { gap: 10px; margin-top: 8px; }
-  .film-stage .fe-process-complement p { font-size: 14px; line-height: 1.35; }
-  .film-stage .fe-process-complement strong { margin-block: 4px; font-size: 16px; line-height: 1.25; }
-
-  .film-stage .fe-learning-pair { gap: 20px; }
-  .film-stage .fe-learning-pair h4 { font-size: 20px; line-height: 1.2; margin-bottom: 10px; }
-  .film-stage .fe-learning-pair .fe-retain, .film-stage .fe-learning-pair .fe-addition { padding-top: 8px; }
-  .film-stage .fe-learning-pair .fe-retain { min-height: 70px; }
-  .film-stage .fe-learning-pair .fe-addition { margin-top: 8px; }
-  .film-stage .fe-learning-pair .fe-retain p, .film-stage .fe-learning-pair .fe-addition p { font-size: 14px; line-height: 1.35; margin-top: 4px; }
-  .film-stage .fe-learning-pair .fe-recommendation-outcome { padding-top: 10px; font-size: 14px; line-height: 1.35; }
-
-  .film-stage .fe-gate-groups { gap: 12px 18px; }
-  .film-stage .fe-gate-groups > section { padding-top: 8px; }
-  .film-stage .fe-gate-groups h4 { gap: 7px; font-size: 16px; line-height: 1.25; }
-  .film-stage .fe-gate-groups dl { margin-top: 6px; gap: 8px; }
-  .film-stage .fe-gate-groups > section:first-child dl { gap: 10px; }
-  .film-stage .fe-gate-groups dt { font-size: 13px; line-height: 1.2; margin-bottom: 3px; }
-  .film-stage .fe-gate-groups dd { font-size: 14px; line-height: 1.35; }
+  .film-stage .fe-approach-body { gap: 20px; }
+  .film-stage .fe-approach-idea { margin-bottom: 10px; font-size: 16px; line-height: 1.3; }
+  .film-stage .fe-chips { gap: 7px; }
+  .film-stage .fe-chips li { padding-block: 6px; }
+  .film-stage .fe-chips strong { font-size: 16px; }
+  .film-stage .fe-chips span { font-size: 14px; line-height: 1.3; }
 }
 
 @media (max-width: 760px) {
   .fe-scene .fe-method-panel { padding: 20px; border-radius: 12px; }
   .fe-method-panel h3 { font-size: 25px; }
   .fe-method-panel .fe-method-note { font-size: 15px; }
-  .fe-draft-table :is(th,td) { padding-inline: 2px; }
-  .fe-draft-table th:first-child { width: 32%; }
-  .fe-draft-table thead th { font-size: 12px; }
-  .fe-draft-table tbody th, .fe-draft-table tfoot :is(th,td) { font-size: 15px; }
-  .fe-synthesis-inputs, .fe-analysis-groups, .fe-learning-pair { grid-template-columns: 1fr; gap: 24px; }
-  .fe-synthesis-inputs article > p:last-child, .fe-method-panel .fe-comparator-note { font-size: 16px; }
-  .fe-synthesis-join { margin-inline: 25%; }
+  .fe-approach-body { grid-template-columns: 1fr; gap: 16px; }
   .fe-final-mix li { grid-template-columns: 22px minmax(88px,.7fr) minmax(0,1.3fr); gap: 9px; }
   .fe-final-mix h4 { font-size: 17px; }
   .fe-final-mix li > p { font-size: 15px; }
-  .fe-analysis-group > h4 { min-height: 0; font-size: 18px; }
-  .fe-analysis-group dt span { font-size: 12px; }
-  .fe-analysis-group dt strong { font-size: 20px; }
-  .fe-analysis-group dd { font-size: 16px; }
-  .fe-analysis-group dl { gap: 16px; }
-  .fe-portfolio-branches { gap: 16px; }
-  .fe-portfolio-branches p { font-size: 15px; }
-  .fe-process-complement { grid-template-columns: 1fr; gap: 10px; }
-  .fe-process-complement p { font-size: 16px; }
-  .fe-complement-plus { text-align: left; }
-  .fe-learning-pair .fe-retain { min-height: 0; }
-  .fe-gate-groups { grid-template-columns: 1fr; gap: 20px; }
-  .fe-gate-groups > section:first-child dl { grid-template-columns: 1fr; gap: 14px; }
-  .fe-gate-groups h4 { font-size: 19px; }
-  .fe-gate-groups dt, .fe-gate-groups dd { font-size: 16px; }
 }

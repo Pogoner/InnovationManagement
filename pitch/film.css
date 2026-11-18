@@ -18,10 +18,8 @@
 .film-scan-cursor { stroke: #c0f3ee; stroke-width: 2; opacity: var(--scan-opacity,0); filter: drop-shadow(0 0 9px #a9d9d9); }
 .film-site-dot { fill: #efbd91; opacity: var(--site-opacity,0); }
 .film-site-ring { stroke: #efbd91; stroke-width: 1; opacity: var(--site-opacity,0); }
-.film-building { position: absolute; left: 19%; bottom: 21%; width: 43%; }
-.film-building[data-architecture="A"] { aspect-ratio: 1774 / 887; transform: translateY(10.8%); }
-.film-building[data-architecture="B"] { aspect-ratio: 1846 / 852; transform: translateY(8%); }
-.film-world-architecture[data-world-variant="A"] [data-architecture="B"], .film-world-architecture[data-world-variant="B"] [data-architecture="A"] { display: none; }
+.film-building { position: absolute; left: 14%; bottom: 24%; width: 43%; }
+.film-building[data-architecture="A"] { aspect-ratio: 1774 / 887; transform: translateY(10.8%) scaleX(-1); }
 .film-building > img, .film-building > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .film-building-ghost { opacity: var(--ghost-opacity,0); filter: grayscale(1) brightness(1.5); }
 .film-building-photo { opacity: var(--build-opacity,0); clip-path: inset(calc((1 - var(--build-progress,0)) * 100%) 0 0); filter: brightness(calc(1 + var(--building-light,0) * .14)); }

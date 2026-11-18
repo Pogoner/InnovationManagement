@@ -5,7 +5,7 @@
   const scenes = window.PitchScenes;
   if (!story || !scenes || story.some(s => !scenes[s.step])) return;
   // Read the existing shared selection before adding a second set of controls.
-  let variant = document.querySelector('[data-variant][aria-pressed="true"]')?.dataset.variant || 'A';
+  let variant = 'A';
   story.find(chapter=>chapter.step===6).beats=window.PitchRoadmapPhases[variant];
   const clamp = n => Math.min(1,Math.max(0,n));
   const smooth = (a,b,n) => { const p=clamp((n-a)/(b-a)); return p*p*(3-2*p); };
@@ -45,13 +45,12 @@
     const reel = document.createElement('div');
     reel.className = 'film-reel';
     reel.style.setProperty('--reel-length',chapter.length);
-    reel.innerHTML = '<div class="film-stage" data-film-step="'+chapter.step+'"><div class="film-chapter-meta"><span>PART '+String(chapter.step).padStart(2,'0')+' / '+chapter.label+'</span><span>ROCKETLIGHT / MISSION '+String(story.length+1-chapter.step).padStart(2,'0')+'</span></div><div class="film-copy"><p class="eyebrow film-beat-tag"></p><h2 id="film-title-'+chapter.step+'"></h2><p class="film-beat-copy"></p><a class="film-evidence-link" href="#belege-'+chapter.step+'">Zahlen &amp; Hintergründe '+arrow+'</a></div><div class="film-visual"></div><div class="film-stage-bottom"><div class="film-local-progress" aria-hidden="true"><i></i></div><p class="film-scene-cue"></p><nav class="film-beat-nav" aria-label="Phasen: '+chapter.label+'"></nav></div><span class="film-chapter-watermark" aria-hidden="true">'+String(chapter.step).padStart(2,'0')+'</span></div>';
+    reel.innerHTML = '<div class="film-stage" data-film-step="'+chapter.step+'"><div class="film-chapter-meta"><span>PART '+String(chapter.step).padStart(2,'0')+' / '+chapter.label+'</span></div><div class="film-copy"><p class="eyebrow film-beat-tag"></p><h2 id="film-title-'+chapter.step+'"></h2><p class="film-beat-copy"></p><a class="film-evidence-link" href="#belege-'+chapter.step+'">Zahlen &amp; Hintergründe '+arrow+'</a></div><div class="film-visual"></div><div class="film-stage-bottom"><div class="film-local-progress" aria-hidden="true"><i></i></div><p class="film-scene-cue"></p><nav class="film-beat-nav" aria-label="Phasen: '+chapter.label+'"></nav></div><span class="film-chapter-watermark" aria-hidden="true">'+String(chapter.step).padStart(2,'0')+'</span></div>';
     section.classList.remove('page-width');
     section.classList.add('film-chapter');
     section.setAttribute('aria-labelledby','film-title-'+chapter.step);
     section.append(reel,disclosure);
     const stage = reel.querySelector('.film-stage');
-    stage.querySelector('.film-chapter-meta > span:last-child').textContent='ZEITRAHMEN '+duration(chapter.seconds)+' MIN';
     const visual = stage.querySelector('.film-visual');
     visual.innerHTML = scenes[chapter.step].markup();
     const nav = stage.querySelector('.film-beat-nav');
@@ -370,6 +369,71 @@
       r.lastP=p;
       r.stage.scrollIntoView({block:'start',behavior:'instant'});
     } else scrollTo({top:r.top+point*r.range,behavior:'smooth'});
+  });
+  // Live presentation: ← / → step through every animation stop of the page.
+  function stops() {
+    if(dirty)measure();
+    const list=[0,heroTop+heroRange];
+    records.forEach(record=>{
+      if(record.planning)list.push(record.planningTop-headerClearance);
+      stillPoints[record.chapter.step].forEach((point,index)=>{
+        const phase=record.useStatic?record.staticScene?.phases[index]:null;
+        if(phase)list.push(phase.getBoundingClientRect().top+scrollY-headerClearance);
+        else if(!record.methodLinear&&!record.linear)list.push(record.top+point*record.range+1);
+      });
+    });
+    const launchRange=Math.max(1,launch.offsetHeight-height);
+    list.push(launchTop,launchTop+launchRange);
+    return list.map(Math.round).sort((a,b)=>a-b).filter((v,i,a)=>i===0||v-a[i-1]>12);
+  }
+  // Own eased scroll so each step takes roughly twice as long as the browser default.
+  let keyTarget=null,scrollFrame=0;
+  function glideTo(target) {
+    cancelAnimationFrame(scrollFrame);
+    keyTarget=target;
+    const from=scrollY,distance=target-from;
+    if(reduced||Math.abs(distance)<2){scrollTo({top:target,behavior:'instant'});keyTarget=null;return;}
+    const zone=y=>records.findIndex(r=>y>=r.top-2&&y<r.top+r.height-2);
+    const crossing=zone(from)!==zone(target);
+    const span=crossing?Math.min(2400,Math.max(1100,Math.abs(distance)*.6)):Math.min(6400,Math.max(2800,Math.abs(distance)*3));
+    const start=performance.now();
+    const step=now=>{
+      const t=Math.min(1,(now-start)/span);
+      const e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+      scrollTo({top:from+distance*e,behavior:'instant'});
+      if(t<1)scrollFrame=requestAnimationFrame(step);else keyTarget=null;
+    };
+    scrollFrame=requestAnimationFrame(step);
+  }
+  const stopGlide=()=>{cancelAnimationFrame(scrollFrame);keyTarget=null;};
+  addEventListener('wheel',stopGlide,{passive:true});
+  addEventListener('touchstart',stopGlide,{passive:true});
+  document.addEventListener('keydown',event=>{
+    if(event.key!=='ArrowRight'&&event.key!=='ArrowLeft')return;
+    if(event.altKey||event.ctrlKey||event.metaKey||event.shiftKey||event.defaultPrevented)return;
+    const el=event.target;
+    if(el.closest?.('input,select,textarea,[contenteditable="true"],[role="slider"],details[open]'))return;
+    const forward=event.key==='ArrowRight';
+    const list=stops();
+    const launchRange=Math.max(1,launch.offsetHeight-height);
+    const base=keyTarget!==null?keyTarget:scrollY;
+    // At the launch stage, → plays the film before moving on to the finale.
+    if(forward&&keyTarget===null&&scrollY>=launchTop-12&&scrollY<launchTop+launchRange-12){
+      const mode=launchStage.dataset.launchMode;
+      const trigger=mode==='complete'?null:mode==='playing'?'wait':launchStage.querySelector('#launch-begin:not(:disabled)')||launchStage.querySelector('#launch-button:not(:disabled)');
+      if(trigger){
+        event.preventDefault();
+        if(trigger!=='wait'){
+          if(Math.abs(scrollY-launchTop)>12)scrollTo({top:launchTop,behavior:'instant'});
+          trigger.click();
+        }
+        return;
+      }
+    }
+    const next=forward?list.find(v=>v>base+8):[...list].reverse().find(v=>v<base-8);
+    if(next===undefined)return;
+    event.preventDefault();
+    glideTo(next);
   });
   photo.addEventListener('load',()=>document.dispatchEvent(new Event('pitch:layout')));
   window.PitchFilm={measure,update,setVariant,setReduced,captureMotionPosition};

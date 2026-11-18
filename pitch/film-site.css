@@ -1,6 +1,6 @@
 /* The same source-coordinate plot progresses through eight planning layers. */
 .film-background[data-scene="6"] .film-world-grade { opacity: .35; }
-.film-site-overlays { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; overflow: visible; }
+.film-site-overlays { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; overflow: visible; transform: translate(-5%,-3%); }
 .film-site-building { z-index: 1; }
 .film-site-overlays .fs-trace { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--fs-layer-draw,1)); }
 .film-site-overlays .fs-label { fill: #edf5ee; stroke: none; font-size: 24px; font-weight: 400; letter-spacing: -.02em; paint-order: stroke; filter: drop-shadow(0 2px 5px #000); }
@@ -40,11 +40,9 @@
 .fs-pilot-dot { fill: #ffdbaf; opacity: var(--pilot-reveal,0); filter: drop-shadow(0 0 8px #ffb976); }
 .fs-pilot-light text { fill: #eadac7; font-size: 15px; letter-spacing: .08em; }
 .fs-operation-layer { opacity: var(--fs-operate,0); }
-.film-world-architecture .film-site-caption { top: 94%; font-size: 9px; opacity: .65; }
 @media (max-width:760px) {
   /* The linear phase cards carry full labels; retain only spatial marks here. */
   .film-site-overlays .fs-label, .film-site-overlays .fs-label-sub, .film-site-overlays .fs-leader { display: none; }
-  .film-world-architecture .film-site-caption { display: none; }
 }
 
 /* A shared aerial camera introduces the real image-space site comparison. */

@@ -36,6 +36,27 @@
 .launch-ending > p:not(.eyebrow) { margin-top: 24px; color: #d1dad9; font-size: clamp(16px,1.5vw,21px); }
 .launch-ending .launch-end-link { display: inline-flex; align-items: center; gap: 18px; min-height: 44px; margin-top: 26px; font-size: 12px; color: #d9e2df; pointer-events: auto; }
 .launch-ending .launch-end-link:hover { color: var(--copper); }
+.launch-ending { width: calc(100% - var(--gutter) * 2); }
+.launch-ending > h3, .launch-ending > p, .launch-ending > .launch-end-link { max-width: 630px; }
+.launch-crew { --orb: min(640px, 44vw, 80svh); --u: calc(var(--orb) / 580); position: absolute; right: 0; bottom: calc(clamp(170px,22svh,230px) * -1 + (100svh - var(--orb)) / 2); width: var(--orb); }
+.launch-orbit { position: relative; width: var(--orb); height: var(--orb); }
+.launch-orbit figure { margin: 0; position: relative; }
+.launch-orbit img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 50% 22%; border-radius: 50%; border: 1px solid #efbd9199; box-shadow: 0 0 0 3px #03080d99, 0 0 22px #efbd9133; background: #101a22; }
+.launch-orbit figcaption { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 8px; color: #fff; font-size: 16px; font-weight: 500; letter-spacing: .02em; white-space: nowrap; text-shadow: 0 0 3px #000, 0 1px 10px #000d; }
+.orbit-ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); border: 1px dashed #a9d9d933; border-radius: 50%; }
+.orbit-ring.ring1 { width: calc(var(--u) * 300); height: calc(var(--u) * 300); }
+.orbit-ring.ring2 { width: calc(var(--u) * 470); height: calc(var(--u) * 470); }
+.orbit-sun { position: absolute; left: 50%; top: 50%; width: calc(var(--u) * 150); transform: translate(-50%,-50%); }
+.orbit-sun img { border-color: #fff0d3; border-width: 2px; box-shadow: 0 0 0 4px #03080d99, 0 0 46px #efbd9188; }
+.orbit-sun figcaption { font-size: 19px; color: #ffd9b0; }
+.orbit-arm { position: absolute; inset: 0; }
+.orbit-arm.ring1 { --s: calc(var(--u) * 100); }
+.orbit-arm.ring2 { --s: calc(var(--u) * 104); }
+/* film-launch.js moves each planet with a translate-only transform, so portraits stay upright without counter-rotation. */
+.orbit-planet { position: absolute; left: calc(50% - var(--s) / 2); top: calc(50% - var(--s) / 2); width: var(--s); will-change: transform; }
+@media (max-width: 1100px) {
+  .launch-crew { --orb: min(420px, 86vw); position: static; margin: 30px 0 40px; text-align: left; }
+}
 
 .launch-horizon-controls { position: absolute; z-index: 5; inset-inline: var(--gutter); bottom: max(60px,calc(env(safe-area-inset-bottom) + 40px)); display: flex; justify-content: space-between; align-items: center; gap: 20px; }
 .launch-phase { display: flex; align-items: center; gap: 18px; font-size: 11px; letter-spacing: .09em; color: #e2e6e0 !important; }

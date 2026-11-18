@@ -35,25 +35,92 @@
     {title:'Place',lines:['Direktvertrieb & Family Offices','USA-Pilot · Fläche noch offen']},
     {title:'Promotion',lines:['Einladungen & Empfehlungen','Ausgewählte Medien & Partner']}
   ];
-  // Team judgments of the three drafts, transposed from the original 5P table.
-  // Scores assess the drafts; they do not validate demand or a market outcome.
-  const draftScores = [
-    {name:'People',values:[5,4,4]},
-    {name:'Product',values:[5,4,5]},
-    {name:'Price',values:[4,4,3]},
-    {name:'Place',values:[3,3,5]},
-    {name:'Promotion',values:[5,4,4]}
-  ];
   const diningPhases = [0,.16,.32,.48,.65,.82];
-  const diningViews = ['layout','panorama','price','compare','synthesis','marketing'];
+  const diningViews = ['layout','panorama','price','marketing','econ','scale'];
   const diningDescriptions = [
     'Raumkonzept: zehn versetzte Zweiertische mit zwanzig Plätzen, alle auf das Startpanorama ausgerichtet. Konzeptvisualisierung ohne Standort- oder Entfernungszusage.',
     'Erlebniskonzept: sieben Gänge, Missionsbriefing, Service und gemeinsamer Blick auf den Launch.',
     'Preisannahmen: 35.000 US-Dollar je Gast im Pilot, langfristig bis zu 50.000 US-Dollar. Die Zahlungsbereitschaft ist noch zu prüfen.',
-    'Teamvergleich der fünf Ps aus den Entwürfen von Fable, ChatGPT und Copilot.',
-    'Auswahl des finalen Mixes aus konkreten Produktideen und vorsichtigem Pilotansatz.',
-    'Finaler 5P-Mix: People, Product, Price, Place und Promotion. Preise, Partner und Standort bleiben zu validieren.'
+    'Finaler 5P-Mix: People, Product, Price, Place und Promotion. Preise, Partner und Standort bleiben zu validieren.',
+    'Erwartete Kosten und Gewinne über fünf Jahre: Gewinn und F&E-Kosten je Jahr, kumuliert ab Jahr 4 im Plus. Modellannahmen aus dem Inno-Rendite-Kalkulator.',
+    'Hohe Marge je Gast, aber im Verhältnis zu SpaceX klein: 0,31 Prozent des operativen Ergebnisses und 0,12 Prozent des F&E-Aufwands. Modellannahmen.'
   ];
+
+  // Five-year model of the Rendite-Kalkulator (sheet "5-Jahres-Kalkulation"). The
+  // totals come from the frozen evidence; the per-guest split is the workbook's
+  // plausibility check (cells B50:B54) and is not part of the Hube method.
+  const guestCosts = {menu:2000, service:3000};
+  const econGeo = {base:300, k:16, xs:[110,215,320,425,530], width:38};
+  const scaleGeo = {x:60, width:520};
+  const de = (value, digits = 1) => value.toLocaleString('de-DE', {minimumFractionDigits:digits, maximumFractionDigits:digits});
+  function economics() {
+    const {financialA, financialAssessmentA, base} = window.PitchEvidence;
+    const mio = value => value / 1e6;
+    const profit = financialA.profit.map(mio), cost = financialA.rnd.map(mio), revenue = financialA.revenue.map(mio);
+    let gained = 0, spent = 0;
+    const cumulative = profit.map((value, index) => { gained += value; spent += cost[index]; return gained - spent; });
+    const price = financialAssessmentA.fy.price[2];
+    const variable = guestCosts.menu + guestCosts.service;
+    return {profit, cost, revenue, cumulative, gain:mio(financialA.P), spend:mio(financialA.C), pShare:financialA.pShare, cShare:financialA.cShare,
+      companyProfit:base.profit, companyRnd:base.rnd, price, variable, margin:(price - variable) / price, guests:financialAssessmentA.fy.qty.reduce((a, b) => a + b, 0)};
+  }
+  function econMarkup(e) {
+    const {base, k, xs, width} = econGeo;
+    const points = e.cumulative.map((value, index) => [xs[index], base - value * k]);
+    const turn = e.cumulative.findIndex(value => value >= 0);
+    const share = -e.cumulative[turn - 1] / (e.cumulative[turn] - e.cumulative[turn - 1]);
+    const crossX = xs[turn - 1] + share * (xs[turn] - xs[turn - 1]);
+    return `<g data-fe-econ class="fe-econ">
+      <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">ERWARTETE KOSTEN UND GEWINNE</text>
+      <text class="fe-econ-label fe-econ-gain-label" x="170" y="76" text-anchor="middle">GEWINN · 5 JAHRE</text>
+      <text class="fe-econ-total fe-econ-gain-label" data-fe-gain-total x="170" y="132" text-anchor="middle">0,0</text>
+      <text class="fe-econ-label fe-econ-cost-label" x="470" y="76" text-anchor="middle">F&amp;E-KOSTEN · 5 JAHRE</text>
+      <text class="fe-econ-total fe-econ-cost-label" data-fe-cost-total x="470" y="132" text-anchor="middle">0,0</text>
+      <text class="fe-econ-unit" x="170" y="158" text-anchor="middle">MIO. USD</text>
+      <text class="fe-econ-unit" x="470" y="158" text-anchor="middle">MIO. USD</text>
+      <path class="fe-econ-axis" d="M60 ${base}H600"/>
+      ${e.profit.map((value, index) => `<rect class="fe-econ-gain" data-fe-gain="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
+      ${e.cost.map((value, index) => `<rect class="fe-econ-cost" data-fe-cost="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
+      <path class="fe-econ-line" data-fe-cumulative pathLength="1" d="M${points.map(point => point.map(n).join(' ')).join('L')}"/>
+      ${points.map((point, index) => `<circle class="fe-econ-dot" data-fe-cum-dot="${index}" cx="${n(point[0])}" cy="${n(point[1])}" r="3.5"/>`).join('')}
+      <g data-fe-breakeven class="fe-econ-breakeven"><circle cx="${n(crossX)}" cy="${base}" r="7"/><text x="${n(crossX + 14)}" y="${base + 30}">IM PLUS AB JAHR ${turn + 1}</text></g>
+      ${xs.map((x, index) => `<text class="fe-econ-year" x="${x}" y="366" text-anchor="middle">JAHR ${index + 1}</text>`).join('')}
+      ${e.revenue.map((value, index) => `<text class="fe-econ-revenue" data-fe-revenue="${index}" x="${xs[index]}" y="398" text-anchor="middle">${value > 0 ? de(value) : '–'}</text>`).join('')}
+      <text class="fe-econ-unit" x="320" y="424" text-anchor="middle">UMSATZ JE JAHR IN MIO. USD · ${e.guests} GÄSTE</text>
+      <path class="fe-econ-key" d="M92 452H112" /><text class="fe-econ-legend" x="120" y="456">KUMULIERT: GEWINN − F&amp;E</text>
+      <text class="fe-layout-note" x="320" y="490" text-anchor="middle">Gewinn = Umsatz × Konzernmarge 24,3 % · F&amp;E ohne laufenden Eventbetrieb</text>
+      <text class="fe-layout-note" x="320" y="512" text-anchor="middle">Modellannahmen · Zahlungsbereitschaft noch nicht getestet</text>
+    </g>`;
+  }
+  function scaleMarkup(e) {
+    const {x, width} = scaleGeo;
+    const costShare = e.variable / e.price;
+    const costWidth = width * costShare;
+    return `<g data-fe-scale class="fe-scale">
+      <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">HOHE MARGE. KLEINE GRÖSSE.</text>
+      <text class="fe-econ-label" x="320" y="70" text-anchor="middle">DECKUNGSBEITRAG JE GAST · USD</text>
+      <text class="fe-econ-total fe-econ-gain-label" data-fe-guest-total x="320" y="128" text-anchor="middle">0</text>
+      <rect class="fe-scale-track" x="${x}" y="150" width="${width}" height="24"/>
+      <rect class="fe-econ-gain" data-fe-guest-margin x="${x}" y="150" width="0" height="24"/>
+      <rect class="fe-econ-cost" data-fe-guest-cost x="${x + width}" y="150" width="0" height="24"/>
+      <text class="fe-econ-legend fe-econ-gain-label" x="${x}" y="198">${de(e.margin * 100, 0)} % BLEIBEN</text>
+      <text class="fe-econ-legend fe-econ-cost-label" x="${x + width}" y="198" text-anchor="end">${de(e.variable, 0)} USD VARIABLE KOSTEN</text>
+      <text class="fe-layout-note" x="320" y="224" text-anchor="middle">Preis ${de(e.price, 0)} USD · Menü 2.000 · Logistik, Sicherheit, Service 3.000</text>
+      <text class="fe-econ-label" x="320" y="282" text-anchor="middle">IM VERHÄLTNIS ZU SPACEX</text>
+      <g data-fe-scale-row="0"><text class="fe-econ-legend" x="${x}" y="316">OPERATIVES ERGEBNIS 2025 · ${de(e.companyProfit, 0)} MIO. USD</text>
+        <rect class="fe-scale-track" x="${x}" y="326" width="${width}" height="14"/>
+        <rect class="fe-econ-gain" data-fe-sliver="0" x="${x}" y="326" width="0" height="14"/>
+        <circle class="fe-scale-ring" data-fe-ring="0" cx="${x + 1}" cy="333" r="12"/>
+        <text class="fe-scale-callout fe-econ-gain-label" data-fe-callout="0" x="${x}" y="366">DINNER-GEWINN 5 JAHRE: ${de(e.gain)} MIO. USD = ${de(e.pShare * 100, 2)} %</text></g>
+      <g data-fe-scale-row="1"><text class="fe-econ-legend" x="${x}" y="402">F&amp;E-AUFWAND SPACE-SEGMENT 2025 · ${de(e.companyRnd, 0)} MIO. USD</text>
+        <rect class="fe-scale-track" x="${x}" y="412" width="${width}" height="14"/>
+        <rect class="fe-econ-cost" data-fe-sliver="1" x="${x}" y="412" width="0" height="14"/>
+        <circle class="fe-scale-ring fe-scale-ring-cost" data-fe-ring="1" cx="${x + 1}" cy="419" r="12"/>
+        <text class="fe-scale-callout fe-econ-cost-label" data-fe-callout="1" x="${x}" y="452">DINNER-F&amp;E 5 JAHRE: ${de(e.spend)} MIO. USD = ${de(e.cShare * 100, 2)} %</text></g>
+      <text class="fe-layout-note" x="320" y="490" text-anchor="middle">Im Kalkulator: Nutzen 1 und F&amp;E-Aufwand 1, beide „sehr gering“</text>
+      <text class="fe-layout-note" x="320" y="512" text-anchor="middle">Modellannahmen · KI-gestützt recherchiert</text>
+    </g>`;
+  }
 
   function tableMarkup(table,index) {
     const rotation = Math.atan2(320-table.x,table.y-155)*180/Math.PI;
@@ -140,30 +207,9 @@
           <text class="fe-price-validation" x="320" y="401" text-anchor="middle">ZAHLUNGSBEREITSCHAFT IM PILOT PRÜFEN</text>
           <text class="fe-layout-note" x="320" y="432" text-anchor="middle">Modellannahmen · kein buchbares Angebot</text>
         </g>
+        ${econMarkup(economics())}
+        ${scaleMarkup(economics())}
       </svg>
-      <section class="fe-method-panel fe-compare" data-fe-compare aria-hidden="true">
-        <p class="fe-method-kicker">Gleicher Prompt · 25 Felder · drei Entwürfe</p>
-        <h3>Welche Vorschläge tragen?</h3>
-        <table class="fe-draft-table">
-          <caption>Teamwertung · 1 schwach bis 5 sehr stark</caption>
-          <thead><tr><th scope="col">5P</th><th scope="col">Fable</th><th scope="col">ChatGPT</th><th scope="col">Copilot</th></tr></thead>
-          <tbody>${draftScores.map(row=>`<tr${row.name==='Place'?' class="fe-comparison-focus"':''}><th scope="row">${row.name}</th>${row.values.map((score,index)=>`<td${score===5?' class="fe-rating-strong"':''}><span${row.name==='Place'&&index===2?' class="method-attention"':''}>${score}</span></td>`).join('')}</tr>`).join('')}</tbody>
-          <tfoot><tr><th scope="row">Mittelwert</th><td>4,4</td><td>3,8</td><td>4,2</td></tr></tfoot>
-        </table>
-        <p class="fe-method-note">Copilot liegt bei <strong>Place</strong> vorn. Fable führt bei <strong>People</strong> und <strong>Promotion</strong>. Die Werte beurteilen Entwürfe; sie belegen keine Nachfrage.</p>
-      </section>
-      <section class="fe-method-panel fe-synthesis" data-fe-synthesis aria-hidden="true">
-        <p class="fe-method-kicker">Auswahl des Teams</p>
-        <h3>Produktideen und Pilotansatz verbinden.</h3>
-        <div class="fe-synthesis-inputs">
-          <article><p class="fe-source-label">Fable</p><h4>Konkretes Erlebnis</h4><p>Stark bei Zielgruppe, Produktinszenierung und Promotion. Standort und Entfernung teils zu verbindlich.</p></article>
-          <article><p class="fe-source-label">Copilot</p><h4>Vorsichtiger Pilot</h4><p>Stark bei Pilotansatz und offenen Standortfragen. Beim Preis weniger konkret.</p></article>
-        </div>
-        <p class="fe-comparator-note"><strong>ChatGPT:</strong> vollständig und gut lesbar, inhaltlich nahe an Fable.</p>
-        <div class="fe-synthesis-join" aria-hidden="true"><span></span><span></span></div>
-        <div class="fe-synthesis-result"><span class="fe-source-label">Finaler Mix</span><p>Konkrete Produktideen <span aria-hidden="true">+</span> vorsichtiger Pilotansatz</p></div>
-        <p class="fe-method-note">Persona und Standort bleiben prüfbar. Preis, Ersatztermine, Partner und Zahlungsbedingungen sind vor der Umsetzung zu validieren.</p>
-      </section>
       <section class="fe-method-panel fe-marketing" data-fe-marketing aria-hidden="true">
         <p class="fe-method-kicker">Finaler 5P-Mix</p>
         <h3>Vom Erlebnis zum Gast.</h3>
@@ -191,8 +237,18 @@
       const price = root.querySelector('[data-fe-price]');
       const priceLine = root.querySelector('.fe-price-connector');
       const marketing = root.querySelector('[data-fe-marketing]');
-      const views = [layout, panorama, price, root.querySelector('[data-fe-compare]'), root.querySelector('[data-fe-synthesis]'), marketing];
+      const views = [layout, panorama, price, marketing, root.querySelector('[data-fe-econ]'), root.querySelector('[data-fe-scale]')];
       const mixRows = Array.from(root.querySelectorAll('[data-fe-mix-row]'));
+      const model = economics();
+      const all = selector => Array.from(root.querySelectorAll(selector));
+      const gainBars = all('[data-fe-gain]'), costBars = all('[data-fe-cost]'), revenueLabels = all('[data-fe-revenue]');
+      const cumulativeLine = root.querySelector('[data-fe-cumulative]'), cumulativeDots = all('[data-fe-cum-dot]');
+      const breakEven = root.querySelector('[data-fe-breakeven]');
+      const gainTotal = root.querySelector('[data-fe-gain-total]'), costTotal = root.querySelector('[data-fe-cost-total]');
+      const guestTotal = root.querySelector('[data-fe-guest-total]');
+      const guestMargin = root.querySelector('[data-fe-guest-margin]'), guestCost = root.querySelector('[data-fe-guest-cost]');
+      const slivers = all('[data-fe-sliver]'), rings = all('[data-fe-ring]'), callouts = all('[data-fe-callout]');
+      const sliverShare = [model.pShare, model.cShare];
       let last = '';
       return {
         update(progress, context = {}) {
@@ -231,9 +287,42 @@
           courses.forEach((course,index)=>set(course,'--fe-course-lit',n(smooth(.34+index*.022,.39+index*.022,experienceP))));
           set(priceLine,'stroke-dashoffset',n(1-smooth(.63,.73,priceP)));
           mixRows.forEach((row,index)=>{
-            const arrival = context.static ? 1 : smooth(.82+index*.016,.895+index*.016,p);
+            const arrival = context.static ? 1 : smooth(.5+index*.016,.575+index*.016,p);
             set(row,'opacity',n(arrival));
             set(row,'transform',`translateY(${n(8*(1-arrival))}px)`);
+          });
+          // The two economics views settle at 80 % of their slot, before the navigation's still point.
+          const econT = context.static ? 1 : clamp((p-diningPhases[4])/((diningPhases[5]-diningPhases[4])*.8));
+          let gainSum = 0, costSum = 0;
+          gainBars.forEach((bar,index)=>{
+            const grow = smooth(.04+index*.08,.16+index*.08,econT);
+            const height = model.profit[index]*econGeo.k*grow;
+            gainSum += model.profit[index]*grow;
+            bar.setAttribute('y',n(econGeo.base-height));bar.setAttribute('height',n(height));
+            set(revenueLabels[index],'opacity',n(smooth(.05+index*.08,.14+index*.08,econT)));
+          });
+          costBars.forEach((bar,index)=>{
+            const grow = smooth(.42+index*.05,.54+index*.05,econT);
+            costSum += model.cost[index]*grow;
+            bar.setAttribute('height',n(model.cost[index]*econGeo.k*grow));
+          });
+          gainTotal.textContent = de(gainSum);
+          costTotal.textContent = de(costSum);
+          const lineT = smooth(.72,.94,econT);
+          set(cumulativeLine,'stroke-dashoffset',n(1-lineT));
+          cumulativeDots.forEach((dot,index)=>set(dot,'opacity',n(smooth(index/4-.02,index/4+.02,lineT))));
+          set(breakEven,'opacity',n(smooth(.9,.98,econT)));
+          const scaleT = context.static ? 1 : clamp((p-diningPhases[5])/((1-diningPhases[5])*.8));
+          const marginT = smooth(.05,.3,scaleT), costT = smooth(.3,.42,scaleT);
+          const marginShare = 1-model.variable/model.price;
+          guestMargin.setAttribute('width',n(scaleGeo.width*marginShare*marginT));
+          guestCost.setAttribute('x',n(scaleGeo.x+scaleGeo.width*marginShare*marginT));
+          guestCost.setAttribute('width',n(scaleGeo.width*(1-marginShare)*costT));
+          guestTotal.textContent = de((model.price-model.variable)*marginT,0);
+          slivers.forEach((sliver,index)=>{
+            sliver.setAttribute('width',n(Math.max(1,scaleGeo.width*sliverShare[index])*smooth(.5+index*.1,.62+index*.1,scaleT)));
+            set(rings[index],'opacity',n(smooth(.66+index*.1,.78+index*.1,scaleT)));
+            set(callouts[index],'opacity',n(smooth(.72+index*.1,.86+index*.1,scaleT)));
           });
         }
       };
@@ -241,78 +330,39 @@
   };
 
   const enginePositions = [
-    {x:115,y:178,tx:296,ty:351,labelX:60,labelY:94,title:'Struktur',line:'Verantwortung klären'},
-    {x:525,y:178,tx:312,ty:351,labelX:414,labelY:94,title:'Prozesse',line:'Früh prüfen'},
-    {x:115,y:351,tx:328,ty:351,labelX:60,labelY:433,title:'Kultur',line:'Beteiligung ermöglichen'},
-    {x:525,y:351,tx:344,ty:351,labelX:414,labelY:433,title:'Kompetenzen',line:'Wissen teilen'}
+    {x:115,y:178,tx:304,ty:351,labelX:60,labelY:94,title:'Sicherheit',line:'Fehler ohne Angst'},
+    {x:525,y:178,tx:320,ty:351,labelX:414,labelY:94,title:'Austausch',line:'Wissen bleibt'},
+    {x:115,y:351,tx:336,ty:351,labelX:60,labelY:433,title:'Gates',line:'Früh entscheiden'}
   ];
-  const systemPhases = [0,.21,.42,.63,.82];
-  const systemViews = ['diagnosis','structure-process','culture-skills','gates','engines'];
-  const analysisGroups = [
-    {title:'3 Stärken',kind:'strength',fields:[
-      {name:'Strategie',verb:'SOLLEN',reason:'Langfristige Mission verbindet die Geschäftsfelder.'},
-      {name:'Foresight',verb:'SEHEN',reason:'KI und Daten früh aufgegriffen; Abhängigkeit vom Gründer.'},
-      {name:'Prozesse',verb:'MACHEN',reason:'Schnelle Build-Test-Learn-Schleifen mit realen Daten.'}
-    ]},
-    {title:'3 Felder mit Handlungsbedarf',kind:'development',fields:[
-      {name:'Struktur',verb:'HABEN',reason:'Über Geschäftsfelder hinweg besser koordinieren.'},
-      {name:'Führung / Kultur',verb:'DÜRFEN / WOLLEN',reason:'Beteiligung und psychologische Sicherheit stärken.'},
-      {name:'Kompetenzen / Methoden',verb:'KÖNNEN',reason:'Wissen gemeinsam teilen und gezielt weiterlernen.'}
-    ]}
+  const systemPhases = [0,.25,.5,.78];
+  const systemViews = ['safety','exchange','gates','engines'];
+  // Hube model (see source slides): six fields around "Innovation", one highlighted.
+  const modelFields = [
+    {name:['Strategie'],x:200,y:57},{name:['Foresight'],x:293,y:111},{name:['Führung /','Kultur'],x:293,y:219},
+    {name:['Kompetenzen'],x:200,y:273},{name:['Prozesse'],x:107,y:219},{name:['Struktur'],x:107,y:111}
   ];
-  // The seven source questions are grouped editorially for reading. The grouping
-  // adds no scoring, thresholds or claim that a project has passed the gates.
-  const gateGroups = [
-    {title:'Kunde & Markt',questions:[
-      ['Kundennutzen','Mit Kunden oder einem Prototyp validiert?'],
-      ['Markt','Nachfrage, Wachstum und Zahlungsbereitschaft plausibel?'],
-      ['Differenzierung','Erkennbar besser oder anders?']
-    ]},
-    {title:'Machbarkeit',questions:[
-      ['Reifegrad','Technische und operative Risiken verstanden?'],
-      ['Synergien','Vorhandene Fähigkeiten und Infrastruktur genutzt?']
-    ]},
-    {title:'Tragfähigkeit & Umsetzung',questions:[
-      ['Wirtschaftlichkeit','Investition, Kosten und Amortisation belastbar?'],
-      ['Umsetzung','Ressourcen und Zeit bis zum Markteintritt passend?']
-    ]}
-  ];
+  const modelMarkup = active => `<svg class="fe-model" viewBox="0 0 400 330" aria-hidden="true" focusable="false">
+    <ellipse class="fe-model-ring" cx="200" cy="165" rx="192" ry="158"/>
+    ${modelFields.map(f=>`<path class="fe-model-link" d="M200 165L${f.x} ${f.y}"/>`).join('')}
+    ${modelFields.map((f,i)=>`<g class="fe-model-field${i===active?' is-active':''}"><circle cx="${f.x}" cy="${f.y}" r="37"/>${f.name.map((line,row)=>`<text x="${f.x}" y="${f.y+4+(row-(f.name.length-1)/2)*13}" text-anchor="middle">${line}</text>`).join('')}</g>`).join('')}
+    <circle class="fe-model-core" cx="200" cy="165" r="42"/>
+    <text class="fe-model-core-title" x="200" y="162" text-anchor="middle">Innovation</text>
+    <text class="fe-model-core-formula" x="200" y="180" text-anchor="middle">I = N × U</text>
+  </svg>`;
+  const approachMarkup = ({view,hidden,kicker,title,active,idea,chips}) => `<section class="fe-method-panel fe-approach fe-${view}" data-fe-${view}${hidden?' aria-hidden="true"':''}>
+    <p class="fe-method-kicker">${kicker}</p>
+    <h3>${title}</h3>
+    <div class="fe-approach-body">
+      ${modelMarkup(active)}
+      <div class="fe-approach-copy"><p class="fe-approach-idea">${idea}</p><ol class="fe-chips">${chips.map(([lead,text])=>`<li><strong>${lead}</strong><span>${text}</span></li>`).join('')}</ol></div>
+    </div>
+  </section>`;
 
   scenes[7] = {
-    markup: () => `<div class="fe-scene fe-system" role="group" aria-label="Von sechs Analysefeldern zu vier Empfehlungen für das Innovationsmanagement.">
-      <section class="fe-method-panel fe-diagnosis" data-fe-diagnosis>
-        <p class="fe-method-kicker">Projekturteil · Modell nach Hube</p>
-        <h3>Sechs Felder. Ein differenziertes Bild.</h3>
-        <div class="fe-analysis-groups">${analysisGroups.map(group=>`<section class="fe-analysis-group fe-analysis-${group.kind}"><h4>${group.title}</h4><dl>${group.fields.map(field=>`<div><dt><span>${field.verb}</span><strong>${field.name}</strong></dt><dd>${field.reason}</dd></div>`).join('')}</dl></section>`).join('')}</div>
-        <p class="fe-method-note"><strong>Vier Empfehlungen ergänzen auch die starke Prozessdimension.</strong> Begründetes Urteil aus öffentlichen Quellen; keine interne Unternehmensprüfung.</p>
-      </section>
-      <section class="fe-method-panel fe-structure-process" data-fe-structure-process aria-hidden="true">
-        <p class="fe-method-kicker">Empfehlungen 01 + 02</p>
-        <h3>Verantwortung und Prüfung verbinden.</h3>
-        <section class="fe-recommendation">
-          <h4><span>HABEN · Struktur</span>Das Portfolio gemeinsam steuern.</h4>
-          <p class="fe-portfolio-root">Gemeinsame Portfoliosicht</p>
-          <div class="fe-portfolio-branches"><p><strong>Kerninnovationen</strong><span>Responsible Engineers<br>in der Linie</span></p><p><strong>Radikale Ideen</strong><span>Eigenes Projektteam<br>mit klarem Auftrag</span></p></div>
-        </section>
-        <section class="fe-recommendation">
-          <h4><span>MACHEN · Prozesse</span>Schnelle Iteration gezielt ergänzen.</h4>
-          <div class="fe-process-complement"><p><span class="fe-source-label">Stärke erhalten</span><strong>Build-Test-Learn</strong><span>Mit realen Daten weiterlernen.</span></p><span class="fe-complement-plus" aria-hidden="true">+</span><p><span class="fe-source-label">Früh ergänzen</span><strong>Design Thinking<br>&amp; Go-/No-go-Gates</strong><span>Kundennutzen fachübergreifend prüfen.</span></p></div>
-        </section>
-      </section>
-      <section class="fe-method-panel fe-culture-skills" data-fe-culture-skills aria-hidden="true">
-        <p class="fe-method-kicker">Empfehlungen 03 + 04</p>
-        <h3>Beteiligung und gemeinsames Lernen stärken.</h3>
-        <div class="fe-learning-pair">
-          <section><h4><span>DÜRFEN / WOLLEN</span>Kultur</h4><div class="fe-retain"><span class="fe-source-label">Bewahren</span><p>Eigenverantwortung und Testkultur.</p></div><div class="fe-addition"><span class="fe-source-label">Ergänzen</span><p>Ideen aktiv erfragen. Sachliche Kritik ohne Bestrafungsangst ermöglichen. Umgesetzte Ideen sichtbar würdigen.</p></div><p class="fe-recommendation-outcome">Beteiligung &amp; psychologische Sicherheit</p></section>
-          <section><h4><span>KÖNNEN</span>Kompetenzen</h4><div class="fe-retain"><span class="fe-source-label">Bewahren</span><p>Selbstgesteuertes Lernen.</p></div><div class="fe-addition"><span class="fe-source-label">Ergänzen</span><p>Austausch zwischen Bereichen, feste Lernformate und gemeinsame Weiterbildung. Change-Kompetenz aufbauen.</p></div><p class="fe-recommendation-outcome">Wissenstransfer &amp; gemeinsame Kompetenz</p></section>
-        </div>
-      </section>
-      <section class="fe-method-panel fe-gates" data-fe-gates aria-hidden="true">
-        <p class="fe-method-kicker">Fachübergreifende Go-/No-go-Gates</p>
-        <h3>Sieben Fragen vor der Freigabe.</h3>
-        <div class="fe-gate-groups">${gateGroups.map((group,index)=>`<section><h4><span aria-hidden="true">0${index+1}</span>${group.title}</h4><dl>${group.questions.map(([label,question])=>`<div><dt>${label}</dt><dd>${question}</dd></div>`).join('')}</dl></section>`).join('')}</div>
-        <p class="fe-method-note">Für RocketLight besonders relevant: Standortzugang, Sicherheit, Zahlungsbereitschaft und belastbarer Pilotbetrieb. Kriterien dem Projekt anpassen.</p>
-      </section>
+    markup: () => `<div class="fe-scene fe-system" role="group"     aria-label="Drei konkrete Ansätze für das Innovationsmanagement von SpaceX.">
+${approachMarkup({view:'safety',kicker:'Ansatz 01 · DÜRFEN / WOLLEN · Kultur',title:'Psychologische Sicherheit',active:2,idea:'Fehler und Kritik ohne Angst vor Bestrafung. Wie bei Hardware-Tests.',chips:[['Blameless Review','Ursachen statt Schuldige'],['Kritik-Kanal','direkt oder anonym'],['Pulsbefragung','zweimal im Jahr']]})}
+      ${approachMarkup({view:'exchange',hidden:true,kicker:'Ansatz 02 · KÖNNEN · Kompetenzen',title:'Austausch zwischen Bereichen',active:3,idea:'Wissen darf nicht mit der Fluktuation verloren gehen.',chips:[['Rotation','3–6 Monate in einem anderen Bereich'],['Learning Review','Erkenntnisse teilen'],['Tandems','erfahren + neu']]})}
+      ${approachMarkup({view:'gates',hidden:true,kicker:'Ansatz 03 · MACHEN · Prozesse',title:'Klare Go-/No-go-Gates',active:4,idea:'Drei Entscheidungspunkte. Jedes Mal: Go, Anpassen oder Stopp.',chips:[['Gate 1 · Idee','Kunde &amp; Markt'],['Gate 2 · Konzept','Machbarkeit'],['Gate 3 · Pilot','Wirtschaftlichkeit &amp; Umsetzung']]})}
       <svg class="fe-svg" viewBox="0 0 640 520" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="fe-vehicle-metal"><stop stop-color="#647782"/><stop offset=".38" stop-color="#eff3ed"/><stop offset=".64" stop-color="#a9b6bc"/><stop offset="1" stop-color="#40535f"/></linearGradient>
@@ -349,10 +399,9 @@
           <text class="fe-engine-number" y="7" text-anchor="middle">0${index+1}</text>
         </g>`).join('')}
         ${enginePositions.map((engine,index)=>`<g class="fe-engine-label" data-fe-engine-label="${index}"><text class="fe-engine-name" x="${engine.labelX}" y="${engine.labelY}">${engine.title}</text><text class="fe-engine-purpose" x="${engine.labelX}" y="${engine.labelY+27}">${engine.line}</text><path class="fe-engine-label-rule" pathLength="1" d="M${engine.labelX} ${engine.labelY+40}H${engine.labelX+160}"/></g>`).join('')}
-        <text class="fe-system-foundation" x="320" y="499" text-anchor="middle">KLARE MISSION + FRÜHE TRENDERKENNUNG</text>
         </g>
       </svg>
-      <div class="fe-system-caption" aria-hidden="true">Vier Empfehlungen <span>·</span> Ein gemeinsamer Antrieb</div>
+      <div class="fe-system-caption" aria-hidden="true">Drei Ansätze <span>·</span> Ein gemeinsamer Antrieb</div>
     </div>`,
     mount(root) {
       const scene = root.querySelector('.fe-system');
@@ -376,11 +425,11 @@
           const phase = phaseAt(p, systemPhases);
           const reveal = context.static || phase===0 ? 1 : smooth(systemPhases[phase], systemPhases[phase]+.025, p);
           showPhase(scene, views, systemViews, phase, n(reveal));
-          caption.style.display = phase===4 ? '' : 'none';
-          scene.setAttribute('aria-label', phase===4 ? 'Vier Empfehlungen – Struktur, Prozesse, Kultur und Kompetenzen – bilden metaphorisch den gemeinsamen Antrieb. Die Rakete bleibt bis zum Finale am Boden.' : views[phase].querySelector('h3').textContent);
-          // Only the closing phase assembles the four previously explained
-          // recommendations. All motion is derived from the shared progress.
-          const engineP = clamp((p-.82)/.18);
+          caption.style.display =           phase===3 ? '' : 'none';
+                    scene.setAttribute('aria-label', phase===3 ? 'Drei Ansätze – psychologische Sicherheit, Wissensaustausch und klare Gates – bilden metaphorisch den gemeinsamen Antrieb. Die Rakete bleibt bis zum Finale am Boden.' : views[phase].querySelector('h3').textContent);
+          // Only the closing phase assembles the three previously explained
+          // approaches. All motion is derived from the shared progress.
+          const engineP = clamp((p-.78)/.22);
           const assembly = smooth(.08,.95,engineP);
           const vehicleReveal = smooth(.15,.96,engineP);
           set(scene,'--fe-system-assembled',n(assembly));

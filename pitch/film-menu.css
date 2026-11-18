@@ -1,0 +1,24 @@
+/* Part 08: Menüwahl. Kupfer = meistgewähltes Gericht, Eis = übrige Gerichte. */
+.fm-scene { width: 100%; height: 100%; position: relative; color: #eff3ed; }
+.fm-svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.fm-svg text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-weight: 400; fill: #eff3ed; }
+.fm-svg path, .fm-svg circle, .fm-svg ellipse { vector-effect: non-scaling-stroke; }
+.fm-svg .fm-heading { font-size: 17px; letter-spacing: 1.5px; fill: #c4d4d8; }
+.fm-svg .fm-mock { font-size: 14px; letter-spacing: 1.4px; fill: #efbd91; font-variant-numeric: tabular-nums; }
+.fm-axis { stroke: #a9d9d95c; stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.fm-column { opacity: 0; }
+.fm-bar { fill: #a9d9d9; opacity: .8; }
+.fm-bar.is-lead { fill: #efbd91; opacity: 1; }
+.fm-svg .fm-count { font-size: 30px; font-weight: 350; font-variant-numeric: tabular-nums; fill: #dbe8e6; opacity: 0; }
+.fm-svg .fm-count.is-lead { fill: #efbd91; }
+.fm-plate { fill: #08131ce8; stroke: #a9d9d9b8; stroke-width: 1; }
+.fm-plate-inner { fill: none; stroke: #a9d9d93a; stroke-width: .8; }
+.fm-glyph { fill: none; stroke: #efbd91; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.fm-svg .fm-name { font-size: 18px; letter-spacing: .2px; }
+.fm-svg .fm-line { font-size: 13px; letter-spacing: .6px; fill: #aebfc5; }
+.fm-svg .fm-lead { font-size: 15px; letter-spacing: 1.4px; fill: #efbd91; opacity: 0; }
+
+/* Reduced motion shows the finished chart as ordinary flow. */
+.film-ready.is-reduced #schritt-8 .film-visual { height: auto; max-height: none; min-height: 0; aspect-ratio: auto; }
+.film-ready.is-reduced #schritt-8 .film-stage { align-items: start; }
+.film-ready.is-reduced .fm-scene { height: auto; }

@@ -1,16 +1,30 @@
 /* Scene 06: eight picture phases with dated tasks, then the complete parallel plan.
    The phase block stays above/right of the shared architectural picture. */
 .film-stage[data-film-step="6"] .film-visual { width: 100%; max-width: 650px; height: auto; max-height: none; }
-.film-stage[data-film-step="6"]:has([data-plan-view="phase"]) .film-visual { width: min(465px,100%); }
-@media (min-width: 1201px) {
-  .film-stage[data-film-step="6"]:has([data-plan-view="phase"]) .film-visual { justify-self: start; }
+.film-stage[data-film-step="6"]:has([data-plan-view="phase"]) .film-visual { width: min(480px,100%); }
+.film-stage[data-film-step="6"] .film-chapter-meta > span:last-child { display: none; }
+@media (min-width: 1700px) {
+  .film-stage[data-film-step="6"] .film-visual { margin-right: -60px; }
+  .film-stage[data-film-step="6"]:has([data-plan-view="phase"]) .film-visual { width: min(560px,100%); }
+  .film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-visual { max-width: 760px; }
+  .film-stage[data-film-step="6"] .film-plan-total { font-size: 38px; }
+  .film-stage[data-film-step="6"] .film-plan-name { font-size: 10px; }
+  .film-stage[data-film-step="6"] .film-plan-unit { font-size: 12px; }
+  .film-phase-kicker { font-size: 12px; }
+  .pitch-page .film-phase-card h3 { font-size: 25px; }
+  .film-phase-tasks li > span { font-size: 17px; }
+  .film-phase-tasks time { font-size: 13px; }
+  .pitch-page .film-phase-result { font-size: 16px; }
+  .film-phase-result > span { font-size: 11px; }
+  .film-gate-strip b,.film-gate-strip time { font-size: 12px; }
+  .film-gate-strip li > span { font-size: 13px; }
+  .pitch-page .film-gate-strip > p { font-size: 11px; }
+  .film-roadmap-pilots { font-size: 12px; }
 }
 .film-stage[data-film-step="6"] .film-architecture-plan { width: 100%; padding: 0; border: 0; position: relative; }
-.film-stage[data-film-step="6"] .film-visual::before { content: ""; position: absolute; z-index: -1; inset: -28px -32px -24px; pointer-events: none; background: radial-gradient(ellipse at 55% 35%,#060b10e8 15%,#060b1099 65%,transparent 100%); }
+.film-stage[data-film-step="6"] .film-visual::before { content: ""; position: absolute; z-index: -1; inset: -28px -32px -24px; pointer-events: none; background: radial-gradient(ellipse at 50% 45%,#060b10f7 40%,#060b10ee 78%,#060b10b8 100%); }
 .film-plan-header { display: flex; align-items: center; gap: 18px; }
-.film-stage[data-film-step="6"] .film-variant-switch { flex: 1 1 auto; display: flex; min-width: 0; align-self: center; }
-.film-stage[data-film-step="6"] .film-variant-switch button { min-height: 44px; padding: 8px 10px; font-size: 12px; }
-.film-stage[data-film-step="6"] .film-plan-budget { position: static; flex: 0 0 auto; display: block; padding: 0; text-align: right; }
+.film-stage[data-film-step="6"] .film-plan-budget { position: static; flex: 0 0 auto; display: block; padding: 0; text-align: left; }
 .film-stage[data-film-step="6"] .film-plan-name { display: block; font-size: 8px; letter-spacing: .09em; }
 .film-stage[data-film-step="6"] .film-plan-total { font-size: 32px; line-height: 1.1; margin-top: 3px; }
 .film-stage[data-film-step="6"] .film-plan-unit { font-size: 10px; line-height: 1.35; }
@@ -28,13 +42,8 @@
 .film-phase-tasks li { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 14px; align-items: baseline; border-top: 1px solid #a9d9d925; padding: 11px 0; }
 .film-phase-tasks li > span { font-size: 14px; line-height: 1.4; color: #e0e9e8; }
 .film-phase-tasks time { color: #a9c3c9; font-size: 11px; line-height: 1.45; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.pitch-page .film-phase-picture,.pitch-page .film-phase-result,.pitch-page .film-phase-parallel { display: grid; grid-template-columns: 66px minmax(0,1fr); column-gap: 12px; font-size: 13px; line-height: 1.5; margin: 14px 0 0; color: #c0d0d4; }
-.film-phase-picture > span,.film-phase-result > span,.film-phase-parallel > span { font-size: 9px; line-height: 1.6; letter-spacing: .08em; padding-top: 2px; }
-.film-phase-picture > span { color: #a9d9d9; }
-.film-phase-result > span { color: #efbd91; }
-.pitch-page .film-phase-parallel { color: #91abb6; font-size: 12px; }
-.film-phase-parallel > span { color: #91abb6; }
-.pitch-page .film-phase-plan-note { margin: 16px 0 0; color: #809ba7; font-size: 10px; line-height: 1.5; max-width: 580px; }
+.pitch-page .film-phase-result { display: grid; grid-template-columns: 66px minmax(0,1fr); column-gap: 12px; font-size: 14px; line-height: 1.5; margin: 14px 0 0; color: #d0dcdf; }
+.film-phase-result > span { font-size: 9px; line-height: 1.7; letter-spacing: .08em; padding-top: 2px; color: #efbd91; }
 .film-phase-sequence { display: none; }
 .film-plan-timeline { display: block; width: 100%; height: auto; overflow: visible; }
 .film-plan-timeline text { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #d7e4e4; font-weight: 400; font-variant-numeric: tabular-nums; }
@@ -73,16 +82,13 @@
   .film-stage[data-film-step="6"] .film-plan-name { display: none; }
   .film-stage[data-film-step="6"] .film-plan-total { font-size: 28px; margin: 0; }
   .film-stage[data-film-step="6"] .film-plan-unit { font-size: 9px; padding: 0; }
-  .film-stage[data-film-step="6"] .film-variant-switch button { padding-inline: 7px; font-size: 11px; }
   .film-phase-position { margin-block: 10px 12px; }
   .film-phase-kicker { font-size: 9px; margin-bottom: 7px; }
   .pitch-page .film-phase-card h3 { font-size: 18px; margin-bottom: 10px; }
   .film-phase-tasks li { padding-block: 8px; gap: 10px; }
   .film-phase-tasks li > span { font-size: 13px; }
   .film-phase-tasks time { font-size: 10px; }
-  .pitch-page .film-phase-picture,.pitch-page .film-phase-result,.pitch-page .film-phase-parallel { margin-top: 9px; font-size: 12px; line-height: 1.45; }
-  .pitch-page .film-phase-parallel { font-size: 11px; }
-  .pitch-page .film-phase-plan-note { font-size: 9px; margin-top: 10px; }
+  .pitch-page .film-phase-result { margin-top: 9px; font-size: 12px; line-height: 1.45; }
   .film-roadmap-pilots { font-size: 9px; gap: 2px 5px; padding-top: 5px; line-height: 1.4; }
   .film-roadmap-pilots > span { font-size: 8px; }
   .film-gate-strip { margin-top: 8px; padding-top: 7px; }
@@ -91,7 +97,6 @@
   .film-gate-strip li { gap: 2px 6px; }
   .film-gate-strip time { font-size: 9px; }
   .film-gate-strip li > span { font-size: 10px; }
-  .film-architecture-plan[data-plan-view="roadmap"] .film-phase-plan-note { display: none; }
   .film-architecture-plan[data-plan-view="roadmap"] .film-phase-position { display: none; }
   .film-architecture-plan[data-plan-view="roadmap"] .film-timeline-view { margin-top: 12px; }
   .film-architecture-plan[data-plan-view="roadmap"] .film-plan-timeline { height: min(300px,calc(100svh - 394px)); }
@@ -120,8 +125,6 @@
   .film-stage[data-film-step="6"],.film-ready.is-reduced .film-stage[data-film-step="6"] { position: relative; height: auto; min-height: 0; overflow: visible; padding-top: 130px; padding-bottom: 155px; gap: 24px; }
   .film-stage[data-film-step="6"] .film-visual,.film-ready.is-reduced .film-stage[data-film-step="6"] .film-visual { width: 100%; max-width: none; height: auto; min-height: 0; max-height: none; aspect-ratio: auto; flex: 0 0 auto; margin-top: 0; }
   .film-plan-header { gap: 12px; }
-  .film-stage[data-film-step="6"] .film-variant-switch button { min-height: 44px; padding-inline: 7px; font-size: 12px; }
-  .film-stage[data-film-step="6"] .film-variant-switch button span { margin-left: 3px; }
   .film-stage[data-film-step="6"] .film-plan-name { display: none; }
   .film-stage[data-film-step="6"] .film-plan-total { font-size: 28px; margin: 0; }
   .film-stage[data-film-step="6"] .film-plan-unit { font-size: 10px; }
@@ -133,8 +136,7 @@
   .film-phase-tasks li { gap: 10px; padding-block: 11px; }
   .film-phase-tasks li > span { font-size: 14px; }
   .film-phase-tasks time { font-size: 11px; }
-  .pitch-page .film-phase-picture,.pitch-page .film-phase-result,.pitch-page .film-phase-parallel { font-size: 13px; margin-top: 13px; line-height: 1.55; grid-template-columns: 67px minmax(0,1fr); }
-  .pitch-page .film-phase-plan-note { font-size: 11px; line-height: 1.6; margin-top: 20px; }
+  .pitch-page .film-phase-result { font-size: 13px; margin-top: 13px; line-height: 1.55; grid-template-columns: 67px minmax(0,1fr); }
   .film-plan-timeline { display: none; }
   .film-mobile-roadmap { display: block; }
   .film-mobile-chart-title { font-size: 18px; font-weight: 450; color: #dbe6e4; line-height: 1.4; margin-bottom: 20px; }
@@ -166,7 +168,6 @@
 }
 @media (max-width: 420px) {
   .film-plan-header { gap: 8px; }
-  .film-stage[data-film-step="6"] .film-variant-switch button { font-size: 11px; padding-inline: 5px; }
   .film-stage[data-film-step="6"] .film-plan-total { font-size: 25px; }
   .film-stage[data-film-step="6"] .film-plan-unit { font-size: 9px; }
   .film-phase-tasks li { grid-template-columns: minmax(0,1fr); gap: 3px; }

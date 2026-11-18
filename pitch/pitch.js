@@ -23,7 +23,7 @@
   // The source UI defines index 0 as KI and index 1 as the group/team.
   let matrixIndex = 1;
   const params = new URLSearchParams(location.search);
-  let variant = (params.get('variante') || read('rocketlight:variant')) === 'B' ? 'B' : 'A';
+  const variant = 'A';
   writeHistory('replaceState',{...history.state, pitchVariant:variant},location.href);
 
   function selectIdea(id) {
@@ -88,14 +88,14 @@
     image.src = 'assets/dining-facing-launch.webp';
     image.alt = `Gemeinsames Innenraumkonzept für Variante ${variant}: einzelne Zweiertische auf versetzten Terrassen mit freier Sicht auf den Raketenstart. Künstlerische Visualisierung.`;
     $('#variant-location').textContent = meta.location.toLocaleUpperCase('de-DE');
-    $('#variant-title').innerHTML = isA ? 'Ein Pavillon.<br>Mehr als ein Horizont.' : 'Ein fester Ort.<br>Für besondere Momente.';
-    $('#variant-description').textContent = isA ? 'Erst in Florida erproben, dann den zweiten Standort entwickeln.' : 'Piloten im Kennedy Space Center sind geplant, während die eigene Lounge entsteht.';
+    $('#variant-title').innerHTML = 'Ein Pavillon.<br>Mehr als ein Horizont.';
+    $('#variant-description').textContent = 'Erst in Florida erproben, dann den zweiten Standort entwickeln.';
     $('#roadmap-metrics').innerHTML = `<div class="roadmap-metric"><span>GEPLANTER RAHMEN</span><strong>${escape(meta.budget)}</strong><small>${escape(meta.budgetLabel)}</small></div><div class="roadmap-metric"><span>ERSTER PILOT</span><strong>${escape(meta.firstDinner)}</strong><small>${escape(meta.firstDinnerLabel)}</small></div><div class="roadmap-metric"><span>FÜNFJAHRESZIEL</span><strong>${escape(meta.revenue)}</strong><small>Mio. USD Umsatz · Planannahme</small></div>`;
     $('#gate-timeline').innerHTML = meta.gates.map(gate => {const [day,month,year] = gate.date.split('.');return `<li><span>${escape(gate.id)}</span><time datetime="${year}-${month}-${day}">${escape(gate.date)}</time><h4>${escape(gate.title)}</h4><p>${escape(gate.description)}</p></li>`;}).join('');
     $('#critical-path').textContent = meta.critical;
     $('#roadmap-projects').innerHTML = `<ol class="project-list">${data.t1.map((project,index)=>`<li><span>TEILPROJEKT ${String(index+1).padStart(2,'0')}</span><h4>${escape(project.name)}</h4><p>${escape(project.inhalt)}</p><p><strong>Ziel:</strong> ${escape(project.ziel)}</p></li>`).join('')}</ol><h3>Die vier W-Fragen</h3><p>Geplante Rollen, Partner und Termine. Genannte Organisationen oder Personen haben damit keine Zusage erteilt.</p><div class="four-questions">${[['was','Was?'],['wer','Wer?'],['wann','Wann?'],['wie','Wie?']].map(([key,label])=>`<section><h4>${label}</h4><ul>${data.w4[key].map(item=>`<li>${escape(item)}</li>`).join('')}</ul></section>`).join('')}</div>`;
-    $('#variant-caveat').textContent = isA ? 'Originalroadmap vom 05.11.2026: Teilprojekte laufen teilweise parallel; Gates sind geplante Entscheidungen. Die dort genannte 12-Monats-Garantie ist eine frühere Planannahme. Im finalen 5P-Mix bleiben Bedingungen und Kosten eines Ersatztermins zu prüfen.' : 'Eigenständige Alternative: 13,38 Mio. USD in der Budgettabelle, hier gerundet 13,4 Mio. USD. Die Piloten starten im Plan bereits 2027 im KSC, die eigene Lounge eröffnet am 01.10.2028. Der Umsatz von 47,2 Mio. USD ist aus dem Basiskonzept übernommen; die A-Jahresrechnung ist kein Finanzplan für B.';
-    $$('[data-plan-link]').forEach(link => link.href = `../teil6/?variante=${variant}#${link.dataset.planLink}`);
+    $('#variant-caveat').textContent = 'Originalroadmap vom 05.11.2026: Teilprojekte laufen teilweise parallel; Gates sind geplante Entscheidungen. Die dort genannte 12-Monats-Garantie ist eine frühere Planannahme. Im finalen 5P-Mix bleiben Bedingungen und Kosten eines Ersatztermins zu prüfen.';
+    $$('[data-plan-link]').forEach(link => link.href = `../teil6/#${link.dataset.planLink}`);
     $('#presentation-download').href = `../praesentation/${data.file}`;
     const alternativeNote = $('#decision-alternative');
     if (alternativeNote) alternativeNote.hidden = isA;
@@ -209,14 +209,6 @@
     }
     const matrixButton = event.target.closest('[data-matrix]');
     if (matrixButton) { matrixIndex = Number(matrixButton.dataset.matrix); renderMatrix(); }
-    const variantButton = event.target.closest('[data-variant]');
-    if (variantButton && variantButton.dataset.variant !== variant) {
-      variant = variantButton.dataset.variant;
-      write('rocketlight:variant',variant);
-      const url = new URL(location.href); url.searchParams.set('variante',variant);
-      writeHistory('replaceState',{...history.state,pitchVariant:variant},url);
-      renderVariant(true);
-    }
     const anchor = event.target.closest('a[href^="#"]');
     if (anchor && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
       const target = document.getElementById(anchor.hash.slice(1));
@@ -260,14 +252,7 @@
     if (nextReduced !== reduced) updateMotion();
     queueMeasure();
   }, {passive:true});
-  addEventListener('popstate', event => {
-    const requested = new URLSearchParams(location.search).get('variante') || event.state?.pitchVariant || read('rocketlight:variant');
-    const restored = requested === 'B' ? 'B' : 'A';
-    if (restored !== variant) {
-      variant = restored;
-      write('rocketlight:variant',variant);
-      renderVariant(true);
-    }
+  addEventListener('popstate', () => {
     setMenu(false);
     queueMeasure();
   });
@@ -280,11 +265,6 @@
     } else queueMeasure();
   });
   addEventListener('storage', event => {
-    if (event.key === 'rocketlight:variant') {
-      variant = event.newValue === 'B' ? 'B' : 'A';
-      const url = new URL(location.href); url.searchParams.set('variante',variant); writeHistory('replaceState',{...history.state,pitchVariant:variant},url);
-      renderVariant(true);
-    }
     if (event.key === 'rocketlight:motion') {
       motionPreference = event.newValue;
       preferredReduced = motionPreference === 'reduced' || (motionPreference !== 'full' && media.matches);

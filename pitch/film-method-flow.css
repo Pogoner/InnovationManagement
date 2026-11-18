@@ -5,27 +5,14 @@
 .fm-flow-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .fm-flow-svg text { font-family: inherit; fill: #eff3ed; font-weight: 400; }
 .fm-flow-svg .fm-kicker { font-size: 12px; letter-spacing: 1.6px; fill: #a9d9d9; }
-.fm-flow-svg .fm-heading { font-size: 28px; letter-spacing: -.6px; }
-.fm-flow-svg .fm-copy { font-size: 19px; fill: #cfdbdd; }
 .fm-flow-svg .fm-note { font-size: 14px; fill: #a8b5bb; }
 .fm-flow-svg .fm-label { font-size: 18px; }
-.fm-flow-svg .fm-small,.fm-flow-svg .fm-tick { font-size: 14px; fill: #a8b5bb; }
-.fm-flow-svg .fm-big { font-size: 58px; fill: #efbd91; letter-spacing: -2px; }
-.fm-flow-svg .fm-ice { fill: #a9d9d9; }
+.fm-flow-svg .fm-small { font-size: 14px; fill: #a8b5bb; }
 .fm-tile { fill: #efbd9109; stroke: #a9d9d933; stroke-width: 1; }
 .fm-flow-svg .fm-stat { font-size: 38px; fill: #efbd91; letter-spacing: -1.2px; }
 .fm-flow-svg .fm-unit { font-size: 15px; fill: #a8b5bb; letter-spacing: 0; }
+.fm-spine { fill: none; stroke: #a9d9d9; stroke-width: 1.3; stroke-dasharray: 1; stroke-dashoffset: 1; }
 .fm-node { fill: #101d24; stroke: #a9d9d966; stroke-width: 1; }
-.fm-spine,.fm-join { fill: none; stroke: #a9d9d9; stroke-width: 1.3; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.fm-rule { fill: none; stroke: #a9d9d933; stroke-width: 1; }
-.fm-total-box { fill: #efbd9109; stroke: #efbd9177; stroke-width: 1; }
-.fm-grid { fill: none; stroke: #a9d9d955; stroke-width: 1; }
-.fm-quadrant { fill: #efbd910d; }
-.fm-team-dot { fill: #efbd91; stroke: #060b10; stroke-width: 3; }
-.fm-ai-dot { fill: #a9d9d9; stroke: #060b10; stroke-width: 3; }
-.fm-difference-line { fill: none; stroke: #ee9992; stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.fm-flow-svg .fm-difference-label { font-size: 23px; fill: #ee9992; }
-.fm-flow-svg .fm-alert { fill: #ee9992; }
 .film-static-art .fm-flow { height: 100%; }
 
 /* Each settled picture is a speaking position; progression remains deliberate. */

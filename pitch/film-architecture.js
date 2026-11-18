@@ -8,8 +8,7 @@
   const start = stamp('2026-11-01'), end = stamp('2032-01-01');
   const dateX = text => 210 + (stamp(text)-start)/(end-start)*410;
   const shortLabels = {
-    A:[['Genehmigung &','Sicherheit'],['Pavillon & Logistik'],['Kulinarik & Service'],['Vertrieb & Marketing'],['Vier Pilot-Dinner'],['Skalierung &','Regelbetrieb']],
-    B:[['Standort sichern'],['Genehmigungen &','Sicherheit'],['Architektur & Bau'],['Küche & Team'],['Vier Pilot-Dinner'],['Vertrieb & Eröffnung']]
+    A:[['Genehmigung &','Sicherheit'],['Pavillon & Logistik'],['Kulinarik & Service'],['Vertrieb & Marketing'],['Vier Pilot-Dinner'],['Skalierung &','Regelbetrieb']]
   };
   function roadmapMarkup(variant) {
     const {data,meta}=window.PitchEvidence.variants[variant];
@@ -45,13 +44,13 @@
 
   const phaseName = phase => phase.tag.split(' / ').slice(1).join(' / ');
   const activityMarkup = phase => '<ol class="film-phase-tasks">'+phase.activities.map(item=>'<li><span>'+safe(item.label)+'</span><time'+(item.date?' datetime="'+item.date+'"':'')+'>'+safe(item.period)+'</time></li>').join('')+'</ol>';
-  const phaseMarkup = (phase,index,linear=false) => '<article class="film-phase-card'+(linear?' is-linear':'')+'" data-roadmap-phase="'+index+'"><div class="film-phase-kicker"><span>'+String(index+1).padStart(2,'0')+' / 08</span><span>GEPLANT · '+safe(phase.period)+'</span></div><h3>'+safe(phaseName(phase))+'</h3>'+activityMarkup(phase)+'<p class="film-phase-picture"><span>IM BILD</span>'+safe(phase.imageAction)+'</p><p class="film-phase-result"><span>PRÜFPUNKT</span>'+safe(phase.result)+'</p><p class="film-phase-parallel"><span>PARALLEL</span>'+safe(phase.parallel)+'</p></article>';
+  const phaseMarkup = (phase,index,linear=false) => '<article class="film-phase-card'+(linear?' is-linear':'')+'" data-roadmap-phase="'+index+'"><div class="film-phase-kicker"><span>'+String(index+1).padStart(2,'0')+' / 08</span><span>GEPLANT · '+safe(phase.period)+'</span></div><h3>'+safe(phaseName(phase))+'</h3>'+activityMarkup(phase)+'<p class="film-phase-result"><span>PRÜFPUNKT</span>'+safe(phase.result)+'</p></article>';
   const gatesMarkup = variant => '<div class="film-gate-strip"><p>FÜNF GEPLANTE FREIGABEN</p><ol>'+window.PitchEvidence.variants[variant].meta.gates.map(gate=>'<li><b>'+safe(gate.id)+'</b><time datetime="'+gate.date.split('.').reverse().join('-')+'">'+safe(gate.date)+'</time><span>'+safe(gate.title)+'</span></li>').join('')+'</ol></div>';
 
   window.PitchScenes = window.PitchScenes || {};
   window.PitchScenes[6] = {
     markup: function () {
-      return '<div class="film-architecture-plan"><div class="film-plan-header"><div class="film-variant-switch" role="group" aria-label="Variante in der Filmszene wählen"><button type="button" data-variant="A" aria-pressed="true">A <span>Pavillon</span></button><button type="button" data-variant="B" aria-pressed="false">B <span>Lounge</span></button></div><div class="film-plan-budget"><span class="film-plan-name"></span><strong class="film-plan-total"></strong><small class="film-plan-unit"></small></div></div><div class="film-phase-position" aria-hidden="true">'+Array.from({length:8},(_,i)=>'<i data-phase-position="'+i+'"></i>').join('')+'</div><div class="film-current-phase"></div><div class="film-phase-sequence"></div><div class="film-timeline-view"></div><p class="film-phase-plan-note">Bildphasen verdichten den Originalplan. Arbeitspakete laufen teilweise parallel; die Animation zeigt keinen erreichten Projektstatus.</p></div>';
+      return '<div class="film-architecture-plan"><div class="film-plan-header"><div class="film-plan-budget"><span class="film-plan-name"></span><strong class="film-plan-total"></strong><small class="film-plan-unit"></small></div></div><div class="film-phase-position" aria-hidden="true">'+Array.from({length:8},(_,i)=>'<i data-phase-position="'+i+'"></i>').join('')+'</div><div class="film-current-phase"></div><div class="film-phase-sequence"></div><div class="film-timeline-view"></div></div>';
     },
     mount: function (root) {
       const plan = root.querySelector('.film-architecture-plan');
@@ -62,15 +61,15 @@
       const sequence = root.querySelector('.film-phase-sequence');
       const timeline = root.querySelector('.film-timeline-view');
       const phasePositions = Array.from(root.querySelectorAll('[data-phase-position]'));
-      let cards=[],lanes=[],scan,previousVariant;
+      let cards=[],lanes=[],scan,built=false;
       return {
         update: function (p, context) {
-          const variant = context.variant;
+          const variant = 'A';
           const phases = window.PitchRoadmapPhases[variant];
-          if (variant !== previousVariant) {
-            previousVariant=variant;
+          if (!built) {
+            built=true;
             const meta=window.PitchEvidence.variants[variant].meta;
-            name.textContent=variant==='A'?'MOBILER PAVILLON':'LOUNGE TITUSVILLE';
+            name.textContent='MOBILER PAVILLON';
             total.textContent=meta.budget; unit.textContent=meta.budgetLabel;
             current.innerHTML=phases.slice(0,7).map((phase,index)=>phaseMarkup(phase,index)).join('');
             sequence.innerHTML='<p class="film-phase-sequence-heading">Acht Bildphasen · ein paralleler Maßnahmenplan</p>'+phases.map((phase,index)=>phaseMarkup(phase,index,true)).join('');

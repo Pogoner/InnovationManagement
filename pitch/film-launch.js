@@ -267,4 +267,35 @@
       return controller;
     }
   };
+
+  // Team orbit: translate-only positioning from one clock; no counter-rotation, so nothing shimmers.
+  const orbit = document.querySelector('.launch-orbit');
+  if (!orbit) return;
+  const periods = {ring1: 46, ring2: 78};
+  const planets = Array.from(orbit.querySelectorAll('.orbit-arm')).map(arm => {
+    const ring = arm.classList.contains('ring2') ? 'ring2' : 'ring1';
+    return {el: arm.querySelector('.orbit-planet'), ring, period: periods[ring], start: parseFloat(arm.style.getPropertyValue('--a')) || 0, radius: 0};
+  });
+  const reducedNow = () => document.body.classList.contains('is-reduced') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const measure = () => planets.forEach(planet => {
+    planet.radius = orbit.querySelector(`.orbit-ring.${planet.ring}`).getBoundingClientRect().width / 2;
+  });
+  const place = seconds => planets.forEach(planet => {
+    const angle = (planet.start + 360 * seconds / planet.period) * Math.PI / 180;
+    planet.el.style.transform = `translate3d(${(Math.sin(angle) * planet.radius).toFixed(2)}px,${(-Math.cos(angle) * planet.radius).toFixed(2)}px,0)`;
+  });
+  let origin = null, frame = 0, visible = false;
+  const tick = now => {
+    frame = 0;
+    if (!visible) return;
+    if (reducedNow()) { place(0); return; }
+    origin ??= now;
+    place((now - origin) / 1000);
+    frame = requestAnimationFrame(tick);
+  };
+  const sync = () => { if (visible && !frame) frame = requestAnimationFrame(tick); };
+  new ResizeObserver(() => { measure(); place(origin === null ? 0 : (performance.now() - origin) / 1000); }).observe(orbit);
+  new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); sync(); }).observe(orbit);
+  new MutationObserver(sync).observe(document.body, {attributes: true, attributeFilter: ['class']});
+  measure(); place(0);
 })();

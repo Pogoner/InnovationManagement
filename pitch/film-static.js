@@ -9,11 +9,11 @@
   const phaseSelectors = {
     1: ['.fa-mission', '[data-flow-panel="facts"]'],
     2: ['.fa-hube-rows'],
-    3: ['.fa-radar-labels', '.fa-trend-grid, .fa-trend-key', '[data-stufen-phase="0"]', '[data-stufen-phase="1"]', '.fa-matrix-phase', '.fa-selection-final'],
-    4: ['.fa-cases-phase', '.fa-score-phase', '.fa-revenue-phase'],
+    3: ['.fa-pool-rows', '.fa-pool-twelve', '.fa-matrix-phase', '.fa-selection-final'],
+    4: ['.fa-ir-bars', '.fa-ir-callout'],
     5: ['[data-fe-layout]', '[data-fe-panorama]', '[data-fe-price]', '[data-fe-marketing]'],
-    7: ['.fe-engine-label', '.fe-engine-label', '.fe-engine-label', '.fe-engine-label, .fe-system-foundation'],
-    8: ['[data-fq-panel="0"]', '[data-fq-panel="1"]', '[data-fq-panel="2"]']
+    7: ['[data-fe-safety]', '[data-fe-exchange]', '[data-fe-gates]', '[data-fe-engines]'],
+    8: ['[data-fm-chart]', '[data-fm-chart]']
   };
 
   function phaseGroups(art, chapter, index, beat) {
@@ -144,7 +144,7 @@
     header.className = 'film-static-intro';
     const meta = document.createElement('p');
     meta.className = 'film-static-meta';
-    meta.textContent = `PART ${String(chapter.step).padStart(2, '0')} / ROCKETLIGHT · ZEITRAHMEN ${Math.floor(chapter.seconds/60)}:${String(chapter.seconds%60).padStart(2,'0')} MIN`;
+    meta.textContent = `PART ${String(chapter.step).padStart(2, '0')} / ROCKETLIGHT`;
     const heading = document.createElement('h2');
     heading.id = `${prefix}-heading`;
     heading.textContent = chapter.label;

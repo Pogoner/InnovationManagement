@@ -1,0 +1,47 @@
+/* Pilotdinner booking page: one calm column, phone first. */
+:root { --bg: #060b10; --panel: #0c1721; --line: #a9d9d933; --ice: #a9d9d9; --copper: #efbd91; --ink: #eff3ed; --muted: #aebfc5; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100svh; background: radial-gradient(120% 80% at 50% -10%, #12212d 0%, var(--bg) 60%); color: var(--ink); font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.book { width: min(100%, 560px); margin: 0 auto; padding: max(22px, env(safe-area-inset-top)) 18px max(32px, env(safe-area-inset-bottom)); }
+.book-back { display: inline-block; margin-bottom: 18px; color: var(--ice); font-size: 14px; text-decoration: none; }
+.book-back:hover { color: var(--copper); }
+.book-eyebrow { margin: 0 0 10px; font-size: 11px; letter-spacing: .18em; color: var(--copper); }
+.book-head h1 { margin: 0 0 10px; font-size: clamp(32px, 9vw, 44px); line-height: 1.05; font-weight: 300; letter-spacing: -.02em; }
+.book h1 em, .book-done h2 em { font-style: normal; color: var(--copper); }
+.book-lead { margin: 0 0 14px; color: var(--muted); }
+.book-block { margin: 22px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); }
+.book-block h2 { margin: 0 0 14px; font-size: 17px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+.book-block h2 span { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--copper); color: var(--copper); font-size: 12px; }
+.book-block h2 small { color: var(--muted); font-weight: 400; font-size: 13px; }
+.book-name input { width: 100%; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: inherit; font-size: 17px; }
+.book-name input:focus-visible, .book-avatar:focus-visible, .book-menu:focus-visible, .book-extra:focus-visible, .book-submit:focus-visible, .book-ghost:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+.book-avatars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+.book-avatar { padding: 4px; border-radius: 50%; border: 2px solid transparent; background: none; cursor: pointer; aspect-ratio: 1; display: block; }
+.book-avatar svg { width: 100%; height: 100%; display: block; border-radius: 50%; opacity: .72; transition: opacity .2s; }
+.book-avatar[aria-checked="true"] { border-color: var(--copper); }
+.book-avatar[aria-checked="true"] svg { opacity: 1; }
+.book-menus { display: grid; gap: 10px; }
+.book-menu, .book-extra { display: grid; grid-template-columns: 54px 1fr; align-items: center; gap: 14px; width: 100%; padding: 12px 14px; text-align: left; border-radius: 12px; border: 1px solid var(--line); background: var(--panel); color: inherit; font: inherit; cursor: pointer; }
+.book-menu[aria-checked="true"], .book-extra[aria-checked="true"] { border-color: var(--copper); background: #1a2229; }
+.book-menu svg { width: 54px; height: 54px; }
+.book-menu svg .plate { fill: #08131c; stroke: #a9d9d9aa; stroke-width: 1; }
+.book-menu svg .glyph { fill: none; stroke: var(--copper); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.book-menu b, .book-extra b { display: block; font-weight: 500; font-size: 17px; }
+.book-menu small, .book-extra small { color: var(--muted); font-size: 13px; }
+.book-extras { display: grid; gap: 8px; }
+.book-extra { grid-template-columns: 26px 1fr; padding: 10px 14px; }
+.book-extra i { width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid var(--ice); display: grid; place-items: center; font-style: normal; color: transparent; font-size: 14px; }
+.book-extra[aria-checked="true"] i { background: var(--copper); border-color: var(--copper); color: #1a1008; }
+.book-error { margin: 16px 0 0; color: #ffb4a6; font-size: 14px; }
+.book-submit { width: 100%; margin-top: 20px; padding: 16px; border: 0; border-radius: 12px; background: var(--copper); color: #1a1008; font: inherit; font-size: 17px; font-weight: 600; cursor: pointer; }
+.book-submit:disabled { opacity: .55; cursor: progress; }
+.book-ghost { margin-top: 6px; padding: 12px 18px; border-radius: 10px; border: 1px solid var(--line); background: none; color: var(--ink); font: inherit; cursor: pointer; }
+.book-done { margin-top: 24px; text-align: center; }
+.book-done[hidden], .book-form[hidden], .book-error[hidden] { display: none; }
+.book-done-avatar svg { width: 132px; height: 132px; border-radius: 50%; border: 2px solid var(--copper); }
+.book-done h2 { margin: 6px 0 8px; font-size: 30px; font-weight: 300; color: var(--ink); }
+.book-head[hidden] { display: none; }
+.book-fine { margin: 28px 0 0; color: #7f929c; font-size: 12px; line-height: 1.5; }
+@media (prefers-reduced-motion: reduce) { .book-avatar svg { transition: none; } }

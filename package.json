@@ -1,0 +1,12 @@
+{
+  "name": "rocketlight-pitch",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pitch server with live menu bookings. No dependencies.",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

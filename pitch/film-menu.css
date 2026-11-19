@@ -17,6 +17,12 @@
 .fm-svg .fm-name { font-size: 18px; letter-spacing: .2px; }
 .fm-svg .fm-line { font-size: 13px; letter-spacing: .6px; fill: #aebfc5; }
 .fm-svg .fm-lead { font-size: 15px; letter-spacing: 1.4px; fill: #efbd91; opacity: 0; }
+.fm-svg .fm-more { font-size: 12px; fill: #aebfc5; letter-spacing: .6px; }
+
+/* Link from the pitch header to the booking page. */
+.header-book { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid #efbd9199; border-radius: 999px; color: #efbd91; font-size: 12px; letter-spacing: .08em; text-decoration: none; white-space: nowrap; }
+.header-book:hover, .header-book:focus-visible { background: #efbd9122; }
+@media (max-width: 760px) { .header-book { display: none; } }
 
 /* Reduced motion shows the finished chart as ordinary flow. */
 .film-ready.is-reduced #schritt-8 .film-visual { height: auto; max-height: none; min-height: 0; aspect-ratio: auto; }

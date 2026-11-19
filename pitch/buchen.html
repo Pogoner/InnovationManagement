@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#060b10">
+  <meta name="robots" content="noindex">
+  <title>RocketLight · Pilotdinner buchen</title>
+  <link rel="stylesheet" href="buchen.css?v=773688aeebdf">
+  <script defer src="booking-shared.js?v=a32c9950a9c0"></script>
+  <script defer src="buchen.js?v=631681028782"></script>
+</head>
+<body>
+  <main class="book">
+    <a class="book-back" href="index.html#schritt-5">← Zurück zum Pitch</a>
+    <header class="book-head">
+      <p class="book-eyebrow">ROCKETLIGHT DINNER · PILOTDINNER</p>
+      <h1>Sie sind <em>eingeladen.</em></h1>
+      <p class="book-lead">Drei Fragen, eine Minute. Ihre Wahl erscheint gleich auf der Leinwand. Keine Zahlung, keine echte Buchung.</p>
+    </header>
+
+    <form id="book-form" class="book-form" novalidate>
+      <section class="book-block" aria-labelledby="b-who">
+        <h2 id="b-who"><span>1</span> Wer sind Sie?</h2>
+        <label class="book-name"><span class="sr-only">Name</span><input id="book-name" name="name" type="text" maxlength="16" autocomplete="nickname" placeholder="Ihr Name oder Spitzname" required></label>
+        <div id="book-avatars" class="book-avatars" role="radiogroup" aria-label="Avatar wählen"></div>
+      </section>
+
+      <section class="book-block" aria-labelledby="b-menu">
+        <h2 id="b-menu"><span>2</span> Welches Menü?</h2>
+        <div id="book-menus" class="book-menus" role="radiogroup" aria-label="Menü wählen"></div>
+      </section>
+
+      <section class="book-block" aria-labelledby="b-extras">
+        <h2 id="b-extras"><span>3</span> Ein Extra? <small>optional</small></h2>
+        <div id="book-extras" class="book-extras"></div>
+      </section>
+
+      <p id="book-error" class="book-error" role="alert" hidden></p>
+      <button id="book-submit" class="book-submit" type="submit">Platz buchen</button>
+    </form>
+
+    <section id="book-done" class="book-done" aria-live="polite" hidden>
+      <div id="book-done-avatar" class="book-done-avatar"></div>
+      <p class="book-eyebrow">PLATZ GESICHERT</p>
+      <h2 id="book-done-title"></h2>
+      <p id="book-done-detail" class="book-lead"></p>
+      <p class="book-lead">Schauen Sie nach vorn: Ihre Wahl erscheint in der Auswertung.</p>
+      <button id="book-change" class="book-ghost" type="button">Wahl ändern</button>
+    </section>
+
+    <p class="book-fine">Studentisches Konzept · Trend2Business · Gruppe 2. Es gibt kein Angebot von SpaceX. Ihre Wahl wird 30 Minuten gespeichert und dann gelöscht.</p>
+  </main>
+</body>
+</html>

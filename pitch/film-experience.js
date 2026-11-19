@@ -35,16 +35,41 @@
     {title:'Place',lines:['Direktvertrieb & Family Offices','USA-Pilot · Fläche noch offen']},
     {title:'Promotion',lines:['Einladungen & Empfehlungen','Ausgewählte Medien & Partner']}
   ];
-  const diningPhases = [0,.16,.32,.48,.65,.82];
-  const diningViews = ['layout','panorama','price','marketing','econ','scale'];
+  const diningPhases = [0,.16,.32,.48,.65,.80,.91];
+  const diningViews = ['layout','panorama','price','marketing','econ','scale','invite'];
   const diningDescriptions = [
     'Raumkonzept: zehn versetzte Zweiertische mit zwanzig Plätzen, alle auf das Startpanorama ausgerichtet. Konzeptvisualisierung ohne Standort- oder Entfernungszusage.',
     'Erlebniskonzept: sieben Gänge, Missionsbriefing, Service und gemeinsamer Blick auf den Launch.',
     'Preisannahmen: 35.000 US-Dollar je Gast im Pilot, langfristig bis zu 50.000 US-Dollar. Die Zahlungsbereitschaft ist noch zu prüfen.',
     'Finaler 5P-Mix: People, Product, Price, Place und Promotion. Preise, Partner und Standort bleiben zu validieren.',
     'Erwartete Kosten und Gewinne über fünf Jahre: Gewinn und F&E-Kosten je Jahr, kumuliert ab Jahr 4 im Plus. Modellannahmen aus dem Inno-Rendite-Kalkulator.',
-    'Hohe Marge je Gast, aber im Verhältnis zu SpaceX klein: 0,31 Prozent des operativen Ergebnisses und 0,12 Prozent des F&E-Aufwands. Modellannahmen.'
+    'Hohe Marge je Gast, aber im Verhältnis zu SpaceX klein: 0,31 Prozent des operativen Ergebnisses und 0,12 Prozent des F&E-Aufwands. Modellannahmen.',
+    'Einladung zum Pilotdinner: Über den QR-Code wählen die Zuhörer Avatar, Menü und ein optionales Extra. Es gibt keine Zahlung.'
   ];
+
+  // QR code for the booking page next to the pitch; the library is vendored (pitch/vendor/qrcode.js).
+  function inviteMarkup() {
+    const url = new URL('buchen.html', document.baseURI).href;
+    let code = '';
+    if (window.qrcode) {
+      const qr = window.qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      const count = qr.getModuleCount(), cell = 232 / count;
+      let path = '';
+      for (let row = 0; row < count; row++) for (let col = 0; col < count; col++) {
+        if (qr.isDark(row, col)) path += `M${n(204 + col * cell)} ${n(86 + row * cell)}h${n(cell + .3)}v${n(cell + .3)}h${n(-cell - .3)}z`;
+      }
+      code = `<rect x="188" y="70" width="264" height="264" rx="10" fill="#eff3ed"/><path d="${path}" fill="#060b10"/>`;
+    }
+    return `<g data-fe-invite class="fe-invite">
+      <text class="fe-diagram-heading" x="320" y="38" text-anchor="middle">SIE SIND ZUM PILOTDINNER EINGELADEN</text>
+      <g data-fe-qr>${code}</g>
+      <text class="fe-invite-action" x="320" y="378" text-anchor="middle">SCANNEN · MENÜ WÄHLEN</text>
+      <text class="fe-invite-url" x="320" y="412" text-anchor="middle">${url.replace(/^https?:\/\//, '')}</text>
+      <text class="fe-layout-note" x="320" y="462" text-anchor="middle">Eine Minute · keine Zahlung · Ihre Wahl erscheint gleich im Pitch</text>
+    </g>`;
+  }
 
   // Five-year model of the Rendite-Kalkulator (sheet "5-Jahres-Kalkulation"). The
   // totals come from the frozen evidence; the per-guest split is the workbook's
@@ -209,6 +234,7 @@
         </g>
         ${econMarkup(economics())}
         ${scaleMarkup(economics())}
+        ${inviteMarkup()}
       </svg>
       <section class="fe-method-panel fe-marketing" data-fe-marketing aria-hidden="true">
         <p class="fe-method-kicker">Finaler 5P-Mix</p>
@@ -237,7 +263,7 @@
       const price = root.querySelector('[data-fe-price]');
       const priceLine = root.querySelector('.fe-price-connector');
       const marketing = root.querySelector('[data-fe-marketing]');
-      const views = [layout, panorama, price, marketing, root.querySelector('[data-fe-econ]'), root.querySelector('[data-fe-scale]')];
+      const views = [layout, panorama, price, marketing, root.querySelector('[data-fe-econ]'), root.querySelector('[data-fe-scale]'), root.querySelector('[data-fe-invite]')];
       const mixRows = Array.from(root.querySelectorAll('[data-fe-mix-row]'));
       const model = economics();
       const all = selector => Array.from(root.querySelectorAll(selector));
@@ -312,7 +338,7 @@
           set(cumulativeLine,'stroke-dashoffset',n(1-lineT));
           cumulativeDots.forEach((dot,index)=>set(dot,'opacity',n(smooth(index/4-.02,index/4+.02,lineT))));
           set(breakEven,'opacity',n(smooth(.9,.98,econT)));
-          const scaleT = context.static ? 1 : clamp((p-diningPhases[5])/((1-diningPhases[5])*.8));
+          const scaleT = context.static ? 1 : clamp((p-diningPhases[5])/((diningPhases[6]-diningPhases[5])*.8));
           const marginT = smooth(.05,.3,scaleT), costT = smooth(.3,.42,scaleT);
           const marginShare = 1-model.variable/model.price;
           guestMargin.setAttribute('width',n(scaleGeo.width*marginShare*marginT));

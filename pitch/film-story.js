@@ -124,7 +124,7 @@ window.PitchFilmStory = [
     "step": 5,
     "label": "5P-Marketingmix & Wirtschaftlichkeit",
     "detail": "Der finale Marketingmix · alle 25 Felder",
-    "length": 6.4,
+    "length": 7.6,
     "beats": [
       {
         "at": 0,
@@ -173,13 +173,22 @@ window.PitchFilmStory = [
         "view": "[data-fe-econ]"
       },
       {
-        "at": 0.82,
+        "at": 0.8,
         "tag": "WIRTSCHAFTLICHKEIT",
         "title": "Hohe Marge.<br><em>Kleine Größe.</em>",
         "copy": "Je Gast bleiben bei 50.000 USD etwa 45.000 USD übrig. Doch im Maßstab von SpaceX ist das Dinner eine Nische: 0,31 % des operativen Ergebnisses. Entscheidend ist darum der Nachweis der Nachfrage im Pilot.",
         "cue": "Profitabel je Gast, aber klein im Konzern.",
-        "still": 1,
+        "still": 0.88,
         "view": "[data-fe-scale]"
+      },
+      {
+        "at": 0.91,
+        "tag": "DER PILOT BEGINNT HIER",
+        "title": "Sie sind zum<br><em>Pilotdinner eingeladen.</em>",
+        "copy": "Scannen Sie den Code, wählen Sie Avatar und Menü, und buchen Sie Ihren Platz. Es dauert eine Minute und kostet nichts. Ihre Wahl sehen wir am Ende gemeinsam.",
+        "cue": "QR-Code scannen und ein Menü wählen.",
+        "still": 1,
+        "view": "[data-fe-invite]"
       }
     ],
     "seconds": 195
@@ -240,24 +249,24 @@ window.PitchFilmStory = [
   {
     "step": 8,
     "label": "Menüwahl mit dem Publikum",
-    "detail": "Beispieldaten der Hauptgang-Wahl",
+    "detail": "Beispiel-Hauptgänge der Menüwahl",
     "length": 3.4,
     "beats": [
       {
         "at": 0,
         "tag": "DIE WAHL",
-        "title": "Welchen Hauptgang<br><em>würden Sie wählen?</em>",
-        "copy": "Jedes Dinner beginnt mit einer Entscheidung. Vier Hauptgänge stehen zur Wahl, jeder Gast hat eine Stimme.",
-        "cue": "Vier Gerichte, eine Stimme je Gast.",
+        "title": "Welches Menü<br><em>wählt das Publikum?</em>",
+        "copy": "Jedes Dinner beginnt mit einer Entscheidung. Drei Menüs stehen zur Wahl, jeder Gast hat eine Stimme.",
+        "cue": "Drei Menüs, eine Wahl je Gast.",
         "still": 0.38,
         "view": "[data-fm-chart]"
       },
       {
         "at": 0.5,
-        "tag": "DAS ERGEBNIS · BEISPIELDATEN",
+        "tag": "DAS ERGEBNIS",
         "title": "Ihre Wahl.<br><em>Ein erster Nachfragetest.</em>",
-        "copy": "Die Balken zeigen, wie oft welches Gericht gewählt wurde. Die Zahlen sind Beispieldaten; hier erscheinen die echten Stimmen des Publikums. Sie zeigen Interesse, noch keine zahlungsbereite Nachfrage.",
-        "cue": "Stimmen je Gericht",
+        "copy": "Die Balken zeigen, wie oft welches Menü in den letzten 30 Minuten gebucht wurde. Das ist Interesse, noch keine zahlungsbereite Nachfrage.",
+        "cue": "Buchungen je Menü",
         "still": 1,
         "view": "[data-fm-chart]"
       }

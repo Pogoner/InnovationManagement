@@ -2006,6 +2006,14 @@ window.ROCKET_META = {
     "revenueLabel": "Für feste Standorte nicht neu kalkuliert",
     "firstDinner": "10/2028",
     "firstDinnerLabel": "Erster Pilot im eigenen Pavillon",
+    "pilotModel": {
+      "capacity": 20,
+      "occupancy": 0.8,
+      "price": 35000,
+      "targetPrice": 50000,
+      "variableCost": 5000,
+      "assumptionNote": "Modellannahmen für den festen Florida-Piloten: 20 Plätze, 35.000 USD je Platz und 80 % Auslastung aus dem bisherigen Pilotansatz. Die Auslastung ist kein Buchungsnachweis. Zielpreis 50.000 USD und variable Kosten von 5.000 USD je Gast sind übernommene, unvalidierte Annahmen; feste Standortkosten und Investitionen sind darin nicht enthalten."
+    },
     "location": "Titusville / Florida · Standort 1 zu prüfen",
     "secondLocation": "Raum Starbase / South Padre Island · Ausbauperspektive",
     "expansion": "Langfristig zwei eigenständige feste Standorte. Texas nur nach eigenem Standort-, Genehmigungs- und Investitionsentscheid; Bauplatz, Budget und Eröffnung offen.",

@@ -4,7 +4,7 @@ Planstand: 20.11.2026. Fortschreibung des Studienkonzepts; alle Termine sind Pla
 
 ## Umfang
 
-Teil 6 wird auf einen festen ersten Pavillon in Titusville/Florida und langfristig einen zweiten eigenständigen festen Standort im Raum Starbase/South Padre Island ausgerichtet. Das Gebäude wird nicht zwischen den Standorten transportiert. Die übrigen Pitch-Kapitel, der bestehende Finanzrechner und die Buchungsfunktion bleiben in ihrem bisherigen Stand.
+Teil 6 wird auf einen festen ersten Pavillon in Titusville/Florida und langfristig einen zweiten eigenständigen festen Standort im Raum Starbase/South Padre Island ausgerichtet. Das Gebäude wird nicht zwischen den Standorten transportiert. Die erste Umstellung betraf Teil 6. Der anschließende Abgleich der übrigen Website ist unten dokumentiert; die Buchungsfunktion bleibt unverändert.
 
 Ausgangspunkt ist der gemeinsame Repository-Stand `863a679`. Die bisher aktive mobile Roadmap wird fachlich ersetzt; die vorhandene ältere Lounge-Planung dient nur als Referenz für die Abfolge eines festen Bauvorhabens.
 
@@ -35,3 +35,11 @@ Umsatz und Innovationsrendite aus dem unveränderten Finanzrechner gelten nicht 
 Die aktuelle Darstellung entsteht aus `planning-data.js`, `roadmap-phases.js` und den Teil-6-Ansichten. Der neue Foliensatz `quellen/step-6-roadmap-fester-pavillon.pptx` folgt diesem Planstand. `quellen/step-6-roadmap-pavillon.pptx` bleibt als historische mobile Originalquelle erhalten und wird nicht mehr als aktuelle Roadmap verlinkt.
 
 Die Überarbeitung wird in einzelnen nachvollziehbaren Commits gesichert. Ausgangsdaten anderer Teamteile werden nicht umgedeutet.
+
+## Abgleich der Website mit dem festen Konzept
+
+Die Website verwendet für die aktuelle Umsatzdarstellung ein begrenztes Pilotszenario aus denselben vier Roadmap-Terminen: zwei Dinner 2028 und zwei 2029. Bei 20 Plätzen, 35.000 USD je Gast und angenommenen 80 % Auslastung ergeben sich 32 verkaufte Plätze beziehungsweise 1,12 Mio. USD Umsatz je Jahr; insgesamt 64 Plätze und 2,24 Mio. USD vor Kosten. Die Auslastung ist eine übernommene Modellannahme, kein beobachteter Buchungsstand.
+
+Grundstück, fester Bau, vollständiger Betrieb und ein späterer Texas-Standort werden damit nicht finanziell nachgewiesen. Investitionssumme, Gewinn und Amortisation bleiben offen. Der Zielpreis von 50.000 USD und variable Kosten von 5.000 USD ergeben lediglich einen angenommenen Deckungsbeitrag vor Bau, Fixkosten und Steuern. Der Score 1,83 bleibt als Ergebnis der ursprünglichen Ideenauswahl gekennzeichnet; Aufwand und Risiken des festen Baus sind neu zu bewerten.
+
+Die Website-Daten stehen zentral in `ROCKET_META.A.pilotModel` und werden mit den vorhandenen Pilotterminen zu `PitchEvidence.fixedPilot` verbunden. Die ursprünglichen Kalkulationsdateien, PowerPoint-Dateien und der vorhandene Gesamt-PDF bleiben für die spätere Neuverknüpfung unverändert.

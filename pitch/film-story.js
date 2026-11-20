@@ -95,7 +95,7 @@ window.PitchFilmStory = [
   {
     "step": 4,
     "label": "Bewertung & Kalkulation",
-    "sources": [{"file": "step-4-rocketlight.xlsm", "label": "RocketLight"}, {"file": "step-4-starlink-insights.xlsm", "label": "Starlink Insights"}, {"file": "step-4-launch-engineering-cloud.xlsm", "label": "Launch Engineering Cloud"}],
+    "sources": [{"file": "step-4-rocketlight.xlsm", "label": "RocketLight · Vorbewertung"}, {"file": "step-4-starlink-insights.xlsm", "label": "Starlink Insights"}, {"file": "step-4-launch-engineering-cloud.xlsm", "label": "Launch Engineering Cloud"}],
     "length": 3,
     "beats": [
       {
@@ -123,7 +123,7 @@ window.PitchFilmStory = [
   {
     "step": 5,
     "label": "Das Dinner & die Wirtschaftlichkeit",
-    "sources": [{"file": "step-5-marketing-mix.xlsx", "label": "Marketingmix"}, {"file": "step-4-rocketlight.xlsm", "label": "Kalkulation"}],
+    "sources": [{"file": "step-4-rocketlight-fester-pavillon.xlsx", "label": "Fünfjahresrechnung"}, {"file": "step-5-marketing-mix.xlsx", "label": "Marketingmix"}],
     "length": 5.8,
     "beats": [
       {
@@ -132,45 +132,54 @@ window.PitchFilmStory = [
         "title": "Zehn Tische.<br><em>Ein gemeinsamer Blick.</em>",
         "copy": "Im festen Pavillon in Florida sitzen 20 Gäste an zehn Zweiertischen. Versetzte, leicht terrassierte Reihen richten jeden Platz auf das Startpanorama aus.",
         "cue": "Die Tische entstehen. Die Sichtachsen öffnen sich.",
-        "still": 0.13,
+        "still": 0.12,
         "view": "[data-fe-layout]"
       },
       {
-        "at": 0.16,
+        "at": 0.14,
         "tag": "DAS ERLEBNIS",
         "title": "Sieben Gänge.<br><em>Ein großer Moment.</em>",
         "copy": "Missionsbriefing, Fine Dining und persönlicher Concierge verdichten den Abend. Die Rakete wird zum gemeinsamen Mittelpunkt.",
         "cue": "Das Raumkonzept wird zum Erlebnis.",
-        "still": 0.29,
+        "still": 0.26,
         "view": "[data-fe-panorama]",
         "art": "panorama"
       },
       {
-        "at": 0.32,
+        "at": 0.28,
         "tag": "DIE PREISANNAHME",
         "title": "Selten ist wertvoll.<br><em>Vertrauen schafft Zugang.</em>",
         "copy": "35.000 USD je Gast im Pilot; langfristig bis zu 50.000 USD als Ziel. Erst reale Buchungen zeigen, ob diese Zahlungsbereitschaft trägt.",
         "cue": "Der Pilot prüft die Preisannahme.",
-        "still": 0.45,
+        "still": 0.40,
         "view": "[data-fe-price]"
       },
       {
-        "at": 0.48,
-        "tag": "PILOTUMSATZ · FLORIDA 2028–2029",
-        "title": "Vier Abende.<br><em>Ein prüfbarer Ansatz.</em>",
-        "copy": "Nach Fertigstellung sind je zwei Pilot-Dinner 2028 und 2029 geplant. Bei 20 Plätzen, angenommenen 80 % Auslastung und 35.000 USD je Gast ergeben sich insgesamt 2,24 Mio. USD Umsatz vor Kosten. Die Bauinvestition wird separat kalkuliert.",
-        "cue": "Zwei Piloten je Jahr · Umsatzannahme vor Kosten · Investition offen",
-        "still": 0.62,
+        "at": 0.42,
+        "tag": "DECKUNGSBEITRAG · ZIELPREISSZENARIO",
+        "title": "Der Beitrag zählt.<br><em>Die Vollkosten auch.</em>",
+        "copy": "50.000 USD Zielpreis minus 5.000 USD variable Kosten ergeben im Modell 45.000 USD je Gast. Davon sind der laufende Standortbetrieb und die Projektinvestition zu tragen. Deshalb rechnen wir den gesamten Weg über fünf Jahre.",
+        "cue": "Vom Beitrag je Gast zur vollständigen Projektrechnung",
+        "still": 0.59,
+        "view": "[data-fe-scale]"
+      },
+      {
+        "at": 0.62,
+        "tag": "FÜNF JAHRE · FLORIDA · BASISSZENARIO",
+        "title": "Erst investieren.<br><em>Dann wachsen.</em>",
+        "copy": "13,38 Mio. USD für Investition und Anlauf; laufende Kosten kommen hinzu. Vier Piloten 2028–2029, danach 10 und 16 Dinner pro Jahr. Bei 90 % Auslastung und 50.000 USD Zielpreis wird der kumulierte Cashflow im Basisszenario 2031 positiv.",
+        "cue": "Umsatz und Auszahlungen aufbauen · Cashflow über fünf Jahre verfolgen",
+        "still": 0.77,
         "view": "[data-fe-econ]"
       },
       {
-        "at": 0.65,
-        "tag": "DECKUNGSBEITRAG · ZIELPREISSZENARIO",
-        "title": "Der Beitrag zählt.<br><em>Die Vollkosten auch.</em>",
-        "copy": "Bei einem späteren Zielpreis von 50.000 USD und angenommenen 5.000 USD variablen Kosten ergibt sich ein Deckungsbeitrag von 45.000 USD je Gast. Daraus sind noch Bau, Fixkosten und Steuern zu finanzieren. Über den Betrieb entscheiden wir nach den Piloten.",
-        "cue": "Deckungsbeitrag vor Bau, Fixkosten und Steuern · Amortisation offen",
+        "at": 0.8,
+        "tag": "SENSITIVITÄT · WAS MUSS TRAGEN?",
+        "title": "Zwei Annahmen.<br><em>Ein anderer Ausgang.</em>",
+        "copy": "90 % Auslastung und 50.000 USD je Gast ergeben im Basisszenario +5,60 Mio. USD kumulierten Cashflow. Bei 70 % und 40.000 USD bleiben −2,72 Mio. USD. Die Piloten prüfen genau diese Annahmen; an G4 entscheiden wir über den Regelbetrieb.",
+        "cue": "Preis und Auslastung verändern das Ergebnis · vor Finanzierung und Steuern",
         "still": 1,
-        "view": "[data-fe-scale]"
+        "view": "[data-fe-sensitivity]"
       }
     ],
     "seconds": 195
@@ -219,18 +228,18 @@ window.PitchFilmStory = [
     "beats": [
       {
         "at": 0,
-        "tag": "DIE WAHL",
+        "tag": "",
         "title": "Welches Menü<br><em>wählt das Publikum?</em>",
-        "copy": "Jedes Dinner beginnt mit einer Entscheidung. Scannen Sie den Code, wählen Sie Avatar und Menü und buchen Sie Ihren Platz. Es dauert eine Minute und kostet nichts.",
+        "copy": "",
         "cue": "QR-Code scannen und ein Menü wählen.",
         "still": 0.38,
         "view": "[data-fm-chart]"
       },
       {
         "at": 0.5,
-        "tag": "DAS ERGEBNIS",
+        "tag": "",
         "title": "Ihre Wahl.<br><em>Ein erster Nachfragetest.</em>",
-        "copy": "Die Balken zeigen, wie oft welches Menü in den letzten 30 Minuten gebucht wurde. Das ist Interesse, noch keine zahlungsbereite Nachfrage.",
+        "copy": "",
         "cue": "Buchungen je Menü",
         "still": 1,
         "view": "[data-fm-chart]"

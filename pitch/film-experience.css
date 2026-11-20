@@ -56,7 +56,7 @@
 .fe-scene .fe-price-validation { fill: #dce5dd; font-size: 18px; letter-spacing: .9px; }
 .fe-price-connector { fill: none; stroke: url(#fe-market-line); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; }
 
-/* Pilotumsatz aus der festen Planung; Deckungsbeitrag separat vom Baubudget. */
+/* Five-year cashflow and the price/occupancy sensitivity share one model. */
 .fe-scene .fe-econ-label { font-size: 15px; letter-spacing: 1.5px; fill: #b9cbc9; }
 .fe-scene .fe-econ-total { font-size: 58px; letter-spacing: -3px; font-weight: 350; font-variant-numeric: tabular-nums; }
 .fe-scene .fe-econ-unit { font-size: 13px; letter-spacing: 1.4px; fill: #aebfc5; }
@@ -82,6 +82,23 @@
 .fe-scale-ring { fill: none; stroke: #efbd91; stroke-width: 1.2; opacity: 0; }
 .fe-scale-ring-cost { stroke: #a9d9d9; }
 .fe-scene .fe-scale-callout { font-size: 16px; letter-spacing: .8px; opacity: 0; }
+.fe-fin-grid { fill: none; stroke: #a9d9d91c; stroke-width: 1; }
+.fe-scene .fe-fin-tick { fill: #a8b5bb; font-size: 15px; }
+.fe-scene .fe-finance .fe-econ-year { font-size: 19px; }
+.fe-scene .fe-fin-value { fill: #efbd91; font-size: 17px; font-variant-numeric: tabular-nums; }
+.fe-scene .fe-fin-event { fill: #b9cbc9; font-size: 14px; }
+.fe-scene .fe-fin-legend { fill: #d1dddd; font-size: 17px; }
+.fe-scene .fe-fin-note { fill: #aebfc5; font-size: 16px; }
+.fe-finance-line { fill: none; stroke: #f4f4e9; stroke-width: 2.4; stroke-dasharray: 1; stroke-dashoffset: 1; vector-effect: none !important; }
+.fe-case-panel { fill: #efbd9108; stroke: #efbd9144; stroke-width: 1; }
+.fe-case-bar { fill: #efbd91; }
+.fe-case-zero { stroke: #c5d7d783; stroke-width: 1; }
+.fe-scene .fe-case-title { fill: #d8e3df; font-size: 18px; letter-spacing: 1.6px; }
+.fe-scene .fe-case-value { fill: #efbd91; font-size: 42px; font-weight: 350; font-variant-numeric: tabular-nums; }
+.fe-scene .fe-case-assumption { fill: #c4d4d8; font-size: 18px; }
+.fe-scene .fe-case-conclusion { fill: #dce5dd; font-size: 22px; }
+.fe-case.is-downside .fe-case-panel { fill: #e5a29c09; stroke: #e5a29c55; }
+.fe-case.is-downside .fe-case-bar, .fe-scene .fe-case.is-downside .fe-case-value { fill: #e5a29c; }
 
 /* Four independent recommendations physically assemble into one grounded vehicle. */
 .fe-system .fe-svg { padding-bottom: 20px; }

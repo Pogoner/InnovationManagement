@@ -4,7 +4,7 @@ const emptyMsg=()=>`<section class="panel"><p style="font-size:1.15rem">${isX()?
 function wNotice(){const ok=sum(state.w.n)===100&&sum(state.w.a)===100;return ok?'':`<div class="notice">Die Gewichte ergeben nicht je 100 % (Nutzen ${sum(state.w.n)} %, Aufwand ${sum(state.w.a)} %). Unter „Einstellungen“ korrigieren.</div>`}
 function rocketLightLegacyNote(list=[cur()]){
   if(!isX()||!list.some(a=>a&&a.idea==9))return '';
-  return `<aside class="notice info" aria-label="Einordnung der RocketLight-Rechnung"><strong>RocketLight: ursprüngliches mobiles Vergleichsszenario.</strong> Die hinterlegten Annahmen bilden den früheren mobilen Pavillon ab. Für die feste Roadmap ist eine neue Wirtschaftlichkeitsprüfung nötig. <a href="../pitch/#schritt-6">Aktuelle feste Roadmap · 20.11.2026</a></aside>`;
+  return `<aside class="notice info" aria-label="Einordnung der RocketLight-Rechnung"><strong>RocketLight: ursprüngliches mobiles Vergleichsszenario.</strong> Die hinterlegten Annahmen bilden den früheren mobilen Pavillon ab. Die aktuelle Florida-Rechnung trennt 13,38 Mio. USD Investition und Anlauf von den laufenden Betriebskosten. Die alten 3,48 Mio. USD werden nicht addiert. <a href="../quellen/step-4-rocketlight-fester-pavillon.xlsx" download>Aktuelle Fünfjahresrechnung (XLSX)</a> · <a href="../pitch/#schritt-6">Feste Roadmap</a></aside>`;
 }
 function vRanking(){
   const L=state.list;if(!L.length)return emptyMsg();

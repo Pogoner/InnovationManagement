@@ -21,7 +21,11 @@ Islam Abdalla · Matthias Dölker · Maren Ell · Asma Ul Haq · Alexander Lenar
 
 ## Teil 6: aktueller Planstand
 
-Seit dem 20.11.2026 plant Teil 6 einen festen Pavillon in Florida und langfristig einen zweiten festen Standort in Texas. Termine, Freigaben und die Grenze der bisherigen Budgetreferenz stehen im [Roadmap-Planstand](pitch/roadmap-planstand.md) und in den [aktuellen Roadmap-Folien](quellen/step-6-roadmap-fester-pavillon.pptx). Die Website zeigt dazu ein Pilotszenario für 2028–2029 mit ausdrücklich offenen Investitionskosten. Die ursprüngliche Finanzrechnung bleibt im Kalkulator als früherer mobiler Konzeptstand gekennzeichnet. `quellen/step-6-roadmap-pavillon.pptx` dokumentiert das frühere mobile Konzept.
+Seit dem 20.11.2026 plant Teil 6 einen festen Pavillon in Florida und langfristig einen zweiten festen Standort in Texas. [Roadmap-Planstand](pitch/roadmap-planstand.md), [aktuelle Roadmap-Folien](quellen/step-6-roadmap-fester-pavillon.pptx) und [Fünfjahresrechnung](quellen/step-4-rocketlight-fester-pavillon.xlsx) verwenden dasselbe studentische Florida-Arbeitsszenario: 13,38 Mio. USD für Investition und Anlauf, laufende Kosten zusätzlich. Die vier Piloten liegen in 2028–2029; der spätere Hochlauf ist eine Annahme. Website und Excel zeigen Cashflow und Sensitivität vor Finanzierung und Steuern. Bauumfang und Angebote müssen den Budgetansatz an G2 validieren; Texas ist separat.
+
+Die Budgetüberleitung und fünf offiziell recherchierte Anlaufstellen mit Anschriften und Telefonnummern sind im Pitch aufklappbar und in der Roadmap-PPTX enthalten. Die ursprüngliche mobile Finanzrechnung bleibt im Kalkulator als Vorbewertung erkennbar; ihre 3,48 Mio. USD werden nicht hinzugerechnet. `quellen/step-6-roadmap-pavillon.pptx` und der frühere `pitch_pdf_export.pdf` dokumentieren ältere Stände. Für einen aktuellen Gesamtexport die Druckfunktion der Website verwenden.
+
+`node quellen/verify-finance.mjs` prüft den gemeinsamen Zahlen- und Terminstand. Die aktuellen Office-Dateien lassen sich mit `quellen/build-finance.mjs` und `quellen/build-roadmap.mjs` nachvollziehbar erzeugen.
 
 ## Lokal mit Server starten
 

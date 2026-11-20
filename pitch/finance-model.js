@@ -134,14 +134,14 @@
     };
     const budgetSensitivity = config.historicalBudgetBounds.map(total => ({
       assumedProjectBudget: total, cumulativeCashFlow: base.totals.operatingCashFlow - total,
-      label: 'Reine Rechenvariation des Gesamtbudgets; 10–15 Mio. USD sind die historische Lounge-Spanne, keine validierte Pavillon-Schätzung.'
+      label: 'Reine Rechenvariation für Investition und Anlauf; 10–15 Mio. USD sind die historische Lounge-Spanne, keine validierte Pavillon-Schätzung.'
     }));
     return {
       planDate: config.planDate, years: [...config.years], inputs: config, pilotDates, gateDates, budget,
       annual: base.annual, totals: base.totals, financing, scenarios, sensitivity, budgetSensitivity,
       provenance: {
         pilotDates: 'pitch/planning-data.js: ROCKET_DATA.A.rows; Gates aus ROCKET_META.A.gates',
-        budget: 'Studentischer Gesamtprojektansatz auf Basis der früheren größeren Lounge-Kostenstruktur; konservatives Arbeitsszenario, kein neues Bauangebot. Echte Pavillonangebote sind an G2 erforderlich.',
+        budget: 'Studentischer Projektbudgetansatz für Investition und Anlauf auf Basis der früheren größeren Lounge-Kostenstruktur; vorläufiges Arbeitsszenario, kein neues Bauangebot. Echte Pavillonangebote sind an G2 erforderlich.',
         assumptions: 'Neue studentische Szenarioannahmen vom 20.11.2026; keine nachgewiesene Zahlungsbereitschaft oder Kostenvalidierung.',
         historicalWorkbook: 'quellen/step-4-rocketlight.xlsm: mobiles Vergleichsszenario mit 3,48 Mio. USD; nicht zum neuen Ansatz addiert.'
       },
@@ -153,6 +153,7 @@
         'Ein- und Auszahlungen vereinfachend im Veranstaltungsjahr; keine Anzahlungen, Forderungs-/Verbindlichkeitsfristen oder Working-Capital-Reserve.',
         'Keine Inflation, Baukostenreserve, Finanzierungskosten oder zusätzliche Liquiditätsreserve; Zahlungsplan und G2-Budget neu validieren.',
         'Der 13,38-Mio.-Ansatz ersetzt den mobilen Ansatz; 3,48 Mio. USD werden nicht hinzugerechnet.',
+        'Das Projektbudget für Investition und Anlauf enthält keine laufenden Betriebsauszahlungen; diese werden gesondert gerechnet.',
         'Sensitivitäten ändern Preis und Auslastung des Regelbetriebs; die vier Piloten bleiben bei 80 % und 35.000 USD.'
       ]
     };

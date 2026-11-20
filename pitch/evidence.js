@@ -54,7 +54,14 @@ const state = seed();
   // original mobile financial model below remains a separate historical case.
   const fixedData = window.ROCKET_DATA.A;
   const fixedMeta = window.ROCKET_META.A;
-  const pilotModel = fixedMeta.pilotModel;
+  const fixedFinance = window.RocketFinance.build(fixedData, fixedMeta);
+  const pilotModel = {
+    capacity: fixedFinance.inputs.seats,
+    occupancy: fixedFinance.inputs.pilotOccupancy,
+    price: fixedFinance.inputs.pilotPrice,
+    targetPrice: fixedFinance.inputs.regularPrice,
+    variableCost: fixedFinance.inputs.variableCostPerGuest
+  };
   const operatingGate = fixedMeta.gates.find(gate => gate.id === 'G4');
   const dates = [...new Set(fixedData.rows.flatMap(row => row.items
     .filter(item => item.num && item.d)
@@ -83,7 +90,7 @@ const state = seed();
     events,
     seats,
     revenue: seats * price,
-    budgetStatus: fixedMeta.budget,
+    budgetStatus: fixedMeta.budgetStatus,
     budgetReference: fixedMeta.budgetReference,
     operatingDecision: operatingGate.date.split('.').reverse().join('-'),
     targetPrice,
@@ -122,6 +129,7 @@ const state = seed();
     financialAssessmentA,
     financialA: calcFY(financialAssessmentA.fy, state.base),
     fixedPilot,
+    fixedFinance,
     variants: {
       A: { data: window.ROCKET_DATA.A, meta: window.ROCKET_META.A }
     },
@@ -132,6 +140,7 @@ const state = seed();
       planning: 'planning-data.js',
       financialVariant: 'historical-mobile-A',
       financialScope: 'Unveränderte Originalrechnung des mobilen Konzepts; kein Wirtschaftlichkeitsnachweis für feste Standorte.',
+      fixedFinance: 'finance-model.js · gemeinsames Florida-Arbeitsszenario 2027–2031; gleiche Eingaben wie im aktuellen XLSX',
       fixedPilot: {
         dates: 'planning-data.js · ROCKET_DATA.A.rows · nummerierte Pilottermine',
         assumptions: 'planning-data.js · ROCKET_META.A.pilotModel',

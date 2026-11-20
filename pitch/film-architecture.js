@@ -74,9 +74,9 @@
           if (!built) {
             built=true;
             const meta=window.PitchEvidence.variants[variant].meta;
-            name.textContent='STANDORT 1 · ORIENTIERUNGSRAHMEN';
-            total.textContent=meta.budgetReference || meta.budget;
-            unit.textContent=meta.budgetReference?'Ältere Lounge-Schätzung · Pavillon neu validieren':meta.budgetLabel;
+            name.textContent='FLORIDA · GESAMTPROJEKT';
+            total.textContent=meta.budget+' Mio. USD';
+            unit.textContent='Investition + Anlauf · an G2 validieren';
             current.innerHTML=phases.map((phase,index)=>phaseMarkup(phase,index)).join('');
             sequence.innerHTML='<p class="film-phase-sequence-heading">'+phases.length+' Bildphasen · ein paralleler Maßnahmenplan</p>'+phases.map((phase,index)=>phaseMarkup(phase,index,true)).join('');
             timeline.innerHTML=roadmapMarkup(variant)+compactRoadmapMarkup(variant)+gatesMarkup(variant);

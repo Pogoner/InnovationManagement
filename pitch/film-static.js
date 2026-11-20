@@ -171,6 +171,11 @@
       copy.className = 'film-static-copy';
       copy.textContent = beat.copy;
       caption.append(tag, title, copy);
+      if (window.PitchDetails && (chapter.step === 6 || index === chapter.beats.length - 1)) {
+        const actions = document.createElement('div');
+        actions.innerHTML = window.PitchDetails.actions(chapter.step);
+        caption.append(actions);
+      }
 
       const diagram = document.createElement('div');
       diagram.className = 'film-static-diagram';

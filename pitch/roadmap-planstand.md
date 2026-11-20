@@ -24,22 +24,68 @@ Planungsfenster: Standort und Planung 2027; Bau November 2027 bis August 2028; b
 
 Texas bleibt ein langfristiges Ausbauziel. Grundstück, Genehmigungen, eigenes Investitionsbudget und Eröffnung müssen separat geprüft und freigegeben werden. Die Roadmap legt dafür keinen Eröffnungstermin fest und setzt einen erfolgreichen Florida-Betrieb voraus.
 
-## Budgetgrenze
+## Gemeinsames Budget für Investition und Anlauf
 
-Die frühere aktive Planung mit 3,48 Mio. USD galt für ein mobiles Konzept. Sie finanziert nicht automatisch einen oder zwei feste Bauten. Die vorhandene ältere Lounge-Planung enthält einen groben Rahmen von 10–15 Mio. USD (Rechenstand 13,38 Mio. USD) für einen größeren festen Bau mit rund 1.000 m². Dieser Rahmen dient ausschließlich der Orientierung für Standort 1 und muss für den festen Pavillon neu kalkuliert werden. Ein zweiter Standort ist darin nicht enthalten.
+Die Website, die aktuelle Roadmap-PPTX und die neue Fünfjahres-XLSX verwenden **13,38 Mio. USD für Investition und Anlauf in Florida**. Das ist ein vorläufiges studentisches Arbeitsszenario auf Basis der vorhandenen Kostenstruktur der früheren größeren festen Lounge. Es ist keine neue Kostenschätzung eines Bauunternehmens. Entwurf, Bauumfang und Angebote für den tatsächlich geplanten Pavillon müssen den Ansatz an G2 bestätigen oder verändern. Texas ist nicht enthalten.
 
-Umsatz und Innovationsrendite aus dem unveränderten Finanzrechner gelten nicht als nachgerechneter Wirtschaftlichkeitsnachweis für das neue feste Konzept. Auch Nachfrage und Zahlungsbereitschaft sind Prüfziele der Piloten, keine bereits erzielten Ergebnisse.
+| Position | Mio. USD | Abgrenzung im Modell |
+| --- | ---: | --- |
+| Grundstück | 2,00 | Sachinvestition; noch keine konkrete Erwerbszusage |
+| Architektur und Bau | 9,00 | Sachinvestition; 20 % Auszahlung 2027, 80 % 2028 |
+| Küche und Ausstattung | 0,60 | Sachinvestition; Erstausstattung |
+| Projektmanagement / Entwicklung | 0,58 | Entwicklung und Anlauf; getrennt vom Betriebspersonal |
+| Gutachten / Genehmigungen | 0,50 | Entwicklung und Anlauf |
+| Pilotvorbereitung / Qualifizierung | 0,40 | Training, Testservice und Freigabe; kein doppelt gerechnetes Catering |
+| Markteinführung | 0,30 | Einmaliger Anlauf; getrennt vom laufenden Vertrieb |
+| **Investition und Anlauf gesamt** | **13,38** | **11,60 Sachinvestitionen + 1,78 Entwicklung / Anlauf** |
+
+Die früheren **3,48 Mio. USD** werden **nicht addiert**. Der in der Original-XLSM als F&E bezeichnete mobile Ansatz bestand aus 0,78 Mio. Personal und 2,70 Mio. Sachkosten; er enthielt bereits einen mobilen Pavillon, Genehmigungen und Pilotaufwendungen. Auch die frühere Lounge-Spanne von 10–15 Mio. USD ist kein zusätzlicher Baukostenblock. Diese Überleitung wird im Pitch aufklappbar und in beiden aktuellen Dateien erklärt.
+
+Laufende Betriebskosten kommen zusätzlich hinzu: im Basisszenario 2,66 Mio. variable Kosten und 4,00 Mio. Fixkosten über 2027–2031. Zusammen ergeben sich **20,04 Mio. USD Auszahlungen**. Alle Beträge lauten auf USD, nicht EUR.
+
+## Fünfjahresrechnung und Sensitivität
+
+Die vier Pilottermine werden direkt aus denselben Roadmap-Daten gelesen. Bei 20 Plätzen, 35.000 USD je Gast und angenommenen 80 % Auslastung ergeben sie je 1,12 Mio. USD Umsatz in 2028 und 2029. Nach G4 nimmt das Basisszenario 10 Dinner 2030 und 16 Dinner 2031 mit 90 % Auslastung und 50.000 USD je Gast an. Diese Nachfrage ist nicht nachgewiesen.
+
+| Mio. USD | 2027 | 2028 | 2029 | 2030 | 2031 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Umsatz | 0,00 | 1,12 | 1,12 | 9,00 | 14,40 |
+| Auszahlungen inkl. Investition und Anlauf | 4,54 | 9,10 | 1,66 | 2,10 | 2,64 |
+| Cashflow des Jahres | −4,54 | −7,98 | −0,54 | 6,90 | 11,76 |
+| Cashflow kumuliert | −4,54 | −12,52 | −13,06 | −6,16 | 5,60 |
+
+Der gemeinsame Kostenansatz enthält 5.000 USD je Gast und 1,20 Mio. USD jährliche laufende Fixkosten ab Betriebsaufbau; in September–Dezember 2028 anteilig 0,40 Mio. USD. Die Fixkosten gliedern sich in 0,75 Mio. Personal, 0,30 Mio. Standort / Instandhaltung / Versicherung und 0,15 Mio. Verwaltung / Vertrieb pro vollem Jahr.
+
+Bei 70 % Auslastung und 40.000 USD im Regelbetrieb endet das Modell bei **−2,72 Mio. USD**, bei 95 % und 50.000 USD bei **+6,77 Mio. USD**. Die vier Pilotannahmen bleiben gleich. Im Pitch folgt die Sensitivität direkt auf die animierte Fünfjahresgrafik.
+
+Die Zahlen sind **Cashflow vor Finanzierung und Steuern**, keine Gewinnrechnung und keine Finanzierungszusage. Abschreibungen und Restwerte werden nicht als Ein- oder Auszahlungen berücksichtigt. Inflation, Baukosten- und Liquiditätsreserve sowie unterjährige Zahlungsziele sind noch nicht modelliert. Der indikative Mittelbedarf bis 30.09.2028 vor den ersten Piloten liegt bei 13,18 Mio. USD; das größte Defizit an den betrachteten Jahresenden beträgt 13,06 Mio. USD. Diese beiden Kennzahlen ersetzen keine monatliche Liquiditätsplanung.
+
+## Konkrete Anlaufstellen
+
+Der Button **Adressen & Telefonnummern** in Teil 6 öffnet fünf offizielle Anlaufstellen, jeweils mit Anschrift, Telefon, Zweck, passenden Roadmap-Phasen und verlinkter Quelle. Dieselben Kontakte stehen im Anhang der Roadmap-PPTX. Datenstand: 20.11.2026. Es handelt sich um recherchierte Anlaufstellen; niemand wurde beauftragt oder kontaktiert.
+
+- [Titusville Planning Department](https://www.titusville.com/m/directory/department?did=23): Grundstücksnutzung und Planungsrecht.
+- [Titusville Building Department](https://www.titusville.com/187/Building-Department): Bauplanprüfung, Genehmigungsablauf und Abnahmen.
+- [Space Florida](https://www.spaceflorida.gov/contact-us): Standort- und Entwicklungsanfragen.
+- [SJRWMD Palm Bay Service Center](https://www.sjrwmd.com/contact/): wasserbezogene Standort- und Genehmigungsfragen.
+- [BRPH Melbourne](https://www.brph.com/contact/locations/): mögliche Architektur- und Ingenieurplanung.
+
+Die Anschriften gehören den Anlaufstellen. Eine Grundstücksadresse für den künftigen Pavillon ist noch nicht ausgewählt.
 
 ## Dateien und Nachvollziehbarkeit
 
-Die aktuelle Darstellung entsteht aus `planning-data.js`, `roadmap-phases.js` und den Teil-6-Ansichten. Der neue Foliensatz `quellen/step-6-roadmap-fester-pavillon.pptx` folgt diesem Planstand. `quellen/step-6-roadmap-pavillon.pptx` bleibt als historische mobile Originalquelle erhalten und wird nicht mehr als aktuelle Roadmap verlinkt.
+Die aktuelle Darstellung entsteht aus `planning-data.js`, `roadmap-phases.js`, `finance-model.js` und `roadmap-contacts.js`. `evidence.js` verbindet die Daten zum gemeinsamen Lesemodell.
+
+- `quellen/step-6-roadmap-fester-pavillon.pptx`: sechs Hauptfolien plus Kostenüberleitung und Kontakte als zwei Anhänge.
+- `quellen/step-4-rocketlight-fester-pavillon.xlsx`: aktuelle, editierbare Fünfjahresrechnung mit Annahmen, Kostenüberleitung und Sensitivität.
+- `quellen/step-4-rocketlight.xlsm` und `quellen/step-6-roadmap-pavillon.pptx`: historische mobile Originalquellen; nicht die aktuelle feste Kalkulation.
+- `quellen/build-finance.mjs` und `quellen/build-roadmap.mjs`: nachvollziehbare Erzeugung der aktuellen Dateien.
+- `node quellen/verify-finance.mjs`: Abgleich von Budget, Pilotterminen, Cashflow, Sensitivität und Pitch-Phasen.
 
 Die Überarbeitung wird in einzelnen nachvollziehbaren Commits gesichert. Ausgangsdaten anderer Teamteile werden nicht umgedeutet.
 
 ## Abgleich der Website mit dem festen Konzept
 
-Die Website verwendet für die aktuelle Umsatzdarstellung ein begrenztes Pilotszenario aus denselben vier Roadmap-Terminen: zwei Dinner 2028 und zwei 2029. Bei 20 Plätzen, 35.000 USD je Gast und angenommenen 80 % Auslastung ergeben sich 32 verkaufte Plätze beziehungsweise 1,12 Mio. USD Umsatz je Jahr; insgesamt 64 Plätze und 2,24 Mio. USD vor Kosten. Die Auslastung ist eine übernommene Modellannahme, kein beobachteter Buchungsstand.
+Die erste Umstellung ersetzte unpassende Gewinnversprechen durch ein reines Pilotszenario. Nach Teamfeedback wurde die Fünfjahresdarstellung als transparente gemeinsame Szenariorechnung wieder aufgenommen. Der Score 1,83 dokumentiert weiterhin die ursprüngliche Ideenauswahl; neue Bau- und Betriebsrisiken werden dadurch nicht automatisch neu bewertet.
 
-Grundstück, fester Bau, vollständiger Betrieb und ein späterer Texas-Standort werden damit nicht finanziell nachgewiesen. Investitionssumme, Gewinn und Amortisation bleiben offen. Der Zielpreis von 50.000 USD und variable Kosten von 5.000 USD ergeben lediglich einen angenommenen Deckungsbeitrag vor Bau, Fixkosten und Steuern. Der Score 1,83 bleibt als Ergebnis der ursprünglichen Ideenauswahl gekennzeichnet; Aufwand und Risiken des festen Baus sind neu zu bewerten.
-
-Die Website-Daten stehen zentral in `ROCKET_META.A.pilotModel` und werden mit den vorhandenen Pilotterminen zu `PitchEvidence.fixedPilot` verbunden. Die ursprünglichen Kalkulationsdateien, PowerPoint-Dateien und der vorhandene Gesamt-PDF bleiben für die spätere Neuverknüpfung unverändert.
+Die drei Finalisten haben getrennte Spalten. Der Zusatz unter der Preisgrafik und die erklärenden Umfrage-Untertitel entfallen; Menüwahl, Live-/Beispieldatenkennzeichnung und Buchungsfunktion bleiben bestehen. Die aktuelle Druckfunktion erzeugt die Grafik aus demselben Modell; der zuvor abgelegte Gesamt-PDF-Export ist ein historischer Stand und wird nicht als aktuelle Roadmap-Quelle verwendet.

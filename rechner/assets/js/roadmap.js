@@ -24,7 +24,7 @@ const RM_KIND={gate:'Gate',qg:'Genehmigung, Vertrag, Abnahme',ms:'Kunden-Meilens
 const RM={v:'A',sel:1};
 try{Object.assign(RM,JSON.parse(localStorage.getItem(KEY+'.rm')||'{}'))}catch(e){}
 if(!RM_DATA[RM.v])RM.v='A';
-function rmTeaser(){return `<section class="rm-teaser"><div><div class="x-up" style="color:var(--gold)">Umsetzung · Teil 6</div><h3>Vom Konzept an die Startrampe</h3><p>Stage-Gates, sechs Teilprojekte, Budget und Roadmap – für den mobilen Pavillon und die feste Lounge.</p></div><button class="xbtn" data-sub="rmover">Zur Umsetzung</button></section>`}
+function rmTeaser(){return `<section class="rm-teaser"><div><div class="x-up" style="color:var(--gold)">Aktuelle Umsetzung · Teil 6</div><h3>Ein Konzept. Zwei feste Standorte.</h3><p>Fester Pavillon in Florida zuerst, langfristig ein zweiter fester Standort in Texas. Termine, Freigaben und offene Budgetprüfung im Planstand vom 20.11.2026.</p></div><a class="xbtn" href="../pitch/#schritt-6">Zur aktuellen Roadmap</a></section>`}
 function rmSave(){try{localStorage.setItem(KEY+'.rm',JSON.stringify({v:RM.v,sel:RM.sel}))}catch(e){}}
 const rmV=()=>RM_DATA[RM.v];
 const rmIcon=(k,s=24)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${RM_ICONS[k]||''}</svg>`;

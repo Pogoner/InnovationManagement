@@ -56,7 +56,7 @@
 .fe-scene .fe-price-validation { fill: #dce5dd; font-size: 18px; letter-spacing: .9px; }
 .fe-price-connector { fill: none; stroke: url(#fe-market-line); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; }
 
-/* Kosten und Gewinne: Kupfer = Gewinn, Eis = Kosten, wie die Preis- und Methodenflächen. */
+/* Pilotumsatz aus der festen Planung; Deckungsbeitrag separat vom Baubudget. */
 .fe-scene .fe-econ-label { font-size: 15px; letter-spacing: 1.5px; fill: #b9cbc9; }
 .fe-scene .fe-econ-total { font-size: 58px; letter-spacing: -3px; font-weight: 350; font-variant-numeric: tabular-nums; }
 .fe-scene .fe-econ-unit { font-size: 13px; letter-spacing: 1.4px; fill: #aebfc5; }
@@ -68,6 +68,10 @@
 .fe-econ-axis { stroke: #a9d9d95c; stroke-width: 1; }
 .fe-econ-gain { fill: #efbd91; }
 .fe-econ-cost { fill: #a9d9d9; opacity: .8; }
+.fe-dining .fe-pilot-bar { fill: #a9d9d9; fill-opacity: .78; stroke: #cce5e2; stroke-width: .8; }
+.fe-dining .fe-pilot .fe-econ-year { font-size: 19px; letter-spacing: 1.5px; }
+.fe-dining .fe-pilot-open { font-size: 25px; letter-spacing: 2px; fill: #efbd91; }
+.fe-dining .fe-pilot-assumption { font-size: 15px; letter-spacing: 0; }
 .fe-econ-line { fill: none; stroke: #eff3ed; stroke-width: 1.6; stroke-dasharray: 1 2; stroke-dashoffset: 1; vector-effect: none !important; }
 .fe-econ-dot { fill: #060b10; stroke: #eff3ed; stroke-width: 1.4; opacity: 0; }
 .fe-econ-key { stroke: #eff3ed; stroke-width: 1.6; }

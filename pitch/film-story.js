@@ -102,19 +102,19 @@ window.PitchFilmStory = [
         "at": 0,
         "still": 0.5,
         "view": ".fa-ir-bars",
-        "tag": "INNOVATIONSRENDITE",
+        "tag": "URSPRÜNGLICHE TEAMBEWERTUNG",
         "title": "Drei Ideen.<br><em>Ein Score.</em>",
-        "copy": "Die IR teilt den gewichteten Nutzen durch den gewichteten Aufwand. RocketLight führt mit 1,83. Starlink Insights liegt bei 1,62, Launch Engineering Cloud bei 1,27.",
-        "cue": "Innovationsrendite der drei Ideen"
+        "copy": "Die IR teilt den gewichteten Nutzen durch den gewichteten Aufwand. In unserer ursprünglichen Ideenbewertung führte RocketLight mit 1,83 vor Starlink Insights mit 1,62 und Launch Engineering Cloud mit 1,27.",
+        "cue": "Die ursprüngliche Teamwertung erklärt unsere Ideenauswahl"
       },
       {
         "at": 0.55,
         "still": 1,
         "view": ".fa-ir-callout",
-        "tag": "ROCKETLIGHT · DER HÖCHSTE SCORE",
-        "title": "Eine Idee sticht<br><em>heraus.</em>",
-        "copy": "Aus unserer Sicht erzielt RocketLight Dinner die höchste Innovationsrendite, vor Starlink Insights und der Launch Engineering Cloud. IR ist ein Bewertungsscore, keine Finanzrendite.",
-        "cue": "RocketLight liegt vorn",
+        "tag": "VON DER IDEENAUSWAHL ZUR UMSETZUNG",
+        "title": "Die Idee überzeugt.<br><em>Der Bau wird geprüft.</em>",
+        "copy": "Die damalige Bewertung begründet unsere Auswahl. Für den festen Pavillon müssen Bauaufwand, Genehmigungen und Betrieb neu bewertet werden. Die Roadmap macht diese Prüfungen zu Freigabepunkten.",
+        "cue": "Ursprüngliche Auswahl · Aufwand des festen Baus neu bewerten",
         "tone": "difference"
       }
     ],
@@ -130,7 +130,7 @@ window.PitchFilmStory = [
         "at": 0,
         "tag": "DAS RAUMKONZEPT",
         "title": "Zehn Tische.<br><em>Ein gemeinsamer Blick.</em>",
-        "copy": "20 Gäste sitzen an zehn Zweiertischen. Versetzte, leicht terrassierte Reihen richten jeden Platz auf das Startpanorama aus.",
+        "copy": "Im festen Pavillon in Florida sitzen 20 Gäste an zehn Zweiertischen. Versetzte, leicht terrassierte Reihen richten jeden Platz auf das Startpanorama aus.",
         "cue": "Die Tische entstehen. Die Sichtachsen öffnen sich.",
         "still": 0.13,
         "view": "[data-fe-layout]"
@@ -156,19 +156,19 @@ window.PitchFilmStory = [
       },
       {
         "at": 0.48,
-        "tag": "ERWARTETE KOSTEN UND GEWINNE",
-        "title": "Erst investieren.<br><em>Dann verdienen.</em>",
-        "copy": "Im ersten Jahr entstehen nur Kosten für Konzept, Pavillon und Genehmigungen. Ab dem zweiten Jahr laufen die Piloten. Über fünf Jahre stehen rund 11,5 Mio. USD Gewinn etwa 3,5 Mio. USD F&E-Kosten gegenüber.",
-        "cue": "Der Gewinn wächst, die Kosten sinken, kumuliert im Plus ab Jahr 4.",
+        "tag": "PILOTUMSATZ · FLORIDA 2028–2029",
+        "title": "Vier Abende.<br><em>Ein prüfbarer Ansatz.</em>",
+        "copy": "Nach Fertigstellung sind je zwei Pilot-Dinner 2028 und 2029 geplant. Bei 20 Plätzen, angenommenen 80 % Auslastung und 35.000 USD je Gast ergeben sich insgesamt 2,24 Mio. USD Umsatz vor Kosten. Die Bauinvestition wird separat kalkuliert.",
+        "cue": "Zwei Piloten je Jahr · Umsatzannahme vor Kosten · Investition offen",
         "still": 0.62,
         "view": "[data-fe-econ]"
       },
       {
         "at": 0.65,
-        "tag": "WIRTSCHAFTLICHKEIT",
-        "title": "Hohe Marge.<br><em>Kleine Größe.</em>",
-        "copy": "Je Gast bleiben bei 50.000 USD etwa 45.000 USD übrig. Das Dinner bleibt ein kleines Angebot für 20 Gäste; entscheidend ist der Nachweis der Nachfrage im Pilot.",
-        "cue": "Profitabel je Gast, aber ein kleines Angebot.",
+        "tag": "DECKUNGSBEITRAG · ZIELPREISSZENARIO",
+        "title": "Der Beitrag zählt.<br><em>Die Vollkosten auch.</em>",
+        "copy": "Bei einem späteren Zielpreis von 50.000 USD und angenommenen 5.000 USD variablen Kosten ergibt sich ein Deckungsbeitrag von 45.000 USD je Gast. Daraus sind noch Bau, Fixkosten und Steuern zu finanzieren. Über den Betrieb entscheiden wir nach den Piloten.",
+        "cue": "Deckungsbeitrag vor Bau, Fixkosten und Steuern · Amortisation offen",
         "still": 1,
         "view": "[data-fe-scale]"
       }

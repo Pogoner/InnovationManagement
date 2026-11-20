@@ -242,16 +242,16 @@
     markup() {
       const { E } = data(), cases = caseData(), team = E.rocketlightAssessments.find(item => item.assessment.id === 'rld-team');
       const summary = cases.map(item => `${item.name}: IR ${num(item.items[0].result.IR)}`).join('. ');
-      return svg('finance', `Innovationsrendite IR ist gewichteter Nutzen geteilt durch gewichteten Aufwand. ${summary}. Bewertungsscores, keine finanzielle Rendite.`, `
+      return svg('finance', `Ursprüngliche Teamwertung zur Ideenauswahl. Innovationsrendite IR ist gewichteter Nutzen geteilt durch gewichteten Aufwand. ${summary}. Aufwand des festen Pavillons neu bewerten; keine finanzielle Rendite.`, `
         <g class="fa-ir-bars">
-          <text class="fa-kicker" x="40" y="30">INNOVATIONSRENDITE · IR</text>
-          <text class="fa-method-footnote" x="40" y="58">IR = gewichteter Nutzen ÷ gewichteter Aufwand · Bewertungsscore, keine Finanzrendite</text>
+          <text class="fa-kicker" x="40" y="30">URSPRÜNGLICHE TEAMWERTUNG · IR</text>
+          <text class="fa-method-footnote" x="40" y="58">IR = Nutzen ÷ Aufwand · Aufwand des festen Pavillons neu bewerten</text>
           ${[0, .5, 1, 1.5, 2].map(value => `<path class="fa-grid-line" d="M${irX(value)} 84V408"/><text class="fa-case-tick" x="${irX(value)}" y="428" text-anchor="middle">${num(value, 1)}</text>`).join('')}
           ${cases.map((item, index) => { const y = 120 + index * 100, teamIR = item.items[0].result.IR; return `<g class="fa-ir-case" data-ir-case="${index}">${lines(index === 2 ? ['Launch Engineering', 'Cloud'] : [item.name], 40, y + 20, 'fa-case-name', 22)}<rect class="fa-ir-team" data-ir-bar="${index}" data-width="${(irX(teamIR) - 230).toFixed(3)}" x="230" y="${y}" width="0" height="36" rx="3"/><text class="fa-ir-value fa-copper-text" data-ir-value="${index}" x="${irX(teamIR) + 10}" y="${y + 27}">${num(teamIR)}</text></g>`; }).join('')}
         </g>
         <g class="fa-ir-callout" opacity="0">
           <path class="fa-grid-line" d="M40 462H600"/>
-          <text class="fa-method-note-strong fa-copper-text" x="40" y="500">RocketLight: ${num(team.result.IR)} · der höchste Score</text>
+          <text class="fa-method-note-strong fa-copper-text" x="40" y="500">RocketLight: ${num(team.result.IR)} · ursprüngliche Auswahl</text>
         </g>
         </g>
       `);

@@ -2003,7 +2003,7 @@ window.ROCKET_META = {
     "budgetReference": "10–15 Mio. USD",
     "budgetReferenceNote": "Historischer Orientierungsrahmen der größeren festen Lounge für Standort 1 (damals rund 13,4 Mio. USD); für den Pavillon neu validieren. Texas zusätzlich und offen.",
     "revenue": "offen",
-    "revenueLabel": "Für feste Standorte nicht neu kalkuliert",
+    "revenueLabel": "Regelbetrieb und Ausbau noch nicht kalkuliert",
     "firstDinner": "10/2028",
     "firstDinnerLabel": "Erster Pilot im eigenen Pavillon",
     "pilotModel": {

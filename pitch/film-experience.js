@@ -34,68 +34,54 @@
     'Raumkonzept: zehn versetzte Zweiertische mit zwanzig Plätzen, alle auf das Startpanorama ausgerichtet. Konzeptvisualisierung ohne Standort- oder Entfernungszusage.',
     'Erlebniskonzept: sieben Gänge, Missionsbriefing, Service und gemeinsamer Blick auf den Launch.',
     'Preisannahmen: 35.000 US-Dollar je Gast im Pilot, langfristig bis zu 50.000 US-Dollar. Die Zahlungsbereitschaft ist noch zu prüfen.',
-    'Erwartete Kosten und Gewinne über fünf Jahre: Gewinn und F&E-Kosten je Jahr, kumuliert ab Jahr 4 im Plus. Modellannahmen aus dem Inno-Rendite-Kalkulator.',
-    'Hohe Marge je Gast: Bei 50.000 US-Dollar Preis bleiben etwa 45.000 US-Dollar Deckungsbeitrag. Modellannahmen.'
+    'Pilotmodell Florida: vier eigene Dinner, je zwei in 2028 und 2029. Bei zwanzig Plätzen, angenommenen achtzig Prozent Auslastung und 35.000 US-Dollar je Gast entstehen je Jahr 1,12 Millionen und insgesamt 2,24 Millionen US-Dollar Umsatz vor Kosten. Die Bauinvestition ist offen. G4 prüft im Juli 2029 den Betrieb; Texas bleibt ein langfristiges Ziel mit eigenem, offenem Budget.',
+    'Modellannahme zum Zielpreis: 50.000 US-Dollar je Gast abzüglich 5.000 US-Dollar variabler Kosten ergeben 45.000 US-Dollar Deckungsbeitrag vor Bauinvestition, Fixkosten und Steuern. Die Zahlungsbereitschaft ist noch zu prüfen.'
   ];
 
-  // Five-year model of the Rendite-Kalkulator (sheet "5-Jahres-Kalkulation"). The
-  // totals come from the frozen evidence; the per-guest split is the workbook's
-  // plausibility check (cells B50:B54) and is not part of the Hube method.
-  const guestCosts = {menu:2000, service:3000};
-  const econGeo = {base:300, k:16, xs:[110,215,320,425,530], width:38};
+  // The fixed Florida pilot schedule supplies the two annual revenue bars.
+  // Revenue and the target-price contribution do not estimate full project returns.
+  const econGeo = {base:296, height:106, xs:[202,438], width:86};
   const scaleGeo = {x:60, width:520};
   const de = (value, digits = 1) => value.toLocaleString('de-DE', {minimumFractionDigits:digits, maximumFractionDigits:digits});
-  function economics() {
-    const {financialA, financialAssessmentA, base} = window.PitchEvidence;
-    const mio = value => value / 1e6;
-    const profit = financialA.profit.map(mio), cost = financialA.rnd.map(mio), revenue = financialA.revenue.map(mio);
-    let gained = 0, spent = 0;
-    const cumulative = profit.map((value, index) => { gained += value; spent += cost[index]; return gained - spent; });
-    const price = financialAssessmentA.fy.price[2];
-    const variable = guestCosts.menu + guestCosts.service;
-    return {profit, cost, revenue, cumulative, gain:mio(financialA.P), spend:mio(financialA.C), pShare:financialA.pShare, cShare:financialA.cShare,
-      companyProfit:base.profit, companyRnd:base.rnd, price, variable, margin:(price - variable) / price, guests:financialAssessmentA.fy.qty.reduce((a, b) => a + b, 0)};
-  }
   function econMarkup(e) {
-    const {base, k, xs, width} = econGeo;
-    const points = e.cumulative.map((value, index) => [xs[index], base - value * k]);
-    const turn = e.cumulative.findIndex(value => value >= 0);
-    const share = -e.cumulative[turn - 1] / (e.cumulative[turn] - e.cumulative[turn - 1]);
-    const crossX = xs[turn - 1] + share * (xs[turn] - xs[turn - 1]);
-    return `<g data-fe-econ class="fe-econ">
-      <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">ERWARTETE KOSTEN UND GEWINNE</text>
-      <text class="fe-econ-label fe-econ-gain-label" x="170" y="76" text-anchor="middle">GEWINN · 5 JAHRE</text>
-      <text class="fe-econ-total fe-econ-gain-label" data-fe-gain-total x="170" y="132" text-anchor="middle">0,0</text>
-      <text class="fe-econ-label fe-econ-cost-label" x="470" y="76" text-anchor="middle">F&amp;E-KOSTEN · 5 JAHRE</text>
-      <text class="fe-econ-total fe-econ-cost-label" data-fe-cost-total x="470" y="132" text-anchor="middle">0,0</text>
-      <text class="fe-econ-unit" x="170" y="158" text-anchor="middle">MIO. USD</text>
-      <text class="fe-econ-unit" x="470" y="158" text-anchor="middle">MIO. USD</text>
-      <path class="fe-econ-axis" d="M60 ${base}H600"/>
-      ${e.profit.map((value, index) => `<rect class="fe-econ-gain" data-fe-gain="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
-      ${e.cost.map((value, index) => `<rect class="fe-econ-cost" data-fe-cost="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
-      <path class="fe-econ-line" data-fe-cumulative pathLength="1" d="M${points.map(point => point.map(n).join(' ')).join('L')}"/>
-      ${points.map((point, index) => `<circle class="fe-econ-dot" data-fe-cum-dot="${index}" cx="${n(point[0])}" cy="${n(point[1])}" r="3.5"/>`).join('')}
-      <g data-fe-breakeven class="fe-econ-breakeven"><circle cx="${n(crossX)}" cy="${base}" r="7"/><text x="${n(crossX + 14)}" y="${base + 30}">IM PLUS AB JAHR ${turn + 1}</text></g>
-      ${xs.map((x, index) => `<text class="fe-econ-year" x="${x}" y="366" text-anchor="middle">JAHR ${index + 1}</text>`).join('')}
-      ${e.revenue.map((value, index) => `<text class="fe-econ-revenue" data-fe-revenue="${index}" x="${xs[index]}" y="398" text-anchor="middle">${value > 0 ? de(value) : '–'}</text>`).join('')}
-      <text class="fe-econ-unit" x="320" y="424" text-anchor="middle">UMSATZ JE JAHR IN MIO. USD · ${e.guests} GÄSTE</text>
-      <path class="fe-econ-key" d="M92 452H112" /><text class="fe-econ-legend" x="120" y="456">KUMULIERT: GEWINN − F&amp;E</text>
+    const {base, xs, width} = econGeo;
+    const decision = new Date(`${e.operatingDecision}T12:00:00Z`).toLocaleDateString('de-DE', {month:'long', year:'numeric', timeZone:'UTC'}).toLocaleUpperCase('de-DE');
+    return `<g data-fe-econ class="fe-econ fe-pilot">
+      <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">${e.events} EIGENE PILOT-DINNER · FLORIDA</text>
+      <text class="fe-econ-label" x="320" y="65" text-anchor="middle">GEPLANTER PILOTUMSATZ</text>
+      <text class="fe-econ-total fe-econ-gain-label" data-fe-pilot-total x="320" y="124" text-anchor="middle">0,00</text>
+      <text class="fe-econ-unit" x="320" y="148" text-anchor="middle">MIO. USD GESAMT · UMSATZ VOR KOSTEN</text>
+      <path class="fe-econ-axis" d="M84 ${base}H556"/>
+      ${e.years.map((year, index) => `<g>
+        <text class="fe-econ-revenue" data-fe-pilot-year-total="${index}" x="${xs[index]}" y="179" text-anchor="middle">0,00 MIO. USD</text>
+        <rect class="fe-pilot-bar" data-fe-pilot-year="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>
+        <text class="fe-econ-year" x="${xs[index]}" y="324" text-anchor="middle">${year.year}</text>
+        <text class="fe-layout-note" x="${xs[index]}" y="349" text-anchor="middle">${year.events} Dinner · ${de(year.seats,0)} Gäste</text>
+      </g>`).join('')}
+      <text class="fe-layout-note fe-pilot-assumption" x="320" y="383" text-anchor="middle">Je Dinner: ${e.capacity} Plätze × ${de(e.occupancy * 100,0)} % × ${de(e.price,0)} USD</text>
+      <g data-fe-pilot-decision>
+        <path class="fe-econ-axis" d="M52 405H588"/>
+        <text class="fe-econ-label" x="52" y="434">BAUINVESTITION</text>
+        <text class="fe-pilot-open" x="52" y="464">${e.budgetStatus.toLocaleUpperCase('de-DE')}</text>
+        <text class="fe-econ-label" x="304" y="434">G4 · ${decision}</text>
+        <text class="fe-layout-note" x="304" y="464">Betrieb in Florida prüfen</text>
+        <text class="fe-layout-note" x="320" y="502" text-anchor="middle">Texas langfristig · eigener Standort · Budget offen</text>
+      </g>
     </g>`;
   }
   function scaleMarkup(e) {
     const {x, width} = scaleGeo;
-    const costShare = e.variable / e.price;
-    const costWidth = width * costShare;
     return `<g data-fe-scale class="fe-scale">
-      <text class="fe-diagram-heading" x="320" y="86" text-anchor="middle">HOHE MARGE. KLEINE GRÖSSE.</text>
+      <text class="fe-diagram-heading" x="320" y="86" text-anchor="middle">BEITRAG JE GAST · ZIELPREISMODELL</text>
       <text class="fe-econ-label" x="320" y="168" text-anchor="middle">DECKUNGSBEITRAG JE GAST · USD</text>
       <text class="fe-econ-total fe-econ-gain-label" data-fe-guest-total x="320" y="252" text-anchor="middle">0</text>
       <rect class="fe-scale-track" x="${x}" y="292" width="${width}" height="28"/>
       <rect class="fe-econ-gain" data-fe-guest-margin x="${x}" y="292" width="0" height="28"/>
       <rect class="fe-econ-cost" data-fe-guest-cost x="${x + width}" y="292" width="0" height="28"/>
-      <text class="fe-econ-legend fe-econ-gain-label" x="${x}" y="354">${de(e.margin * 100, 0)} % BLEIBEN</text>
-      <text class="fe-econ-legend fe-econ-cost-label" x="${x + width}" y="354" text-anchor="end">${de(e.variable, 0)} USD VARIABLE KOSTEN</text>
-      <text class="fe-layout-note" x="320" y="408" text-anchor="middle">Preis ${de(e.price, 0)} USD · Menü 2.000 · Logistik, Sicherheit, Service 3.000</text>
+      <text class="fe-econ-legend fe-econ-gain-label" x="${x}" y="354">DECKUNGSBEITRAG</text>
+      <text class="fe-econ-legend fe-econ-cost-label" x="${x + width}" y="354" text-anchor="end">${de(e.variableCost, 0)} USD VARIABLE KOSTEN</text>
+      <text class="fe-layout-note" x="320" y="404" text-anchor="middle">Zielpreis ${de(e.targetPrice, 0)} USD · Zahlungsbereitschaft offen</text>
+      <text class="fe-econ-label" x="320" y="441" text-anchor="middle">VOR BAU, FIXKOSTEN UND STEUERN</text>
     </g>`;
   }
 
@@ -184,8 +170,8 @@
           <text class="fe-price-validation" x="320" y="401" text-anchor="middle">ZAHLUNGSBEREITSCHAFT IM PILOT PRÜFEN</text>
           <text class="fe-layout-note" x="320" y="432" text-anchor="middle">Modellannahmen · kein buchbares Angebot</text>
         </g>
-        ${econMarkup(economics())}
-        ${scaleMarkup(economics())}
+        ${econMarkup(window.PitchEvidence.fixedPilot)}
+        ${scaleMarkup(window.PitchEvidence.fixedPilot)}
       </svg>
     </div>`,
     mount(root) {
@@ -208,12 +194,12 @@
       const price = root.querySelector('[data-fe-price]');
       const priceLine = root.querySelector('.fe-price-connector');
       const views = [layout, panorama, price, root.querySelector('[data-fe-econ]'), root.querySelector('[data-fe-scale]')];
-      const model = economics();
+      const model = window.PitchEvidence.fixedPilot;
       const all = selector => Array.from(root.querySelectorAll(selector));
-      const gainBars = all('[data-fe-gain]'), costBars = all('[data-fe-cost]'), revenueLabels = all('[data-fe-revenue]');
-      const cumulativeLine = root.querySelector('[data-fe-cumulative]'), cumulativeDots = all('[data-fe-cum-dot]');
-      const breakEven = root.querySelector('[data-fe-breakeven]');
-      const gainTotal = root.querySelector('[data-fe-gain-total]'), costTotal = root.querySelector('[data-fe-cost-total]');
+      const pilotBars = all('[data-fe-pilot-year]'), pilotLabels = all('[data-fe-pilot-year-total]');
+      const pilotTotal = root.querySelector('[data-fe-pilot-total]');
+      const pilotDecision = root.querySelector('[data-fe-pilot-decision]');
+      const annualMaximum = Math.max(1, ...model.years.map(year => year.revenue));
       const guestTotal = root.querySelector('[data-fe-guest-total]');
       const guestMargin = root.querySelector('[data-fe-guest-margin]'), guestCost = root.querySelector('[data-fe-guest-cost]');
       let last = '';
@@ -255,32 +241,24 @@
           set(priceLine,'stroke-dashoffset',n(1-smooth(.63,.73,priceP)));
           // The two economics views settle at 80 % of their slot, before the navigation's still point.
           const econT = context.static ? 1 : clamp((p-diningPhases[3])/((diningPhases[4]-diningPhases[3])*.8));
-          let gainSum = 0, costSum = 0;
-          gainBars.forEach((bar,index)=>{
-            const grow = smooth(.04+index*.08,.16+index*.08,econT);
-            const height = model.profit[index]*econGeo.k*grow;
-            gainSum += model.profit[index]*grow;
+          let pilotSum = 0;
+          pilotBars.forEach((bar,index)=>{
+            const grow = smooth(.04+index*.2,.49+index*.2,econT);
+            const revenue = model.years[index].revenue*grow;
+            const height = revenue/annualMaximum*econGeo.height;
+            pilotSum += revenue;
             bar.setAttribute('y',n(econGeo.base-height));bar.setAttribute('height',n(height));
-            set(revenueLabels[index],'opacity',n(smooth(.05+index*.08,.14+index*.08,econT)));
+            pilotLabels[index].textContent = `${de(revenue/1e6,2)} MIO. USD`;
           });
-          costBars.forEach((bar,index)=>{
-            const grow = smooth(.42+index*.05,.54+index*.05,econT);
-            costSum += model.cost[index]*grow;
-            bar.setAttribute('height',n(model.cost[index]*econGeo.k*grow));
-          });
-          gainTotal.textContent = de(gainSum);
-          costTotal.textContent = de(costSum);
-          const lineT = smooth(.72,.94,econT);
-          set(cumulativeLine,'stroke-dashoffset',n(1-lineT));
-          cumulativeDots.forEach((dot,index)=>set(dot,'opacity',n(smooth(index/4-.02,index/4+.02,lineT))));
-          set(breakEven,'opacity',n(smooth(.9,.98,econT)));
+          pilotTotal.textContent = de(pilotSum/1e6,2);
+          set(pilotDecision,'opacity',n(smooth(.6,.9,econT)));
           const scaleT = context.static ? 1 : clamp((p-diningPhases[4])/((1-diningPhases[4])*.8));
           const marginT = smooth(.05,.3,scaleT), costT = smooth(.3,.42,scaleT);
-          const marginShare = 1-model.variable/model.price;
+          const marginShare = 1-model.variableCost/model.targetPrice;
           guestMargin.setAttribute('width',n(scaleGeo.width*marginShare*marginT));
           guestCost.setAttribute('x',n(scaleGeo.x+scaleGeo.width*marginShare*marginT));
           guestCost.setAttribute('width',n(scaleGeo.width*(1-marginShare)*costT));
-          guestTotal.textContent = de((model.price-model.variable)*marginT,0);
+          guestTotal.textContent = de((model.targetPrice-model.variableCost)*marginT,0);
         }
       };
     }

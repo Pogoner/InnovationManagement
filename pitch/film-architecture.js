@@ -44,13 +44,12 @@
 
   const phaseName = phase => phase.tag.split(' / ').slice(1).join(' / ');
   const activityMarkup = phase => '<ol class="film-phase-tasks">'+phase.activities.map(item=>'<li><span>'+safe(item.label)+'</span><time'+(item.date?' datetime="'+item.date+'"':'')+'>'+safe(item.period)+'</time></li>').join('')+'</ol>';
-  const phaseMarkup = (phase,index,linear=false) => '<article class="film-phase-card'+(linear?' is-linear':'')+'" data-roadmap-phase="'+index+'"><div class="film-phase-kicker"><span>'+String(index+1).padStart(2,'0')+' / 08</span><span>GEPLANT · '+safe(phase.period)+'</span></div><h3>'+safe(phaseName(phase))+'</h3>'+activityMarkup(phase)+'<p class="film-phase-result"><span>PRÜFPUNKT</span>'+safe(phase.result)+'</p></article>';
-  const gatesMarkup = variant => '<div class="film-gate-strip"><p>FÜNF GEPLANTE FREIGABEN</p><ol>'+window.PitchEvidence.variants[variant].meta.gates.map(gate=>'<li><b>'+safe(gate.id)+'</b><time datetime="'+gate.date.split('.').reverse().join('-')+'">'+safe(gate.date)+'</time><span>'+safe(gate.title)+'</span></li>').join('')+'</ol></div>';
+  const phaseMarkup = (phase,index,linear=false) => '<article class="film-phase-card'+(linear?' is-linear':'')+'" data-roadmap-phase="'+index+'"><div class="film-phase-kicker"><span>'+String(index+1).padStart(2,'0')+' / 07</span><span>GEPLANT · '+safe(phase.period)+'</span></div><h3>'+safe(phaseName(phase))+'</h3>'+activityMarkup(phase)+'<p class="film-phase-result"><span>PRÜFPUNKT</span>'+safe(phase.result)+'</p></article>';  const gatesMarkup = variant => '<div class="film-gate-strip"><p>FÜNF GEPLANTE FREIGABEN</p><ol>'+window.PitchEvidence.variants[variant].meta.gates.map(gate=>'<li><b>'+safe(gate.id)+'</b><time datetime="'+gate.date.split('.').reverse().join('-')+'">'+safe(gate.date)+'</time><span>'+safe(gate.title)+'</span></li>').join('')+'</ol></div>';
 
   window.PitchScenes = window.PitchScenes || {};
   window.PitchScenes[6] = {
     markup: function () {
-      return '<div class="film-architecture-plan"><div class="film-plan-header"><div class="film-plan-budget"><span class="film-plan-name"></span><strong class="film-plan-total"></strong><small class="film-plan-unit"></small></div></div><div class="film-phase-position" aria-hidden="true">'+Array.from({length:8},(_,i)=>'<i data-phase-position="'+i+'"></i>').join('')+'</div><div class="film-current-phase"></div><div class="film-phase-sequence"></div><div class="film-timeline-view"></div></div>';
+      return '<div class="film-architecture-plan"><div class="film-plan-header"><div class="film-plan-budget"><span class="film-plan-name"></span><strong class="film-plan-total"></strong><small class="film-plan-unit"></small></div></div><div class="film-phase-position" aria-hidden="true">'+Array.from({length:7},(_,i)=>'<i data-phase-position="'+i+'"></i>').join('')+'</div><div class="film-current-phase"></div><div class="film-phase-sequence"></div><div class="film-timeline-view"></div></div>';
     },
     mount: function (root) {
       const plan = root.querySelector('.film-architecture-plan');
@@ -71,8 +70,8 @@
             const meta=window.PitchEvidence.variants[variant].meta;
             name.textContent='MOBILER PAVILLON';
             total.textContent=meta.budget; unit.textContent=meta.budgetLabel;
-            current.innerHTML=phases.slice(0,7).map((phase,index)=>phaseMarkup(phase,index)).join('');
-            sequence.innerHTML='<p class="film-phase-sequence-heading">Acht Bildphasen · ein paralleler Maßnahmenplan</p>'+phases.map((phase,index)=>phaseMarkup(phase,index,true)).join('');
+            current.innerHTML=phases.map((phase,index)=>phaseMarkup(phase,index)).join('');
+            sequence.innerHTML='<p class="film-phase-sequence-heading">Sieben Bildphasen · ein paralleler Maßnahmenplan</p>'+phases.map((phase,index)=>phaseMarkup(phase,index,true)).join('');
             timeline.innerHTML=roadmapMarkup(variant)+compactRoadmapMarkup(variant)+gatesMarkup(variant);
             cards=Array.from(current.children);
             lanes=Array.from(timeline.querySelectorAll('[data-plan-lane]'));
@@ -82,7 +81,7 @@
           phases.forEach((phase,i)=>{if(p>=phase.at)index=i;});
           // The reduced layout remains complete even when a phase button was used.
           const linear=Boolean(context.reduced || context.mobile || document.body.classList.contains('is-reduced'));
-          const fullPlan=index===7;
+          const fullPlan=false;
           plan.dataset.planView=linear?'linear':fullPlan?'roadmap':'phase';
           plan.dataset.activePhase=String(index);
           current.hidden=linear||fullPlan;

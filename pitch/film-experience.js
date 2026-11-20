@@ -28,22 +28,14 @@
     {x:95,y:287},{x:205,y:261},{x:315,y:250},{x:425,y:261},{x:535,y:287},
     {x:68,y:405},{x:183,y:375},{x:298,y:363},{x:413,y:375},{x:528,y:405}
   ];
-  const marketingMix = [
-    {title:'People',sub:'/ Customer',lines:['Raumfahrtfans · Unternehmer','Executive & Customer Hospitality']},
-    {title:'Product',lines:['20 Gäste · 7 Gänge · Launch','Missionsbriefing & Concierge']},
-    {title:'Price',lines:['35.000 USD im Pilot','bis 50.000 USD als Zielpreis']},
-    {title:'Place',lines:['Direktvertrieb & Family Offices','USA-Pilot · Fläche noch offen']},
-    {title:'Promotion',lines:['Einladungen & Empfehlungen','Ausgewählte Medien & Partner']}
-  ];
-  const diningPhases = [0,.16,.32,.48,.65,.80,.91];
-  const diningViews = ['layout','panorama','price','marketing','econ','scale','invite'];
+  const diningPhases = [0,.16,.32,.48,.65,.82];
+  const diningViews = ['layout','panorama','price','econ','scale','invite'];
   const diningDescriptions = [
     'Raumkonzept: zehn versetzte Zweiertische mit zwanzig Plätzen, alle auf das Startpanorama ausgerichtet. Konzeptvisualisierung ohne Standort- oder Entfernungszusage.',
     'Erlebniskonzept: sieben Gänge, Missionsbriefing, Service und gemeinsamer Blick auf den Launch.',
     'Preisannahmen: 35.000 US-Dollar je Gast im Pilot, langfristig bis zu 50.000 US-Dollar. Die Zahlungsbereitschaft ist noch zu prüfen.',
-    'Finaler 5P-Mix: People, Product, Price, Place und Promotion. Preise, Partner und Standort bleiben zu validieren.',
     'Erwartete Kosten und Gewinne über fünf Jahre: Gewinn und F&E-Kosten je Jahr, kumuliert ab Jahr 4 im Plus. Modellannahmen aus dem Inno-Rendite-Kalkulator.',
-    'Hohe Marge je Gast, aber im Verhältnis zu SpaceX klein: 0,31 Prozent des operativen Ergebnisses und 0,12 Prozent des F&E-Aufwands. Modellannahmen.',
+    'Hohe Marge je Gast: Bei 50.000 US-Dollar Preis bleiben etwa 45.000 US-Dollar Deckungsbeitrag. Modellannahmen.',
     'Einladung zum Pilotdinner: Über den QR-Code wählen die Zuhörer Avatar, Menü und ein optionales Extra. Es gibt keine Zahlung.'
   ];
 
@@ -121,7 +113,7 @@
     const {x, width} = scaleGeo;
     const costShare = e.variable / e.price;
     const costWidth = width * costShare;
-    return `<g data-fe-scale class="fe-scale">
+    return `<g data-fe-scale class="fe-scale" transform="translate(0 70)">
       <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">HOHE MARGE. KLEINE GRÖSSE.</text>
       <text class="fe-econ-label" x="320" y="70" text-anchor="middle">DECKUNGSBEITRAG JE GAST · USD</text>
       <text class="fe-econ-total fe-econ-gain-label" data-fe-guest-total x="320" y="128" text-anchor="middle">0</text>
@@ -131,19 +123,7 @@
       <text class="fe-econ-legend fe-econ-gain-label" x="${x}" y="198">${de(e.margin * 100, 0)} % BLEIBEN</text>
       <text class="fe-econ-legend fe-econ-cost-label" x="${x + width}" y="198" text-anchor="end">${de(e.variable, 0)} USD VARIABLE KOSTEN</text>
       <text class="fe-layout-note" x="320" y="224" text-anchor="middle">Preis ${de(e.price, 0)} USD · Menü 2.000 · Logistik, Sicherheit, Service 3.000</text>
-      <text class="fe-econ-label" x="320" y="282" text-anchor="middle">IM VERHÄLTNIS ZU SPACEX</text>
-      <g data-fe-scale-row="0"><text class="fe-econ-legend" x="${x}" y="316">OPERATIVES ERGEBNIS 2025 · ${de(e.companyProfit, 0)} MIO. USD</text>
-        <rect class="fe-scale-track" x="${x}" y="326" width="${width}" height="14"/>
-        <rect class="fe-econ-gain" data-fe-sliver="0" x="${x}" y="326" width="0" height="14"/>
-        <circle class="fe-scale-ring" data-fe-ring="0" cx="${x + 1}" cy="333" r="12"/>
-        <text class="fe-scale-callout fe-econ-gain-label" data-fe-callout="0" x="${x}" y="366">DINNER-GEWINN 5 JAHRE: ${de(e.gain)} MIO. USD = ${de(e.pShare * 100, 2)} %</text></g>
-      <g data-fe-scale-row="1"><text class="fe-econ-legend" x="${x}" y="402">F&amp;E-AUFWAND SPACE-SEGMENT 2025 · ${de(e.companyRnd, 0)} MIO. USD</text>
-        <rect class="fe-scale-track" x="${x}" y="412" width="${width}" height="14"/>
-        <rect class="fe-econ-cost" data-fe-sliver="1" x="${x}" y="412" width="0" height="14"/>
-        <circle class="fe-scale-ring fe-scale-ring-cost" data-fe-ring="1" cx="${x + 1}" cy="419" r="12"/>
-        <text class="fe-scale-callout fe-econ-cost-label" data-fe-callout="1" x="${x}" y="452">DINNER-F&amp;E 5 JAHRE: ${de(e.spend)} MIO. USD = ${de(e.cShare * 100, 2)} %</text></g>
-      <text class="fe-layout-note" x="320" y="490" text-anchor="middle">Im Kalkulator: Nutzen 1 und F&amp;E-Aufwand 1, beide „sehr gering“</text>
-      <text class="fe-layout-note" x="320" y="512" text-anchor="middle">Modellannahmen · KI-gestützt recherchiert</text>
+      <text class="fe-layout-note" x="320" y="262" text-anchor="middle">Modellannahmen · KI-gestützt recherchiert</text>
     </g>`;
   }
 
@@ -236,12 +216,6 @@
         ${scaleMarkup(economics())}
         ${inviteMarkup()}
       </svg>
-      <section class="fe-method-panel fe-marketing" data-fe-marketing aria-hidden="true">
-        <p class="fe-method-kicker">Finaler 5P-Mix</p>
-        <h3>Vom Erlebnis zum Gast.</h3>
-        <ol class="fe-final-mix">${marketingMix.map((part,index)=>`<li data-fe-mix-row="${index}"><span class="fe-final-mix-index" aria-hidden="true">0${index+1}</span><h4>${part.title}${part.sub?`<small>${part.sub}</small>`:''}</h4><p>${part.lines.map(line=>`<span>${line}</span>`).join('')}</p></li>`).join('')}</ol>
-        <p class="fe-method-note">People meint die Kundschaft. Preise, Partner und Fläche sind Annahmen des Konzepts und noch zu validieren.</p>
-      </section>
     </div>`,
     mount(root) {
       const scene = root.querySelector('.fe-dining');
@@ -262,9 +236,7 @@
       const courseLine = root.querySelector('.fe-course-line');
       const price = root.querySelector('[data-fe-price]');
       const priceLine = root.querySelector('.fe-price-connector');
-      const marketing = root.querySelector('[data-fe-marketing]');
-      const views = [layout, panorama, price, marketing, root.querySelector('[data-fe-econ]'), root.querySelector('[data-fe-scale]'), root.querySelector('[data-fe-invite]')];
-      const mixRows = Array.from(root.querySelectorAll('[data-fe-mix-row]'));
+      const views = [layout, panorama, price, root.querySelector('[data-fe-econ]'), root.querySelector('[data-fe-scale]'), root.querySelector('[data-fe-invite]')];
       const model = economics();
       const all = selector => Array.from(root.querySelectorAll(selector));
       const gainBars = all('[data-fe-gain]'), costBars = all('[data-fe-cost]'), revenueLabels = all('[data-fe-revenue]');
@@ -273,8 +245,6 @@
       const gainTotal = root.querySelector('[data-fe-gain-total]'), costTotal = root.querySelector('[data-fe-cost-total]');
       const guestTotal = root.querySelector('[data-fe-guest-total]');
       const guestMargin = root.querySelector('[data-fe-guest-margin]'), guestCost = root.querySelector('[data-fe-guest-cost]');
-      const slivers = all('[data-fe-sliver]'), rings = all('[data-fe-ring]'), callouts = all('[data-fe-callout]');
-      const sliverShare = [model.pShare, model.cShare];
       let last = '';
       return {
         update(progress, context = {}) {
@@ -312,13 +282,8 @@
           set(courseLine,'stroke-dashoffset',n(1-smooth(.35,.52,experienceP)));
           courses.forEach((course,index)=>set(course,'--fe-course-lit',n(smooth(.34+index*.022,.39+index*.022,experienceP))));
           set(priceLine,'stroke-dashoffset',n(1-smooth(.63,.73,priceP)));
-          mixRows.forEach((row,index)=>{
-            const arrival = context.static ? 1 : smooth(.5+index*.016,.575+index*.016,p);
-            set(row,'opacity',n(arrival));
-            set(row,'transform',`translateY(${n(8*(1-arrival))}px)`);
-          });
           // The two economics views settle at 80 % of their slot, before the navigation's still point.
-          const econT = context.static ? 1 : clamp((p-diningPhases[4])/((diningPhases[5]-diningPhases[4])*.8));
+          const econT = context.static ? 1 : clamp((p-diningPhases[3])/((diningPhases[4]-diningPhases[3])*.8));
           let gainSum = 0, costSum = 0;
           gainBars.forEach((bar,index)=>{
             const grow = smooth(.04+index*.08,.16+index*.08,econT);
@@ -338,18 +303,13 @@
           set(cumulativeLine,'stroke-dashoffset',n(1-lineT));
           cumulativeDots.forEach((dot,index)=>set(dot,'opacity',n(smooth(index/4-.02,index/4+.02,lineT))));
           set(breakEven,'opacity',n(smooth(.9,.98,econT)));
-          const scaleT = context.static ? 1 : clamp((p-diningPhases[5])/((diningPhases[6]-diningPhases[5])*.8));
+          const scaleT = context.static ? 1 : clamp((p-diningPhases[4])/((diningPhases[5]-diningPhases[4])*.8));
           const marginT = smooth(.05,.3,scaleT), costT = smooth(.3,.42,scaleT);
           const marginShare = 1-model.variable/model.price;
           guestMargin.setAttribute('width',n(scaleGeo.width*marginShare*marginT));
           guestCost.setAttribute('x',n(scaleGeo.x+scaleGeo.width*marginShare*marginT));
           guestCost.setAttribute('width',n(scaleGeo.width*(1-marginShare)*costT));
           guestTotal.textContent = de((model.price-model.variable)*marginT,0);
-          slivers.forEach((sliver,index)=>{
-            sliver.setAttribute('width',n(Math.max(1,scaleGeo.width*sliverShare[index])*smooth(.5+index*.1,.62+index*.1,scaleT)));
-            set(rings[index],'opacity',n(smooth(.66+index*.1,.78+index*.1,scaleT)));
-            set(callouts[index],'opacity',n(smooth(.72+index*.1,.86+index*.1,scaleT)));
-          });
         }
       };
     }

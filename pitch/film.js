@@ -72,14 +72,7 @@
     const status=document.createElement('span');
     status.className='film-phase-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.setAttribute('aria-atomic','true');
     transport.append(status);
-    let planning=null;
-    if(chapter.step===6 && window.PitchPlanningMethod) {
-      planning=document.createElement('aside');
-      planning.className='fm-planning-method';
-      planning.setAttribute('aria-labelledby','planning-method-title');
-      planning.innerHTML=window.PitchPlanningMethod.markup(variant);
-      disclosure.before(planning);
-    }
+    const planning=null;
     return {chapter,section,reel,stage,visual,disclosure,source,planning,renderer:scenes[chapter.step].mount(visual),
       tag:stage.querySelector('.film-beat-tag'),title:stage.querySelector('h2'),copy:stage.querySelector('.film-beat-copy'),
       copyBox:stage.querySelector('.film-copy'),cue:stage.querySelector('.film-scene-cue'),buttons:Array.from(nav.children),
@@ -268,7 +261,6 @@
     roadmap.chapter.beats=window.PitchRoadmapPhases[value];
     roadmap.beat=-1;
     roadmap.buttons.forEach((button,index)=>button.setAttribute('aria-label',roadmap.chapter.beats[index].cue));
-    if(roadmap.planning)roadmap.planning.innerHTML=window.PitchPlanningMethod.markup(value);
     records.forEach(r=>{r.lastP=-1;r.staticScene?.updateVariant(value);});
     document.dispatchEvent(new Event('pitch:layout'));
   }

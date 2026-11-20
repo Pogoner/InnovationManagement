@@ -5,6 +5,14 @@
   const ramp = (a, b, p) => { const t=clamp((p-a)/(b-a)); return t*t*(3-2*t); };
   const blueprints = {"A": "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"film-draft\" data-blueprint=\"A\" viewBox=\"0 0 1774 887\" width=\"1774\" height=\"887\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\">\n  <!-- Coordinates trace pavilion-cutout.webp at its original 1774 × 887 size. -->\n  <polygon class=\"draft-fill draft-fill-front\" points=\"145,416 1446,354 1446,773 145,750\" fill=\"currentColor\" fill-opacity=\"0.035\" stroke=\"none\"/>\n  <polygon class=\"draft-fill draft-fill-right\" points=\"1458,358 1659,415 1659,744 1458,773\" fill=\"currentColor\" fill-opacity=\"0.022\" stroke=\"none\"/>\n  <!-- Roof: overhang, narrow fascia and the recessed glazing line. -->\n  <path class=\"draft-trace\" pathLength=\"1\" d=\"M40 390 L1491 302 L1737 394\"/>\n  <path class=\"draft-trace\" pathLength=\"1\" d=\"M40 402 L1501 326 L1737 405\"/>\n  <path class=\"draft-trace\" pathLength=\"1\" d=\"M40 390 L40 402\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M1491 302 L1501 326\"/>\n  <path class=\"draft-trace\" pathLength=\"1\" d=\"M1737 394 L1737 405\"/>\n  <path class=\"draft-trace\" pathLength=\"1\" d=\"M140 416 L1446 354 L1659 415\"/>\n  <!-- Front and right-hand glass facades. -->\n  <path class=\"draft-trace\" pathLength=\"1\" d=\"M145 416 L145 750 L1446 773 L1446 354\"/>\n  <path class=\"draft-trace\" pathLength=\"1\" d=\"M1659 415 L1659 744 L1458 773\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M178 414 L178 747\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M328 407 L328 750\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M339 407 L339 748\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M509 397 L509 755\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M727 387 L727 760\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M982 375 L982 766\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M1297 360 L1297 771\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M1528 377 L1528 761\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M1606 399 L1606 749\"/>\n  <!-- Thin, photographed platform; no invented foundation or site grid. -->\n  <path class=\"draft-trace\" pathLength=\"1\" d=\"M94 753 L1477 779 L1670 744\"/>\n  <path class=\"draft-trace\" pathLength=\"1\" d=\"M94 767 L1477 791 L1670 755\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M94 753 L94 767\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M1477 779 L1477 791\"/>\n  <path class=\"draft-trace draft-detail\" pathLength=\"1\" d=\"M1670 744 L1670 755\"/>\n</svg>"};
   const PHASE_STARTS = [0,.12,.24,.36,.48,.60,.72,.86];
+  // The scene has seven beats; map them onto the original layer timeline (the eighth layer is no longer shown).
+  const BEAT_STARTS = [0,.14,.29,.43,.57,.71,.86,1];
+  const LAYER_STARTS = [0,.12,.24,.36,.48,.60,.72,.85];
+  const layerTime = p => {
+    const i = Math.min(6,BEAT_STARTS.findIndex((at,k)=>p<BEAT_STARTS[k+1]) );
+    const k = i < 0 ? 6 : i;
+    return LAYER_STARTS[k]+(LAYER_STARTS[k+1]-LAYER_STARTS[k])*(p-BEAT_STARTS[k])/(BEAT_STARTS[k+1]-BEAT_STARTS[k]);
+  };
   const ROCKET = { x:1290, y:480 };
   const FLOOR = [[366,685],[921,654],[1040,750],[395,788]];
   // Tables follow the perspective of the floor outline: u across, v from back to front.
@@ -151,7 +159,7 @@
       let lastKey='';
       return {
         update: function (progress,context) {
-          const p=clamp(progress);
+          const p=layerTime(clamp(progress));
           const key=fixed(p)+'|'+context.variant+'|'+Boolean(context.reduced);
           if(lastKey===key)return;
           lastKey=key;

@@ -124,7 +124,7 @@ window.PitchFilmStory = [
     "step": 5,
     "label": "5P-Marketingmix & Wirtschaftlichkeit",
     "detail": "Der finale Marketingmix · alle 25 Felder",
-    "length": 7.6,
+    "length": 6.8,
     "beats": [
       {
         "at": 0,
@@ -156,33 +156,24 @@ window.PitchFilmStory = [
       },
       {
         "at": 0.48,
-        "tag": "DER 5P-MARKETING-MIX",
-        "title": "Fünf Entscheidungen.<br><em>Ein stimmiges Angebot.</em>",
-        "copy": "Zielgruppe, Produkt, Preis, Zugang und Kommunikation greifen ineinander. Der finale Mix zeigt den Weg vom besonderen Abend zum Gast.",
-        "cue": "Alle fünf Ps verbinden sich zum Marktzugang.",
-        "still": 0.63,
-        "view": "[data-fe-marketing]"
-      },
-      {
-        "at": 0.65,
         "tag": "ERWARTETE KOSTEN UND GEWINNE",
         "title": "Erst investieren.<br><em>Dann verdienen.</em>",
         "copy": "Im ersten Jahr entstehen nur Kosten für Konzept, Pavillon und Genehmigungen. Ab dem zweiten Jahr laufen die Piloten. Über fünf Jahre stehen rund 11,5 Mio. USD Gewinn etwa 3,5 Mio. USD F&E-Kosten gegenüber.",
         "cue": "Der Gewinn wächst, die Kosten sinken, kumuliert im Plus ab Jahr 4.",
-        "still": 0.79,
+        "still": 0.62,
         "view": "[data-fe-econ]"
       },
       {
-        "at": 0.8,
+        "at": 0.65,
         "tag": "WIRTSCHAFTLICHKEIT",
         "title": "Hohe Marge.<br><em>Kleine Größe.</em>",
-        "copy": "Je Gast bleiben bei 50.000 USD etwa 45.000 USD übrig. Doch im Maßstab von SpaceX ist das Dinner eine Nische: 0,31 % des operativen Ergebnisses. Entscheidend ist darum der Nachweis der Nachfrage im Pilot.",
-        "cue": "Profitabel je Gast, aber klein im Konzern.",
-        "still": 0.88,
+        "copy": "Je Gast bleiben bei 50.000 USD etwa 45.000 USD übrig. Das Dinner bleibt ein kleines Angebot für 20 Gäste; entscheidend ist der Nachweis der Nachfrage im Pilot.",
+        "cue": "Profitabel je Gast, aber ein kleines Angebot.",
+        "still": 0.79,
         "view": "[data-fe-scale]"
       },
       {
-        "at": 0.91,
+        "at": 0.82,
         "tag": "DER PILOT BEGINNT HIER",
         "title": "Sie sind zum<br><em>Pilotdinner eingeladen.</em>",
         "copy": "Scannen Sie den Code, wählen Sie Avatar und Menü, und buchen Sie Ihren Platz. Es dauert eine Minute und kostet nichts. Ihre Wahl sehen wir am Ende gemeinsam.",
@@ -196,7 +187,7 @@ window.PitchFilmStory = [
   {
     "step": 6,
     "label": "Roadmap & Umsetzung",
-    "detail": "Acht Planungsphasen, parallele Maßnahmen, Gates & Varianten A/B",
+    "detail": "Sieben Planungsphasen, parallele Maßnahmen & Gates",
     "length": 7.8,
     "beats": [],
     "seconds": 120

@@ -50,10 +50,4 @@
   }
 
   wrap(1,[{key:'facts',index:1,markup:factsPanel}],[0,.5],[[0,1],null]);
-
-  window.PitchPlanningMethod={markup(variant){
-    const data=window.PitchEvidence.variants[variant].data;
-    const fields=[['Was?','Das Vorhaben',data.w4.was[0]],['Wer?','Die Verantwortung',data.w4.wer[1].replace(/\[Name\]/g,'(zu besetzen)')],['Wann?','Termine und Freigabepunkte',data.w4.wann[1]],['Wie?','Das Vorgehen',data.w4.wie[0]]];
-    return `<div class="fm-planning-intro"><p class="eyebrow">DIE 4W-METHODE / VARIANTE ${esc(variant)}</p><h3 id="planning-method-title">Aus einer Idee wird<br>ein <em>Projektauftrag.</em></h3><p>Vier Fragen verknüpfen Leistungsumfang, Verantwortung, Termine und Vorgehen. Daraus entstehen die parallelen Teilprojekte der Roadmap.</p></div><div class="fm-planning-fields">${fields.map((field,index)=>`<section data-planning-reveal="${index}"><span class="fm-planning-question">${field[0]}</span><h4>${field[1]}</h4><p>${esc(field[2])}</p></section>`).join('')}</div><div class="film-present-controls fm-planning-controls"><button type="button" data-film-chapter="6" data-film-planning="previous">Zurück zur Roadmap</button><button type="button" data-film-chapter="6" data-film-planning="next">Weiter zum Management <span aria-hidden="true">→</span></button></div><p class="fm-planning-note">Auszug aus der Teil-6-Planung. Rollen, Partner, Termine und Freigaben beschreiben den vorgeschlagenen Projektauftrag.</p>`;
-  }};
 })();

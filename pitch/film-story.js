@@ -49,7 +49,7 @@ window.PitchFilmStory = [
   {
     "step": 3,
     "label": "Trends & Ideenauswahl",
-    "detail": "Trendportfolio, zwölf Matrixideen & alle 19 Trendideen",
+    "detail": "Trendportfolio, zwölf Matrixideen & alle 19 Geschäftsideen",
     "length": 4.4,
     "beats": [
       {
@@ -103,7 +103,7 @@ window.PitchFilmStory = [
         "still": 0.5,
         "view": ".fa-ir-bars",
         "tag": "INNOVATIONSRENDITE · TEAM UND KI",
-        "title": "Drei Ideen.<br><em>Zwei Bewertungen.</em>",
+        "title": "Drei Ideen.<br><em>Ein Score.</em>",
         "copy": "Die IR teilt den gewichteten Nutzen durch den gewichteten Aufwand. RocketLight führt beim Team mit 1,83 (KI 0,73). Starlink Insights liegt bei 1,62 und 1,10, Launch Engineering Cloud bei 1,27 und 1,13.",
         "cue": "IR von Team und KI für drei Ideen"
       },
@@ -114,7 +114,7 @@ window.PitchFilmStory = [
         "tag": "ROCKETLIGHT · DIE ABWEICHUNG",
         "title": "Eine Idee sticht<br><em>heraus.</em>",
         "copy": "Die Umsetzbarkeit (Team 1, KI 4) erklärt die Hälfte des Aufwandsunterschieds. Das Team priorisiert RocketLight; genau diese Bewertung ist der Prüfpunkt. IR ist ein Bewertungsscore, keine Finanzrendite.",
-        "cue": "Die Abweichung benennen: Umsetzbarkeit",
+        "cue": "RocketLight liegt vorn",
         "tone": "difference"
       }
     ],
@@ -124,7 +124,7 @@ window.PitchFilmStory = [
     "step": 5,
     "label": "5P-Marketingmix & Wirtschaftlichkeit",
     "detail": "Der finale Marketingmix · alle 25 Felder",
-    "length": 6.8,
+    "length": 5.8,
     "beats": [
       {
         "at": 0,
@@ -169,17 +169,8 @@ window.PitchFilmStory = [
         "title": "Hohe Marge.<br><em>Kleine Größe.</em>",
         "copy": "Je Gast bleiben bei 50.000 USD etwa 45.000 USD übrig. Das Dinner bleibt ein kleines Angebot für 20 Gäste; entscheidend ist der Nachweis der Nachfrage im Pilot.",
         "cue": "Profitabel je Gast, aber ein kleines Angebot.",
-        "still": 0.79,
-        "view": "[data-fe-scale]"
-      },
-      {
-        "at": 0.82,
-        "tag": "DER PILOT BEGINNT HIER",
-        "title": "Sie sind zum<br><em>Pilotdinner eingeladen.</em>",
-        "copy": "Scannen Sie den Code, wählen Sie Avatar und Menü, und buchen Sie Ihren Platz. Es dauert eine Minute und kostet nichts. Ihre Wahl sehen wir am Ende gemeinsam.",
-        "cue": "QR-Code scannen und ein Menü wählen.",
         "still": 1,
-        "view": "[data-fe-invite]"
+        "view": "[data-fe-scale]"
       }
     ],
     "seconds": 195
@@ -247,8 +238,8 @@ window.PitchFilmStory = [
         "at": 0,
         "tag": "DIE WAHL",
         "title": "Welches Menü<br><em>wählt das Publikum?</em>",
-        "copy": "Jedes Dinner beginnt mit einer Entscheidung. Drei Menüs stehen zur Wahl, jeder Gast hat eine Stimme.",
-        "cue": "Drei Menüs, eine Wahl je Gast.",
+        "copy": "Jedes Dinner beginnt mit einer Entscheidung. Scannen Sie den Code, wählen Sie Avatar und Menü und buchen Sie Ihren Platz. Es dauert eine Minute und kostet nichts.",
+        "cue": "QR-Code scannen und ein Menü wählen.",
         "still": 0.38,
         "view": "[data-fm-chart]"
       },

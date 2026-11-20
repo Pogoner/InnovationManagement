@@ -105,6 +105,7 @@
   }
 
   function renderSources() {
+    if (!$('#source-list')) return;
     $('#source-list').innerHTML = E.sources.map(source => `<li><p>${escape(source.fact)}</p>${source.links.map(link => /^https?:\/\//i.test(link.url || '') ? `<a href="${safeURL(link.url)}" target="_blank" rel="noopener noreferrer">${escape(link.by || 'Originalquelle')} <svg class="arrow-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M4 4h8v8"/></svg></a>` : `<p>${escape(link.by || 'Projektinterne Quelle')} (ohne externe URL)</p>`).join('')}</li>`).join('');
   }
 

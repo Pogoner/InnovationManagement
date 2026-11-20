@@ -16,16 +16,17 @@
 
   const menus = shared.menus;
   const exampleCounts = {falcon: 13, odyssey: 8, starlight: 10};
-  const geo = {xs: [135, 320, 505], width: 70, base: 270, height: 140, avatar: 30, gap: 4, perRow: 5, max: 10};
+  const geo = {xs: [95, 245, 395], width: 70, base: 270, height: 140, avatar: 26, gap: 3, perRow: 5, max: 10};
+  const qr = {x: 480, y: 130, size: 150};
   const apiUrl = () => new URL('../api/bookings', document.baseURI);
 
   scenes[8] = {
     markup: () => `<div class="fm-scene" role="group" aria-label="Menüwahl des Publikums" data-fm-scene>
       <svg class="fm-svg" viewBox="0 0 640 520" aria-hidden="true" focusable="false">
         <g data-fm-chart>
-          <text class="fm-heading" x="320" y="29" text-anchor="middle">WELCHES MENÜ WÄHLT DAS PUBLIKUM?</text>
-          <text class="fm-mock" data-fm-status x="320" y="58" text-anchor="middle"></text>
-          <path class="fm-axis" data-fm-axis pathLength="1" d="M40 ${geo.base}H600"/>
+          <text class="fm-heading" x="245" y="29" text-anchor="middle">WELCHES MENÜ WÄHLT DAS PUBLIKUM?</text>
+          <text class="fm-mock" data-fm-status x="245" y="58" text-anchor="middle"></text>
+          <path class="fm-axis" data-fm-axis pathLength="1" d="M25 ${geo.base}H465"/>
           ${menus.map((menu, index) => `<g class="fm-column" data-fm-column="${index}">
             <rect class="fm-bar" data-fm-bar x="${geo.xs[index] - geo.width / 2}" y="${geo.base}" width="${geo.width}" height="0" rx="3"/>
             <text class="fm-count" data-fm-count x="${geo.xs[index]}" y="${geo.base - 10}" text-anchor="middle">0</text>
@@ -34,7 +35,13 @@
             <text class="fm-line" x="${geo.xs[index]}" y="399" text-anchor="middle">${menu.tag}</text>
             <g data-fm-people="${index}"></g>
           </g>`).join('')}
-          <text class="fm-lead" data-fm-lead x="320" y="508" text-anchor="middle"></text>
+          <text class="fm-lead" data-fm-lead x="245" y="508" text-anchor="middle"></text>
+          <g class="fm-qr" data-fm-qr>
+            <text class="fm-qr-head" x="${qr.x + qr.size / 2}" y="${qr.y - 16}" text-anchor="middle">SIE SIND EINGELADEN</text>
+            ${shared.qrMarkup(qr.x, qr.y, qr.size)}
+            <text class="fm-qr-action" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 28}" text-anchor="middle">SCANNEN &amp; BUCHEN</text>
+            <text class="fm-qr-url" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 50}" text-anchor="middle"${shared.bookingUrl().length > 40 ? ` textLength="${qr.size + 20}" lengthAdjust="spacingAndGlyphs"` : ''}>${shared.esc(shared.bookingUrl().replace(/^https?:\/\//, ''))}</text>
+          </g>
         </g>
       </svg>
     </div>`,
@@ -42,6 +49,7 @@
       const scene = root.querySelector('[data-fm-scene]');
       const chart = root.querySelector('[data-fm-chart]');
       const axis = root.querySelector('[data-fm-axis]');
+      const qrGroup = root.querySelector('[data-fm-qr]');
       const status = root.querySelector('[data-fm-status]');
       const columns = Array.from(root.querySelectorAll('[data-fm-column]'));
       const bars = Array.from(root.querySelectorAll('[data-fm-bar]'));
@@ -60,6 +68,7 @@
         const scale = geo.height / max;
         set(chart, 'opacity', 1);
         set(axis, 'stroke-dashoffset', n(1 - smooth(0, .2, p)));
+        set(qrGroup, 'opacity', n(smooth(0, .15, p)));
         let total = 0;
         menus.forEach((menu, index) => {
           const arrival = smooth(index * .05, .16 + index * .05, p);

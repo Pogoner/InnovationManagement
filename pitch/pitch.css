@@ -366,3 +366,6 @@ html { scroll-padding-top: 0; }
 .rubric-map small { display: block; font-size: 12px; line-height: 1.6; color: var(--muted); margin-top: 5px; }
 .rubric-map a:hover strong { color: var(--ice); }
 @media (max-width:760px) { .rubric-map ol { grid-template-columns: 1fr; } }
+
+.footer-team { grid-column: 1/-1; order: 2; display: flex; flex-wrap: wrap; gap: 8px 32px; list-style: none; margin: 0; padding: 0; font-size: 16px; color: #dbe6e4; }
+.pitch-footer > span { order: 3; }

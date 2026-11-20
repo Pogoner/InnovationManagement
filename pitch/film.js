@@ -226,7 +226,7 @@
     const diningFocus=smooth(.16,.19,dining.progress)*(1-smooth(.29,.32,dining.progress));
     world.style.setProperty('--dining-opacity',fmt(diningMix));
     world.style.setProperty('--dining-image-opacity',fmt(.34+Math.max(diningFocus*experienceMix,interiorReveal*.35)*.55));
-    const worldIn=smooth(heroBottom-height*.7,heroBottom-height*.08,y);
+    const worldIn=smooth(records[0].top-height*.7,records[0].top-height*.08,y);
     const worldOut=1-smooth(launchTop-height*.4,launchTop+height*.3,y);
     world.style.opacity=fmt(worldIn*worldOut);
     world.dataset.scene=String(step);
@@ -267,7 +267,7 @@
   function captureMotionPosition(next) {
     if(reduced===next)return null;
     const y=scrollY;
-    if(y<heroBottom)return {node:prologue,offset:0};
+    if(y>=heroTop&&y<heroBottom)return {node:prologue,offset:0};
     let record=records[0];
     records.forEach(r=>{if(y+Math.min(height*.2,130)>=r.top)record=r;});
     if(y<record.top+record.height) {
@@ -285,7 +285,7 @@
       return {record,point};
     }
     let node=record.disclosure;
-    if(y>=launchTop)node=y>=document.querySelector('#quellen').getBoundingClientRect().top+y?document.querySelector('#quellen'):launch;
+    if(y>=launchTop)node=launch;
     return {node,offset:y-(node.getBoundingClientRect().top+y)};
   }
   function setReduced(value,anchor) {
@@ -331,8 +331,8 @@
     if(index<0){target=records[records.indexOf(r)-1];index=target?.chapter.beats.length-1;}
     if(index>=r.chapter.beats.length&&target===r){target=records[records.indexOf(r)+1];index=0;}
     if(!target){
-      const destination=direction<0?hero:launch;
-      destination.querySelector(direction<0?'.button':'#launch-begin')?.focus({preventScroll:true});
+      const destination=direction<0?document.getElementById('einstieg'):launch;
+      destination.querySelector(direction<0?'.intro-scroll':'#launch-begin')?.focus({preventScroll:true});
       destination.scrollIntoView({behavior:reduced?'instant':'smooth'});return;
     }
     const point=stillPoints[target.chapter.step][index];

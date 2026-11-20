@@ -57,6 +57,7 @@
   }
 
   function renderSources() {
+    if (!$('#research-source-list')) return;
     $('#research-source-list').innerHTML = R.sources.map(source => {
       const origin = source.provenance?.file === 'part2' ? 'Schritt 2' : source.provenance?.file === 'part3' ? 'Schritt 3' : source.checkedAt ? 'Primärquelle · geprüft' : 'Matrixquelle';
       const label = [origin, source.label].filter(Boolean).join(' · ');

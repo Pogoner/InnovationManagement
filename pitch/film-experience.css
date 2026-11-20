@@ -34,9 +34,7 @@
 .fe-scene .fe-view-label { font-size: 13px; letter-spacing: 1px; fill: #b9cbc9; }
 .fe-scene .fe-layout-caption { font-size: 18px; letter-spacing: 1.5px; fill: #d2deda; }
 .fe-scene .fe-layout-note { font-size: 15px; letter-spacing: .2px; fill: #aebfc5; }
-.fe-panorama,.fe-price,.fe-econ,.fe-scale,.fe-invite { opacity: 0; }
-.fe-scene .fe-invite-action { font-size: 22px; letter-spacing: 3px; fill: #efbd91; }
-.fe-scene .fe-invite-url { font-size: 18px; letter-spacing: .4px; fill: #dce5dd; }
+.fe-panorama,.fe-price,.fe-econ,.fe-scale { opacity: 0; }
 .fe-window-image { pointer-events: none; }
 .fe-window-divider { fill: none; stroke: #eac49e; stroke-width: 1; }
 .fe-scene .fe-window-label { font-size: 17px; letter-spacing: 1.3px; fill: #f0e9db; }

@@ -45,15 +45,15 @@ Der Ablauf zeigt zuerst alle Konzepte, dann die Auswahl, dann die Kernidee der d
 
 | # | Slide (Pitch) | Zeit | Visual | Mögliche Formulierung |
 |---|---|---:|---|---|
-| 4 | **Ideenpool und Auswahl** (Kap. 3, Phase 1–2) | 1:00 | 23 Konzepte in Zeilen: 8 Trends mit 19 Trendideen, darunter 4 Open-Innovation-Ideen. Blau: KI-generierte Trendfavoriten. Dann bleiben 12 Konzepte (8 + 4) übrig. | „Aus acht Trends und vier Open-Innovation-Ideen entstehen 23 Konzepte. Zwölf kommen weiter.“ |
+| 4 | **Ideenpool und Auswahl** (Kap. 3, Phase 1–2) | 1:00 | 23 Konzepte in Zeilen: 8 Trends mit 19 Geschäftsideen, darunter 4 Open-Innovation-Ideen. Blau: KI-generierte Trendfavoriten. Dann bleiben 12 Konzepte (8 + 4) übrig. | „Aus acht Trends und vier Open-Innovation-Ideen entstehen 23 Konzepte. Zwölf kommen weiter.“ |
 | 5 | **Now/How/Wow und drei Favoriten** (Kap. 3, Phase 3–4) | 1:00 | 12 Punkte wandern in die Team-Matrix (Machbarkeit × Originalität). Im Team-Urteil WOW: RocketLight Dinner und Starlink Insights. Danach die drei Favoriten mit Kernidee: RocketLight (Sternemenü mit Blick auf den Start), Starlink Insights (Netzdaten als Wetterwissen), Launch Engineering Cloud (Prüfung von Satellitenentwürfen, im Team-Urteil NOW). | „Zwei Ideen sind im Team-Urteil WOW. Drei kommen in die Vertiefung, und RocketLight ist die, die wir Ihnen heute zeigen.“ |
 | 6 | **Innovationsrendite (IR)** (Kap. 4, Phase 1–2) | 1:30 | Balken Team und KI für die drei Favoriten: RocketLight 1,83 / 0,73, Starlink Insights 1,62 / 1,10, Launch Engineering Cloud 1,27 / 1,13. Abweichung RocketLight: Die Umsetzbarkeit (Team 1, KI 4) erklärt 0,90 von 1,80 Aufwandspunkten. | „Eine Idee sticht heraus: RocketLight Dinner. Die KI sieht die Umsetzbarkeit kritischer. Genau das prüfen wir weiter.“ |
 
 **Übergang zu C:** „Was genau ist dieses Dinner? Wir zeigen es Ihnen.“
 
 **Hinweise zur Umsetzung**
-- Die Zahl ist **23**, nicht 21. `quellen/PRUEFUNG-SCHRITT-2-3.md` nennt 19 Trendideen (Blatt „Ideenvergleich“) und 4 Open-Innovation-Ideen (Blatt „Geschäftsideen“). Davon kommen 12 in die Matrix.
-- Die Farbe Blau für KI ist nur für die 8 Trendfavoriten belegt (Legende „KI-generierte Ideen“, Blatt „Geschäftsideen“). Die übrigen 11 Trendideen haben keine Herkunftsangabe und stehen deshalb grau als „weitere Trendidee“. Offene Frage für das Team: Stammen sie von KI oder von uns?
+- Die Zahl ist **23**, nicht 21. `quellen/PRUEFUNG-SCHRITT-2-3.md` nennt 19 Geschäftsideen (Blatt „Ideenvergleich“) und 4 Open-Innovation-Ideen (Blatt „Geschäftsideen“). Davon kommen 12 in die Matrix.
+- Die Farbe Blau für KI ist nur für die 8 Trendfavoriten belegt (Legende „KI-generierte Ideen“, Blatt „Geschäftsideen“). Die übrigen 11 Geschäftsideen haben keine Herkunftsangabe und stehen deshalb grau als „weitere Geschäftsidee“. Offene Frage für das Team: Stammen sie von KI oder von uns?
 - Aus dem Hauptfluss genommen (bleiben im Dossier „Hinter der Szene“ und in den Belegen): 360°-Radar, Trendportfolio (Einfluss × Handlungsdruck), die Stufenmodell-Tabellen, Kriterien und Gewichte, Aufwandsbeiträge, IR-Gleichung sowie die Umsatzrechnung der Variante A. Der Umsatz (Plätze × Preis) ist Backup für Block C.
 - Optional, falls Zeit bleibt: eine Zwischenfolie mit dem Stufenmodell für ein Beispiel (Neo-Ökologie → Emissionen messen → Umweltmessdienste → Starlink Climate Watch).
 - Die Dreierauswahl ist eine Teamentscheidung und kein Matrix-Ranking. Die KI-Werte stehen im Dossier.

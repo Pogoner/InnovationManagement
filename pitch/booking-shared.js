@@ -87,5 +87,21 @@
     return `<svg viewBox="0 0 100 100" width="${px}" height="${px}" ${extra} role="img" aria-label="${esc(a.t)}">${s}</svg>`;
   }
 
-  window.PitchBooking = {avatars: AVATARS, menus: MENUS, extras: EXTRAS, avatarSVG, esc};
+  // QR code of the booking page next to the pitch (library: pitch/vendor/qrcode.js).
+  const bookingUrl = () => new URL('buchen.html', document.baseURI).href;
+  function qrMarkup(x, y, size) {
+    if (!window.qrcode) return '';
+    const qr = window.qrcode(0, 'M');
+    qr.addData(bookingUrl());
+    qr.make();
+    const count = qr.getModuleCount(), pad = size * .07, cell = (size - 2 * pad) / count;
+    const f = value => value.toFixed(2);
+    let path = '';
+    for (let row = 0; row < count; row++) for (let col = 0; col < count; col++) {
+      if (qr.isDark(row, col)) path += `M${f(x + pad + col * cell)} ${f(y + pad + row * cell)}h${f(cell + .2)}v${f(cell + .2)}h${f(-cell - .2)}z`;
+    }
+    return `<rect x="${x}" y="${y}" width="${size}" height="${size}" rx="8" fill="#eff3ed"/><path d="${path}" fill="#060b10"/>`;
+  }
+
+  window.PitchBooking = {avatars: AVATARS, menus: MENUS, extras: EXTRAS, avatarSVG, esc, bookingUrl, qrMarkup};
 })();

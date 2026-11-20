@@ -18,6 +18,9 @@
 .fm-svg .fm-line { font-size: 13px; letter-spacing: .6px; fill: #aebfc5; }
 .fm-svg .fm-lead { font-size: 15px; letter-spacing: 1.4px; fill: #efbd91; opacity: 0; }
 .fm-svg .fm-more { font-size: 12px; fill: #aebfc5; letter-spacing: .6px; }
+.fm-svg .fm-qr-head { font-size: 13px; letter-spacing: 1.6px; fill: #c4d4d8; }
+.fm-svg .fm-qr-action { font-size: 14px; letter-spacing: 2px; fill: #efbd91; }
+.fm-svg .fm-qr-url { font-size: 11px; letter-spacing: .2px; fill: #dce5dd; }
 
 /* Link from the pitch header to the booking page. */
 .header-book { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid #efbd9199; border-radius: 999px; color: #efbd91; font-size: 12px; letter-spacing: .08em; text-decoration: none; white-space: nowrap; }

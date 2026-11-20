@@ -26,7 +26,7 @@ Die Zeitfenster beginnen mit dem ersten gesprochenen Satz. Eine eigene Uhr mitla
 **Kernaussage:** Die Auswahl folgt mehreren nachvollziehbaren Schritten; ihre Herkunft und Begründung bleiben sichtbar.
 
 - **Vorführen 1:** Im Trendportfolio Einfluss und Handlungsdruck erklären. Eine Ableitung vollständig sprechen: Trend → Herausforderung → Zukunftsmarkt → Idee. Die ausgearbeiteten Zwischenstufen der acht Ableitungen sind **redaktionelle Ergänzungen zu den Favoriten der Arbeitsmappe**.
-- **Vorführen 2:** Auswahlkette zeigen: 19 Trendideen → 8 Favoriten, dazu 4 separat entstandene Open-Innovation-Ideen → 12 Matrixeinträge → 3 Vertiefungen. Bei Launch Engineering Cloud führt Originalität 3 gegenüber 4 von NOW zu WOW; Machbarkeit bleibt jeweils 4. RocketLight stammt aus Open Innovation.
+- **Vorführen 2:** Auswahlkette zeigen: 19 Geschäftsidee → 8 Favoriten, dazu 4 separat entstandene Open-Innovation-Ideen → 12 Matrixeinträge → 3 Vertiefungen. Bei Launch Engineering Cloud führt Originalität 3 gegenüber 4 von NOW zu WOW; Machbarkeit bleibt jeweils 4. RocketLight stammt aus Open Innovation.
 - **Übergang:** „Diese drei Ideen vertiefen wir jetzt mit einem gemeinsamen Bewertungsmaßstab.“
 - **Im Dossier:** Alle 19 Ideen, zwölf vollständige Begründungen und Quellen. Die Matrixwerte sind Team-/KI-Urteile, keine nachgewiesene Marktfähigkeit.
 

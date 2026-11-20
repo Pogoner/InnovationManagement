@@ -6,7 +6,7 @@ Stand: 15. November 2026. Ausgangspunkt `fd5f8064351951a367b80e1e2fefbfa928321de
 
 1. Untersuchungsfrage und Arbeitsweg nach dem Unternehmenskontext sichtbar machen.
 2. Hube-Formel → Raptor-Faktorvergleich → Gesamtergebnisse → Starlink-Nullfaktor.
-3. Suchfeld → Trendportfolio → Stufenmodell → 19 Trendideen / 8 Favoriten + 4 Open-Innovation-Ideen / 12 Matrixeinträge → NOW/WOW-Abweichung → 3 Vertiefungen.
+3. Suchfeld → Trendportfolio → Stufenmodell → 19 Geschäftsideen / 8 Favoriten + 4 Open-Innovation-Ideen / 12 Matrixeinträge → NOW/WOW-Abweichung → 3 Vertiefungen.
 4. Kriterien und Originalgewichte → konkrete Aufwandsbeiträge → IR-Rechnung → drei Alternativen → Pilotumsatz und Jahresplanung.
 5. Raum und Erlebnis → Preisannahme → tatsächlicher Vergleich Fable/ChatGPT/Copilot → begründete Synthese → finaler 5P-Mix.
 6. Planung mit parallelen Arbeitspaketen, Was/Wer/Wann/Wie und geplanten Gates verknüpfen; Varianten A/B erhalten.

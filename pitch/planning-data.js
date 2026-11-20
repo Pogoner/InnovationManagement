@@ -17,7 +17,7 @@ window.ROCKET_DATA = {
         "Langfristig zwei eigenständige feste Standorte: Florida zuerst, später möglicherweise Raum Starbase/South Padre Island in Texas. Für Texas sind Bauplatz, Budget und Eröffnung offen."
       ],
       "wer": [
-        "Sponsor als vorgeschlagene Planungsrolle: Gwynne Shotwell, President & COO von SpaceX; keine Zusage.",
+        "Sponsor bzw. Investitionsgremium als Planungsrolle: Zuständigkeit und Besetzung noch zu benennen.",
         "Projektleitung: Hospitality-Projektleitung mit Fachverantwortung für Standort, Bau und Sicherheit; je Teilprojekt eine Leitung [Name].",
         "Benötigte Partner: Architektur- und Fachplanung, Bauunternehmen sowie Kulinarik- und Servicepartner. Konkrete Beauftragung und Zuständigkeiten sind offen."
       ],

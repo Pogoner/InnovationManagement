@@ -2,15 +2,11 @@
 function ranked(){return state.list.map(a=>({a,r:calc(a)})).sort((p,q)=>(q.r.IR===Infinity?1e9:q.r.IR)-(p.r.IR===Infinity?1e9:p.r.IR))}
 const emptyMsg=()=>`<section class="panel"><p style="font-size:1.15rem">${isX()?'Noch keine Bewertungen.':'Noch keine Idee geprüft. Starte mit dem Ideen-Check.'}</p>${isX()?'':'<div class="row" style="margin-top:16px"><button class="btn primary" data-tabgo="wizard">Zum Ideen-Check</button></div>'}</section>`;
 function wNotice(){const ok=sum(state.w.n)===100&&sum(state.w.a)===100;return ok?'':`<div class="notice">Die Gewichte ergeben nicht je 100 % (Nutzen ${sum(state.w.n)} %, Aufwand ${sum(state.w.a)} %). Unter „Einstellungen“ korrigieren.</div>`}
-function rocketLightLegacyNote(list=[cur()]){
-  if(!isX()||!list.some(a=>a&&a.idea==9))return '';
-  return `<aside class="notice info" aria-label="Einordnung der RocketLight-Rechnung"><strong>RocketLight: ursprüngliches mobiles Vergleichsszenario.</strong> Die hinterlegten Annahmen bilden den früheren mobilen Pavillon ab. Die aktuelle Florida-Rechnung trennt 13,38 Mio. USD Investition und Anlauf von den laufenden Betriebskosten. Die alten 3,48 Mio. USD werden nicht addiert. <a href="../quellen/step-4-rocketlight-fester-pavillon.xlsx" download>Aktuelle Fünfjahresrechnung (XLSX)</a> · <a href="../pitch/#schritt-6">Feste Roadmap</a></aside>`;
-}
 function vRanking(){
   const L=state.list;if(!L.length)return emptyMsg();
   const R=ranked(),best=R[0];
   const avgN=sum(R.map(o=>o.r.IN))/R.length, avgA=sum(R.map(o=>o.r.IA))/R.length;
-  return `${wNotice()}${rocketLightLegacyNote(L)}
+  return `${wNotice()}
   <section class="tiles">
     <div class="tile"><span class="eyebrow">Höchste Rendite</span><span class="v acc">${f2(best.r.IR)}</span><span class="s">${esc(best.a.project)}</span></div>
     <div class="tile"><span class="eyebrow">Bewertungen</span><span class="v">${L.length}</span><span class="s">${esc(state.horizon)}</span></div>
@@ -25,17 +21,17 @@ function vRanking(){
 }
 function vPortfolio(){
   const L=state.list;if(!L.length)return emptyMsg();
-  return `${rocketLightLegacyNote(L)}<section class="panel"><header><h2>Aufwand/Nutzen-Portfolio</h2></header>${portfolio(L)}</section>
+  return `<section class="panel"><header><h2>Aufwand/Nutzen-Portfolio</h2></header>${portfolio(L)}</section>
   <section class="panel"><header><h2>Netzgrafik</h2><span class="muted">Alle zwölf Einzelbewertungen, 0 bis 5</span></header><div class="chartbox">${radar(L)}</div>${legend(L)}</section>`;
 }
 function vBars(){
   const L=state.list;if(!L.length)return emptyMsg();const R=ranked().map(o=>o.a);
-  return `${rocketLightLegacyNote(L)}<section class="panel"><header><h2>Rendite</h2><span class="muted">Nutzen ÷ Aufwand · gestrichelte Linie = 1</span></header>${barChart(R,{key:'IR',ref:1,title:'Rendite je Bewertung'})}</section>
+  return `<section class="panel"><header><h2>Rendite</h2><span class="muted">Nutzen ÷ Aufwand · gestrichelte Linie = 1</span></header>${barChart(R,{key:'IR',ref:1,title:'Rendite je Bewertung'})}</section>
   <section class="panel"><header><h2>Bilanz</h2><span class="muted">Nutzen − Aufwand</span></header>${barChart(R,{key:'bil',title:'Bilanz je Bewertung'})}</section>`;
 }
 function vTop(){
   const R=ranked();
-  return `${rocketLightLegacyNote(R.map(o=>o.a))}<section class="cards">${R.map(({a,r})=>{const vc=r.IR>=1.5?'ok':r.IR>=1?'mid':'bad';return `<button class="card" style="--c:${colorOf(a)}" data-open="${a.id}">
+  return `<section class="cards">${R.map(({a,r})=>{const vc=r.IR>=1.5?'ok':r.IR>=1?'mid':'bad';return `<button class="card" style="--c:${colorOf(a)}" data-open="${a.id}">
     <div><div class="eyebrow">${esc(a.assessor||'')}</div><h3>${esc(a.project)}</h3></div>
     <div class="ir giant ${vc}" style="font-size:4.2rem">${f2(r.IR)}</div>
     <div class="bar2"><div class="t"><span>Nutzen</span><b class="num" style="color:var(--gain)">${f2(r.IN)}</b></div><div class="track"><div class="fill" style="width:${r.IN/5*100}%;background:var(--gain)"></div></div></div>
@@ -49,7 +45,7 @@ function vDetail(){
   const rows=(list,g)=>list.map((c,i)=>{const sc=(g==='n'?r.n:r.x)[i],w=state.w[g][i];const locked=c.quant&&a.link&&a.fy;
     return `<div class="rrow"><div class="score ${g==='n'?'g':'c'}">${sc??'–'}</div><div><h4>${esc(c.t)}</h4><div class="w">Gewicht ${w} % · gewichtet ${f2((+sc||0)*w/100)}</div>
      <p>${locked?esc(quantWhy(a,g==='n'?'gain':'cost')):''} ${esc(a.why[c.k]||'')}</p></div></div>`}).join('');
-  return `<section class="panel">${picker(false)}</section>${rocketLightLegacyNote()}
+  return `<section class="panel">${picker(false)}</section>
   <section class="panel"><div class="res-hero"><div class="giant ${vc}">${f2(r.IR)}</div>
     <div style="display:grid;gap:12px"><div class="eyebrow">${esc(a.assessor||'')}</div><h2>${esc(a.project)}</h2><div>${pfChip(r).replace('class="chip','class="chip big')}</div>
     <p class="verdict-line">Nutzen <b class="num" style="color:var(--gain)">${f2(r.IN)}</b> · Aufwand <b class="num" style="color:var(--cost)">${f2(r.IA)}</b> · Bilanz <b class="num">${r.bil>=0?'+':''}${f2(r.bil)}</b></p>
@@ -180,7 +176,7 @@ function vAssess(){
   if(!a)return `<section class="panel">${picker()}</section>`;
   const r=calc(a);
   const conf=ui.confirm==='del'?`<span class="row"><span>Bewertung wirklich löschen?</span><button class="btn small danger" data-act="del-yes">Löschen</button><button class="btn small" data-act="del-no">Abbrechen</button></span>`:`<button class="btn small danger" data-act="del">Löschen</button>`;
-  return `<section class="panel">${picker()}</section>${rocketLightLegacyNote()}
+  return `<section class="panel">${picker()}</section>
   <div class="layout-edit">
    <div style="display:grid;gap:24px;min-width:0">
     <section class="panel"><div class="fields">
@@ -206,7 +202,7 @@ function vAssess(){
 function vFY(){
   const a=cur();
   if(!a)return emptyMsg();
-  const pk=`<section class="panel">${picker(false)}</section>${rocketLightLegacyNote()}`;
+  const pk=`<section class="panel">${picker(false)}</section>`;
   if(!a.fy)return pk+`<section class="panel" style="display:grid;gap:16px"><h2>${esc(a.project)}</h2><p style="font-size:1.1rem;max-width:60ch">Für diese Idee gibt es noch keine 5-Jahres-Kalkulation. Sie berechnet „Wirtschaftlicher Nutzen“ und „Investitionsaufwand F&amp;E“ aus Umsatz, Gewinn und Entwicklungskosten statt aus dem Bauchgefühl.</p><div><button class="btn primary" data-act="addfy">5-Jahres-Kalkulation anlegen</button></div></section>`;
   const fy=a.fy,b=state.base,cu=esc(b.currency),yrs=[0,1,2,3,4];
   const numIn=(path,v,step='any')=>`<input class="in" type="number" step="${step}" data-fy="${path}" value="${v}" aria-label="${path}">`;

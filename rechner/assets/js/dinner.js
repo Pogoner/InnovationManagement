@@ -136,9 +136,8 @@ function rlTotal(){const tbl=RO.seats===4;const base=tbl?RL_TABLE:RO.seats*RL_PR
   return {base,pair,ex,tot:base+pair+ex,tbl};}
 const setName=k=>(RL_SETS.find(x=>x.k===k)||RL_SETS[0]).name;
 
-function dinnerLegacyNote(){return `<aside class="notice info" aria-label="Einordnung der Dinner-Demo"><strong>Historische Dinner-Demo des mobilen Konzepts.</strong> Die dargestellten Termine, Orte und Preise sind keine aktuellen Buchungsangebote. Die heutige Roadmap plant einen festen Pavillon in Florida und langfristig einen zweiten festen Standort in Texas. <a href="../pitch/#schritt-6">Zur aktuellen festen Roadmap</a></aside>`}
 function vDinExp(){
-  return `${dinnerLegacyNote()}<section class="xhero"><canvas id="heroCanvas" aria-hidden="true"></canvas><div class="shade"></div>
+  return `<section class="xhero"><canvas id="heroCanvas" aria-hidden="true"></canvas><div class="shade"></div>
    <div class="copy"><div class="x-up" style="color:var(--gold)">Dinner mit Raketenstart · 20 Plätze</div>
     <h2>RocketLight<br>Dinner</h2>
     <p>Sieben Gänge Sterneküche, ein echter Raketenstart vor der Glasfront. Das exklusivste Dinner der Welt.</p>
@@ -179,12 +178,12 @@ function vGuests(){
     </div>`}).join('');
 }
 function vDinBook(){
-  if(RO.done)return dinnerLegacyNote()+vDinPass(RO.done);
+  if(RO.done)return vDinPass(RO.done);
   syncGuests();
   const T=rlTotal(),m=RL_MISSIONS.find(x=>x.id===RO.mission);
   const ch=(on,attrs,b,s,p)=>`<button class="choice" aria-pressed="${on}" ${attrs}><b>${esc(b)}</b><span>${esc(s)}</span>${p?`<span class="p">${p}</span>`:''}</button>`;
   const cnt={};RO.guests.forEach(g=>cnt[g.menu]=(cnt[g.menu]||0)+1);
-  return `${dinnerLegacyNote()}<section class="xsec"><div class="x-up" style="color:var(--gold)">Reservierung</div><h2>Ihr Platz am Startfenster</h2></section>
+  return `<section class="xsec"><div class="x-up" style="color:var(--gold)">Reservierung</div><h2>Ihr Platz am Startfenster</h2></section>
   <div class="book"><div style="display:grid;gap:28px;min-width:0">
    <div class="bgroup"><h3>1 · Mission wählen</h3><div class="choices">${RL_MISSIONS.map(x=>ch(x.id===RO.mission,`data-ro="mission:${x.id}"`,x.id+' · '+x.date,x.site+' · '+x.time,x.note)).join('')}</div></div>
    <div class="bgroup"><h3>2 · Plätze</h3><div class="row" style="gap:20px"><div class="stepper"><button data-ro="seats:-1" aria-label="Weniger Plätze">−</button><output>${RO.seats}</output><button data-ro="seats:+1" aria-label="Mehr Plätze">+</button></div>

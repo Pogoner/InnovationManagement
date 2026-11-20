@@ -156,12 +156,7 @@
   function matrixGeometry() {
     return data().R.matrix.map(idea => ({ idea, id: idea.id, x: 50 + (idea.team.feasibility - 1) * 86.5, y: 390 - (idea.team.originality - 1) * 72.5 }));
   }
-  const finalistColumns = [
-    { id: 9, x: 110, name: ['RocketLight', 'Dinner'], idea: ['Sternemenü mit', 'Blick auf', 'den Start'] },
-    { id: 4, x: 320, name: ['Starlink', 'Insights'], idea: ['Netzdaten aus', 'Starlink-Terminals', 'als Wetterwissen'] },
-    { id: 8, x: 530, name: ['Launch', 'Engineering', 'Cloud'], idea: ['Prüft Satelliten-', 'entwürfe vor', 'dem Start'] }
-  ];
-  const finalistPositions = Object.fromEntries(finalistColumns.map(({id, x}) => [id, {x, y:205}]));
+  const finalistPositions = { 9: { x: 168, y: 204 }, 4: { x: 168, y: 324 }, 8: { x: 168, y: 444 } };
   function poolGeometry() {
     const trends = poolRows.flatMap((row, rowIndex) => row.ideas.map((label, column) => ({
       label, row: rowIndex, x: 250 + column * 56, y: 166 + rowIndex * 27,
@@ -176,7 +171,7 @@
   scenes[3] = {
     markup() {
       const pool = poolGeometry(), matrix = matrixGeometry(), matrixGroups = pointGroups(matrix);
-      return svg('selection', 'Dreiundzwanzig Konzepte: acht Trendfavoriten, elf weitere Geschäftsideen und vier Open-Innovation-Ideen. Zwölf Favoriten wandern in die Team-Now-How-Wow-Matrix. Drei vertiefte Business Cases in eigenen Spalten: RocketLight Dinner – Sternemenü mit Blick auf den Start; Starlink Insights – Netzdaten aus Starlink-Terminals als Wetterwissen; Launch Engineering Cloud – prüft Satellitenentwürfe vor dem Start.', `
+      return svg('selection', 'Dreiundzwanzig Konzepte: acht Trendfavoriten, elf weitere Geschäftsideen und vier Open-Innovation-Ideen. Zwölf Favoriten wandern in die Team-Now-How-Wow-Matrix. Drei vertiefte Business Cases: RocketLight Dinner, Starlink Insights und Launch Engineering Cloud.', `
         <g class="fa-pool-rows">
           <text class="fa-kicker" x="24" y="30">8 TRENDS · 19 Geschäftsideen</text>
           ${poolRows.map((row, index) => `<text class="fa-pool-name" x="24" y="${166 + index * 27 + 5}">${esc(row.name)}</text>`).join('')}
@@ -202,9 +197,10 @@
         <g class="fa-selection-phase">
           <text class="fa-kicker" x="320" y="31" text-anchor="middle">8 TREND-FAVORITEN + 4 OPEN INNOVATION</text>
           <g class="fa-selection-middle"><circle class="fa-candidate-orbit fa-trace" cx="320" cy="260" r="128" pathLength="1"/><text class="fa-number-large" x="320" y="263" text-anchor="middle">12</text><text class="fa-kicker" x="320" y="291" text-anchor="middle">KANDIDATEN</text></g>
-          <g class="fa-selection-final"><text class="fa-number-large" x="320" y="100" text-anchor="middle">3</text><text class="fa-kicker" x="320" y="133" text-anchor="middle">VERTIEFTE BUSINESS CASES</text><path class="fa-selection-tree fa-trace" pathLength="1" d="M110 174V154H530V174M320 154V174"/>
-            <path class="fa-finalist-divider" d="M215 246V465M425 246V465"/>
-            ${finalistColumns.map(item => `<g data-finalist-copy="${item.id}">${lines(item.name, item.x, 274, 'fa-finalist-name', 30, 'middle')}${lines(item.idea, item.x, 382, 'fa-footnote fa-finalist-idea', 27, 'middle')}</g>`).join('')}
+          <g class="fa-selection-final"><text class="fa-number-large" x="74" y="112">3</text><text class="fa-kicker" x="137" y="107">VERTIEFTE BUSINESS CASES</text><path class="fa-selection-tree fa-trace" pathLength="1" d="M87 204V444M87 204H144M87 324H144M87 444H144"/>
+            <g data-finalist-copy="9"><text class="fa-finalist-name fa-copper-text" x="214" y="201">RocketLight Dinner</text><text class="fa-footnote" x="214" y="231">Sternemenü mit Blick auf den Start</text></g>
+            <g data-finalist-copy="4"><text class="fa-finalist-name" x="214" y="321">Starlink Insights</text><text class="fa-footnote" x="214" y="351">Netzdaten aus Starlink-Terminals als Wetterwissen</text></g>
+            <g data-finalist-copy="8"><text class="fa-finalist-name" x="214" y="428">Launch Engineering</text><text class="fa-finalist-name" x="214" y="457">Cloud</text><text class="fa-footnote" x="214" y="486">Prüft Satellitenentwürfe vor dem Start</text></g>
           </g>
           ${matrix.map((point, index) => `<g class="fa-candidate ${point.id >= 9 ? 'is-extra' : ''} ${point.id === 9 ? 'is-pitch' : ''}" data-candidate="${index}"><circle class="fa-candidate-halo" r="27"/><circle class="fa-candidate-dot" r="9"/><text class="fa-candidate-id" y="6" text-anchor="middle">${String(point.id).padStart(2, '0')}</text></g>`).join('')}
         </g>
@@ -216,7 +212,6 @@
       const rows = root.querySelector('.fa-pool-rows'), count = root.querySelector('.fa-pool-count'), twelve = root.querySelector('.fa-pool-twelve');
       const matrixLayer = root.querySelector('.fa-matrix-phase'), matrixBorder = root.querySelector('.fa-matrix-border'), matrixPoints = [...root.querySelectorAll('[data-matrix-cluster]')], matrixKey = root.querySelector('.fa-matrix-key');
       const selection = root.querySelector('.fa-selection-phase'), middle = root.querySelector('.fa-selection-middle'), final = root.querySelector('.fa-selection-final'), tree = root.querySelector('.fa-selection-tree'), orbit = root.querySelector('.fa-candidate-orbit');
-      const finalistCopies = [...root.querySelectorAll('[data-finalist-copy]')];
       const candidates = [...root.querySelectorAll('[data-candidate]')].map((node, index) => ({ node, id: index + 1, dot: node.querySelector('.fa-candidate-dot'), halo: node.querySelector('.fa-candidate-halo'), label: node.querySelector('.fa-candidate-id') }));
       return {
         update(progress, context) {
@@ -232,7 +227,6 @@
           });
           opacity(matrixLayer, smooth(.56, .62, p) * (1 - smooth(.86, .9, p))); draw(matrixBorder, smooth(.58, .66, p)); opacity(matrixKey, smooth(.62, .68, p)); matrixPoints.forEach((point, index) => opacity(point, smooth(.72 + index * .004, .77 + index * .004, p)));
           opacity(selection, smooth(.84, .87, p)); opacity(middle, 1 - smooth(.88, .92, p)); draw(orbit, smooth(.84, .9, p)); opacity(final, smooth(.90, .94, p)); draw(tree, smooth(.91, .99, p));
-          finalistCopies.forEach(copy => opacity(copy, smooth(.94, .985, p)));
           candidates.forEach(item => { const angle = (item.id - 1) / 12 * Math.PI * 2 - Math.PI / 2, q = smooth(.88, .97, p), destination = finalistPositions[item.id]; const x = 320 + Math.cos(angle) * 128, y = 260 + Math.sin(angle) * 128; at(item.node, destination ? mix(x, destination.x, q) : x + Math.cos(angle) * q * 70, destination ? mix(y, destination.y, q) : y + Math.sin(angle) * q * 70); opacity(item.node, destination ? 1 : 1 - smooth(.9, .96, p)); item.dot.setAttribute('r', mix(9, destination ? 22 : 9, q).toFixed(3)); opacity(item.label, destination ? smooth(.92, .97, p) : 0); opacity(item.halo, destination ? smooth(.92, .98, p) : 0); });
         }
       };
@@ -248,16 +242,16 @@
     markup() {
       const { E } = data(), cases = caseData(), team = E.rocketlightAssessments.find(item => item.assessment.id === 'rld-team');
       const summary = cases.map(item => `${item.name}: IR ${num(item.items[0].result.IR)}`).join('. ');
-      return svg('finance', `Ursprüngliche Teamwertung zur Ideenauswahl. Innovationsrendite IR ist gewichteter Nutzen geteilt durch gewichteten Aufwand. ${summary}. Aufwand des festen Pavillons neu bewerten; keine finanzielle Rendite.`, `
+      return svg('finance', `Innovationsrendite IR ist gewichteter Nutzen geteilt durch gewichteten Aufwand. ${summary}. Bewertungsscores, keine finanzielle Rendite.`, `
         <g class="fa-ir-bars">
-          <text class="fa-kicker" x="40" y="30">URSPRÜNGLICHE TEAMWERTUNG · IR</text>
-          <text class="fa-method-footnote" x="40" y="58">IR = Nutzen ÷ Aufwand · Aufwand des festen Pavillons neu bewerten</text>
+          <text class="fa-kicker" x="40" y="30">INNOVATIONSRENDITE · IR</text>
+          <text class="fa-method-footnote" x="40" y="58">IR = gewichteter Nutzen ÷ gewichteter Aufwand · Bewertungsscore, keine Finanzrendite</text>
           ${[0, .5, 1, 1.5, 2].map(value => `<path class="fa-grid-line" d="M${irX(value)} 84V408"/><text class="fa-case-tick" x="${irX(value)}" y="428" text-anchor="middle">${num(value, 1)}</text>`).join('')}
           ${cases.map((item, index) => { const y = 120 + index * 100, teamIR = item.items[0].result.IR; return `<g class="fa-ir-case" data-ir-case="${index}">${lines(index === 2 ? ['Launch Engineering', 'Cloud'] : [item.name], 40, y + 20, 'fa-case-name', 22)}<rect class="fa-ir-team" data-ir-bar="${index}" data-width="${(irX(teamIR) - 230).toFixed(3)}" x="230" y="${y}" width="0" height="36" rx="3"/><text class="fa-ir-value fa-copper-text" data-ir-value="${index}" x="${irX(teamIR) + 10}" y="${y + 27}">${num(teamIR)}</text></g>`; }).join('')}
         </g>
         <g class="fa-ir-callout" opacity="0">
           <path class="fa-grid-line" d="M40 462H600"/>
-          <text class="fa-method-note-strong fa-copper-text" x="40" y="500">RocketLight: ${num(team.result.IR)} · ursprüngliche Auswahl</text>
+          <text class="fa-method-note-strong fa-copper-text" x="40" y="500">RocketLight: ${num(team.result.IR)} · der höchste Score</text>
         </g>
         </g>
       `);

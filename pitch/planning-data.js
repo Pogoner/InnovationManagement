@@ -6,9 +6,9 @@ window.ROCKET_DATA = {
     "titles": {
       "w4": "Ein fester Pavillon in Florida – langfristig zwei eigenständige Standorte",
       "t1": "Sechs parallele Teilprojekte führen zum eigenen Pavillon und zu vier Piloten in Florida",
-      "t2": "13,38 Mio. USD für Investition und Anlauf in Florida – vorläufiges studentisches Arbeitsszenario",
+      "t2": "Investition neu kalkulieren – die frühere Lounge-Schätzung dient nur als Orientierung",
       "rm": "Erst genehmigen und bauen, dann pilotieren – Texas bleibt eine eigene Ausbauentscheidung",
-      "src": "Termine und Kosten sind Studienannahmen; die öffentlich benannten Anlaufstellen sind nicht beauftragt"
+      "src": "Neue Planannahme vom 20.11.2026; bestehende Quellen belegen keine Grundstücks- oder Partnerzusage"
     },
     "w4": {
       "was": [
@@ -27,7 +27,7 @@ window.ROCKET_DATA = {
         "Geplante Piloten: 15.10.2028, 15.12.2028, 15.03.2029 und 15.06.2029 · 31.07.2029 Betriebs- und Ausbauprüfung (G4). Alle Tage sind Planannahmen, keine bestätigten Starttermine."
       ],
       "wie": [
-        "Vorläufiges studentisches Projektbudget für Investition und Anlauf in Florida: 13,38 Mio. USD, davon 11,60 Mio. Sachinvestitionen und 1,78 Mio. Entwicklung und Anlauf. Die Beträge übernehmen die vorhandene historische Lounge-Kostenstruktur; sie sind keine neu validierte Pavillonkostenschätzung. Entwurf und Angebote müssen sie bis G2 prüfen. Laufende Betriebskosten kommen im Fünfjahresmodell zusätzlich hinzu; Texas ist nicht enthalten.",
+        "Investition für den festen Pavillon neu kalkulieren. Historische Orientierung für Standort 1: 10–15 Mio. USD aus der früheren, größeren Lounge-Planung (damals 13,38 Mio., gerundet 13,4 Mio. USD). Dieser Rahmen ist für den Pavillon neu zu validieren; Texas ist nicht enthalten.",
         "Bau erst nach Standort- und Investitionsfreigabe; eigene Piloten erst nach Fertigstellung, Abnahmen und Betriebsfreigabe. Echte Dinnertermine bleiben von geeigneten Startfenstern und örtlichen Freigaben abhängig.",
         "Buchungen, Stornos, Gästefeedback, Ablauf und tatsächliche Kosten im Pilot dokumentieren. Erfolgskriterien vorab festlegen; erst mit den Ergebnissen über Betrieb und eine spätere Ausbauprüfung entscheiden."
       ]
@@ -42,8 +42,8 @@ window.ROCKET_DATA = {
       {
         "name": "Architektur & Bau",
         "icon": "pavilion",
-        "inhalt": "Einen festen Pavillon für 20 Gäste mit Panoramafront, Küche und technischer Versorgung entwerfen; das Kosten-Arbeitsszenario anhand von Entwurf und Angeboten bis G2 prüfen, danach bauen. Abnahmen und Probebetrieb im September 2028.",
-        "ziel": "Der eigene Pavillon ist vor dem ersten Pilot-Dinner fertig und betriebsbereit; die Baukosten sind vor Beauftragung zu validieren."
+        "inhalt": "Einen festen Pavillon für 20 Gäste mit Panoramafront, Küche und technischer Versorgung entwerfen, neu kalkulieren und nach G2 bauen; Abnahmen und Probebetrieb im September 2028.",
+        "ziel": "Der eigene Pavillon ist vor dem ersten Pilot-Dinner fertig und betriebsbereit."
       },
       {
         "name": "Kulinarik & Betrieb",
@@ -93,7 +93,7 @@ window.ROCKET_DATA = {
         "cust": "–",
         "st": "y",
         "pot": "–",
-        "bud": "580"
+        "bud": "offen"
       },
       {
         "tp": "1 Standort & Genehmigungen",
@@ -112,7 +112,7 @@ window.ROCKET_DATA = {
         "cust": "intern",
         "st": "y",
         "pot": "–",
-        "bud": "2.500"
+        "bud": "offen"
       },
       {
         "tp": "2 Architektur & Bau",
@@ -131,7 +131,7 @@ window.ROCKET_DATA = {
         "cust": "intern",
         "st": "y",
         "pot": "–",
-        "bud": "9.000"
+        "bud": "offen"
       },
       {
         "tp": "3 Kulinarik & Betrieb",
@@ -150,7 +150,7 @@ window.ROCKET_DATA = {
         "cust": "Gäste",
         "st": "y",
         "pot": "–",
-        "bud": "600"
+        "bud": "offen"
       },
       {
         "tp": "4 Vertrieb & Pilotgäste",
@@ -169,7 +169,7 @@ window.ROCKET_DATA = {
         "cust": "Pilotinteressierte",
         "st": "y",
         "pot": "–",
-        "bud": "300"
+        "bud": "offen"
       },
       {
         "tp": "5 Vier Pilot-Dinner",
@@ -188,7 +188,7 @@ window.ROCKET_DATA = {
         "cust": "Bis zu 80 Plätze als Kapazität; Buchungen offen",
         "st": "y",
         "pot": "–",
-        "bud": "400"
+        "bud": "offen"
       },
       {
         "tp": "6 Betrieb & Ausbauprüfung",
@@ -207,16 +207,16 @@ window.ROCKET_DATA = {
         "cust": "Gäste / intern",
         "st": "y",
         "pot": "–",
-        "bud": "separat / offen"
+        "bud": "offen"
       },
       {
-        "tp": "Summe · Investition und Anlauf (Florida)",
+        "tp": "Summe · neu zu kalkulieren",
         "sum": true,
-        "pot": "25,64",
-        "bud": "13.380"
+        "pot": "offen",
+        "bud": "offen"
       }
     ],
-    "t2note": "Vorläufiges studentisches Projektbudget für Investition und Anlauf in Florida: 13,38 Mio. USD. Sachinvestitionen 11,60 Mio. = Grundstück 2,00 + Architektur/Bau 9,00 + Küche/Ausstattung 0,60. Entwicklung und Anlauf 1,78 Mio. = Projektleitung 0,58 + Gutachten/Genehmigungen 0,50 + Pilotvorbereitung 0,40 + Markteinführung 0,30. Die Beträge übernehmen die historische größere Lounge-Kostenstruktur und sind keine neu validierte Pavillonkostenschätzung. Die damaligen 10–15 Mio. USD bleiben eine historische Orientierung. Das frühere mobile Gesamtprojektbudget von 3,48 Mio. USD wird nicht zusätzlich addiert; sein F&E-Block enthielt bereits Bau- und Pilotkosten. Laufende Betriebskosten kommen im Fünfjahresmodell zusätzlich hinzu. Texas ist separat und nicht enthalten. Das neue Fünfjahres-Szenario 2027–2031 für Florida steht in step-4-rocketlight-fester-pavillon.xlsx; 25,64 Mio. USD Umsatz sind eine Modellannahme, keine bestätigte Nachfrage.",
+    "t2note": "Für den festen Pavillon liegt noch keine neue Investitions- oder Umsatzrechnung vor. Der historische Orientierungsrahmen von 10–15 Mio. USD (damals 13,38 Mio., gerundet 13,4 Mio. USD) stammt aus der größeren festen Lounge mit ca. 1.000 m², zwei Geschossen, Dachterrasse und Profiküche. Er betrifft nur Standort 1 und ist für das Pavillonkonzept neu zu validieren. Standort 2 in Texas benötigt eine zusätzliche, eigene Kalkulation. 47,2 Mio. USD Umsatz und die Renditekennzahlen des bisherigen mobilen Rechners validieren diesen neuen Plan nicht.",
     "rows": [
       {
         "name": "Gesamtprojekt",
@@ -963,10 +963,10 @@ window.ROCKET_DATA = {
       "Neue redaktionelle Planannahme vom 20.11.2026: ein fester Pavillon in Titusville/Florida; langfristig zwei eigenständige feste Standorte. Der zweite Standort im Raum Starbase/South Padre Island ist nicht gesichert.",
       "Standort und Planung 2027, Bau November 2027 bis August 2028, Abnahmen und Betriebsbereitschaft September 2028. Vier eigene Piloten erst nach G3: Oktober und Dezember 2028 sowie März und Juni 2029. Auswertung und Betriebsprüfung ab Juli 2029.",
       "Alle konkreten Tage, Gates, Abhängigkeiten und Ampeln sind Planannahmen, keine bereits erreichten Freigaben. Die Dinnerdaten sind keine bestätigten Raketenstarttermine.",
-      "Vorläufiges studentisches Projektbudget für Investition und Anlauf in Florida: 13,38 Mio. USD auf Basis der vorhandenen historischen Lounge-Kostenstruktur, davon 11,60 Mio. Sachinvestitionen und 1,78 Mio. Entwicklung/Anlauf. Laufende Betriebskosten kommen im Fünfjahresmodell zusätzlich hinzu. Keine neu validierte Pavillonkostenschätzung; Entwurf und Angebote müssen den Ansatz bis G2 prüfen. Die historischen 10–15 Mio. USD sind nur eine Orientierung.",
+      "Investition des festen Pavillons und Wirtschaftlichkeit sind neu zu kalkulieren. Die historische Lounge-Schätzung von 10–15 Mio. USD (13,38 Mio. aufgeteilt, gerundet 13,4 Mio.) dient nur als Orientierung für Standort 1; sie ist kein validiertes Pavillonbudget.",
       "Texas benötigt ein eigenes Grundstück, Genehmigungen, eine eigene Investitionsfreigabe und zusätzliche Mittel. Für Eröffnung und Bau gibt es hier bewusst keinen festen Termin.",
-      "Die frühere mobile Originalrechnung bleibt historisch: Ihr 3,48-Mio.-USD-F&E-/Projektblock enthielt bereits Bau- und Pilotkosten und wird nicht auf die 13,38 Mio. USD addiert. Für Florida gilt jetzt ein getrenntes Fünfjahres-Szenario 2027–2031 (step-4-rocketlight-fester-pavillon.xlsx); dessen Umsatz- und Cashflowwerte sind Annahmen, keine erzielten Ergebnisse.",
-      "Bestehende historische Quellen und Variante B bleiben als Herkunft erhalten. Aktuelle öffentlich benannte Anlaufstellen stehen in roadmap-contacts.js (Abruf 20.11.2026); keine davon wurde kontaktiert oder beauftragt. Genannte Stellen belegen keine Grundstücks-, Genehmigungs-, Finanzierungs- oder Partnerzusage."
+      "Die 47,2 Mio. USD Umsatz, das 3,48-Mio.-USD-Projektbudget und Renditekennzahlen der bisherigen mobilen Kalkulation werden nicht als Nachweis für feste Standorte übernommen. Andere Teamkapitel und Rechnerdaten bleiben unverändert.",
+      "Bestehende Quellenbasis und historische Variante B bleiben als Herkunft erhalten. Sie belegen keine Standort-, Genehmigungs-, Partner- oder Kundenzusage. Die Benennung von Organisationen oder Personen ist eine Planungsannahme; [Name]-Felder sind offen."
     ]
   },
   "B": {
@@ -1998,22 +1998,14 @@ window.ROCKET_META = {
   "A": {
     "name": "Fester Pavillon · Florida zuerst",
     "short": "Fester Pavillon · Standort 1 Florida",
-    "budget": "13,38",
-    "budgetLabel": "Mio. USD Investition und Anlauf · Arbeitsszenario",
+    "budget": "offen",
+    "budgetLabel": "Pavillon neu kalkulieren",
     "budgetReference": "10–15 Mio. USD",
-    "budgetReferenceNote": "Historische Orientierung der größeren festen Lounge: 10–15 Mio. USD. Die vorhandene Kostenstruktur wird als vorläufiges studentisches Florida-Arbeitsszenario für Investition und Anlauf von 13,38 Mio. USD übernommen: 11,60 Mio. Sachinvestitionen und 1,78 Mio. Entwicklung/Anlauf. Keine neu validierte Pavillonkostenschätzung; bis G2 anhand von Entwurf und Angeboten prüfen. Laufende Betriebskosten kommen im Fünfjahresmodell zusätzlich hinzu. Texas benötigt ein eigenes Budget und ist nicht enthalten.",
-    "revenue": "25,64",
-    "revenueLabel": "Mio. USD · Florida-Szenario 2027–2031, keine bestätigte Nachfrage",
+    "budgetReferenceNote": "Historischer Orientierungsrahmen der größeren festen Lounge für Standort 1 (damals rund 13,4 Mio. USD); für den Pavillon neu validieren. Texas zusätzlich und offen.",
+    "revenue": "offen",
+    "revenueLabel": "Für feste Standorte nicht neu kalkuliert",
     "firstDinner": "10/2028",
     "firstDinnerLabel": "Erster Pilot im eigenen Pavillon",
-    "pilotModel": {
-      "capacity": 20,
-      "occupancy": 0.8,
-      "price": 35000,
-      "targetPrice": 50000,
-      "variableCost": 5000,
-      "assumptionNote": "Modellannahmen für den festen Florida-Piloten: 20 Plätze, 35.000 USD je Platz und 80 % Auslastung aus dem bisherigen Pilotansatz. Die Auslastung ist kein Buchungsnachweis. Zielpreis 50.000 USD und variable Kosten von 5.000 USD je Gast sind übernommene, unvalidierte Annahmen; feste Standortkosten und Investitionen sind darin nicht enthalten."
-    },
     "location": "Titusville / Florida · Standort 1 zu prüfen",
     "secondLocation": "Raum Starbase / South Padre Island · Ausbauperspektive",
     "expansion": "Langfristig zwei eigenständige feste Standorte. Texas nur nach eigenem Standort-, Genehmigungs- und Investitionsentscheid; Bauplatz, Budget und Eröffnung offen.",
@@ -2023,7 +2015,7 @@ window.ROCKET_META = {
         "id": "G0",
         "date": "30.11.2026",
         "title": "Projektauftrag",
-        "description": "Planungsauftrag für den ersten festen Pavillon in Florida. Das 13,38-Mio.-USD-Arbeitsszenario ist noch keine Investitionsfreigabe."
+        "description": "Planungsauftrag für den ersten festen Pavillon in Florida; Investitionshöhe noch offen."
       },
       {
         "id": "G1",
@@ -2035,7 +2027,7 @@ window.ROCKET_META = {
         "id": "G2",
         "date": "30.09.2027",
         "title": "Bauinvestition",
-        "description": "Bau nur bei geeigneter Fläche und erforderlichen Genehmigungen freigeben. Das 13,38-Mio.-USD-Arbeitsszenario vorher anhand von Entwurf und Angeboten validieren; geplanter Baubeginn 01.11.2027."
+        "description": "Bau nur bei geeigneter Fläche, erforderlichen Genehmigungen und neu validiertem Budget freigeben; geplanter Baubeginn 01.11.2027."
       },
       {
         "id": "G3",
@@ -2050,8 +2042,7 @@ window.ROCKET_META = {
         "description": "Vier Piloten auswerten und über Florida-Betrieb entscheiden. Ein zweiter fester Standort in Texas braucht eine eigene Standort-, Genehmigungs- und Investitionsfreigabe."
       }
     ],
-    "critical": "Kritischer Pfad: Fläche und Genehmigungen klären, Bauinvestition an G2 freigeben, den eigenen Florida-Pavillon fertigstellen und an G3 betrieblich freigeben. Erst danach beginnen die vier eigenen Piloten. Texas hat keinen festen Eröffnungstermin.",
-    "budgetStatus": "studentisches Arbeitsszenario, nicht validiert"
+    "critical": "Kritischer Pfad: Fläche und Genehmigungen klären, Bauinvestition an G2 freigeben, den eigenen Florida-Pavillon fertigstellen und an G3 betrieblich freigeben. Erst danach beginnen die vier eigenen Piloten. Texas hat keinen festen Eröffnungstermin."
   },
   "B": {
     "name": "Lounge Titusville",

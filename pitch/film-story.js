@@ -95,26 +95,26 @@ window.PitchFilmStory = [
   {
     "step": 4,
     "label": "Bewertung & Kalkulation",
-    "sources": [{"file": "step-4-rocketlight.xlsm", "label": "RocketLight · Vorbewertung"}, {"file": "step-4-starlink-insights.xlsm", "label": "Starlink Insights"}, {"file": "step-4-launch-engineering-cloud.xlsm", "label": "Launch Engineering Cloud"}],
+    "sources": [{"file": "step-4-rocketlight.xlsm", "label": "RocketLight"}, {"file": "step-4-starlink-insights.xlsm", "label": "Starlink Insights"}, {"file": "step-4-launch-engineering-cloud.xlsm", "label": "Launch Engineering Cloud"}],
     "length": 3,
     "beats": [
       {
         "at": 0,
         "still": 0.5,
         "view": ".fa-ir-bars",
-        "tag": "URSPRÜNGLICHE TEAMBEWERTUNG",
+        "tag": "INNOVATIONSRENDITE",
         "title": "Drei Ideen.<br><em>Ein Score.</em>",
-        "copy": "Die IR teilt den gewichteten Nutzen durch den gewichteten Aufwand. In unserer ursprünglichen Ideenbewertung führte RocketLight mit 1,83 vor Starlink Insights mit 1,62 und Launch Engineering Cloud mit 1,27.",
-        "cue": "Die ursprüngliche Teamwertung erklärt unsere Ideenauswahl"
+        "copy": "Die IR teilt den gewichteten Nutzen durch den gewichteten Aufwand. RocketLight führt mit 1,83. Starlink Insights liegt bei 1,62, Launch Engineering Cloud bei 1,27.",
+        "cue": "Innovationsrendite der drei Ideen"
       },
       {
         "at": 0.55,
         "still": 1,
         "view": ".fa-ir-callout",
-        "tag": "VON DER IDEENAUSWAHL ZUR UMSETZUNG",
-        "title": "Die Idee überzeugt.<br><em>Der Bau wird geprüft.</em>",
-        "copy": "Die damalige Bewertung begründet unsere Auswahl. Für den festen Pavillon müssen Bauaufwand, Genehmigungen und Betrieb neu bewertet werden. Die Roadmap macht diese Prüfungen zu Freigabepunkten.",
-        "cue": "Ursprüngliche Auswahl · Aufwand des festen Baus neu bewerten",
+        "tag": "ROCKETLIGHT · DER HÖCHSTE SCORE",
+        "title": "Eine Idee sticht<br><em>heraus.</em>",
+        "copy": "Aus unserer Sicht erzielt RocketLight Dinner die höchste Innovationsrendite, vor Starlink Insights und der Launch Engineering Cloud. IR ist ein Bewertungsscore, keine Finanzrendite.",
+        "cue": "RocketLight liegt vorn",
         "tone": "difference"
       }
     ],
@@ -123,63 +123,54 @@ window.PitchFilmStory = [
   {
     "step": 5,
     "label": "Das Dinner & die Wirtschaftlichkeit",
-    "sources": [{"file": "step-4-rocketlight-fester-pavillon.xlsx", "label": "Fünfjahresrechnung"}, {"file": "step-5-marketing-mix.xlsx", "label": "Marketingmix"}],
+    "sources": [{"file": "step-5-marketing-mix.xlsx", "label": "Marketingmix"}, {"file": "step-4-rocketlight.xlsm", "label": "Kalkulation"}],
     "length": 5.8,
     "beats": [
       {
         "at": 0,
         "tag": "DAS RAUMKONZEPT",
         "title": "Zehn Tische.<br><em>Ein gemeinsamer Blick.</em>",
-        "copy": "Im festen Pavillon in Florida sitzen 20 Gäste an zehn Zweiertischen. Versetzte, leicht terrassierte Reihen richten jeden Platz auf das Startpanorama aus.",
+        "copy": "20 Gäste sitzen an zehn Zweiertischen. Versetzte, leicht terrassierte Reihen richten jeden Platz auf das Startpanorama aus.",
         "cue": "Die Tische entstehen. Die Sichtachsen öffnen sich.",
-        "still": 0.12,
+        "still": 0.13,
         "view": "[data-fe-layout]"
       },
       {
-        "at": 0.14,
+        "at": 0.16,
         "tag": "DAS ERLEBNIS",
         "title": "Sieben Gänge.<br><em>Ein großer Moment.</em>",
         "copy": "Missionsbriefing, Fine Dining und persönlicher Concierge verdichten den Abend. Die Rakete wird zum gemeinsamen Mittelpunkt.",
         "cue": "Das Raumkonzept wird zum Erlebnis.",
-        "still": 0.26,
+        "still": 0.29,
         "view": "[data-fe-panorama]",
         "art": "panorama"
       },
       {
-        "at": 0.28,
+        "at": 0.32,
         "tag": "DIE PREISANNAHME",
         "title": "Selten ist wertvoll.<br><em>Vertrauen schafft Zugang.</em>",
         "copy": "35.000 USD je Gast im Pilot; langfristig bis zu 50.000 USD als Ziel. Erst reale Buchungen zeigen, ob diese Zahlungsbereitschaft trägt.",
         "cue": "Der Pilot prüft die Preisannahme.",
-        "still": 0.40,
+        "still": 0.45,
         "view": "[data-fe-price]"
       },
       {
-        "at": 0.42,
-        "tag": "DECKUNGSBEITRAG · ZIELPREISSZENARIO",
-        "title": "Der Beitrag zählt.<br><em>Die Vollkosten auch.</em>",
-        "copy": "50.000 USD Zielpreis minus 5.000 USD variable Kosten ergeben im Modell 45.000 USD je Gast. Davon sind der laufende Standortbetrieb und die Projektinvestition zu tragen. Deshalb rechnen wir den gesamten Weg über fünf Jahre.",
-        "cue": "Vom Beitrag je Gast zur vollständigen Projektrechnung",
-        "still": 0.59,
-        "view": "[data-fe-scale]"
-      },
-      {
-        "at": 0.62,
-        "tag": "FÜNF JAHRE · FLORIDA · BASISSZENARIO",
-        "title": "Erst investieren.<br><em>Dann wachsen.</em>",
-        "copy": "13,38 Mio. USD für Investition und Anlauf; laufende Kosten kommen hinzu. Vier Piloten 2028–2029, danach 10 und 16 Dinner pro Jahr. Bei 90 % Auslastung und 50.000 USD Zielpreis wird der kumulierte Cashflow im Basisszenario 2031 positiv.",
-        "cue": "Umsatz und Auszahlungen aufbauen · Cashflow über fünf Jahre verfolgen",
-        "still": 0.77,
+        "at": 0.48,
+        "tag": "ERWARTETE KOSTEN UND GEWINNE",
+        "title": "Erst investieren.<br><em>Dann verdienen.</em>",
+        "copy": "Im ersten Jahr entstehen nur Kosten für Konzept, Pavillon und Genehmigungen. Ab dem zweiten Jahr laufen die Piloten. Über fünf Jahre stehen rund 11,5 Mio. USD Gewinn etwa 3,5 Mio. USD F&E-Kosten gegenüber.",
+        "cue": "Der Gewinn wächst, die Kosten sinken, kumuliert im Plus ab Jahr 4.",
+        "still": 0.62,
         "view": "[data-fe-econ]"
       },
       {
-        "at": 0.8,
-        "tag": "SENSITIVITÄT · WAS MUSS TRAGEN?",
-        "title": "Zwei Annahmen.<br><em>Ein anderer Ausgang.</em>",
-        "copy": "90 % Auslastung und 50.000 USD je Gast ergeben im Basisszenario +5,60 Mio. USD kumulierten Cashflow. Bei 70 % und 40.000 USD bleiben −2,72 Mio. USD. Die Piloten prüfen genau diese Annahmen; an G4 entscheiden wir über den Regelbetrieb.",
-        "cue": "Preis und Auslastung verändern das Ergebnis · vor Finanzierung und Steuern",
+        "at": 0.65,
+        "tag": "WIRTSCHAFTLICHKEIT",
+        "title": "Hohe Marge.<br><em>Kleine Größe.</em>",
+        "copy": "Je Gast bleiben bei 50.000 USD etwa 45.000 USD übrig. Das Dinner bleibt ein kleines Angebot für 20 Gäste; entscheidend ist der Nachweis der Nachfrage im Pilot.",
+        "cue": "Profitabel je Gast, aber ein kleines Angebot.",
         "still": 1,
-        "view": "[data-fe-sensitivity]"
+        "view": "[data-fe-scale]"
       }
     ],
     "seconds": 195
@@ -228,18 +219,18 @@ window.PitchFilmStory = [
     "beats": [
       {
         "at": 0,
-        "tag": "",
+        "tag": "DIE WAHL",
         "title": "Welches Menü<br><em>wählt das Publikum?</em>",
-        "copy": "",
+        "copy": "Jedes Dinner beginnt mit einer Entscheidung. Scannen Sie den Code, wählen Sie Avatar und Menü und buchen Sie Ihren Platz. Es dauert eine Minute und kostet nichts.",
         "cue": "QR-Code scannen und ein Menü wählen.",
         "still": 0.38,
         "view": "[data-fm-chart]"
       },
       {
         "at": 0.5,
-        "tag": "",
+        "tag": "DAS ERGEBNIS",
         "title": "Ihre Wahl.<br><em>Ein erster Nachfragetest.</em>",
-        "copy": "",
+        "copy": "Die Balken zeigen, wie oft welches Menü in den letzten 30 Minuten gebucht wurde. Das ist Interesse, noch keine zahlungsbereite Nachfrage.",
         "cue": "Buchungen je Menü",
         "still": 1,
         "view": "[data-fm-chart]"

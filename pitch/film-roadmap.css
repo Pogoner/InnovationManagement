@@ -168,7 +168,7 @@
 
 /* Complete plan: slide 5 of the roadmap presentation as an image; it stays in the reading flow for reduced motion. */
 .film-roadmap-image { margin: 0; }
-.film-roadmap-image img { display: block; width: 100%; height: auto; border: 1px solid #a9d9d92a; border-radius: 4px; background: #000; }
+.film-roadmap-image img { display: block; width: 100%; height: auto; background: #000; }
 /* Step 9: the complete plan uses the full stage width; copy shrinks to a headline above it. */
 .film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) { grid-template-columns: minmax(0,1fr); grid-template-rows: auto minmax(0,1fr); align-items: start; align-content: start; row-gap: 14px; padding-top: calc(var(--header-height,80px) + 40px); }
 .film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-copy { grid-row: 1; }
@@ -176,7 +176,7 @@
 .film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-beat-copy,
 .film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-evidence-links { display: none; }
 .film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-visual { grid-row: 2; justify-self: stretch; width: 100%; max-width: none; margin-right: 0; }
-.film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-visual::before { inset: -14px -24px -10px; background: #060b10f4; }
+.film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-visual::before { display: none; }
 .film-architecture-plan[data-plan-view="roadmap"] .film-plan-header,
 .film-architecture-plan[data-plan-view="roadmap"] .film-gate-strip,
 .film-architecture-plan[data-plan-view="roadmap"] .film-roadmap-pilots,

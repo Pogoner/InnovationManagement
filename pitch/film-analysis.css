@@ -56,7 +56,9 @@
 .fa-candidate-halo { fill: #efbd910d; stroke: #a9d9d92b; stroke-width: 1; }
 .fa-candidate-id { font-size: 17px; fill: #081218 !important; font-weight: 550 !important; }
 .fa-selection-tree { stroke: #a9d9d95e; stroke-width: 1; }
+.fa-finalist-divider { fill: none; stroke: #a9d9d93d; stroke-width: 1; }
 .fa-finalist-name { font-size: 25px; letter-spacing: -.6px; }
+.fa-finalist-idea { font-size: 18px; }
 
 /* Innovation return bars: team in copper, AI in ice, same scale for every idea. */
 .fa-svg .fa-ir-team { fill: #efbd91; fill-opacity: .9; }

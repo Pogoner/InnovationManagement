@@ -11,7 +11,7 @@ Semesterprojekt Innovationsmanagement: Pitch zu SpaceX und der Idee „RocketLig
 | Präsentation (Pitch) | [/pitch/](http://rocketlight-pitch.azurewebsites.net/pitch/) | [pitch/index.html](pitch/index.html) |
 | Menü buchen (für das Publikum) | [/pitch/buchen.html](http://rocketlight-pitch.azurewebsites.net/pitch/buchen.html) | [pitch/buchen.html](pitch/buchen.html) |
 | Innovationsrendite-Rechner nach Prof. Dr. Gerhard Hube  | [/rechner/](http://rocketlight-pitch.azurewebsites.net/rechner/) | [rechner/index.html](rechner/index.html) |
-| Quellen: Excel- und PowerPoint-Dokumente zu den Schritten 1–7 | [GitHub: quellen/](https://github.com/Pogoner/InnovationManagement/tree/main/quellen) | [quellen/](quellen/) |
+| Quellen: Excel- und PowerPoint-Dokumente zu den Schritten 1–8 | [GitHub: quellen/](https://github.com/Pogoner/InnovationManagement/tree/main/quellen) | [quellen/](quellen/) |
 
 Die Seiten sind statisch (HTML, CSS, JavaScript, kein Build-Schritt). Zum Ansehen genügt es, `pitch/index.html` oder `rechner/index.html` im Browser zu öffnen. Nur die Live-Buchung braucht den Server.
 

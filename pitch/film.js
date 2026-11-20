@@ -17,7 +17,7 @@
   const sourceLinks = chapter => {
     const list = chapter.sources || [];
     if(!list.length) return '';
-    return '<div class="film-evidence-links">'+list.map(item=>'<a class="film-evidence-link" href="'+sourceBase+item.file+'" target="_blank" rel="noopener" download>Zahlen &amp; Hintergründe'+(item.label&&list.length>1?' · '+item.label:'')+' '+arrow+'</a>').join('')+'</div>';
+    return '<div class="film-evidence-links">'+list.map(item=>'<a class="film-evidence-link" href="'+sourceBase+encodeURIComponent(item.file)+'" target="_blank" rel="noopener" download>Zahlen &amp; Hintergründe'+(item.label&&list.length>1?' · '+item.label:'')+' '+arrow+'</a>').join('')+'</div>';
   };
   const duration = seconds=>Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0');
   const world = document.createElement('div');

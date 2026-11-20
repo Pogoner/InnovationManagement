@@ -103,7 +103,7 @@
     $('#critical-path').textContent = meta.critical;
     $('#roadmap-projects').innerHTML = `<ol class="project-list">${data.t1.map((project,index)=>`<li><span>TEILPROJEKT ${String(index+1).padStart(2,'0')}</span><h4>${escape(project.name)}</h4><p>${escape(project.inhalt)}</p><p><strong>Ziel:</strong> ${escape(project.ziel)}</p></li>`).join('')}</ol><h3>Die vier W-Fragen</h3><p>Geplante Rollen, Partner und Termine. Genannte Organisationen oder Personen haben damit keine Zusage erteilt.</p><div class="four-questions">${[['was','Was?'],['wer','Wer?'],['wann','Wann?'],['wie','Wie?']].map(([key,label])=>`<section><h4>${label}</h4><ul>${data.w4[key].map(item=>`<li>${escape(item)}</li>`).join('')}</ul></section>`).join('')}</div>`;
     $('#variant-caveat').textContent = 'Planstand 20.11.2026. Termine und Freigaben sind Planannahmen; Dinner hängen zusätzlich von geeigneten Startfenstern ab. Investition und Wirtschaftlichkeit der festen Standorte werden gesondert geprüft. Die bestehende Finanzrechnung beschreibt den früheren mobilen Konzeptstand.';
-    $('#presentation-download').href = '../quellen/step-6-roadmap-fester-pavillon.pptx';
+    $('#presentation-download').href = '../quellen/Schritt_6_Roadmap.pptx';
     const alternativeNote = $('#decision-alternative');
     if (alternativeNote) alternativeNote.hidden = isA;
     if (announce) $('#variant-status').textContent = 'Roadmap für den festen Pavillon: Florida zuerst, Texas langfristig als eigenständiger zweiter Bau. Neue Planannahmen vom 20. November 2026. Termine, Projekte und Download wurden angepasst.';

@@ -4,7 +4,7 @@ window.PitchFilmStory = [
   {
     "step": 1,
     "label": "Das Unternehmen",
-    "sources": [{"file": "step-1-7-company-recommendations.pptx"}],
+    "sources": [{"file": "Schritt_1_Unternehmensvorstellung.pptx"}],
     "length": 3,
     "beats": [
       {
@@ -31,7 +31,7 @@ window.PitchFilmStory = [
   {
     "step": 2,
     "label": "Der Innovationsprüfstand",
-    "sources": [{"file": "step-2-innovation-assessment.xlsx"}],
+    "sources": [{"file": "Schritt_2_Innovationsprüfstand.xlsx"}],
     "length": 2.4,
     "beats": [
       {
@@ -49,7 +49,7 @@ window.PitchFilmStory = [
   {
     "step": 3,
     "label": "Trends & Ideenauswahl",
-    "sources": [{"file": "step-3-trend-portfolio.xlsx"}],
+    "sources": [{"file": "Schritt_3_Trendportfolioanalyse.xlsx"}],
     "length": 4.4,
     "beats": [
       {
@@ -95,7 +95,7 @@ window.PitchFilmStory = [
   {
     "step": 4,
     "label": "Bewertung & Kalkulation",
-    "sources": [{"file": "step-4-rocketlight.xlsm", "label": "RocketLight"}, {"file": "step-4-starlink-insights.xlsm", "label": "Starlink Insights"}, {"file": "step-4-launch-engineering-cloud.xlsm", "label": "Launch Engineering Cloud"}],
+    "sources": [{"file": "Schritt_4_Inno_Rendite_Kalkulator_RocketLight.xlsm", "label": "RocketLight"}, {"file": "Schritt_4_Inno_Rendite_Kalkulator_StarlinkInsights.xlsm", "label": "Starlink Insights"}, {"file": "Schritt_4_Inno_Rendite_Kalkulator_LaunchEngineeringCloud.xlsm", "label": "Launch Engineering Cloud"}],
     "length": 3,
     "beats": [
       {
@@ -123,7 +123,7 @@ window.PitchFilmStory = [
   {
     "step": 5,
     "label": "Das Dinner & die Wirtschaftlichkeit",
-    "sources": [{"file": "step-5-marketing-mix.xlsx", "label": "Marketingmix"}, {"file": "step-4-rocketlight.xlsm", "label": "Kalkulation"}],
+    "sources": [{"file": "Schritt_5_5P_Marketing Mix .xlsx", "label": "Marketingmix"}, {"file": "Schritt_4_Inno_Rendite_Kalkulator_RocketLight.xlsm", "label": "Kalkulation"}],
     "length": 5.8,
     "beats": [
       {
@@ -178,7 +178,7 @@ window.PitchFilmStory = [
   {
     "step": 6,
     "label": "Roadmap & Umsetzung",
-    "sources": [{"file": "step-6-roadmap-fester-pavillon.pptx"}],
+    "sources": [{"file": "Schritt_6_Roadmap.pptx"}],
     "detail": "Fester Pavillon in Florida, langfristig zwei Standorte · acht Planungsphasen",
     "length": 8.2,
     "beats": [],
@@ -187,7 +187,7 @@ window.PitchFilmStory = [
   {
     "step": 7,
     "label": "Ganzheitliches Innovationsmanagement",
-    "sources": [{"file": "step-1-7-company-recommendations.pptx"}],
+    "sources": [{"file": "Schritt_7_Ganzheitliches Innovationsmanagement.pptx"}],
     "length": 3.6,
     "beats": [
       {
@@ -214,7 +214,7 @@ window.PitchFilmStory = [
   {
     "step": 8,
     "label": "Menüwahl mit dem Publikum",
-    "sources": [],
+    "sources": [{"file": "Schritt_8_Methodenreflexion.xlsx"}],
     "length": 3.4,
     "beats": [
       {

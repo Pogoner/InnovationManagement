@@ -1,7 +1,7 @@
 /* Teil 6: current fixed-pavilion plan A (20.11.2026). Historical plan B is preserved unchanged. */
 window.ROCKET_DATA = {
   "A": {
-    "file": "step-6-roadmap-fester-pavillon.pptx",
+    "file": "Schritt_6_Roadmap.pptx",
     "short": "Fester Pavillon · Standort 1 Florida",
     "titles": {
       "w4": "Ein fester Pavillon in Florida – langfristig zwei eigenständige Standorte",

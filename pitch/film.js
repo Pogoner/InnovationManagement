@@ -158,7 +158,7 @@
     camera.style.top=cameraTop.toFixed(2)+'px';
     const y=scrollY;
     records.forEach(record=>{
-      record.methodLinear=methodSteps.has(record.chapter.step)&&(width<=760||height<680||(width<=1100&&height<760));
+      record.methodLinear=methodSteps.has(record.chapter.step)&&(height<560||(width<=760&&height<700));
       record.useStatic=methodSteps.has(record.chapter.step)&&(reduced||record.methodLinear);
       record.section.classList.toggle('is-method-linear',record.methodLinear);
       if (record.useStatic && !record.staticScene && window.PitchStatic) {

@@ -192,3 +192,5 @@
   .film-mobile-activities li { display: block; }
   .film-mobile-activities time { display: block; }
 }
+/* The full plan (Gantt and date list) is not part of the pitch. */
+.film-timeline-view { display: none !important; }

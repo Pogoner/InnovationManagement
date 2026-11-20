@@ -154,7 +154,7 @@
   .film-ready .hero-base { bottom: 132px; }
   .film-ready .hero-facts b { font-size: 23px; }
   .film-intro-cue { bottom: 87px; }
-  .film-stage { display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 15px; padding: 120px var(--gutter) 146px; }
+  .film-stage { display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 15px; padding: 120px var(--gutter) 172px; }
   .film-chapter-meta { font-size: 8px; top: 93px; }
   .film-copy { flex: 0 0 auto; }
   .film-copy .film-beat-tag { font-size: 7px; margin-bottom: 11px; }
@@ -220,7 +220,7 @@
   .film-stage[data-film-step="6"] .film-copy::before { content: ""; position: absolute; z-index: -1; inset: -35px -30px -20px; pointer-events: none; background: radial-gradient(ellipse at 35% 40%,#060b10a3,transparent 75%); }
 }
 @media (max-width: 420px) {
-  .film-stage { padding-top: 118px; padding-bottom: 138px; gap: 8px; }
+  .film-stage { padding-top: 118px; padding-bottom: 164px; gap: 8px; }
   .film-copy .film-beat-copy { font-size: 12px; }
   .film-beat-nav button { width: 30px; }
   .film-stage-bottom .film-scene-cue { max-width: calc(100% - 180px); font-size: 7px; }

@@ -1,6 +1,6 @@
 # Pitch-Server mit Live-Menüwahl
 
-Kleiner Node.js-Server ohne Abhängigkeiten. Er liefert `pitch/`, `assets/` und `teil6/` aus und speichert die Buchungen der Zuhörer im Arbeitsspeicher. Es gibt kein Login. Einträge, die älter als 30 Minuten sind, werden verworfen.
+Kleiner Node.js-Server ohne Abhängigkeiten. Er liefert `pitch/`, `rechner/` und `quellen/` aus und speichert die Buchungen der Zuhörer im Arbeitsspeicher. Es gibt kein Login. Einträge, die älter als 30 Minuten sind, werden verworfen.
 
 ## Lokal starten
 

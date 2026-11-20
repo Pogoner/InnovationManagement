@@ -1,7 +1,7 @@
 /* Original Teil-6 content, preserved from the existing calculator. */
 window.ROCKET_DATA = {
   "A": {
-    "file": "Part6_Roadmap_RocketLightDinner_A_Mobiler-Pavillon.pptx",
+    "file": "step-6-roadmap-pavillon.pptx",
     "short": "Variante A · Mobiler Pavillon",
     "titles": {
       "w4": "In 16 Monaten zum ersten Pilot-Dinner – der mobile Pavillon hält Budget und Risiko klein",

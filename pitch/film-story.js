@@ -102,16 +102,16 @@ window.PitchFilmStory = [
         "at": 0,
         "still": 0.5,
         "view": ".fa-ir-bars",
-        "tag": "INNOVATIONSRENDITE · TEAM UND KI",
+        "tag": "INNOVATIONSRENDITE · TEAMBEWERTUNG",
         "title": "Drei Ideen.<br><em>Ein Score.</em>",
         "copy": "Die IR teilt den gewichteten Nutzen durch den gewichteten Aufwand. RocketLight führt beim Team mit 1,83 (KI 0,73). Starlink Insights liegt bei 1,62 und 1,10, Launch Engineering Cloud bei 1,27 und 1,13.",
-        "cue": "IR von Team und KI für drei Ideen"
+        "cue": "Innovationsrendite der drei Ideen"
       },
       {
         "at": 0.55,
         "still": 1,
         "view": ".fa-ir-callout",
-        "tag": "ROCKETLIGHT · DIE ABWEICHUNG",
+        "tag": "ROCKETLIGHT · DER HÖCHSTE SCORE",
         "title": "Eine Idee sticht<br><em>heraus.</em>",
         "copy": "Die Umsetzbarkeit (Team 1, KI 4) erklärt die Hälfte des Aufwandsunterschieds. Das Team priorisiert RocketLight; genau diese Bewertung ist der Prüfpunkt. IR ist ein Bewertungsscore, keine Finanzrendite.",
         "cue": "RocketLight liegt vorn",
@@ -122,7 +122,7 @@ window.PitchFilmStory = [
   },
   {
     "step": 5,
-    "label": "5P-Marketingmix & Wirtschaftlichkeit",
+    "label": "Das Dinner & die Wirtschaftlichkeit",
     "detail": "Der finale Marketingmix · alle 25 Felder",
     "length": 5.8,
     "beats": [

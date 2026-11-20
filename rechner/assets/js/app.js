@@ -57,7 +57,7 @@ function fillW(){['n','a'].forEach(k=>{const s=sum(state.w[k]);document.querySel
 function autoGrow(t){t.style.height='auto';t.style.height=Math.min(t.scrollHeight+2,320)+'px'}
 function go(sub){
   const part6={rmover:'vision',rm4w:'mission',rmtp:'projects',rmbud:'budget',rmmap:'timeline',rmsrc:'sources'};
-  if(ui.ctx==='dinner'&&typeof part6[sub]==='string'){location.assign(`./teil6/#${part6[sub]}`);return}
+  if(ui.ctx==='dinner'&&typeof part6[sub]==='string'){location.assign('../pitch/#schritt-6');return}
   ui.sub[ui.ctx]=sub;ui.confirm=null;render();if(FLOW[ui.ctx])toChapter(sub);else toTool()
 }
 /* SpaceX-Case und RocketLight Dinner laufen als eine durchgehende Seite: alle Schritte untereinander, die Schrittleiste springt zum Kapitel. */
@@ -161,9 +161,9 @@ document.getElementById('view').addEventListener('input',e=>{
 });
 const h=(location.hash||'').slice(1);
 if(h==='pitch'){
-  location.replace('./pitch/'+location.search);
+  location.replace('../pitch/'+location.search);
 }else if(h==='roadmap'||h==='teil6'){
-  location.replace('./teil6/');
+  location.replace('../pitch/#schritt-6');
 }else{
   useCtx({spacex:'spacex',case:'spacex',dinner:'dinner',launch:'dinner',methode:'method',method:'method'}[h]||'user');
   if(h==='launch')ui.sub.dinner='launch';
@@ -171,7 +171,7 @@ if(h==='pitch'){
 }
 /* Zurück/Vor und Sprunglinks innerhalb der einen Seite */
 addEventListener('hashchange',()=>{const k=(location.hash||'').slice(1);
-  if(k==='pitch'){location.replace('./pitch/'+location.search);return}
-  if(k==='roadmap'||k==='teil6'){location.replace('./teil6/');return}
+  if(k==='pitch'){location.replace('../pitch/'+location.search);return}
+  if(k==='roadmap'||k==='teil6'){location.replace('../pitch/#schritt-6');return}
   const c={idee:'user',spacex:'spacex',case:'spacex',dinner:'dinner',launch:'dinner',methode:'method',method:'method'}[k];
   if(c){useCtx(c);if(k==='launch')ui.sub.dinner='launch';ui.confirm=null;render();if(c==='spacex')window.scrollTo(0,0);else toTool()}});

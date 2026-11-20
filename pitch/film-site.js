@@ -109,7 +109,7 @@
       state:p<.045?'overview':p<.105?'compare':p<.155?'approach':'arrival'
     };
   }
-  function aerialMarkup(src='../teil6/site-aerial.webp') {
+  function aerialMarkup(src='assets/site-aerial.webp') {
     return '<div class="site-flight" aria-hidden="true"><div class="site-flight-camera">'+
       '<img src="'+src+'" alt="" width="1672" height="941" decoding="async">'+
       '<svg class="site-flight-map" viewBox="0 0 1672 941" fill="none" aria-hidden="true" focusable="false">'+
@@ -146,7 +146,7 @@
   window.PitchArchitecture = {
     aerialMarkup, mountAerial, aerialState,
     markup: function () {
-      return '<div class="film-building film-site-building" data-architecture="A"><img class="film-building-ghost" src="../teil6/pavilion-glass.svg" alt="" width="1774" height="887"><img class="film-building-photo" src="../teil6/pavilion-glass.svg" alt="" width="1774" height="887">'+blueprints.A+'</div>'+
+      return '<div class="film-building film-site-building" data-architecture="A"><img class="film-building-ghost" src="assets/pavilion-glass.svg" alt="" width="1774" height="887"><img class="film-building-photo" src="assets/pavilion-glass.svg" alt="" width="1774" height="887">'+blueprints.A+'</div>'+
         overlays();
     },
     mount: function (root) {

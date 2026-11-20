@@ -17,8 +17,8 @@ const AVATARS = new Set(['m0', 'm2', 'm3', 'm4', 'w0', 'w1', 'w3', 'w4']);
 const MENUS = new Set(['falcon', 'odyssey', 'starlight']);
 const EXTRAS = new Set(['brief', 'film', 'heli']);
 
-// Only the presentation and its assets are public; quellen/ and the repo stay private.
-const PUBLIC_DIRS = ['pitch', 'assets', 'teil6'];
+// Only the presentation, the calculator and the source documents are public; docs/ and the repo stay private.
+const PUBLIC_DIRS = ['pitch', 'rechner', 'quellen'];
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg',

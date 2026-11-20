@@ -2,7 +2,7 @@
 !package.json
 !server
 !pitch
-!assets
-!teil6
+!rechner
+!quellen
 **/*.md
 !server/README.md

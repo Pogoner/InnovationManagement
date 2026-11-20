@@ -95,8 +95,7 @@
     $('#critical-path').textContent = meta.critical;
     $('#roadmap-projects').innerHTML = `<ol class="project-list">${data.t1.map((project,index)=>`<li><span>TEILPROJEKT ${String(index+1).padStart(2,'0')}</span><h4>${escape(project.name)}</h4><p>${escape(project.inhalt)}</p><p><strong>Ziel:</strong> ${escape(project.ziel)}</p></li>`).join('')}</ol><h3>Die vier W-Fragen</h3><p>Geplante Rollen, Partner und Termine. Genannte Organisationen oder Personen haben damit keine Zusage erteilt.</p><div class="four-questions">${[['was','Was?'],['wer','Wer?'],['wann','Wann?'],['wie','Wie?']].map(([key,label])=>`<section><h4>${label}</h4><ul>${data.w4[key].map(item=>`<li>${escape(item)}</li>`).join('')}</ul></section>`).join('')}</div>`;
     $('#variant-caveat').textContent = 'Originalroadmap vom 05.11.2026: Teilprojekte laufen teilweise parallel; Gates sind geplante Entscheidungen. Die dort genannte 12-Monats-Garantie ist eine frühere Planannahme. Im finalen 5P-Mix bleiben Bedingungen und Kosten eines Ersatztermins zu prüfen.';
-    $$('[data-plan-link]').forEach(link => link.href = `../teil6/#${link.dataset.planLink}`);
-    $('#presentation-download').href = `../praesentation/${data.file}`;
+    $('#presentation-download').href = `../quellen/${data.file}`;
     const alternativeNote = $('#decision-alternative');
     if (alternativeNote) alternativeNote.hidden = isA;
     if (announce) $('#variant-status').textContent = `${meta.short}. ${meta.budget} ${meta.budgetLabel}. ${meta.firstDinnerLabel}: ${meta.firstDinner}. Termine, Projekte und Links wurden angepasst.`;

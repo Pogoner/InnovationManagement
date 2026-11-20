@@ -17,7 +17,7 @@
   const world = document.createElement('div');
   world.className = 'film-background';
   world.setAttribute('aria-hidden','true');
-  world.innerHTML = '<div class="film-camera"><img class="film-landscape-image" src="../teil6/launch-coast-near.webp" width="1672" height="941" alt=""><div class="film-water-light"></div><div class="film-world-architecture">' +
+  world.innerHTML = '<div class="film-camera"><img class="film-landscape-image" src="assets/launch-coast-near.webp" width="1672" height="941" alt=""><div class="film-water-light"></div><div class="film-world-architecture">' +
     window.PitchArchitecture.markup() + '</div></div>' + window.PitchArchitecture.aerialMarkup() + '<div class="film-dining-world"><img src="assets/dining-facing-launch.webp" width="1672" height="941" alt=""><div></div></div><div class="film-world-grade"></div><div class="film-world-grain"></div>';
   document.body.prepend(world);
   const camera = world.querySelector('.film-camera');

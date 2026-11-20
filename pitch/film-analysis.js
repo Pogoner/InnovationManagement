@@ -100,7 +100,7 @@
             <text class="fa-audit-driver" x="210" y="${y + 50}">${esc(row.note)}</text>
           </g>`;
       }).join('')}
-          <text class="fa-method-footnote" x="320" y="498" text-anchor="middle">Bewertung des Teams · Balkenskala bis 72 · Punkte, keine Prozente</text>
+          <text class="fa-method-footnote" x="320" y="498" text-anchor="middle"></text>
         </g>
       `);
     },

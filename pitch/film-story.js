@@ -230,7 +230,6 @@ window.PitchFilmStory = [
   {
     "step": 8,
     "label": "Menüwahl mit dem Publikum",
-    "sources": [{ "file": "Schritt_8_Methodenreflexion.xlsx" }],
     "length": 3.4,
     "beats": [
       {

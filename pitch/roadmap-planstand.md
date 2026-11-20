@@ -39,7 +39,7 @@ Projektbezogene Rechnung für Standort 1 Florida, Betrachtungszeitraum 2027–20
 
 Umsatz, variable Kosten (5.000 USD je Gast) und laufende Fixkosten ergeben das Betriebsergebnis. Investitionen (Grundstück, Planung, Genehmigungen, Bau, Ausstattung, 10 % Reserve) werden nur im Cashflow abgezogen. Die Konzernmarge von SpaceX wird nicht verwendet. Alle Beträge sind Planannahmen; die 10–15 Mio. USD der Lounge-Schätzung sind kein Pavillonbudget. 45.000 USD je Gast (90 %) sind der Deckungsbeitrag vor Fixkosten und Investition. Bleibt der kumulierte Cashflow im Zeitraum negativ, erscheint „Im Betrachtungszeitraum nicht erreicht“.
 
-Quelle der Werte: `pitch/calc/data.js` (RocketLight, KI-Bewertung, `fy`) und `pitch/calc/model.js` (`calcProject`). Die Arbeitsmappe [Schritt_4_RocketLight_Finanzrechnung_Fester_Pavillon.xlsx](../quellen/Schritt_4_RocketLight_Finanzrechnung_Fester_Pavillon.xlsx) enthält dieselbe Rechnung mit Formeln. Die Hube-Innovationsrendite bleibt ein eigener Bewertungsscore.
+Quelle der Werte: `pitch/calc/data.js` (RocketLight, KI-Bewertung, `fy`) und `pitch/calc/model.js` (`calcProject`). Die Arbeitsmappe [Schritt_4_Inno_Rendite_Kalkulator.xlsm](../quellen/Schritt_4_Inno_Rendite_Kalkulator.xlsm) enthält dieselbe Rechnung mit Formeln im Blatt „5-Jahres RocketLight“; die Bewertungen daraus fließen in den „Rendite-Kalkulator“ ein. Die Hube-Innovationsrendite bleibt ein eigener Bewertungsscore.
 
 ## Dateien
 

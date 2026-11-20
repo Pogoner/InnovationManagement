@@ -139,7 +139,7 @@ window.PitchFilmStory = [
   {
     "step": 5,
     "label": "Das Dinner & die Wirtschaftlichkeit",
-    "sources": [{ "file": "Schritt_5_5P_Marketing Mix.xlsx", "label": "Marketingmix" }, { "file": "Schritt_4_RocketLight_Finanzrechnung_Fester_Pavillon.xlsx", "label": "Finanzrechnung" }],
+    "sources": [{ "file": "Schritt_5_5P_Marketing Mix.xlsx", "label": "Marketingmix" }, { "file": "Schritt_4_Inno_Rendite_Kalkulator.xlsm", "label": "Finanzrechnung" }],
     "length": 5.8,
     "beats": [
       {

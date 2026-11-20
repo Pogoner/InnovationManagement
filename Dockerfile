@@ -4,7 +4,6 @@ WORKDIR /app
 COPY package.json ./
 COPY server ./server
 COPY pitch ./pitch
-COPY rechner ./rechner
 COPY quellen ./quellen
 USER node
 EXPOSE 8080

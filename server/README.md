@@ -1,6 +1,6 @@
 # Pitch-Server mit Live-Menüwahl
 
-Kleiner Node.js-Server ohne Abhängigkeiten. Er liefert `pitch/`, `rechner/` und `quellen/` aus und speichert die Buchungen der Zuhörer im Arbeitsspeicher. Es gibt kein Login. Einträge, die älter als 30 Minuten sind, werden verworfen.
+Kleiner Node.js-Server ohne Abhängigkeiten. Er liefert `pitch/` und `quellen/` aus und speichert die Buchungen der Zuhörer im Arbeitsspeicher. Es gibt kein Login. Einträge, die älter als 30 Minuten sind, werden verworfen.
 
 ## Lokal starten
 
@@ -8,7 +8,7 @@ Kleiner Node.js-Server ohne Abhängigkeiten. Er liefert `pitch/`, `rechner/` und
 npm start
 ```
 
-Dann `http://localhost:8080/pitch/` öffnen. Die Buchungsseite liegt unter `/pitch/buchen.html`. Für einen Test mit dem Handy muss der Rechner im selben Netz erreichbar sein.
+Dann `http://localhost:8080/pitch/` öffnen. Die Buchungsseite liegt unter `/pitch/buchen.html`. Für einen Test mit dem Handy muss der Computer im selben Netz erreichbar sein.
 
 ## Auf Azure bereitstellen (Container)
 

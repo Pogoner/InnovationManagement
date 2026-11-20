@@ -86,19 +86,27 @@
     $$('[data-variant]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.variant === variant)));
     const image = $('#variant-image');
     image.src = 'assets/dining-facing-launch.webp';
-    image.alt = `Gemeinsames Innenraumkonzept für Variante ${variant}: einzelne Zweiertische auf versetzten Terrassen mit freier Sicht auf den Raketenstart. Künstlerische Visualisierung.`;
-    $('#variant-location').textContent = meta.location.toLocaleUpperCase('de-DE');
-    $('#variant-title').innerHTML = 'Ein Pavillon.<br>Mehr als ein Horizont.';
-    $('#variant-description').textContent = 'Erst in Florida erproben, dann den zweiten Standort entwickeln.';
-    $('#roadmap-metrics').innerHTML = `<div class="roadmap-metric"><span>GEPLANTER RAHMEN</span><strong>${escape(meta.budget)}</strong><small>${escape(meta.budgetLabel)}</small></div><div class="roadmap-metric"><span>ERSTER PILOT</span><strong>${escape(meta.firstDinner)}</strong><small>${escape(meta.firstDinnerLabel)}</small></div><div class="roadmap-metric"><span>FÜNFJAHRESZIEL</span><strong>${escape(meta.revenue)}</strong><small>Mio. USD Umsatz · Planannahme</small></div>`;
-    $('#gate-timeline').innerHTML = meta.gates.map(gate => {const [day,month,year] = gate.date.split('.');return `<li><span>${escape(gate.id)}</span><time datetime="${year}-${month}-${day}">${escape(gate.date)}</time><h4>${escape(gate.title)}</h4><p>${escape(gate.description)}</p></li>`;}).join('');
+    image.alt = 'Innenraumkonzept für 20 Gäste im festen Pavillon: einzelne Zweiertische mit freier Sicht auf den Raketenstart. Künstlerische Visualisierung.';
+    $('#variant-location').textContent = 'FLORIDA · TEXAS';
+    $('#variant-title').innerHTML = 'Florida zuerst.<br>Texas langfristig.';
+    $('#variant-description').textContent = 'Der erste Standort bleibt in Florida. Der zweite feste Bau in Texas erhält eine eigene Planung, Finanzierung und Freigabe.';
+    $('#roadmap-metrics').innerHTML = '<div class="roadmap-metric"><span>LANGFRISTIGES ZIEL</span><strong>1 → 2</strong><small>feste Standorte · Florida zuerst, Texas später</small></div><div class="roadmap-metric"><span>RAUMKONZEPT</span><strong>20</strong><small>Plätze je Standort · Konzeptannahme</small></div><div class="roadmap-metric"><span>BUDGETREFERENZ</span><strong>10–15</strong><small>Mio. USD für Standort 1 · neu zu validieren</small></div>';
+    $('#roadmap-budget-note').textContent = 'Die 10–15 Mio. USD stammen aus einer bestehenden Grobschätzung für eine größere Lounge. Für den festen Pavillon in Florida müssen Bauumfang und Kosten neu validiert werden. Der zweite Standort in Texas benötigt ein separates, bisher nicht kalkuliertes Budget.';
+    $('#gate-timeline').innerHTML = meta.gates.map(gate => {
+      const date = String(gate.date || '').trim();
+      const parts = date.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+      const timing = parts
+        ? `<time class="gate-date" datetime="${parts[3]}-${parts[2]}-${parts[1]}">${escape(date)}</time>`
+        : `<p class="gate-date">${escape(gate.dateLabel || gate.timing || date || 'Termin offen')}</p>`;
+      return `<li><span>${escape(gate.id)}</span>${timing}<h4>${escape(gate.title)}</h4><p>${escape(gate.description)}</p></li>`;
+    }).join('');
     $('#critical-path').textContent = meta.critical;
     $('#roadmap-projects').innerHTML = `<ol class="project-list">${data.t1.map((project,index)=>`<li><span>TEILPROJEKT ${String(index+1).padStart(2,'0')}</span><h4>${escape(project.name)}</h4><p>${escape(project.inhalt)}</p><p><strong>Ziel:</strong> ${escape(project.ziel)}</p></li>`).join('')}</ol><h3>Die vier W-Fragen</h3><p>Geplante Rollen, Partner und Termine. Genannte Organisationen oder Personen haben damit keine Zusage erteilt.</p><div class="four-questions">${[['was','Was?'],['wer','Wer?'],['wann','Wann?'],['wie','Wie?']].map(([key,label])=>`<section><h4>${label}</h4><ul>${data.w4[key].map(item=>`<li>${escape(item)}</li>`).join('')}</ul></section>`).join('')}</div>`;
-    $('#variant-caveat').textContent = 'Originalroadmap vom 05.11.2026: Teilprojekte laufen teilweise parallel; Gates sind geplante Entscheidungen. Die dort genannte 12-Monats-Garantie ist eine frühere Planannahme. Im finalen 5P-Mix bleiben Bedingungen und Kosten eines Ersatztermins zu prüfen.';
-    $('#presentation-download').href = `../quellen/${data.file}`;
+    $('#variant-caveat').textContent = 'Planstand 20.11.2026. Termine und Freigaben sind Planannahmen; Dinner hängen zusätzlich von geeigneten Startfenstern ab. Investition und Wirtschaftlichkeit der festen Standorte werden gesondert geprüft. Die bestehende Finanzrechnung beschreibt den früheren mobilen Konzeptstand.';
+    $('#presentation-download').href = 'roadmap-planstand.md';
     const alternativeNote = $('#decision-alternative');
     if (alternativeNote) alternativeNote.hidden = isA;
-    if (announce) $('#variant-status').textContent = `${meta.short}. ${meta.budget} ${meta.budgetLabel}. ${meta.firstDinnerLabel}: ${meta.firstDinner}. Termine, Projekte und Links wurden angepasst.`;
+    if (announce) $('#variant-status').textContent = 'Roadmap für den festen Pavillon: Florida zuerst, Texas langfristig als eigenständiger zweiter Bau. Neue Planannahmen vom 20. November 2026. Termine, Projekte und Download wurden angepasst.';
     window.PitchFilm?.setVariant(variant);
     queueMeasure();
   }

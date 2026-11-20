@@ -178,8 +178,8 @@ window.PitchFilmStory = [
   {
     "step": 6,
     "label": "Roadmap & Umsetzung",
-    "detail": "Sieben Planungsphasen, parallele Maßnahmen & Gates",
-    "length": 7.8,
+    "detail": "Fester Pavillon in Florida, langfristig zwei Standorte · acht Planungsphasen",
+    "length": 8.2,
     "beats": [],
     "seconds": 120
   },

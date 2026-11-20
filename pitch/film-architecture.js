@@ -8,7 +8,7 @@
   const start = stamp('2026-11-01'), end = stamp('2032-01-01');
   const dateX = text => 210 + (stamp(text)-start)/(end-start)*410;
   const shortLabels = {
-    A:[['Genehmigung &','Sicherheit'],['Pavillon & Logistik'],['Kulinarik & Service'],['Vertrieb & Marketing'],['Vier Pilot-Dinner'],['Skalierung &','Regelbetrieb']]
+    A:[['Standort &','Genehmigungen'],['Architektur & Bau'],['Kulinarik & Betrieb'],['Vertrieb &','Pilotgäste'],['Vier Pilot-Dinner'],['Betrieb &','Ausbauprüfung']]
   };
   function roadmapMarkup(variant) {
     const {data,meta}=window.PitchEvidence.variants[variant];
@@ -44,12 +44,18 @@
 
   const phaseName = phase => phase.tag.split(' / ').slice(1).join(' / ');
   const activityMarkup = phase => '<ol class="film-phase-tasks">'+phase.activities.map(item=>'<li><span>'+safe(item.label)+'</span><time'+(item.date?' datetime="'+item.date+'"':'')+'>'+safe(item.period)+'</time></li>').join('')+'</ol>';
-  const phaseMarkup = (phase,index,linear=false) => '<article class="film-phase-card'+(linear?' is-linear':'')+'" data-roadmap-phase="'+index+'"><div class="film-phase-kicker"><span>'+String(index+1).padStart(2,'0')+' / 07</span><span>GEPLANT · '+safe(phase.period)+'</span></div><h3>'+safe(phaseName(phase))+'</h3>'+activityMarkup(phase)+'<p class="film-phase-result"><span>PRÜFPUNKT</span>'+safe(phase.result)+'</p></article>';  const gatesMarkup = variant => '<div class="film-gate-strip"><p>FÜNF GEPLANTE FREIGABEN</p><ol>'+window.PitchEvidence.variants[variant].meta.gates.map(gate=>'<li><b>'+safe(gate.id)+'</b><time datetime="'+gate.date.split('.').reverse().join('-')+'">'+safe(gate.date)+'</time><span>'+safe(gate.title)+'</span></li>').join('')+'</ol></div>';
+  const locationMarkup = () => '<div class="film-location-perspective" role="group" aria-label="Schematische Standortperspektive: Zwei eigenständige feste Pavillons">'+
+    '<p class="film-location-kicker">SCHEMATISCHE STANDORTPERSPEKTIVE</p><div class="film-location-pair">'+
+    '<div class="film-location film-location-first"><div class="film-location-heading"><span class="film-location-node" aria-hidden="true">1</span><h4>Florida</h4></div><p>Standort 1 · Betrieb erproben</p><small>Der feste Pavillon bleibt.</small></div>'+
+    '<div class="film-location film-location-second"><div class="film-location-heading"><span class="film-location-node" aria-hidden="true">2</span><h4>Texas</h4></div><p>Standort 2 · langfristiges Ziel</p><small>Eigenständiger fester Bau.</small></div></div>'+
+    '<p class="film-location-transfer">Erfahrung übertragen</p><p class="film-location-open">Texas: eigener Bauplatz, Freigabe und Investition offen.</p></div>';
+  const phaseMarkup = (phase,index,linear=false) => '<article class="film-phase-card'+(linear?' is-linear':'')+(phase.id==='operate'?' is-operation':'')+'" data-roadmap-phase="'+index+'"><div class="film-phase-kicker"><span>'+String(index+1).padStart(2,'0')+' / '+String(window.PitchRoadmapPhases.A.length).padStart(2,'0')+'</span><span>GEPLANT · '+safe(phase.period)+'</span></div><h3>'+safe(phaseName(phase))+'</h3>'+(phase.id==='operate'?locationMarkup():'')+(phase.id==='operate'&&!linear?'':activityMarkup(phase))+'<p class="film-phase-result"><span>PRÜFPUNKT</span>'+safe(phase.result)+'</p></article>';
+  const gatesMarkup = variant => '<div class="film-gate-strip"><p>FÜNF GEPLANTE FREIGABEN</p><ol>'+window.PitchEvidence.variants[variant].meta.gates.map(gate=>'<li><b>'+safe(gate.id)+'</b><time datetime="'+gate.date.split('.').reverse().join('-')+'">'+safe(gate.date)+'</time><span>'+safe(gate.title)+'</span></li>').join('')+'</ol></div>';
 
   window.PitchScenes = window.PitchScenes || {};
   window.PitchScenes[6] = {
     markup: function () {
-      return '<div class="film-architecture-plan"><div class="film-plan-header"><div class="film-plan-budget"><span class="film-plan-name"></span><strong class="film-plan-total"></strong><small class="film-plan-unit"></small></div></div><div class="film-phase-position" aria-hidden="true">'+Array.from({length:7},(_,i)=>'<i data-phase-position="'+i+'"></i>').join('')+'</div><div class="film-current-phase"></div><div class="film-phase-sequence"></div><div class="film-timeline-view"></div></div>';
+      return '<div class="film-architecture-plan"><div class="film-plan-header"><div class="film-plan-budget"><span class="film-plan-name"></span><strong class="film-plan-total"></strong><small class="film-plan-unit"></small></div></div><div class="film-phase-position" aria-hidden="true">'+window.PitchRoadmapPhases.A.map((_,i)=>'<i data-phase-position="'+i+'"></i>').join('')+'</div><div class="film-current-phase"></div><div class="film-phase-sequence"></div><div class="film-timeline-view"></div></div>';
     },
     mount: function (root) {
       const plan = root.querySelector('.film-architecture-plan');
@@ -68,10 +74,11 @@
           if (!built) {
             built=true;
             const meta=window.PitchEvidence.variants[variant].meta;
-            name.textContent='MOBILER PAVILLON';
-            total.textContent=meta.budget; unit.textContent=meta.budgetLabel;
+            name.textContent='STANDORT 1 · ORIENTIERUNGSRAHMEN';
+            total.textContent=meta.budgetReference || meta.budget;
+            unit.textContent=meta.budgetReference?'Ältere Lounge-Schätzung · Pavillon neu validieren':meta.budgetLabel;
             current.innerHTML=phases.map((phase,index)=>phaseMarkup(phase,index)).join('');
-            sequence.innerHTML='<p class="film-phase-sequence-heading">Sieben Bildphasen · ein paralleler Maßnahmenplan</p>'+phases.map((phase,index)=>phaseMarkup(phase,index,true)).join('');
+            sequence.innerHTML='<p class="film-phase-sequence-heading">'+phases.length+' Bildphasen · ein paralleler Maßnahmenplan</p>'+phases.map((phase,index)=>phaseMarkup(phase,index,true)).join('');
             timeline.innerHTML=roadmapMarkup(variant)+compactRoadmapMarkup(variant)+gatesMarkup(variant);
             cards=Array.from(current.children);
             lanes=Array.from(timeline.querySelectorAll('[data-plan-lane]'));
@@ -94,6 +101,7 @@
           phasePositions.forEach((node,i)=>{node.classList.toggle('is-active',i===index);node.classList.toggle('is-past',i<index);});
           const local=clamp((p-phases[index].at)/((phases[index+1]?.at??1)-phases[index].at));
           plan.style.setProperty('--phase-reveal',(index===0?1:.55+.45*ramp(0,.18,local)).toFixed(4));
+          plan.style.setProperty('--location-reveal',(linear?1:ramp(.86,.96,p)).toFixed(4));
           const progress=linear?1:ramp(.86,.97,p);
           lanes.forEach(lane=>lane.style.setProperty('--lane-reveal',(linear?1:ramp(.86+Number(lane.dataset.planLane)*.012,.90+Number(lane.dataset.planLane)*.012,p)).toFixed(4)));
           scan.setAttribute('x1',(210+410*progress).toFixed(1));

@@ -44,6 +44,20 @@
 .film-phase-tasks time { color: #a9c3c9; font-size: 11px; line-height: 1.45; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .pitch-page .film-phase-result { display: grid; grid-template-columns: 66px minmax(0,1fr); column-gap: 12px; font-size: 14px; line-height: 1.5; margin: 14px 0 0; color: #d0dcdf; }
 .film-phase-result > span { font-size: 9px; line-height: 1.7; letter-spacing: .08em; padding-top: 2px; color: #efbd91; }
+.film-stage[data-film-step="6"] .film-location-perspective { margin: 0 0 16px; }
+.film-stage[data-film-step="6"] .film-location-kicker { margin: 0 0 11px; color: #a4bcc5; font-size: 10px; line-height: 1.5; letter-spacing: .08em; }
+.film-stage[data-film-step="6"] .film-location-pair { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; }
+.film-stage[data-film-step="6"] .film-location-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+.film-stage[data-film-step="6"] .film-location-heading h4 { margin: 0; color: #edf5ee; font-size: 22px; font-weight: 400; letter-spacing: -.03em; }
+.film-stage[data-film-step="6"] .film-location-node { display: grid; place-items: center; flex: 0 0 26px; width: 26px; height: 26px; border: 1px solid #efbd9180; border-radius: 50%; background: #efbd9115; color: #efbd91; font-size: 12px; }
+.film-stage[data-film-step="6"] .film-location-second .film-location-node { border-color: #a9d9d980; border-style: dashed; color: #a9d9d9; background: transparent; opacity: calc(.5 + var(--location-reveal,1) * .5); }
+.film-stage[data-film-step="6"] .film-location p { margin: 0 0 5px; color: #d0dcdf; font-size: 13px; line-height: 1.45; }
+.film-stage[data-film-step="6"] .film-location small { display: block; color: #a4bcc5; font-size: 12px; line-height: 1.45; }
+.film-stage[data-film-step="6"] .film-location-transfer { display: flex; align-items: center; gap: 12px; margin: 13px 0 8px; color: #a9d9d9; font-size: 12px; line-height: 1.5; }
+.film-stage[data-film-step="6"] .film-location-transfer::before, .film-stage[data-film-step="6"] .film-location-transfer::after { content: ""; flex: 1; height: 1px; background: #a9d9d944; transform: scaleX(var(--location-reveal,1)); }
+.film-stage[data-film-step="6"] .film-location-transfer::before { transform-origin: right; }
+.film-stage[data-film-step="6"] .film-location-transfer::after { transform-origin: left; }
+.film-stage[data-film-step="6"] .film-location-open { margin: 0; color: #b2c8cf; font-size: 12px; line-height: 1.55; }
 .film-phase-sequence { display: none; }
 .film-plan-timeline { display: block; width: 100%; height: auto; overflow: visible; }
 .film-plan-timeline text { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #d7e4e4; font-weight: 400; font-variant-numeric: tabular-nums; }
@@ -79,7 +93,7 @@
 @media (min-width: 761px) and (max-height: 800px) {
   .film-stage[data-film-step="6"] { padding-top: 132px; }
   .film-plan-header { gap: 10px; }
-  .film-stage[data-film-step="6"] .film-plan-name { display: none; }
+  .film-stage[data-film-step="6"] .film-plan-name { display: block; font-size: 8px; }
   .film-stage[data-film-step="6"] .film-plan-total { font-size: 28px; margin: 0; }
   .film-stage[data-film-step="6"] .film-plan-unit { font-size: 9px; padding: 0; }
   .film-phase-position { margin-block: 10px 12px; }
@@ -125,7 +139,7 @@
   .film-stage[data-film-step="6"],.film-ready.is-reduced .film-stage[data-film-step="6"] { position: relative; height: auto; min-height: 0; overflow: visible; padding-top: 130px; padding-bottom: 155px; gap: 24px; }
   .film-stage[data-film-step="6"] .film-visual,.film-ready.is-reduced .film-stage[data-film-step="6"] .film-visual { width: 100%; max-width: none; height: auto; min-height: 0; max-height: none; aspect-ratio: auto; flex: 0 0 auto; margin-top: 0; }
   .film-plan-header { gap: 12px; }
-  .film-stage[data-film-step="6"] .film-plan-name { display: none; }
+  .film-stage[data-film-step="6"] .film-plan-name { display: block; font-size: 8px; }
   .film-stage[data-film-step="6"] .film-plan-total { font-size: 28px; margin: 0; }
   .film-stage[data-film-step="6"] .film-plan-unit { font-size: 10px; }
   .film-architecture-plan[data-plan-view="linear"] .film-phase-sequence { display: block; margin-top: 28px; }

@@ -1,73 +1,73 @@
-/* Original Teil-6 content, preserved from the existing calculator. */
+/* Teil 6: current fixed-pavilion plan A (20.11.2026). Historical plan B is preserved unchanged. */
 window.ROCKET_DATA = {
   "A": {
-    "file": "step-6-roadmap-pavillon.pptx",
-    "short": "Variante A · Mobiler Pavillon",
+    "file": "step-6-roadmap-fester-pavillon.pptx",
+    "short": "Fester Pavillon · Standort 1 Florida",
     "titles": {
-      "w4": "In 16 Monaten zum ersten Pilot-Dinner – der mobile Pavillon hält Budget und Risiko klein",
-      "t1": "Sechs Teilprojekte führen vom Sicherheitskonzept bis zum zweiten Standort in Texas",
-      "t2": "Mit 3,48 Mio USD Projektbudget in zwei Stufen erschließt SpaceX 47,2 Mio USD Umsatz in fünf Jahren",
-      "rm": "Genehmigungen sind der kritische Pfad: Ohne Freigabe bis Ende 2027 startet kein Pilot-Dinner",
-      "src": "Genehmigungen, Orte, Partner und Termine sind recherchiert – Zeitplan und Budget sind Annahmen"
+      "w4": "Ein fester Pavillon in Florida – langfristig zwei eigenständige Standorte",
+      "t1": "Sechs parallele Teilprojekte führen zum eigenen Pavillon und zu vier Piloten in Florida",
+      "t2": "Investition neu kalkulieren – die frühere Lounge-Schätzung dient nur als Orientierung",
+      "rm": "Erst genehmigen und bauen, dann pilotieren – Texas bleibt eine eigene Ausbauentscheidung",
+      "src": "Neue Planannahme vom 20.11.2026; bestehende Quellen belegen keine Grundstücks- oder Partnerzusage"
     },
     "w4": {
       "was": [
-        "Mobiler Glas-Pavillon für 20 Gäste mit Blick auf Nachtstarts, außerhalb der Sperrzonen",
-        "2028: vier Pilot-Dinner in Florida zu 35.000 USD pro Platz",
-        "2031: 24 Events pro Jahr in Florida und bei Starbase (Texas) zu 50.000 USD – 47,2 Mio USD Umsatz in fünf Jahren"
+        "Ein fester Pavillon für 20 Gäste am ersten Standort Titusville/Florida. Grundstück, Sichtachse und Zugang müssen noch geprüft und gesichert werden.",
+        "Den eigenen Pavillon zuerst fertigstellen und betrieblich freigeben; danach vier Pilot-Dinner von Oktober 2028 bis Juni 2029. 35.000 USD je Platz bleiben eine zu prüfende Preishypothese.",
+        "Langfristig zwei eigenständige feste Standorte: Florida zuerst, später möglicherweise Raum Starbase/South Padre Island in Texas. Für Texas sind Bauplatz, Budget und Eröffnung offen."
       ],
       "wer": [
-        "Sponsor: Gwynne Shotwell, President & COO von SpaceX",
-        "Projektleitung: Hospitality-Projektleitung mit Safety-Ingenieur:in aus Launch Operations; je Teilprojekt eine Leitung [Name]",
-        "Partner: Sternekoch aus Orlando, Pavillon-Hersteller, lizenzierter Caterer"
+        "Sponsor als vorgeschlagene Planungsrolle: Gwynne Shotwell, President & COO von SpaceX; keine Zusage.",
+        "Projektleitung: Hospitality-Projektleitung mit Fachverantwortung für Standort, Bau und Sicherheit; je Teilprojekt eine Leitung [Name].",
+        "Benötigte Partner: Architektur- und Fachplanung, Bauunternehmen sowie Kulinarik- und Servicepartner. Konkrete Beauftragung und Zuständigkeiten sind offen."
       ],
       "wann": [
-        "30.11.2026 Projektauftrag (G0) · 30.06.2027 Konzept und Stellplatz frei (G1)",
-        "31.01.2028 Go Pilot (G2) · März bis November 2028 Pilot-Dinner 1 bis 4",
-        "15.12.2028 Go Markteinführung (G3) · 31.12.2030 Übergabe an die Linie (G4)"
+        "30.11.2026 Projektauftrag (G0) · 31.03.2027 Standortoption (G1) · 30.09.2027 Bauinvestition (G2).",
+        "Bau 01.11.2027–31.08.2028 · Abnahmen und betriebliche Vorbereitung im September 2028 · 30.09.2028 Pilotfreigabe (G3).",
+        "Geplante Piloten: 15.10.2028, 15.12.2028, 15.03.2029 und 15.06.2029 · 31.07.2029 Betriebs- und Ausbauprüfung (G4). Alle Tage sind Planannahmen, keine bestätigten Starttermine."
       ],
       "wie": [
-        "Stage-Gate: 3,48 Mio USD in Stufen – 1,79 Mio für 2027, 1,09 Mio für 2028, Rest 2029–30",
-        "Termine nur an Nachtstarts, mit Launch-Garantie: Ersatztermin binnen 12 Monaten",
-        "Nach jedem Pilot NPS und Zahlungsbereitschaft messen; monatlicher Steering-Call mit dem Sponsor"
+        "Investition für den festen Pavillon neu kalkulieren. Historische Orientierung für Standort 1: 10–15 Mio. USD aus der früheren, größeren Lounge-Planung (damals 13,38 Mio., gerundet 13,4 Mio. USD). Dieser Rahmen ist für den Pavillon neu zu validieren; Texas ist nicht enthalten.",
+        "Bau erst nach Standort- und Investitionsfreigabe; eigene Piloten erst nach Fertigstellung, Abnahmen und Betriebsfreigabe. Echte Dinnertermine bleiben von geeigneten Startfenstern und örtlichen Freigaben abhängig.",
+        "Buchungen, Stornos, Gästefeedback, Ablauf und tatsächliche Kosten im Pilot dokumentieren. Erfolgskriterien vorab festlegen; erst mit den Ergebnissen über Betrieb und eine spätere Ausbauprüfung entscheiden."
       ]
     },
     "t1": [
       {
-        "name": "Genehmigung & Sicherheit",
-        "icon": "shield",
-        "inhalt": "Stellplatz außerhalb der Sperrzonen wählen, Lärm- und Sicherheitsgutachten, Abstimmung mit Space Force, NASA und FAA, Genehmigungen in Florida und Texas",
-        "ziel": "Jeder Abend ist genehmigt und sicher – ein Sicherheitskonzept für beide Standorte"
+        "name": "Standort & Genehmigungen",
+        "icon": "map",
+        "inhalt": "Fläche in Titusville/Florida prüfen, Sichtachsen und Zugang klären, Grundstücksoption sichern sowie Standort-, Bau-, Sicherheits- und Betriebsfreigaben vorbereiten.",
+        "ziel": "Ein geeigneter, gesicherter und freigegebener erster Standort; noch keine Grundstücks- oder Genehmigungszusage."
       },
       {
-        "name": "Pavillon & Logistik",
+        "name": "Architektur & Bau",
         "icon": "pavilion",
-        "inhalt": "Glas-Pavillon mit Küche, Klimatechnik und Panoramafront ausschreiben (z. B. Losberger De Boer), bauen, Aufbau testen, Transport FL–TX planen",
-        "ziel": "Ein Pavillon für zwei Standorte statt zwei fester Bauten"
+        "inhalt": "Einen festen Pavillon für 20 Gäste mit Panoramafront, Küche und technischer Versorgung entwerfen, neu kalkulieren und nach G2 bauen; Abnahmen und Probebetrieb im September 2028.",
+        "ziel": "Der eigene Pavillon ist vor dem ersten Pilot-Dinner fertig und betriebsbereit."
       },
       {
-        "name": "Kulinarik & Service",
+        "name": "Kulinarik & Betrieb",
         "icon": "chef",
-        "inhalt": "Sternekoch aus Orlando gewinnen (Michelin Guide Florida 2026), Menü und Service entwickeln, Testdinner im Prototyp, Team schulen",
-        "ziel": "Sterne-Niveau mit einer Servicekraft je zwei Gäste"
+        "inhalt": "Kulinarikpartner, Menü, Serviceabläufe und Betriebsrollen entwickeln; das Team im fertigen Pavillon schulen und den Testservice vor G3 prüfen.",
+        "ziel": "Ein belastbarer Ablauf für die Piloten; Rückmeldungen werden vor dem Regelbetrieb umgesetzt."
       },
       {
-        "name": "Vertrieb & Marketing",
+        "name": "Vertrieb & Pilotgäste",
         "icon": "handshake",
-        "inhalt": "Markttest auf der ILTM Cannes, Partnerkanäle zu Private Banks und Family Offices, Pressearbeit, Vorverkauf und Warteliste",
-        "ziel": "Pilot ausverkauft, Warteliste für den Zielpreis von 50.000 USD"
+        "inhalt": "Zielgruppen und Partnerkanäle prüfen, Interesse und Warteliste aufbauen; Pilotbuchungen, Stornos und Preishypothese nachvollziehbar dokumentieren.",
+        "ziel": "Nachfrage durch reale Pilotdaten prüfen, ohne bereits bestätigte Zahlungsbereitschaft zu behaupten."
       },
       {
-        "name": "Pilot-Dinner Florida",
+        "name": "Vier Pilot-Dinner",
         "icon": "rocket",
-        "inhalt": "Vier Abende mit je 20 Plätzen, gekoppelt an Nachtstarts, mit Launch-Garantie; nach jedem Abend NPS und Zahlungsbereitschaft messen",
-        "ziel": "Nachweis von Nachfrage, Ablauf und Preis vor dem Hochlauf"
+        "inhalt": "Vier geplante Abende im eigenen, freigegebenen Florida-Pavillon: 15.10.2028, 15.12.2028, 15.03.2029 und 15.06.2029; jeweils bis zu 20 Gäste. Preisannahme: 35.000 USD je Platz.",
+        "ziel": "Nachfrage, Ablauf, Rückmeldungen und Kosten als Grundlage für G4 auswerten."
       },
       {
-        "name": "Skalierung & Regelbetrieb",
+        "name": "Betrieb & Ausbauprüfung",
         "icon": "chart",
-        "inhalt": "Zweiter Standort bei Starbase (South Padre Island), Hochlauf von 10 auf 24 Events pro Jahr, Übergabe an die Linie Ende 2030",
-        "ziel": "„Der seltenste Tisch der Welt“ als fester Teil des SpaceX-Angebots"
+        "inhalt": "Ab Juli 2029 die Piloten auswerten und den Florida-Betrieb prüfen. Langfristig einen zweiten eigenständigen festen Standort im Raum Starbase/South Padre Island untersuchen; dafür sind ein eigener Bauplatz, Genehmigungen und Investitionsbeschluss nötig.",
+        "ziel": "Florida nur nach belastbarem Nachweis verstetigen; Texas bleibt eine bedingte Perspektive ohne gesicherten Bauplatz, Budget oder Eröffnungstermin."
       }
     ],
     "pipeHeads": [
@@ -88,34 +88,53 @@ window.ROCKET_DATA = {
           0,
           0
         ],
-        "pl": "Hospitality-PL",
-        "col": "Sponsor: Gwynne Shotwell",
+        "pl": "Projektleitung [Name]",
+        "col": "Sponsor als vorgeschlagene Rolle",
         "cust": "–",
         "st": "y",
         "pot": "–",
-        "bud": "400"
+        "bud": "offen"
       },
       {
-        "tp": "1 Genehmigung & Sicherheit",
+        "tp": "1 Standort & Genehmigungen",
         "pipe": [
           1,
           1,
-          0
+          1
         ],
         "fin": [
           1,
           0,
           0
         ],
-        "pl": "Safety-Ing. Launch Ops",
-        "col": "Space Force, NASA, FAA, Behörden FL/TX",
+        "pl": "TP-Lead Standort/Sicherheit",
+        "col": "Örtliche Stellen und Fachplanung; Zuständigkeiten prüfen",
         "cust": "intern",
         "st": "y",
         "pot": "–",
-        "bud": "780"
+        "bud": "offen"
       },
       {
-        "tp": "2 Pavillon & Logistik",
+        "tp": "2 Architektur & Bau",
+        "pipe": [
+          1,
+          1,
+          1
+        ],
+        "fin": [
+          1,
+          0,
+          0
+        ],
+        "pl": "TP-Lead Bau",
+        "col": "Architektur, Fachplanung, Bauunternehmen; Auswahl offen",
+        "cust": "intern",
+        "st": "y",
+        "pot": "–",
+        "bud": "offen"
+      },
+      {
+        "tp": "3 Kulinarik & Betrieb",
         "pipe": [
           1,
           1,
@@ -127,33 +146,14 @@ window.ROCKET_DATA = {
           0
         ],
         "pl": "Hospitality-PL",
-        "col": "Losberger De Boer (Kandidat)",
-        "cust": "intern",
-        "st": "g",
-        "pot": "–",
-        "bud": "1.000"
-      },
-      {
-        "tp": "3 Kulinarik & Service",
-        "pipe": [
-          1,
-          1,
-          0
-        ],
-        "fin": [
-          1,
-          1,
-          0
-        ],
-        "pl": "Hospitality-PL",
-        "col": "Sternekoch Orlando, Sommelier",
+        "col": "Kulinarikpartner und Serviceleitung; Auswahl offen",
         "cust": "Gäste",
-        "st": "g",
+        "st": "y",
         "pot": "–",
-        "bud": "300"
+        "bud": "offen"
       },
       {
-        "tp": "4 Vertrieb & Marketing",
+        "tp": "4 Vertrieb & Pilotgäste",
         "pipe": [
           1,
           1,
@@ -161,62 +161,62 @@ window.ROCKET_DATA = {
         ],
         "fin": [
           1,
-          1,
+          0,
           0
         ],
         "pl": "Sales-Lead [Name]",
-        "col": "Private Banks, Co-Branding-Partner",
-        "cust": "UHNWI, Corporate",
-        "st": "g",
+        "col": "Zielgruppen- und Vertriebspartner; keine Zusagen",
+        "cust": "Pilotinteressierte",
+        "st": "y",
         "pot": "–",
-        "bud": "200"
+        "bud": "offen"
       },
       {
-        "tp": "5 Pilot-Dinner Florida",
+        "tp": "5 Vier Pilot-Dinner",
         "pipe": [
-          0,
           1,
+          1,
+          1
+        ],
+        "fin": [
+          1,
+          0,
           0
         ],
-        "fin": [
-          1,
-          0,
-          1
-        ],
         "pl": "Hospitality-PL",
-        "col": "Launch Ops, lizenzierter Caterer",
-        "cust": "UHNWI (64 Plätze)",
+        "col": "Eigenes Team im freigegebenen Florida-Pavillon",
+        "cust": "Bis zu 80 Plätze als Kapazität; Buchungen offen",
         "st": "y",
-        "pot": "2,2",
-        "bud": "200"
+        "pot": "–",
+        "bud": "offen"
       },
       {
-        "tp": "6 Skalierung & Regelbetrieb",
+        "tp": "6 Betrieb & Ausbauprüfung",
         "pipe": [
-          0,
+          1,
           1,
           1
         ],
         "fin": [
           1,
           0,
-          1
+          0
         ],
-        "pl": "GM RocketLight",
-        "col": "City of Starbase, Caterer (TABC)",
-        "cust": "UHNWI, Corporate",
-        "st": "g",
-        "pot": "45,0",
-        "bud": "600"
+        "pl": "Projektleitung / künftige Betriebsleitung",
+        "col": "Florida-Betrieb; Texas-Partner und Fläche offen",
+        "cust": "Gäste / intern",
+        "st": "y",
+        "pot": "–",
+        "bud": "offen"
       },
       {
-        "tp": "Summe",
+        "tp": "Summe · neu zu kalkulieren",
         "sum": true,
-        "pot": "47,2",
-        "bud": "3.480"
+        "pot": "offen",
+        "bud": "offen"
       }
     ],
-    "t2note": "Budget = Projekt- und F&E-Kosten der 5-Jahres-Kalkulation (Personal 780 T + Sachkosten 2.700 T USD); Aufteilung auf Teilprojekte ist eigene Annahme. Potential = Umsatz Jahr 1–5 laut Kalkulator. Laufender Betrieb ab 2029 wird aus dem Umsatz finanziert.",
+    "t2note": "Für den festen Pavillon liegt noch keine neue Investitions- oder Umsatzrechnung vor. Der historische Orientierungsrahmen von 10–15 Mio. USD (damals 13,38 Mio., gerundet 13,4 Mio. USD) stammt aus der größeren festen Lounge mit ca. 1.000 m², zwei Geschossen, Dachterrasse und Profiküche. Er betrifft nur Standort 1 und ist für das Pavillonkonzept neu zu validieren. Standort 2 in Texas benötigt eine zusätzliche, eigene Kalkulation. 47,2 Mio. USD Umsatz und die Renditekennzahlen des bisherigen mobilen Rechners validieren diesen neuen Plan nicht.",
     "rows": [
       {
         "name": "Gesamtprojekt",
@@ -227,597 +227,558 @@ window.ROCKET_DATA = {
             "t": "tri",
             "d": "2026-11-30",
             "dir": "start",
-            "dx": -0.2
+            "planned": true
           },
           {
             "t": "dia",
             "d": "2026-11-30",
             "kind": "gate",
-            "dx": 0.1
-          },
-          {
-            "t": "bar",
-            "s": "2026-12-12",
-            "e": "2027-06-20",
-            "text": "Konzept",
-            "style": "p3"
-          },
-          {
-            "t": "dia",
-            "d": "2027-06-30",
-            "kind": "gate"
-          },
-          {
-            "t": "bar",
-            "s": "2027-07-10",
-            "e": "2028-01-22",
-            "text": "Umsetzung",
-            "style": "p3"
-          },
-          {
-            "t": "dia",
-            "d": "2028-01-31",
-            "kind": "gate"
-          },
-          {
-            "t": "bar",
-            "s": "2028-02-10",
-            "e": "2028-12-05",
-            "text": "Pilotphase Florida",
-            "style": "dot"
-          },
-          {
-            "t": "dia",
-            "d": "2028-12-15",
-            "kind": "gate",
             "planned": true
-          },
-          {
-            "t": "bar",
-            "s": "2029-01-01",
-            "e": "2030-12-01",
-            "text": "Hochlauf FL + TX",
-            "style": "dot"
-          },
-          {
-            "t": "dia",
-            "d": "2030-12-31",
-            "kind": "gate",
-            "planned": true
-          },
-          {
-            "t": "bar",
-            "s": "2031-01-20",
-            "e": "2031-12-31",
-            "text": "Regelbetrieb",
-            "style": "dot",
-            "fs": 11
           },
           {
             "t": "lab",
             "d": "2026-11-30",
-            "dx": 0.1,
             "text": "G0 30.11.26",
-            "pos": "above",
-            "color": "FFD400",
-            "bold": true
-          },
-          {
-            "t": "lab",
-            "d": "2027-06-30",
-            "text": "G1 30.06.27",
-            "pos": "above",
-            "color": "FFD400",
-            "bold": true
-          },
-          {
-            "t": "lab",
-            "d": "2028-01-31",
-            "text": "G2 31.01.28",
-            "pos": "above",
-            "color": "FFD400",
-            "bold": true
-          },
-          {
-            "t": "lab",
-            "d": "2028-12-15",
-            "text": "G3 15.12.28",
-            "pos": "above",
-            "color": "FFD400",
-            "bold": true
-          },
-          {
-            "t": "lab",
-            "d": "2030-12-31",
-            "text": "G4 31.12.30",
-            "pos": "above",
-            "color": "FFD400",
-            "bold": true
+            "pos": "above"
           },
           {
             "t": "lab",
             "d": "2026-11-30",
-            "dx": 0.1,
             "text": "Projektauftrag",
-            "pos": "below",
-            "align": "l"
-          },
-          {
-            "t": "lab",
-            "d": "2027-06-30",
-            "text": "Konzept frei",
             "pos": "below"
           },
           {
-            "t": "lab",
-            "d": "2028-01-31",
-            "text": "Go Pilot",
-            "pos": "below"
+            "t": "dia",
+            "d": "2027-03-31",
+            "kind": "gate",
+            "planned": true
           },
           {
             "t": "lab",
-            "d": "2028-12-15",
-            "text": "Go Markteinführung",
-            "pos": "below"
+            "d": "2027-03-31",
+            "text": "G1 31.03.27",
+            "pos": "above"
           },
           {
             "t": "lab",
-            "d": "2030-12-31",
-            "text": "Übergabe an Linie",
+            "d": "2027-03-31",
+            "text": "Standortoption",
             "pos": "below"
+          },
+          {
+            "t": "dia",
+            "d": "2027-09-30",
+            "kind": "gate",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2027-09-30",
+            "text": "G2 30.09.27",
+            "pos": "above"
+          },
+          {
+            "t": "lab",
+            "d": "2027-09-30",
+            "text": "Bauinvestition",
+            "pos": "below"
+          },
+          {
+            "t": "dia",
+            "d": "2028-09-30",
+            "kind": "gate",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2028-09-30",
+            "text": "G3 30.09.28",
+            "pos": "above"
+          },
+          {
+            "t": "lab",
+            "d": "2028-09-30",
+            "text": "Pilotfreigabe",
+            "pos": "below"
+          },
+          {
+            "t": "dia",
+            "d": "2029-07-31",
+            "kind": "gate",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2029-07-31",
+            "text": "G4 31.07.29",
+            "pos": "above"
+          },
+          {
+            "t": "lab",
+            "d": "2029-07-31",
+            "text": "Betriebs- & Ausbauprüfung",
+            "pos": "below"
+          },
+          {
+            "t": "bar",
+            "s": "2026-12-01",
+            "e": "2027-03-20",
+            "text": "Standort & Konzept",
+            "style": "p1"
+          },
+          {
+            "t": "bar",
+            "s": "2027-04-01",
+            "e": "2027-09-20",
+            "text": "Planung & Genehmigung",
+            "style": "p2"
+          },
+          {
+            "t": "bar",
+            "s": "2027-11-01",
+            "e": "2028-08-31",
+            "text": "Bau Standort Florida",
+            "style": "p3"
+          },
+          {
+            "t": "bar",
+            "s": "2028-09-01",
+            "e": "2028-09-29",
+            "text": "Abnahmen & Betrieb",
+            "style": "dot"
+          },
+          {
+            "t": "bar",
+            "s": "2028-10-01",
+            "e": "2029-06-30",
+            "text": "Vier Piloten in Florida",
+            "style": "dot"
+          },
+          {
+            "t": "bar",
+            "s": "2029-08-01",
+            "e": "2031-12-31",
+            "text": "Betrieb Florida (bedingt)",
+            "style": "dot"
           }
         ]
       },
       {
-        "name": "Genehmigung & Sicherheit",
-        "icon": "shield",
+        "name": "Standort & Genehmigungen",
+        "icon": "map",
         "st": "y",
         "items": [
           {
             "t": "tri",
             "d": "2026-12-01",
             "dir": "start",
-            "dx": -0.14
+            "planned": true
           },
           {
             "t": "bar",
             "s": "2026-12-01",
-            "e": "2027-04-10",
-            "text": "Stellplatzwahl",
-            "style": "p1",
-            "fs": 11.5
-          },
-          {
-            "t": "bar",
-            "s": "2027-04-10",
-            "e": "2027-07-24",
-            "text": "Gutachten",
-            "style": "p2"
+            "e": "2027-03-20",
+            "text": "Standortsuche & Prüfung",
+            "style": "p1"
           },
           {
             "t": "dia",
-            "d": "2027-07-31",
-            "kind": "qg"
-          },
-          {
-            "t": "bar",
-            "s": "2027-08-08",
-            "e": "2027-12-20",
-            "text": "Genehmigung FL",
-            "style": "p3",
-            "fs": 11
-          },
-          {
-            "t": "dia",
-            "d": "2027-12-31",
-            "kind": "qg"
-          },
-          {
-            "t": "bar",
-            "s": "2028-07-01",
-            "e": "2029-01-20",
-            "text": "Genehmigung TX",
-            "style": "dot"
-          },
-          {
-            "t": "dia",
-            "d": "2029-02-28",
+            "d": "2027-03-31",
             "kind": "qg",
             "planned": true
           },
           {
+            "t": "lab",
+            "d": "2027-03-31",
+            "text": "Standortoption 31.03.27",
+            "pos": "below"
+          },
+          {
+            "t": "bar",
+            "s": "2027-04-01",
+            "e": "2027-06-30",
+            "text": "Standort- & Sicherheitsplanung",
+            "style": "p2"
+          },
+          {
+            "t": "bar",
+            "s": "2027-07-01",
+            "e": "2027-09-20",
+            "text": "Genehmigung Bau",
+            "style": "p3"
+          },
+          {
+            "t": "dia",
+            "d": "2027-09-30",
+            "kind": "qg",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2027-09-30",
+            "text": "Baugenehmigung bis 30.09.27",
+            "pos": "below"
+          },
+          {
+            "t": "bar",
+            "s": "2028-09-01",
+            "e": "2028-09-20",
+            "text": "Betriebsfreigaben",
+            "style": "dot"
+          },
+          {
+            "t": "dia",
+            "d": "2028-09-30",
+            "kind": "qg",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2028-09-30",
+            "text": "Betriebsfreigabe 30.09.28",
+            "pos": "below"
+          },
+          {
             "t": "tri",
-            "d": "2029-02-28",
+            "d": "2028-09-30",
             "dir": "end",
-            "planned": true,
-            "dx": 0.3
-          },
-          {
-            "t": "lab",
-            "d": "2027-07-31",
-            "text": "Gutachten 31.07.27",
-            "pos": "above"
-          },
-          {
-            "t": "lab",
-            "d": "2027-12-31",
-            "text": "Genehmigung FL 31.12.27",
-            "pos": "below"
-          },
-          {
-            "t": "lab",
-            "d": "2029-02-28",
-            "text": "Genehmigung TX 02/29",
-            "pos": "below"
-          },
-          {
-            "t": "lab",
-            "x": 10.6,
-            "align": "l",
-            "text": "Gelb: Starship-Sperrzonen an LC-39A noch nicht final",
-            "pos": "above",
-            "color": "F2A900",
-            "fs": 11.5
+            "planned": true
           }
         ]
       },
       {
-        "name": "Pavillon & Logistik",
+        "name": "Architektur & Bau",
         "icon": "pavilion",
-        "st": "g",
+        "st": "y",
+        "items": [
+          {
+            "t": "tri",
+            "d": "2027-01-15",
+            "dir": "start",
+            "planned": true
+          },
+          {
+            "t": "bar",
+            "s": "2027-01-15",
+            "e": "2027-03-31",
+            "text": "Raum- & Nutzungskonzept",
+            "style": "p1"
+          },
+          {
+            "t": "bar",
+            "s": "2027-04-01",
+            "e": "2027-08-31",
+            "text": "Entwurf & Fachplanung",
+            "style": "p2"
+          },
+          {
+            "t": "bar",
+            "s": "2027-09-01",
+            "e": "2027-09-20",
+            "text": "Kosten & Vergabe",
+            "style": "p3"
+          },
+          {
+            "t": "dia",
+            "d": "2027-09-30",
+            "kind": "qg",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2027-09-30",
+            "text": "Bauinvestition 30.09.27",
+            "pos": "below"
+          },
+          {
+            "t": "bar",
+            "s": "2027-11-01",
+            "e": "2028-08-31",
+            "text": "Bau & Ausstattung",
+            "style": "dot"
+          },
+          {
+            "t": "bar",
+            "s": "2028-09-01",
+            "e": "2028-09-20",
+            "text": "Abnahme & Probebetrieb",
+            "style": "dot"
+          },
+          {
+            "t": "dia",
+            "d": "2028-09-30",
+            "kind": "qg",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2028-09-30",
+            "text": "Betriebsbereit 30.09.28",
+            "pos": "below"
+          },
+          {
+            "t": "tri",
+            "d": "2028-09-30",
+            "dir": "end",
+            "planned": true
+          }
+        ]
+      },
+      {
+        "name": "Kulinarik & Betrieb",
+        "icon": "chef",
+        "st": "y",
         "items": [
           {
             "t": "tri",
             "d": "2027-01-04",
             "dir": "start",
-            "dx": -0.14
-          },
-          {
-            "t": "bar",
-            "s": "2027-01-04",
-            "e": "2027-06-20",
-            "text": "Ausschreibung",
-            "style": "p1"
-          },
-          {
-            "t": "dia",
-            "d": "2027-06-30",
-            "kind": "qg"
-          },
-          {
-            "t": "bar",
-            "s": "2027-07-10",
-            "e": "2027-12-08",
-            "text": "Bau Prototyp",
-            "style": "p2"
-          },
-          {
-            "t": "dia",
-            "d": "2027-12-20",
-            "kind": "qg"
-          },
-          {
-            "t": "bar",
-            "s": "2028-06-01",
-            "e": "2028-09-30",
-            "text": "Optimierung",
-            "style": "dot"
-          },
-          {
-            "t": "bar",
-            "s": "2029-01-01",
-            "e": "2030-12-20",
-            "text": "Einsatz FL und TX",
-            "style": "dot"
-          },
-          {
-            "t": "tri",
-            "d": "2030-12-31",
-            "dir": "end",
-            "planned": true,
-            "dx": 0.12
-          },
-          {
-            "t": "lab",
-            "d": "2027-06-30",
-            "text": "Auftrag 30.06.27",
-            "pos": "below"
-          },
-          {
-            "t": "lab",
-            "d": "2027-12-20",
-            "text": "Abnahme 20.12.27",
-            "pos": "above"
-          }
-        ]
-      },
-      {
-        "name": "Kulinarik & Service",
-        "icon": "chef",
-        "st": "g",
-        "items": [
-          {
-            "t": "tri",
-            "d": "2026-12-01",
-            "dir": "start",
-            "dx": -0.14
-          },
-          {
-            "t": "bar",
-            "s": "2026-12-01",
-            "e": "2027-04-20",
-            "text": "Koch-Auswahl",
-            "style": "p1"
-          },
-          {
-            "t": "dia",
-            "d": "2027-04-30",
-            "kind": "qg"
-          },
-          {
-            "t": "bar",
-            "s": "2027-05-10",
-            "e": "2027-10-31",
-            "text": "Menü & Service",
-            "style": "p2"
-          },
-          {
-            "t": "dia",
-            "d": "2027-11-15",
-            "kind": "ms"
-          },
-          {
-            "t": "bar",
-            "s": "2027-11-28",
-            "e": "2028-02-20",
-            "text": "Schulung",
-            "style": "dot",
-            "fs": 11
-          },
-          {
-            "t": "tri",
-            "d": "2028-02-29",
-            "dir": "end",
-            "planned": true,
-            "dx": 0.18
-          },
-          {
-            "t": "lab",
-            "d": "2027-04-30",
-            "text": "Partnervertrag 30.04.27",
-            "pos": "below"
-          },
-          {
-            "t": "lab",
-            "d": "2027-11-15",
-            "text": "Testdinner 15.11.27",
-            "pos": "below"
-          }
-        ]
-      },
-      {
-        "name": "Vertrieb & Marketing",
-        "icon": "handshake",
-        "st": "g",
-        "items": [
-          {
-            "t": "tri",
-            "d": "2026-11-30",
-            "dir": "start",
-            "dx": -0.16
-          },
-          {
-            "t": "dia",
-            "d": "2026-11-30",
-            "kind": "ms",
-            "dx": 0.12
-          },
-          {
-            "t": "bar",
-            "s": "2026-12-22",
-            "e": "2027-04-03",
-            "text": "Pitch & PR",
-            "style": "p1"
-          },
-          {
-            "t": "dia",
-            "d": "2027-04-13",
-            "kind": "ms"
-          },
-          {
-            "t": "bar",
-            "s": "2027-04-23",
-            "e": "2027-09-30",
-            "text": "Partnerkanäle",
-            "style": "p2"
-          },
-          {
-            "t": "bar",
-            "s": "2027-10-01",
-            "e": "2028-02-05",
-            "text": "Vorverkauf",
-            "style": "p3"
-          },
-          {
-            "t": "dia",
-            "d": "2028-02-20",
-            "kind": "ms",
             "planned": true
           },
           {
             "t": "bar",
-            "s": "2028-07-01",
-            "e": "2030-12-20",
-            "text": "Warteliste & Vorverkauf 50.000 USD",
+            "s": "2027-01-04",
+            "e": "2027-06-30",
+            "text": "Kulinarikpartner & Menü",
+            "style": "p1"
+          },
+          {
+            "t": "bar",
+            "s": "2027-07-01",
+            "e": "2028-08-31",
+            "text": "Abläufe & Team",
+            "style": "p2"
+          },
+          {
+            "t": "bar",
+            "s": "2028-09-01",
+            "e": "2028-09-20",
+            "text": "Schulung & Testservice",
+            "style": "p3"
+          },
+          {
+            "t": "dia",
+            "d": "2028-09-30",
+            "kind": "qg",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2028-09-30",
+            "text": "Team bereit für G3",
+            "pos": "below"
+          },
+          {
+            "t": "bar",
+            "s": "2028-10-01",
+            "e": "2029-06-30",
+            "text": "Pilotlernen & Verbesserungen",
             "style": "dot"
           },
           {
             "t": "tri",
-            "d": "2030-12-31",
+            "d": "2029-07-31",
             "dir": "end",
-            "planned": true,
-            "dx": 0.12
-          },
-          {
-            "t": "lab",
-            "x": 5.25,
-            "align": "l",
-            "text": "ILTM Cannes 30.11.26",
-            "pos": "below"
-          },
-          {
-            "t": "lab",
-            "d": "2027-04-13",
-            "text": "Space Symposium 04/27",
-            "pos": "above"
-          },
-          {
-            "t": "lab",
-            "d": "2028-02-20",
-            "dx": 0.1,
-            "align": "r",
-            "text": "64 Plätze verkauft 02/28",
-            "pos": "below"
+            "planned": true
           }
         ]
       },
       {
-        "name": "Pilot-Dinner Florida",
+        "name": "Vertrieb & Pilotgäste",
+        "icon": "handshake",
+        "st": "y",
+        "items": [
+          {
+            "t": "tri",
+            "d": "2027-04-01",
+            "dir": "start",
+            "planned": true
+          },
+          {
+            "t": "bar",
+            "s": "2027-04-01",
+            "e": "2027-09-30",
+            "text": "Zielgruppe & Partnerkanäle",
+            "style": "p1"
+          },
+          {
+            "t": "bar",
+            "s": "2027-10-01",
+            "e": "2028-09-20",
+            "text": "Interesse & Warteliste",
+            "style": "p2"
+          },
+          {
+            "t": "dia",
+            "d": "2028-09-30",
+            "kind": "qg",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2028-09-30",
+            "text": "Pilotfreigabe vor Durchführung",
+            "pos": "below"
+          },
+          {
+            "t": "bar",
+            "s": "2028-10-01",
+            "e": "2029-06-30",
+            "text": "Pilotbuchungen & Feedback",
+            "style": "dot"
+          },
+          {
+            "t": "bar",
+            "s": "2029-08-01",
+            "e": "2031-12-31",
+            "text": "Vertrieb Florida (bedingt)",
+            "style": "dot"
+          },
+          {
+            "t": "tri",
+            "d": "2031-12-31",
+            "dir": "end",
+            "planned": true
+          }
+        ]
+      },
+      {
+        "name": "Vier Pilot-Dinner",
         "icon": "rocket",
         "st": "y",
         "items": [
           {
             "t": "tri",
-            "d": "2028-03-01",
+            "d": "2028-10-01",
             "dir": "start",
-            "planned": true,
-            "dx": -0.14
+            "planned": true
           },
           {
             "t": "track",
-            "s": "2028-03-01",
-            "e": "2028-11-30"
-          },
-          {
-            "t": "dia",
-            "d": "2028-03-15",
-            "kind": "ms",
-            "planned": true,
-            "num": "1"
-          },
-          {
-            "t": "dia",
-            "d": "2028-05-15",
-            "kind": "ms",
-            "planned": true,
-            "num": "2"
+            "s": "2028-10-01",
+            "e": "2029-06-30"
           },
           {
             "t": "dia",
             "d": "2028-10-15",
             "kind": "ms",
             "planned": true,
-            "num": "3"
+            "num": "1"
+          },
+          {
+            "t": "lab",
+            "d": "2028-10-15",
+            "text": "P1 15.10.2028",
+            "pos": "below"
           },
           {
             "t": "dia",
-            "d": "2028-11-15",
+            "d": "2028-12-15",
+            "kind": "ms",
+            "planned": true,
+            "num": "2"
+          },
+          {
+            "t": "lab",
+            "d": "2028-12-15",
+            "text": "P2 15.12.2028",
+            "pos": "below"
+          },
+          {
+            "t": "dia",
+            "d": "2029-03-15",
+            "kind": "ms",
+            "planned": true,
+            "num": "3"
+          },
+          {
+            "t": "lab",
+            "d": "2029-03-15",
+            "text": "P3 15.03.2029",
+            "pos": "below"
+          },
+          {
+            "t": "dia",
+            "d": "2029-06-15",
             "kind": "ms",
             "planned": true,
             "num": "4"
           },
           {
-            "t": "tri",
-            "d": "2028-12-15",
-            "dir": "end",
+            "t": "lab",
+            "d": "2029-06-15",
+            "text": "P4 15.06.2029",
+            "pos": "below"
+          },
+          {
+            "t": "bar",
+            "s": "2029-07-01",
+            "e": "2029-07-25",
+            "text": "Pilot-Auswertung",
+            "style": "dot"
+          },
+          {
+            "t": "dia",
+            "d": "2029-07-31",
+            "kind": "qg",
             "planned": true
           },
           {
             "t": "lab",
-            "x": 10.8,
-            "align": "l",
-            "text": "4 Abende à 20 Gäste · 35.000 USD",
-            "pos": "below",
-            "fs": 11
+            "d": "2029-07-31",
+            "text": "Nachweis für G4",
+            "pos": "below"
           },
           {
-            "t": "lab",
-            "x": 11.95,
-            "align": "l",
-            "text": "Pause im Hurrikan-Peak",
-            "pos": "above",
-            "fs": 11
-          },
-          {
-            "t": "lab",
-            "x": 5.65,
-            "align": "l",
-            "text": "Gelb: Starts verschieben sich oft – Launch-Garantie nötig",
-            "pos": "above",
-            "color": "F2A900",
-            "fs": 11.5
+            "t": "tri",
+            "d": "2029-07-31",
+            "dir": "end",
+            "planned": true
           }
         ]
       },
       {
-        "name": "Skalierung & Regelbetrieb",
+        "name": "Betrieb & Ausbauprüfung",
         "icon": "chart",
-        "st": "g",
+        "st": "y",
         "items": [
           {
             "t": "tri",
-            "d": "2028-07-01",
+            "d": "2029-07-01",
             "dir": "start",
-            "planned": true,
-            "dx": -0.14
+            "planned": true
           },
           {
             "t": "bar",
-            "s": "2028-07-01",
-            "e": "2028-12-31",
-            "text": "Vorbereitung Starbase",
+            "s": "2029-07-01",
+            "e": "2029-07-25",
+            "text": "Betriebs- & Ausbauprüfung",
             "style": "dot"
           },
           {
-            "t": "bar",
-            "s": "2029-01-01",
-            "e": "2029-12-31",
-            "text": "10 Events",
-            "style": "dot"
+            "t": "dia",
+            "d": "2029-07-31",
+            "kind": "qg",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2029-07-31",
+            "text": "Betriebsentscheidung 31.07.29",
+            "pos": "below"
           },
           {
             "t": "bar",
-            "s": "2030-01-01",
-            "e": "2030-12-20",
-            "text": "16 Events",
+            "s": "2029-08-01",
+            "e": "2031-12-31",
+            "text": "Betrieb Florida (bedingt)",
             "style": "dot"
           },
           {
             "t": "tri",
-            "d": "2030-12-31",
+            "d": "2031-12-31",
             "dir": "end",
-            "planned": true,
-            "dx": 0.12
-          },
-          {
-            "t": "bar",
-            "s": "2031-02-01",
-            "e": "2031-12-31",
-            "text": "24 Events",
-            "style": "dot"
-          },
-          {
-            "t": "lab",
-            "d": "2029-07-01",
-            "text": "1. Event Starbase 2029",
-            "pos": "below"
-          },
-          {
-            "t": "lab",
-            "x": 18.4,
-            "align": "r",
-            "text": "Regelbetrieb",
-            "pos": "below"
+            "planned": true
           }
         ]
       }
@@ -825,41 +786,54 @@ window.ROCKET_DATA = {
     "links": [
       {
         "from": {
-          "row": 3,
-          "d": "2027-11-15"
+          "row": 1,
+          "d": "2027-09-30"
         },
         "to": {
           "row": 2,
-          "d": "2027-12-20"
+          "d": "2027-11-01"
         },
-        "text": "Testdinner im Prototyp",
-        "textX": 9.7,
+        "text": "Bau erst nach Genehmigung und G2",
+        "textX": 9.15,
+        "textRow": 2
+      },
+      {
+        "from": {
+          "row": 2,
+          "d": "2028-09-30"
+        },
+        "to": {
+          "row": 5,
+          "d": "2028-10-15"
+        },
+        "text": "Eigener Pavillon vor eigenem Pilot freigegeben",
+        "textX": 12.5,
+        "textRow": 5
+      },
+      {
+        "from": {
+          "row": 5,
+          "d": "2029-03-15"
+        },
+        "to": {
+          "row": 3,
+          "d": "2029-03-16"
+        },
+        "text": "Pilot-Feedback verbessert Menü und Ablauf",
+        "textX": 14,
         "textRow": 3
       },
       {
         "from": {
           "row": 5,
-          "d": "2028-05-15"
-        },
-        "to": {
-          "row": 2,
-          "d": "2028-06-01"
-        },
-        "text": "Gästefeedback fließt in Umbau",
-        "textX": 11.97,
-        "textRow": 2
-      },
-      {
-        "from": {
-          "row": 5,
-          "d": "2028-12-15"
+          "d": "2029-07-25"
         },
         "to": {
           "row": 6,
-          "d": "2029-01-01"
+          "d": "2029-07-31"
         },
-        "text": "Preis 50.000 USD bestätigt",
-        "textX": 14.42,
+        "text": "Nachweis vor Betriebsentscheidung",
+        "textX": 14.7,
         "textRow": 6
       }
     ],
@@ -909,19 +883,6 @@ window.ROCKET_DATA = {
         ]
       },
       {
-        "fact": "Banana Creek am Apollo/Saturn V Center liegt 3,9 Meilen von LC-39A; der Saal ist für Dinner ab 19 Uhr buchbar",
-        "links": [
-          {
-            "by": "KSC Launch Viewing",
-            "url": "https://kennedyspacecenter.com/launches-and-events/see-a-launch/launch-viewing-locations"
-          },
-          {
-            "by": "KSC Event Venue",
-            "url": "https://www.kennedyspacecenter.com/groups/event-venue---apollo-saturn-v-center"
-          }
-        ]
-      },
-      {
         "fact": "Temporäre Alkohol-Genehmigung in Florida nur für Non-Profits, Städte und Counties – Ausschank daher über lizenzierten Caterer",
         "links": [
           {
@@ -945,15 +906,6 @@ window.ROCKET_DATA = {
           {
             "by": "Visit Orlando, 28.05.2026",
             "url": "https://www.visitorlando.org/media/press-releases/post/60-orlando-restaurants-recognized-in-2026-michelin-florida-guide/"
-          }
-        ]
-      },
-      {
-        "fact": "Modulare Hospitality-Bauten zur Miete oder zum Kauf, z. B. beim America's Cup",
-        "links": [
-          {
-            "by": "Losberger De Boer",
-            "url": "https://www.losbergerdeboer.com/uk/solutions/event-space-rental/temporary-venues/"
           }
         ]
       },
@@ -987,14 +939,34 @@ window.ROCKET_DATA = {
             "url": "https://fortune.com/ranking/most-powerful-women/2026/gwynne-shotwell/"
           }
         ]
+      },
+      {
+        "fact": "City of Titusville, St. Johns River WMD, BRPH und Grundstücke (3665 S. Washington Ave, 137 Birch St)",
+        "links": [
+          {
+            "by": "W-Fragen-Übung der Gruppe, 09.10.2026",
+            "url": null
+          }
+        ]
+      },
+      {
+        "fact": "Atlantische Hurrikansaison vom 1. Juni bis 30. November",
+        "links": [
+          {
+            "by": "NOAA",
+            "url": "https://www.nhc.noaa.gov/climo/"
+          }
+        ]
       }
     ],
     "assumptions": [
-      "Events, Plätze, Preise, Umsatz (47,2 Mio USD) und Projektbudget (3,48 Mio USD) stammen aus der 5-Jahres-Kalkulation im Inno-Rendite-Kalkulator (Part 4, Stand 09.10.2026).",
-      "Kalkulator-Check: 3,48 Mio / 3.000 Mio USD F&E-Budget = 0,12 % – Bewertung 1 bleibt, Rendite 1,83 unverändert.",
-      "Produkt, Kanäle, Launch-Garantie und Preisstufen folgen dem 5P-Marketing-Mix (Part 5).",
-      "Termine, Gates, Budget je Teilprojekt und Ampeln sind eigene Planannahmen, Stand 05.11.2026.",
-      "[Name]-Felder füllt die Gruppe. Alle Quellen abgerufen am 05.11.2026."
+      "Neue redaktionelle Planannahme vom 20.11.2026: ein fester Pavillon in Titusville/Florida; langfristig zwei eigenständige feste Standorte. Der zweite Standort im Raum Starbase/South Padre Island ist nicht gesichert.",
+      "Standort und Planung 2027, Bau November 2027 bis August 2028, Abnahmen und Betriebsbereitschaft September 2028. Vier eigene Piloten erst nach G3: Oktober und Dezember 2028 sowie März und Juni 2029. Auswertung und Betriebsprüfung ab Juli 2029.",
+      "Alle konkreten Tage, Gates, Abhängigkeiten und Ampeln sind Planannahmen, keine bereits erreichten Freigaben. Die Dinnerdaten sind keine bestätigten Raketenstarttermine.",
+      "Investition des festen Pavillons und Wirtschaftlichkeit sind neu zu kalkulieren. Die historische Lounge-Schätzung von 10–15 Mio. USD (13,38 Mio. aufgeteilt, gerundet 13,4 Mio.) dient nur als Orientierung für Standort 1; sie ist kein validiertes Pavillonbudget.",
+      "Texas benötigt ein eigenes Grundstück, Genehmigungen, eine eigene Investitionsfreigabe und zusätzliche Mittel. Für Eröffnung und Bau gibt es hier bewusst keinen festen Termin.",
+      "Die 47,2 Mio. USD Umsatz, das 3,48-Mio.-USD-Projektbudget und Renditekennzahlen der bisherigen mobilen Kalkulation werden nicht als Nachweis für feste Standorte übernommen. Andere Teamkapitel und Rechnerdaten bleiben unverändert.",
+      "Bestehende Quellenbasis und historische Variante B bleiben als Herkunft erhalten. Sie belegen keine Standort-, Genehmigungs-, Partner- oder Kundenzusage. Die Benennung von Organisationen oder Personen ist eine Planungsannahme; [Name]-Felder sind offen."
     ]
   },
   "B": {
@@ -2024,47 +1996,53 @@ window.ROCKET_DATA = {
 
 window.ROCKET_META = {
   "A": {
-    "name": "Mobiler Pavillon",
-    "short": "Variante A · Mobiler Pavillon",
-    "budget": "3,48",
-    "budgetLabel": "Mio USD Projektbudget",
-    "revenue": "47,2",
-    "firstDinner": "03/2028",
-    "firstDinnerLabel": "Erstes Pilot-Dinner",
-    "location": "Florida, ab 2029 zusätzlich Starbase (Texas)",
+    "name": "Fester Pavillon · Florida zuerst",
+    "short": "Fester Pavillon · Standort 1 Florida",
+    "budget": "offen",
+    "budgetLabel": "Pavillon neu kalkulieren",
+    "budgetReference": "10–15 Mio. USD",
+    "budgetReferenceNote": "Historischer Orientierungsrahmen der größeren festen Lounge für Standort 1 (damals rund 13,4 Mio. USD); für den Pavillon neu validieren. Texas zusätzlich und offen.",
+    "revenue": "offen",
+    "revenueLabel": "Für feste Standorte nicht neu kalkuliert",
+    "firstDinner": "10/2028",
+    "firstDinnerLabel": "Erster Pilot im eigenen Pavillon",
+    "location": "Titusville / Florida · Standort 1 zu prüfen",
+    "secondLocation": "Raum Starbase / South Padre Island · Ausbauperspektive",
+    "expansion": "Langfristig zwei eigenständige feste Standorte. Texas nur nach eigenem Standort-, Genehmigungs- und Investitionsentscheid; Bauplatz, Budget und Eröffnung offen.",
+    "planDate": "20.11.2026",
     "gates": [
       {
         "id": "G0",
         "date": "30.11.2026",
         "title": "Projektauftrag",
-        "description": "Budgetstufe 1 mit 1,79 Mio USD für 2027 frei."
+        "description": "Planungsauftrag für den ersten festen Pavillon in Florida; Investitionshöhe noch offen."
       },
       {
         "id": "G1",
-        "date": "30.06.2027",
-        "title": "Konzept frei",
-        "description": "Stellplatz gewählt, Pavillon wird bestellt."
+        "date": "31.03.2027",
+        "title": "Standortoption",
+        "description": "Geeignete Fläche in Titusville prüfen und eine Option sichern. Noch kein gesicherter Bauplatz."
       },
       {
         "id": "G2",
-        "date": "31.01.2028",
-        "title": "Go Pilot",
-        "description": "Genehmigung FL, Abnahme und Testdinner bestanden; Stufe 2 mit 1,09 Mio USD."
+        "date": "30.09.2027",
+        "title": "Bauinvestition",
+        "description": "Bau nur bei geeigneter Fläche, erforderlichen Genehmigungen und neu validiertem Budget freigeben; geplanter Baubeginn 01.11.2027."
       },
       {
         "id": "G3",
-        "date": "15.12.2028",
-        "title": "Go Markt­einführung",
-        "description": "NPS und Preis von 50.000 USD bestätigt, Go für Starbase."
+        "date": "30.09.2028",
+        "title": "Pilotfreigabe",
+        "description": "Eigener Pavillon fertig, Abnahmen und Betriebsfreigaben geklärt, Team geschult. Erst danach eigene Pilot-Dinner."
       },
       {
         "id": "G4",
-        "date": "31.12.2030",
-        "title": "Übergabe an die Linie",
-        "description": "Ab 2031 Regelbetrieb mit 24 Events im Jahr."
+        "date": "31.07.2029",
+        "title": "Betriebs- & Ausbauprüfung",
+        "description": "Vier Piloten auswerten und über Florida-Betrieb entscheiden. Ein zweiter fester Standort in Texas braucht eine eigene Standort-, Genehmigungs- und Investitionsfreigabe."
       }
     ],
-    "critical": "Kritischer Pfad ist die Genehmigung in Florida bis 31.12.2027 – ohne sie startet kein Pilot-Dinner."
+    "critical": "Kritischer Pfad: Fläche und Genehmigungen klären, Bauinvestition an G2 freigeben, den eigenen Florida-Pavillon fertigstellen und an G3 betrieblich freigeben. Erst danach beginnen die vier eigenen Piloten. Texas hat keinen festen Eröffnungstermin."
   },
   "B": {
     "name": "Lounge Titusville",

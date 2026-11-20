@@ -220,8 +220,9 @@
     const site=records[5];
     const siteMix=smooth(site.top-height*.58,site.top+height*.08,y)*(1-smooth(site.top+site.height-height*.65,site.top+site.height+height*.1,y));
     const experienceMix=smooth(dining.top-height*.5,dining.top+height*.08,y)*(1-smooth(dining.top+dining.height-height*.65,dining.top+dining.height+height*.1,y));
-    // The architectural reveal ends inside the same room introduced in Part 5.
-    const interiorReveal=siteMix*smooth(.90,.98,site.progress);
+    // The pilot phase enters the finished Florida pavilion. The final phase
+    // returns to the fixed building and the separately gated second-site view.
+    const interiorReveal=siteMix*smooth(.72,.77,site.progress)*(1-smooth(.84,.86,site.progress));
     const diningMix=Math.max(experienceMix,interiorReveal);
     const diningFocus=smooth(.16,.19,dining.progress)*(1-smooth(.29,.32,dining.progress));
     world.style.setProperty('--dining-opacity',fmt(diningMix));

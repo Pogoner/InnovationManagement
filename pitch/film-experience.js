@@ -28,86 +28,74 @@
     {x:95,y:287},{x:205,y:261},{x:315,y:250},{x:425,y:261},{x:535,y:287},
     {x:68,y:405},{x:183,y:375},{x:298,y:363},{x:413,y:375},{x:528,y:405}
   ];
-  const diningPhases = [0,.14,.28,.42,.62,.8];
-  const diningViews = ['layout','panorama','price','scale','econ','sensitivity'];
+  const diningPhases = [0,.16,.32,.48,.65];
+  const diningViews = ['layout','panorama','price','econ','scale'];
   const diningDescriptions = [
     'Raumkonzept: zehn versetzte Zweiertische mit zwanzig Plätzen, alle auf das Startpanorama ausgerichtet. Konzeptvisualisierung ohne Standort- oder Entfernungszusage.',
     'Erlebniskonzept: sieben Gänge, Missionsbriefing, Service und gemeinsamer Blick auf den Launch.',
     'Preisannahmen: 35.000 US-Dollar je Gast im Pilot, langfristig bis zu 50.000 US-Dollar. Die Zahlungsbereitschaft ist noch zu prüfen.',
-    'Modellannahme zum Zielpreis: 50.000 US-Dollar je Gast abzüglich 5.000 US-Dollar variabler Kosten ergeben 45.000 US-Dollar Deckungsbeitrag vor Investitionen, Fixkosten und Steuern.',
-    'Fünfjahres-Basisszenario Florida 2027 bis 2031: 13,38 Millionen US-Dollar Projektbudget für Investition und Anlauf, davon 11,60 Millionen Sachinvestitionen und 1,78 Millionen Entwicklung und Anlauf. Vier Piloten 2028 und 2029, zehn Dinner 2030 und sechzehn 2031. Umsatz 25,64 Millionen, Auszahlungen 20,04 Millionen. Kumuliert 5,60 Millionen Cashflow Ende 2031, vor Finanzierung und Steuern. Alle Mengen, Preise und Kosten sind Szenarioannahmen.',
-    'Sensitivität im Regelbetrieb: Bei 90 Prozent Auslastung und 50.000 US-Dollar Preis ergeben sich 5,60 Millionen US-Dollar kumulierter Cashflow bis 2031. Bei 70 Prozent und 40.000 US-Dollar sind es minus 2,72 Millionen. Die vier Pilotannahmen bleiben gleich.'
+    'Erwartete Kosten und Gewinne über fünf Jahre: Gewinn und F&E-Kosten je Jahr, kumuliert ab Jahr 4 im Plus. Modellannahmen aus dem Inno-Rendite-Kalkulator.',
+    'Hohe Marge je Gast: Bei 50.000 US-Dollar Preis bleiben etwa 45.000 US-Dollar Deckungsbeitrag. Modellannahmen.'
   ];
 
-  // One audited scenario drives the website and editable workbook. Outflows
-  // include project investment, development/startup and ongoing operations.
-  const econGeo = {base:285, k:8, xs:[100,210,320,430,540], width:23};
+  // Five-year model of the Rendite-Kalkulator (sheet "5-Jahres-Kalkulation"). The
+  // totals come from the frozen evidence; the per-guest split is the workbook's
+  // plausibility check (cells B50:B54) and is not part of the Hube method.
+  const guestCosts = {menu:2000, service:3000};
+  const econGeo = {base:300, k:16, xs:[110,215,320,425,530], width:38};
   const scaleGeo = {x:60, width:520};
   const de = (value, digits = 1) => value.toLocaleString('de-DE', {minimumFractionDigits:digits, maximumFractionDigits:digits});
-  const signed = value => (value > 0 ? '+' : value < 0 ? '−' : '') + de(Math.abs(value),2);
+  function economics() {
+    const {financialA, financialAssessmentA, base} = window.PitchEvidence;
+    const mio = value => value / 1e6;
+    const profit = financialA.profit.map(mio), cost = financialA.rnd.map(mio), revenue = financialA.revenue.map(mio);
+    let gained = 0, spent = 0;
+    const cumulative = profit.map((value, index) => { gained += value; spent += cost[index]; return gained - spent; });
+    const price = financialAssessmentA.fy.price[2];
+    const variable = guestCosts.menu + guestCosts.service;
+    return {profit, cost, revenue, cumulative, gain:mio(financialA.P), spend:mio(financialA.C), pShare:financialA.pShare, cShare:financialA.cShare,
+      companyProfit:base.profit, companyRnd:base.rnd, price, variable, margin:(price - variable) / price, guests:financialAssessmentA.fy.qty.reduce((a, b) => a + b, 0)};
+  }
   function econMarkup(e) {
     const {base, k, xs, width} = econGeo;
-    const points = e.annual.map((year,index)=>[xs[index],base-year.cumulativeCashFlow/1e6*k]);
-    return `<g data-fe-econ class="fe-econ fe-finance">
-      <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">2027–2031 · FLORIDA · BASISSZENARIO</text>
-      <text class="fe-econ-label" x="158" y="65" text-anchor="middle">INVESTITION &amp; ANLAUF</text>
-      <text class="fe-econ-total fe-econ-cost-label" x="158" y="119" text-anchor="middle">${de(e.budget.total/1e6,2)}</text>
-      <text class="fe-econ-label" x="478" y="65" text-anchor="middle">CASHFLOW BIS 2031</text>
-      <text class="fe-econ-total fe-econ-gain-label" data-fe-fin-total x="478" y="119" text-anchor="middle">0,00</text>
-      <text class="fe-econ-unit" x="158" y="146" text-anchor="middle">MIO. USD · ARBEITSSZENARIO</text>
-      <text class="fe-econ-unit" x="478" y="146" text-anchor="middle">MIO. USD · KUMULIERT</text>
-      <path class="fe-fin-grid" d="M64 205H586M64 365H586"/>
-      <path class="fe-econ-axis" d="M64 ${base}H586"/>
-      <text class="fe-fin-tick" x="48" y="210" text-anchor="end">10</text>
-      <text class="fe-fin-tick" x="48" y="290" text-anchor="end">0</text>
-      <text class="fe-fin-tick" x="48" y="370" text-anchor="end">−10</text>
-      ${e.annual.map((year,index)=>`<g>
-        <rect class="fe-econ-gain" data-fe-fin-revenue="${index}" x="${xs[index]-width-2}" y="${base}" width="${width}" height="0"/>
-        <rect class="fe-econ-cost" data-fe-fin-outflow="${index}" x="${xs[index]+2}" y="${base}" width="${width}" height="0"/>
-        <text class="fe-fin-value" data-fe-fin-revenue-label="${index}" x="${xs[index]-width/2-2}" y="${base-10}" text-anchor="middle">${year.revenue?de(year.revenue/1e6,2):''}</text>
-        <text class="fe-econ-year" x="${xs[index]}" y="426" text-anchor="middle">${year.year}</text>
-        <text class="fe-fin-event" x="${xs[index]}" y="447" text-anchor="middle">${year.pilotEvents?year.pilotEvents+' Piloten':year.regularEvents?year.regularEvents+' Dinner':'Planung / Bau'}</text>
-      </g>`).join('')}
-      <path class="fe-finance-line" data-fe-fin-line pathLength="1" d="M${points.map(point=>point.map(n).join(' ')).join('L')}"/>
-      ${points.map((point,index)=>`<circle class="fe-econ-dot" data-fe-fin-point="${index}" cx="${n(point[0])}" cy="${n(point[1])}" r="4"/>`).join('')}
-      <g data-fe-fin-summary>
-        <rect class="fe-econ-gain" x="48" y="473" width="12" height="12"/><text class="fe-fin-legend" x="68" y="484">Umsatz</text>
-        <rect class="fe-econ-cost" x="181" y="473" width="12" height="12"/><text class="fe-fin-legend" x="201" y="484">Auszahlungen</text>
-        <path class="fe-econ-key" d="M363 479H384"/><text class="fe-fin-legend" x="394" y="484">Cashflow kumuliert</text>
-        <text class="fe-fin-note" x="320" y="512" text-anchor="middle">Mio. USD · vor Finanzierung und Steuern</text>
-      </g>
-    </g>`;
-  }
-  function sensitivityMarkup(e) {
-    const cases=['base','downside'].map(id=>e.scenarios.find(s=>s.id===id));
-    return `<g data-fe-sensitivity class="fe-sensitivity">
-      <text class="fe-diagram-heading" x="320" y="40" text-anchor="middle">2031 · KUMULIERTER CASHFLOW</text>
-      ${cases.map((scenario,index)=>{const y=100+index*164;return `<g data-fe-case="${index}" class="fe-case ${index?'is-downside':''}">
-        <rect class="fe-case-panel" x="24" y="${y}" width="592" height="145" rx="12"/>
-        <text class="fe-case-title" x="46" y="${y+35}">${index?'VORSICHTIG':'BASIS'}</text>
-        <text class="fe-case-value" data-fe-case-value="${index}" x="587" y="${y+47}" text-anchor="end">0,00</text>
-        <text class="fe-case-assumption" x="46" y="${y+72}">${de(scenario.regularOccupancy*100,0)} % Auslastung · ${de(scenario.regularPrice,0)} USD je Gast</text>
-        <path class="fe-econ-axis" d="M62 ${y+107}H584"/>
-        <path class="fe-case-zero" d="M300 ${y+89}V${y+126}"/>
-        <rect class="fe-case-bar" data-fe-case-bar="${index}" x="300" y="${y+96}" width="0" height="23" rx="2"/>
-      </g>`;}).join('')}
-      <text class="fe-case-conclusion" x="320" y="459" text-anchor="middle">Die Piloten prüfen Preis und Nachfrage.</text>
-      <text class="fe-fin-note" x="320" y="491" text-anchor="middle">Mio. USD · vor Finanzierung und Steuern</text>
+    const points = e.cumulative.map((value, index) => [xs[index], base - value * k]);
+    const turn = e.cumulative.findIndex(value => value >= 0);
+    const share = -e.cumulative[turn - 1] / (e.cumulative[turn] - e.cumulative[turn - 1]);
+    const crossX = xs[turn - 1] + share * (xs[turn] - xs[turn - 1]);
+    return `<g data-fe-econ class="fe-econ">
+      <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">ERWARTETE KOSTEN UND GEWINNE</text>
+      <text class="fe-econ-label fe-econ-gain-label" x="170" y="76" text-anchor="middle">GEWINN · 5 JAHRE</text>
+      <text class="fe-econ-total fe-econ-gain-label" data-fe-gain-total x="170" y="132" text-anchor="middle">0,0</text>
+      <text class="fe-econ-label fe-econ-cost-label" x="470" y="76" text-anchor="middle">F&amp;E-KOSTEN · 5 JAHRE</text>
+      <text class="fe-econ-total fe-econ-cost-label" data-fe-cost-total x="470" y="132" text-anchor="middle">0,0</text>
+      <text class="fe-econ-unit" x="170" y="158" text-anchor="middle">MIO. USD</text>
+      <text class="fe-econ-unit" x="470" y="158" text-anchor="middle">MIO. USD</text>
+      <path class="fe-econ-axis" d="M60 ${base}H600"/>
+      ${e.profit.map((value, index) => `<rect class="fe-econ-gain" data-fe-gain="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
+      ${e.cost.map((value, index) => `<rect class="fe-econ-cost" data-fe-cost="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
+      <path class="fe-econ-line" data-fe-cumulative pathLength="1" d="M${points.map(point => point.map(n).join(' ')).join('L')}"/>
+      ${points.map((point, index) => `<circle class="fe-econ-dot" data-fe-cum-dot="${index}" cx="${n(point[0])}" cy="${n(point[1])}" r="3.5"/>`).join('')}
+      <g data-fe-breakeven class="fe-econ-breakeven"><circle cx="${n(crossX)}" cy="${base}" r="7"/><text x="${n(crossX + 14)}" y="${base + 30}">IM PLUS AB JAHR ${turn + 1}</text></g>
+      ${xs.map((x, index) => `<text class="fe-econ-year" x="${x}" y="366" text-anchor="middle">JAHR ${index + 1}</text>`).join('')}
+      ${e.revenue.map((value, index) => `<text class="fe-econ-revenue" data-fe-revenue="${index}" x="${xs[index]}" y="398" text-anchor="middle">${value > 0 ? de(value) : '–'}</text>`).join('')}
+      <text class="fe-econ-unit" x="320" y="424" text-anchor="middle">UMSATZ JE JAHR IN MIO. USD · ${e.guests} GÄSTE</text>
+      <path class="fe-econ-key" d="M92 452H112" /><text class="fe-econ-legend" x="120" y="456">KUMULIERT: GEWINN − F&amp;E</text>
     </g>`;
   }
   function scaleMarkup(e) {
     const {x, width} = scaleGeo;
+    const costShare = e.variable / e.price;
+    const costWidth = width * costShare;
     return `<g data-fe-scale class="fe-scale">
-      <text class="fe-diagram-heading" x="320" y="86" text-anchor="middle">BEITRAG JE GAST · ZIELPREISMODELL</text>
+      <text class="fe-diagram-heading" x="320" y="86" text-anchor="middle">HOHE MARGE. KLEINE GRÖSSE.</text>
       <text class="fe-econ-label" x="320" y="168" text-anchor="middle">DECKUNGSBEITRAG JE GAST · USD</text>
       <text class="fe-econ-total fe-econ-gain-label" data-fe-guest-total x="320" y="252" text-anchor="middle">0</text>
       <rect class="fe-scale-track" x="${x}" y="292" width="${width}" height="28"/>
       <rect class="fe-econ-gain" data-fe-guest-margin x="${x}" y="292" width="0" height="28"/>
       <rect class="fe-econ-cost" data-fe-guest-cost x="${x + width}" y="292" width="0" height="28"/>
-      <text class="fe-econ-legend fe-econ-gain-label" x="${x}" y="354">DECKUNGSBEITRAG</text>
-      <text class="fe-econ-legend fe-econ-cost-label" x="${x + width}" y="354" text-anchor="end">${de(e.variableCost, 0)} USD VARIABLE KOSTEN</text>
-      <text class="fe-layout-note" x="320" y="404" text-anchor="middle">Zielpreis ${de(e.targetPrice, 0)} USD · Zahlungsbereitschaft offen</text>
-      <text class="fe-econ-label" x="320" y="441" text-anchor="middle">VOR BAU, FIXKOSTEN UND STEUERN</text>
+      <text class="fe-econ-legend fe-econ-gain-label" x="${x}" y="354">${de(e.margin * 100, 0)} % BLEIBEN</text>
+      <text class="fe-econ-legend fe-econ-cost-label" x="${x + width}" y="354" text-anchor="end">${de(e.variable, 0)} USD VARIABLE KOSTEN</text>
+      <text class="fe-layout-note" x="320" y="408" text-anchor="middle">Preis ${de(e.price, 0)} USD · Menü 2.000 · Logistik, Sicherheit, Service 3.000</text>
     </g>`;
   }
 
@@ -194,10 +182,10 @@
           <path class="fe-price-connector" pathLength="1" d="M264 258H374M362 250L374 258 362 266"/>
           <text class="fe-price-unit" x="320" y="321" text-anchor="middle">USD JE GAST</text>
           <text class="fe-price-validation" x="320" y="401" text-anchor="middle">ZAHLUNGSBEREITSCHAFT IM PILOT PRÜFEN</text>
+          <text class="fe-layout-note" x="320" y="432" text-anchor="middle">Modellannahmen · kein buchbares Angebot</text>
         </g>
-        ${econMarkup(window.PitchEvidence.fixedFinance)}
-        ${scaleMarkup(window.PitchEvidence.fixedPilot)}
-        ${sensitivityMarkup(window.PitchEvidence.fixedFinance)}
+        ${econMarkup(economics())}
+        ${scaleMarkup(economics())}
       </svg>
     </div>`,
     mount(root) {
@@ -219,16 +207,13 @@
       const courseLine = root.querySelector('.fe-course-line');
       const price = root.querySelector('[data-fe-price]');
       const priceLine = root.querySelector('.fe-price-connector');
-      const views = [layout, panorama, price, root.querySelector('[data-fe-scale]'), root.querySelector('[data-fe-econ]'), root.querySelector('[data-fe-sensitivity]')];
-      const model = window.PitchEvidence.fixedPilot;
-      const finance = window.PitchEvidence.fixedFinance;
+      const views = [layout, panorama, price, root.querySelector('[data-fe-econ]'), root.querySelector('[data-fe-scale]')];
+      const model = economics();
       const all = selector => Array.from(root.querySelectorAll(selector));
-      const revenueBars = all('[data-fe-fin-revenue]'), outflowBars = all('[data-fe-fin-outflow]');
-      const revenueLabels = all('[data-fe-fin-revenue-label]'), financePoints = all('[data-fe-fin-point]');
-      const financeTotal = root.querySelector('[data-fe-fin-total]'), financeLine = root.querySelector('[data-fe-fin-line]');
-      const financeSummary = root.querySelector('[data-fe-fin-summary]');
-      const caseValues = all('[data-fe-case-value]'), caseBars = all('[data-fe-case-bar]'), caseGroups = all('[data-fe-case]');
-      const cases = ['base','downside'].map(id=>finance.scenarios.find(s=>s.id===id));
+      const gainBars = all('[data-fe-gain]'), costBars = all('[data-fe-cost]'), revenueLabels = all('[data-fe-revenue]');
+      const cumulativeLine = root.querySelector('[data-fe-cumulative]'), cumulativeDots = all('[data-fe-cum-dot]');
+      const breakEven = root.querySelector('[data-fe-breakeven]');
+      const gainTotal = root.querySelector('[data-fe-gain-total]'), costTotal = root.querySelector('[data-fe-cost-total]');
       const guestTotal = root.querySelector('[data-fe-guest-total]');
       const guestMargin = root.querySelector('[data-fe-guest-margin]'), guestCost = root.querySelector('[data-fe-guest-cost]');
       let last = '';
@@ -244,9 +229,9 @@
           scene.setAttribute('aria-label', diningDescriptions[phase]);
           // Keep the original room and experience choreography in their shorter
           // slots. All content has settled by the navigation's fixed still point.
-          const roomP = .28*clamp(p/.12);
-          const experienceP = .31+.24*clamp((p-.14)/.12);
-          const priceP = .57+.17*clamp((p-.28)/.12);
+          const roomP = .28*clamp(p/.13);
+          const experienceP = .31+.24*clamp((p-.16)/.13);
+          const priceP = .57+.17*clamp((p-.32)/.13);
           set(scene,'--fe-table-fill',n(.2+.8*smooth(0,.21,roomP)));
           tables.forEach((table,index)=>{
             const arrival = smooth(index*.012,.07+index*.012,roomP);
@@ -268,38 +253,34 @@
           set(courseLine,'stroke-dashoffset',n(1-smooth(.35,.52,experienceP)));
           courses.forEach((course,index)=>set(course,'--fe-course-lit',n(smooth(.34+index*.022,.39+index*.022,experienceP))));
           set(priceLine,'stroke-dashoffset',n(1-smooth(.63,.73,priceP)));
-          // Revenue arrives first, investment and operating outflows follow;
-          // the cumulative cash curve then connects the five annual results.
-          const econT = context.static ? 1 : clamp((p-diningPhases[4])/((diningPhases[5]-diningPhases[4])*.8));
-          revenueBars.forEach((bar,index)=>{
-            const grow=smooth(.02+index*.045,.28+index*.045,econT);
-            const height=finance.annual[index].revenue/1e6*econGeo.k*grow;
+          // The two economics views settle at 80 % of their slot, before the navigation's still point.
+          const econT = context.static ? 1 : clamp((p-diningPhases[3])/((diningPhases[4]-diningPhases[3])*.8));
+          let gainSum = 0, costSum = 0;
+          gainBars.forEach((bar,index)=>{
+            const grow = smooth(.04+index*.08,.16+index*.08,econT);
+            const height = model.profit[index]*econGeo.k*grow;
+            gainSum += model.profit[index]*grow;
             bar.setAttribute('y',n(econGeo.base-height));bar.setAttribute('height',n(height));
-            revenueLabels[index].setAttribute('y',n(econGeo.base-height-10));
-            set(revenueLabels[index],'opacity',n(grow));
+            set(revenueLabels[index],'opacity',n(smooth(.05+index*.08,.14+index*.08,econT)));
           });
-          outflowBars.forEach((bar,index)=>bar.setAttribute('height',n(finance.annual[index].totalOutflows/1e6*econGeo.k*smooth(.34+index*.035,.55+index*.035,econT))));
-          const lineT=smooth(.66,.97,econT);
-          set(financeLine,'stroke-dashoffset',n(1-lineT));
-          financePoints.forEach((point,index)=>set(point,'opacity',n(smooth(index/5,index/5+.16,lineT))));
-          financeTotal.textContent=signed(finance.totals.cumulativeCashFlow/1e6*smooth(.72,.98,econT));
-          set(financeSummary,'opacity',n(smooth(.12,.48,econT)));
-          const scaleT = context.static ? 1 : clamp((p-diningPhases[3])/((diningPhases[4]-diningPhases[3])*.8));
+          costBars.forEach((bar,index)=>{
+            const grow = smooth(.42+index*.05,.54+index*.05,econT);
+            costSum += model.cost[index]*grow;
+            bar.setAttribute('height',n(model.cost[index]*econGeo.k*grow));
+          });
+          gainTotal.textContent = de(gainSum);
+          costTotal.textContent = de(costSum);
+          const lineT = smooth(.72,.94,econT);
+          set(cumulativeLine,'stroke-dashoffset',n(1-lineT));
+          cumulativeDots.forEach((dot,index)=>set(dot,'opacity',n(smooth(index/4-.02,index/4+.02,lineT))));
+          set(breakEven,'opacity',n(smooth(.9,.98,econT)));
+          const scaleT = context.static ? 1 : clamp((p-diningPhases[4])/((1-diningPhases[4])*.8));
           const marginT = smooth(.05,.3,scaleT), costT = smooth(.3,.42,scaleT);
-          const marginShare = 1-model.variableCost/model.targetPrice;
+          const marginShare = 1-model.variable/model.price;
           guestMargin.setAttribute('width',n(scaleGeo.width*marginShare*marginT));
           guestCost.setAttribute('x',n(scaleGeo.x+scaleGeo.width*marginShare*marginT));
           guestCost.setAttribute('width',n(scaleGeo.width*(1-marginShare)*costT));
-          guestTotal.textContent = de((model.targetPrice-model.variableCost)*marginT,0);
-          const caseT=context.static?1:clamp((p-diningPhases[5])/((1-diningPhases[5])*.8));
-          cases.forEach((scenario,index)=>{
-            const grow=smooth(index*.26,.45+index*.26,caseT);
-            const value=scenario.totals.cumulativeCashFlow/1e6;
-            caseValues[index].textContent=signed(value*grow);
-            caseBars[index].setAttribute('x',n(300+Math.min(0,value)*42*grow));
-            caseBars[index].setAttribute('width',n(Math.abs(value)*42*grow));
-            set(caseGroups[index],'opacity',n(.25+.75*grow));
-          });
+          guestTotal.textContent = de((model.price-model.variable)*marginT,0);
         }
       };
     }

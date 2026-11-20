@@ -50,53 +50,6 @@ const state = seed();
     result: calc(assessment)
   }));
 
-  // The current fixed-pavilion pilot uses the actual roadmap dates. The
-  // original mobile financial model below remains a separate historical case.
-  const fixedData = window.ROCKET_DATA.A;
-  const fixedMeta = window.ROCKET_META.A;
-  const fixedFinance = window.RocketFinance.build(fixedData, fixedMeta);
-  const pilotModel = {
-    capacity: fixedFinance.inputs.seats,
-    occupancy: fixedFinance.inputs.pilotOccupancy,
-    price: fixedFinance.inputs.pilotPrice,
-    targetPrice: fixedFinance.inputs.regularPrice,
-    variableCost: fixedFinance.inputs.variableCostPerGuest
-  };
-  const operatingGate = fixedMeta.gates.find(gate => gate.id === 'G4');
-  const dates = [...new Set(fixedData.rows.flatMap(row => row.items
-    .filter(item => item.num && item.d)
-    .map(item => item.d)))].sort();
-  if (!pilotModel || !operatingGate || !dates.length) {
-    throw new Error('RocketLight pitch: the fixed-pavilion pilot plan is incomplete.');
-  }
-  const {capacity, occupancy, price, targetPrice, variableCost} = pilotModel;
-  const eventsByYear = new Map();
-  dates.forEach(date => {
-    const year = Number(date.slice(0, 4));
-    eventsByYear.set(year, (eventsByYear.get(year) || 0) + 1);
-  });
-  const years = [...eventsByYear].map(([year, events]) => {
-    const seats = events * capacity * occupancy;
-    return {year, events, seats, revenue: seats * price};
-  });
-  const events = dates.length;
-  const seats = events * capacity * occupancy;
-  const fixedPilot = {
-    capacity,
-    occupancy,
-    price,
-    dates,
-    years,
-    events,
-    seats,
-    revenue: seats * price,
-    budgetStatus: fixedMeta.budgetStatus,
-    budgetReference: fixedMeta.budgetReference,
-    operatingDecision: operatingGate.date.split('.').reverse().join('-'),
-    targetPrice,
-    variableCost
-  };
-
   // Freezing preserves the original object shapes and values while making
   // accidental edits by presentation code fail instead of changing evidence.
   const freeze = value => {
@@ -124,12 +77,8 @@ const state = seed();
     criteria: { benefit: N_CRIT, effort: A_CRIT },
     assessments,
     rocketlightAssessments: assessments.filter(item => item.assessment.idea === 9),
-    // Historical mobile concept: these original results are not a new
-    // investment, profit or break-even calculation for the fixed pavilion.
     financialAssessmentA,
     financialA: calcFY(financialAssessmentA.fy, state.base),
-    fixedPilot,
-    fixedFinance,
     variants: {
       A: { data: window.ROCKET_DATA.A, meta: window.ROCKET_META.A }
     },
@@ -138,14 +87,7 @@ const state = seed();
       assessments: '../rechner/assets/js/data.js',
       calculation: '../rechner/assets/js/model.js',
       planning: 'planning-data.js',
-      financialVariant: 'historical-mobile-A',
-      financialScope: 'Unveränderte Originalrechnung des mobilen Konzepts; kein Wirtschaftlichkeitsnachweis für feste Standorte.',
-      fixedFinance: 'finance-model.js · gemeinsames Florida-Arbeitsszenario 2027–2031; gleiche Eingaben wie im aktuellen XLSX',
-      fixedPilot: {
-        dates: 'planning-data.js · ROCKET_DATA.A.rows · nummerierte Pilottermine',
-        assumptions: 'planning-data.js · ROCKET_META.A.pilotModel',
-        operatingDecision: 'planning-data.js · ROCKET_META.A.gates · G4'
-      },
+      financialVariant: 'A',
       horizon: state.horizon,
       workbook: state.workbook
     }

@@ -32,13 +32,16 @@
             <text class="fm-count" data-fm-count x="${geo.xs[index]}" y="${geo.base - 10}" text-anchor="middle">0</text>
             <g transform="translate(${geo.xs[index]} 352)"><circle class="fm-plate" r="29"/><circle class="fm-plate-inner" r="21"/><g class="fm-glyph">${menu.glyph}</g></g>
             <text class="fm-name" x="${geo.xs[index]}" y="404" text-anchor="middle">${menu.name}</text>
+            <text class="fm-line" x="${geo.xs[index]}" y="424" text-anchor="middle">${menu.tag}</text>
             <g data-fm-people="${index}"></g>
           </g>`).join('')}
           <text class="fm-lead" data-fm-lead x="225" y="510" text-anchor="middle"></text>
           <g class="fm-qr" data-fm-qr>
+            <text class="fm-qr-head" x="${qr.x + qr.size / 2}" y="${qr.y - 18}" text-anchor="middle">SIE SIND EINGELADEN</text>
             ${shared.qrMarkup(qr.x, qr.y, qr.size)}
             <text class="fm-qr-action" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 32}" text-anchor="middle">SCANNEN &amp; BUCHEN</text>
             <text class="fm-qr-url" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 54}" text-anchor="middle"${shared.bookingUrl().length > 36 ? ` textLength="${qr.size}" lengthAdjust="spacingAndGlyphs"` : ''}>${shared.esc(shared.bookingUrl().replace(/^https?:\/\//, ''))}</text>
+            <text class="fm-qr-sub" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 84}" text-anchor="middle">Eine Minute · keine Zahlung</text>
           </g>
         </g>
       </svg>

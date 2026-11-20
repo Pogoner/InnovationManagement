@@ -16,8 +16,8 @@
   const sourceBase = 'https://github.com/Pogoner/InnovationManagement/raw/main/quellen/';
   const sourceLinks = chapter => {
     const list = chapter.sources || [];
-    const actions = window.PitchDetails?.actions(chapter.step) || '';
-    return actions+(list.length?'<div class="film-evidence-links">'+list.map(item=>'<a class="film-evidence-link" href="'+sourceBase+item.file+'" target="_blank" rel="noopener" download>Zahlen &amp; Hintergründe'+(item.label&&list.length>1?' · '+item.label:'')+' '+arrow+'</a>').join('')+'</div>':'');
+    if(!list.length) return '';
+    return '<div class="film-evidence-links">'+list.map(item=>'<a class="film-evidence-link" href="'+sourceBase+item.file+'" target="_blank" rel="noopener" download>Zahlen &amp; Hintergründe'+(item.label&&list.length>1?' · '+item.label:'')+' '+arrow+'</a>').join('')+'</div>';
   };
   const duration = seconds=>Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0');
   const world = document.createElement('div');
@@ -404,7 +404,7 @@
     if(event.key!=='ArrowRight'&&event.key!=='ArrowLeft')return;
     if(event.altKey||event.ctrlKey||event.metaKey||event.shiftKey||event.defaultPrevented)return;
     const el=event.target;
-    if(el.closest?.('input,select,textarea,[contenteditable="true"],[role="slider"],details[open],dialog[open]'))return;
+    if(el.closest?.('input,select,textarea,[contenteditable="true"],[role="slider"],details[open]'))return;
     const forward=event.key==='ArrowRight';
     const list=stops();
     const launchRange=Math.max(1,launch.offsetHeight-height);

@@ -19,6 +19,10 @@ Die Seiten sind statisch (HTML, CSS, JavaScript, kein Build-Schritt). Zum Ansehe
 
 Islam Abdalla · Matthias Dölker · Maren Ell · Asma Ul Haq · Alexander Lenard · Marius Riesle
 
+## Teil 6: aktueller Planstand
+
+Seit dem 20.11.2026 plant Teil 6 einen festen Pavillon in Florida und langfristig einen zweiten festen Standort in Texas. Termine, Freigaben und die Grenze der bisherigen Budgetreferenz stehen im [Roadmap-Planstand](pitch/roadmap-planstand.md) und in den [aktuellen Roadmap-Folien](quellen/step-6-roadmap-fester-pavillon.pptx). Die übrigen Kapitel und der Finanzrechner behalten ihre bisherigen Annahmen. `quellen/step-6-roadmap-pavillon.pptx` dokumentiert das frühere mobile Konzept.
+
 ## Lokal mit Server starten
 
 ```

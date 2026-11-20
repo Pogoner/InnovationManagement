@@ -178,8 +178,9 @@ window.PitchFilmStory = [
   {
     "step": 6,
     "label": "Roadmap & Umsetzung",
-    "sources": [{"file": "step-6-roadmap-pavillon.pptx"}],
-    "length": 7.8,
+    "sources": [{"file": "step-6-roadmap-fester-pavillon.pptx"}],
+    "detail": "Fester Pavillon in Florida, langfristig zwei Standorte · acht Planungsphasen",
+    "length": 8.2,
     "beats": [],
     "seconds": 120
   },

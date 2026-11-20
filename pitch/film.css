@@ -52,6 +52,8 @@
 .film-copy h2 { font-size: clamp(38px,4.5vw,66px); font-weight: 400; line-height: 1.09; letter-spacing: -.047em; max-width: 600px; }
 .film-copy .film-beat-copy { font-size: clamp(14px,1.22vw,17px); line-height: 1.75; max-width: 430px; margin-top: 26px; color: #becbd0; }
 .film-evidence-link { display: inline-flex; align-items: center; gap: 16px; color: var(--ice) !important; font-size: 11px; min-height: 44px; margin-top: 22px; border-bottom: 1px solid #a9d9d930; }
+.film-evidence-links { display: flex; flex-direction: column; align-items: flex-start; }
+.film-evidence-links .film-evidence-link + .film-evidence-link { margin-top: 0; }
 .film-evidence-link .arrow-icon { width: 14px; height: 14px; }
 .film-evidence-link:hover { color: var(--paper) !important; border-color: #a9d9d9; }
 .film-visual { width: 100%; height: min(63svh,580px); position: relative; min-width: 0; z-index: 2; }
@@ -67,18 +69,6 @@
 .film-beat-nav button:hover span { background: #e3eae3; }
 .film-chapter-watermark { position: absolute; left: calc(var(--gutter) - 8px); bottom: calc(70px + var(--film-bottom)); z-index: -1; font-size: clamp(120px,20vw,290px); font-weight: 300; letter-spacing: -.08em; line-height: 1; color: transparent; -webkit-text-stroke: 1px #a9d9d910; pointer-events: none; }
 
-/* Complete original chapters form a quiet, optional dossier under each scene. */
-.chapter-dossier { position: relative; background: #081119f5; border-top: 1px solid #a9d9d91d; border-bottom: 1px solid #a9d9d916; }
-.chapter-dossier > summary { width: min(1140px,calc(100% - var(--gutter) * 2)); margin-inline: auto; display: flex; align-items: center; gap: 25px; min-height: 90px; padding-block: 18px; list-style: none; cursor: pointer; font-size: 13px; color: #cbd5d9; }
-.chapter-dossier > summary::-webkit-details-marker { display: none; }
-.dossier-number { font-size: 20px; font-weight: 300; color: var(--copper); width: 33px; flex-shrink: 0; }
-.chapter-dossier summary small { display: block; font-size: 8px; letter-spacing: .13em; color: #879ba6; margin-bottom: 5px; }
-.dossier-toggle { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid #a9d9d933; margin-left: auto; font-size: 21px; color: #a9d9d9; flex-shrink: 0; }
-.chapter-dossier[open] > summary { border-bottom: 1px solid #a9d9d924; }
-.chapter-dossier[open] .dossier-toggle { transform: rotate(45deg); }
-.chapter-source-body { padding-top: 80px; padding-bottom: 10px; scroll-margin-top: calc(var(--header-height) + 24px); }
-.chapter-source-body > .page-width { width: 100%; }
-.chapter-source-body .bridge { margin-bottom: 0; }
 
 /* Architecture keeps the image free: a light plan at right, the actual site below. */
 .film-stage[data-film-step="6"] { align-items: start; padding-top: calc(var(--header-height) + 75px); }
@@ -182,10 +172,6 @@
   .film-stage-bottom:has(.film-beat-nav button:nth-child(6)) .film-beat-nav { grid-column: 1 / -1; }
   .film-stage-bottom:has(.film-beat-nav button:nth-child(6)) .film-beat-nav button { width: 44px; }
   .film-chapter-watermark { bottom: 85px; font-size: 190px; }
-  .chapter-dossier > summary { font-size: 12px; gap: 16px; min-height: 88px; }
-  .dossier-number { width: 24px; font-size: 17px; }
-  .dossier-toggle { width: 30px; height: 30px; }
-  .chapter-source-body { padding-top: 42px; }
   .film-stage[data-film-step="6"] { justify-content: flex-start; padding-top: 124px; }
   .film-stage[data-film-step="6"] .film-copy { max-width: 100%; }
   .film-stage[data-film-step="6"] .film-copy h2 { font-size: clamp(28px,7.1vw,43px); }
@@ -266,8 +252,4 @@
   .film-ready .film-prologue,.film-ready .film-reel { height: auto; }
   .film-ready .pitch-hero { position: static; height: auto; min-height: 0; }
   .film-ready .hero-copy { opacity: 1; transform: none; }
-  .chapter-dossier { display: block; background: white; color: #111; border: 0; }
-  .chapter-dossier > summary { display: none; }
-  .chapter-dossier > .chapter-source-body { display: block; width: 100%; padding-top: 35px; }
-  .chapter-dossier::details-content { content-visibility: visible; }
 }

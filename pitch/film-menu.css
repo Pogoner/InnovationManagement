@@ -9,23 +9,28 @@
 .fm-column { opacity: 0; }
 .fm-bar { fill: #a9d9d9; opacity: .8; }
 .fm-bar.is-lead { fill: #efbd91; opacity: 1; }
-.fm-svg .fm-count { font-size: 30px; font-weight: 350; font-variant-numeric: tabular-nums; fill: #dbe8e6; opacity: 0; }
+.fm-svg .fm-count { font-size: 38px; font-weight: 350; font-variant-numeric: tabular-nums; fill: #dbe8e6; opacity: 0; }
 .fm-svg .fm-count.is-lead { fill: #efbd91; }
 .fm-plate { fill: #08131ce8; stroke: #a9d9d9b8; stroke-width: 1; }
 .fm-plate-inner { fill: none; stroke: #a9d9d93a; stroke-width: .8; }
 .fm-glyph { fill: none; stroke: #efbd91; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
-.fm-svg .fm-name { font-size: 18px; letter-spacing: .2px; }
-.fm-svg .fm-line { font-size: 13px; letter-spacing: .6px; fill: #aebfc5; }
+.fm-svg .fm-name { font-size: 21px; letter-spacing: .2px; }
+.fm-svg .fm-line { font-size: 14px; letter-spacing: .6px; fill: #aebfc5; }
 .fm-svg .fm-lead { font-size: 15px; letter-spacing: 1.4px; fill: #efbd91; opacity: 0; }
 .fm-svg .fm-more { font-size: 12px; fill: #aebfc5; letter-spacing: .6px; }
-.fm-svg .fm-qr-head { font-size: 13px; letter-spacing: 1.6px; fill: #c4d4d8; }
-.fm-svg .fm-qr-action { font-size: 14px; letter-spacing: 2px; fill: #efbd91; }
-.fm-svg .fm-qr-url { font-size: 11px; letter-spacing: .2px; fill: #dce5dd; }
+.fm-svg .fm-qr-head { font-size: 15px; letter-spacing: 2px; fill: #dbe8e6; }
+.fm-svg .fm-qr-action { font-size: 19px; letter-spacing: 2.4px; fill: #efbd91; }
+.fm-svg .fm-qr-url { font-size: 12px; letter-spacing: .2px; fill: #eff3ed; }
+.fm-svg .fm-qr-sub { font-size: 14px; letter-spacing: .4px; fill: #aebfc5; }
 
 /* Link from the pitch header to the booking page. */
 .header-book { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid #efbd9199; border-radius: 999px; color: #efbd91; font-size: 12px; letter-spacing: .08em; text-decoration: none; white-space: nowrap; }
 .header-book:hover, .header-book:focus-visible { background: #efbd9122; }
 @media (max-width: 760px) { .header-book { display: none; } }
+.header-calc { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; color: #aebfc5; font-size: 12px; letter-spacing: .08em; text-decoration: none; }
+.header-calc::after { content: "↗"; font-size: 11px; opacity: .7; }
+.header-calc:hover, .header-calc:focus-visible { color: #eff3ed; }
+@media (max-width: 760px) { .header-calc { display: none; } }
 
 /* Reduced motion shows the finished chart as ordinary flow. */
 .film-ready.is-reduced #schritt-8 .film-visual { height: auto; max-height: none; min-height: 0; aspect-ratio: auto; }

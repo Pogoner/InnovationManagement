@@ -4,7 +4,7 @@ window.PitchFilmStory = [
   {
     "step": 1,
     "label": "Das Unternehmen",
-    "detail": "Geschäftsfelder, Kennzahlen & Quellen",
+    "sources": [{"file": "step-1-7-company-recommendations.pptx"}],
     "length": 3,
     "beats": [
       {
@@ -31,7 +31,7 @@ window.PitchFilmStory = [
   {
     "step": 2,
     "label": "Der Innovationsprüfstand",
-    "detail": "Alle Team-/KI-Werte & Rechenwege",
+    "sources": [{"file": "step-2-innovation-assessment.xlsx"}],
     "length": 2.4,
     "beats": [
       {
@@ -49,7 +49,7 @@ window.PitchFilmStory = [
   {
     "step": 3,
     "label": "Trends & Ideenauswahl",
-    "detail": "Trendportfolio, zwölf Matrixideen & alle 19 Geschäftsideen",
+    "sources": [{"file": "step-3-trend-portfolio.xlsx"}],
     "length": 4.4,
     "beats": [
       {
@@ -57,9 +57,9 @@ window.PitchFilmStory = [
         "still": 0.26,
         "view": ".fa-pool-rows",
         "tag": "ACHT TRENDS · 19 IDEEN · 4 OPEN INNOVATION",
-        "title": "23 Konzepte.<br><em>Zwei Herkünfte.</em>",
-        "copy": "Aus acht Trends entstanden 19 Ideen, aus Open Innovation vier weitere. Blau markiert die KI-generierten Trendfavoriten.",
-        "cue": "23 Konzepte: 19 aus Trends, 4 aus Open Innovation"
+        "title": "23 Ideen.<br><em>Alle auf dem Tisch.</em>",
+        "copy": "Aus acht Trends entstanden 19 Ideen, aus Open Innovation vier weitere. Zuerst liegt alles auf dem Tisch.",
+        "cue": "23 Ideen: 19 aus Trends, 4 aus Open Innovation"
       },
       {
         "at": 0.3,
@@ -67,16 +67,16 @@ window.PitchFilmStory = [
         "view": ".fa-pool-twelve",
         "tag": "AUSWAHL · 8 + 4 = 12",
         "title": "Zwölf bleiben.<br><em>Nach drei Fragen.</em>",
-        "copy": "Je Trend wählte das Team eine Idee nach belegtem Problem, zahlender Nachfrage und SpaceX-Beitrag. Die vier Open-Innovation-Ideen kamen separat dazu.",
+        "copy": "Je Trend wählten wir eine Idee nach belegtem Problem, zahlender Nachfrage und SpaceX-Beitrag. Die vier Open-Innovation-Ideen kamen separat dazu.",
         "cue": "Problem · Zahlung · SpaceX-Beitrag"
       },
       {
         "at": 0.58,
         "still": 0.84,
         "view": ".fa-matrix-phase",
-        "tag": "NOW / HOW / WOW · TEAMBEWERTUNG",
+        "tag": "NOW / HOW / WOW",
         "title": "Originell? Machbar?<br><em>Zwei WOW-Ideen.</em>",
-        "copy": "Die zwölf Ideen werden nach Machbarkeit und Originalität eingeordnet. Im Team-Urteil sind RocketLight Dinner und Starlink Insights WOW.",
+        "copy": "Die zwölf Ideen ordnen wir nach Machbarkeit und Originalität ein. RocketLight Dinner und Starlink Insights sind WOW.",
         "cue": "Zwölf Ideen in Now, How und Wow"
       },
       {
@@ -85,7 +85,7 @@ window.PitchFilmStory = [
         "view": ".fa-selection-final",
         "tag": "DREI IDEEN · DIE KERNIDEE",
         "title": "Drei Favoriten.<br><em>Drei Kernideen.</em>",
-        "copy": "RocketLight: Sternemenü mit Blick auf den Start. Starlink Insights: Netzdaten als Wetterwissen. Launch Engineering Cloud: Prüfung von Satellitenentwürfen, im Team-Urteil NOW.",
+        "copy": "RocketLight: Sternemenü mit Blick auf den Start. Starlink Insights: Netzdaten als Wetterwissen. Launch Engineering Cloud: Prüfung von Satellitenentwürfen.",
         "cue": "Die Dreierauswahl ist eine Teamentscheidung"
       }
     ],
@@ -95,16 +95,16 @@ window.PitchFilmStory = [
   {
     "step": 4,
     "label": "Bewertung & Kalkulation",
-    "detail": "Sechs Bewertungen, drei Business Cases & Jahresrechnung",
+    "sources": [{"file": "step-4-rocketlight.xlsm", "label": "RocketLight"}, {"file": "step-4-starlink-insights.xlsm", "label": "Starlink Insights"}, {"file": "step-4-launch-engineering-cloud.xlsm", "label": "Launch Engineering Cloud"}],
     "length": 3,
     "beats": [
       {
         "at": 0,
         "still": 0.5,
         "view": ".fa-ir-bars",
-        "tag": "INNOVATIONSRENDITE · TEAMBEWERTUNG",
+        "tag": "INNOVATIONSRENDITE",
         "title": "Drei Ideen.<br><em>Ein Score.</em>",
-        "copy": "Die IR teilt den gewichteten Nutzen durch den gewichteten Aufwand. RocketLight führt beim Team mit 1,83 (KI 0,73). Starlink Insights liegt bei 1,62 und 1,10, Launch Engineering Cloud bei 1,27 und 1,13.",
+        "copy": "Die IR teilt den gewichteten Nutzen durch den gewichteten Aufwand. RocketLight führt mit 1,83. Starlink Insights liegt bei 1,62, Launch Engineering Cloud bei 1,27.",
         "cue": "Innovationsrendite der drei Ideen"
       },
       {
@@ -113,7 +113,7 @@ window.PitchFilmStory = [
         "view": ".fa-ir-callout",
         "tag": "ROCKETLIGHT · DER HÖCHSTE SCORE",
         "title": "Eine Idee sticht<br><em>heraus.</em>",
-        "copy": "Die Umsetzbarkeit (Team 1, KI 4) erklärt die Hälfte des Aufwandsunterschieds. Das Team priorisiert RocketLight; genau diese Bewertung ist der Prüfpunkt. IR ist ein Bewertungsscore, keine Finanzrendite.",
+        "copy": "Aus unserer Sicht erzielt RocketLight Dinner die höchste Innovationsrendite, vor Starlink Insights und der Launch Engineering Cloud. IR ist ein Bewertungsscore, keine Finanzrendite.",
         "cue": "RocketLight liegt vorn",
         "tone": "difference"
       }
@@ -123,7 +123,7 @@ window.PitchFilmStory = [
   {
     "step": 5,
     "label": "Das Dinner & die Wirtschaftlichkeit",
-    "detail": "Der finale Marketingmix · alle 25 Felder",
+    "sources": [{"file": "step-5-marketing-mix.xlsx", "label": "Marketingmix"}, {"file": "step-4-rocketlight.xlsm", "label": "Kalkulation"}],
     "length": 5.8,
     "beats": [
       {
@@ -178,7 +178,7 @@ window.PitchFilmStory = [
   {
     "step": 6,
     "label": "Roadmap & Umsetzung",
-    "detail": "Sieben Planungsphasen, parallele Maßnahmen & Gates",
+    "sources": [{"file": "step-6-roadmap-pavillon.pptx"}],
     "length": 7.8,
     "beats": [],
     "seconds": 120
@@ -186,7 +186,7 @@ window.PitchFilmStory = [
   {
     "step": 7,
     "label": "Ganzheitliches Innovationsmanagement",
-    "detail": "Fokus Kompetenzen: Jobrotation, Food4Thought, Tandemlearning",
+    "sources": [{"file": "step-1-7-company-recommendations.pptx"}],
     "length": 3.6,
     "beats": [
       {
@@ -213,7 +213,7 @@ window.PitchFilmStory = [
   {
     "step": 8,
     "label": "Menüwahl mit dem Publikum",
-    "detail": "Beispiel-Hauptgänge der Menüwahl",
+    "sources": [],
     "length": 3.4,
     "beats": [
       {

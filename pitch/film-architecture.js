@@ -68,7 +68,7 @@
           if (!built) {
             built=true;
             const meta=window.PitchEvidence.variants[variant].meta;
-            name.textContent='MOBILER PAVILLON';
+            name.textContent='PAVILLON';
             total.textContent=meta.budget; unit.textContent=meta.budgetLabel;
             current.innerHTML=phases.map((phase,index)=>phaseMarkup(phase,index)).join('');
             sequence.innerHTML='<p class="film-phase-sequence-heading">Sieben Bildphasen · ein paralleler Maßnahmenplan</p>'+phases.map((phase,index)=>phaseMarkup(phase,index,true)).join('');

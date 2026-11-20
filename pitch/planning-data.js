@@ -2,9 +2,9 @@
 window.ROCKET_DATA = {
   "A": {
     "file": "step-6-roadmap-pavillon.pptx",
-    "short": "Variante A · Mobiler Pavillon",
+    "short": "Variante A · Pavillon",
     "titles": {
-      "w4": "In 16 Monaten zum ersten Pilot-Dinner – der mobile Pavillon hält Budget und Risiko klein",
+      "w4": "In 16 Monaten zum ersten Pilot-Dinner – der Pavillon hält Budget und Risiko klein",
       "t1": "Sechs Teilprojekte führen vom Sicherheitskonzept bis zum zweiten Standort in Texas",
       "t2": "Mit 3,48 Mio USD Projektbudget in zwei Stufen erschließt SpaceX 47,2 Mio USD Umsatz in fünf Jahren",
       "rm": "Genehmigungen sind der kritische Pfad: Ohne Freigabe bis Ende 2027 startet kein Pilot-Dinner",
@@ -12,7 +12,7 @@ window.ROCKET_DATA = {
     },
     "w4": {
       "was": [
-        "Mobiler Glas-Pavillon für 20 Gäste mit Blick auf Nachtstarts, außerhalb der Sperrzonen",
+        "Glas-Pavillon für 20 Gäste mit Blick auf Nachtstarts, außerhalb der Sperrzonen",
         "2028: vier Pilot-Dinner in Florida zu 35.000 USD pro Platz",
         "2031: 24 Events pro Jahr in Florida und bei Starbase (Texas) zu 50.000 USD – 47,2 Mio USD Umsatz in fünf Jahren"
       ],
@@ -2024,8 +2024,8 @@ window.ROCKET_DATA = {
 
 window.ROCKET_META = {
   "A": {
-    "name": "Mobiler Pavillon",
-    "short": "Variante A · Mobiler Pavillon",
+    "name": "Pavillon",
+    "short": "Variante A · Pavillon",
     "budget": "3,48",
     "budgetLabel": "Mio USD Projektbudget",
     "revenue": "47,2",

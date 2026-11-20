@@ -241,6 +241,38 @@
     write('rocketlight:motion',motionPreference);
     updateMotion();
   });
+  // PDF export: the static reading layout of every chapter is printed, one picture per page.
+  const pdfButton = $('#pdf-export');
+  let restorePrint = null;
+  const finishPrint = () => {
+    if (!restorePrint) return;
+    restorePrint();
+    restorePrint = null;
+    if (pdfButton) pdfButton.disabled = false;
+  };
+  async function exportPDF() {
+    if (restorePrint) return;
+    pdfButton.disabled = true;
+    const previous = preferredReduced;
+    preferredReduced = true;
+    document.body.classList.add('is-printing');
+    restorePrint = () => {
+      preferredReduced = previous;
+      document.body.classList.remove('is-printing');
+      updateMotion();
+    };
+    updateMotion();
+    $$('img[loading="lazy"]').forEach(image => { image.loading = 'eager'; });
+    const frames = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    await frames();
+    await Promise.all($$('img').map(image => image.decode ? image.decode().catch(() => {}) : null));
+    await new Promise(resolve => setTimeout(resolve, 900));
+    await frames();
+    window.print();
+    finishPrint();
+  }
+  pdfButton?.addEventListener('click', exportPDF);
+  addEventListener('afterprint', finishPrint);
   media.addEventListener('change', () => {
     if (motionPreference !== 'full' && motionPreference !== 'reduced') preferredReduced = media.matches;
     updateMotion();

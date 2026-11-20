@@ -13,6 +13,12 @@
   const arrow = '<svg class="arrow-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12 12 4M4 4h8v8"/></svg>';
   const stillPoints = Object.fromEntries(story.map(chapter=>[chapter.step,chapter.beats.map(beat=>beat.still??beat.point??1)]));
   const methodSteps = new Set([1,2,3,4,5,7,8]);
+  const sourceBase = 'https://github.com/Pogoner/InnovationManagement/raw/main/quellen/';
+  const sourceLinks = chapter => {
+    const list = chapter.sources || [];
+    if(!list.length) return '';
+    return '<div class="film-evidence-links">'+list.map(item=>'<a class="film-evidence-link" href="'+sourceBase+item.file+'" target="_blank" rel="noopener" download>Zahlen &amp; Hintergründe'+(item.label&&list.length>1?' · '+item.label:'')+' '+arrow+'</a>').join('')+'</div>';
+  };
   const duration = seconds=>Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0');
   const world = document.createElement('div');
   world.className = 'film-background';
@@ -34,22 +40,15 @@
   hero.append(introCue);
   const records = story.map(chapter => {
     const section = document.getElementById('schritt-'+chapter.step);
-    const source = document.createElement('div');
-    source.className = 'chapter-source-body page-width';
-    source.id = 'belege-'+chapter.step;
-    while(section.firstChild) source.append(section.firstChild);
-    const disclosure = document.createElement('details');
-    disclosure.className = 'chapter-dossier';
-    disclosure.innerHTML = '<summary><span class="dossier-number">'+String(chapter.step).padStart(2,'0')+'</span><span><small>HINTER DER SZENE</small>'+chapter.detail+'</span><span class="dossier-toggle" aria-hidden="true">+</span></summary>';
-    disclosure.append(source);
+    section.replaceChildren();
     const reel = document.createElement('div');
     reel.className = 'film-reel';
     reel.style.setProperty('--reel-length',chapter.length);
-    reel.innerHTML = '<div class="film-stage" data-film-step="'+chapter.step+'"><div class="film-chapter-meta"><span>PART '+String(chapter.step).padStart(2,'0')+' / '+chapter.label+'</span></div><div class="film-copy"><p class="eyebrow film-beat-tag"></p><h2 id="film-title-'+chapter.step+'"></h2><p class="film-beat-copy"></p><a class="film-evidence-link" href="#belege-'+chapter.step+'">Zahlen &amp; Hintergründe '+arrow+'</a></div><div class="film-visual"></div><div class="film-stage-bottom"><div class="film-local-progress" aria-hidden="true"><i></i></div><p class="film-scene-cue"></p><nav class="film-beat-nav" aria-label="Phasen: '+chapter.label+'"></nav></div><span class="film-chapter-watermark" aria-hidden="true">'+String(chapter.step).padStart(2,'0')+'</span></div>';
+    reel.innerHTML = '<div class="film-stage" data-film-step="'+chapter.step+'"><div class="film-chapter-meta"><span>PART '+String(chapter.step).padStart(2,'0')+' / '+chapter.label+'</span></div><div class="film-copy"><p class="eyebrow film-beat-tag"></p><h2 id="film-title-'+chapter.step+'"></h2><p class="film-beat-copy"></p>'+sourceLinks(chapter)+'</div><div class="film-visual"></div><div class="film-stage-bottom"><div class="film-local-progress" aria-hidden="true"><i></i></div><p class="film-scene-cue"></p><nav class="film-beat-nav" aria-label="Phasen: '+chapter.label+'"></nav></div><span class="film-chapter-watermark" aria-hidden="true">'+String(chapter.step).padStart(2,'0')+'</span></div>';
     section.classList.remove('page-width');
     section.classList.add('film-chapter');
     section.setAttribute('aria-labelledby','film-title-'+chapter.step);
-    section.append(reel,disclosure);
+    section.append(reel);
     const stage = reel.querySelector('.film-stage');
     const visual = stage.querySelector('.film-visual');
     visual.innerHTML = scenes[chapter.step].markup();
@@ -73,7 +72,7 @@
     status.className='film-phase-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.setAttribute('aria-atomic','true');
     transport.append(status);
     const planning=null;
-    return {chapter,section,reel,stage,visual,disclosure,source,planning,renderer:scenes[chapter.step].mount(visual),
+    return {chapter,section,reel,stage,visual,planning,renderer:scenes[chapter.step].mount(visual),
       tag:stage.querySelector('.film-beat-tag'),title:stage.querySelector('h2'),copy:stage.querySelector('.film-beat-copy'),
       copyBox:stage.querySelector('.film-copy'),cue:stage.querySelector('.film-scene-cue'),buttons:Array.from(nav.children),
       count:transport.querySelector('.film-phase-count'),forward:transport.querySelector('[data-film-direction="1"]'),status,attention:[],attentionBeat:-1,
@@ -284,7 +283,7 @@
       }
       return {record,point};
     }
-    let node=record.disclosure;
+    let node=record.section;
     if(y>=launchTop)node=launch;
     return {node,offset:y-(node.getBoundingClientRect().top+y)};
   }

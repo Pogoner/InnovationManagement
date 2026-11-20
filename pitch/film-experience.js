@@ -80,25 +80,22 @@
       ${e.revenue.map((value, index) => `<text class="fe-econ-revenue" data-fe-revenue="${index}" x="${xs[index]}" y="398" text-anchor="middle">${value > 0 ? de(value) : '–'}</text>`).join('')}
       <text class="fe-econ-unit" x="320" y="424" text-anchor="middle">UMSATZ JE JAHR IN MIO. USD · ${e.guests} GÄSTE</text>
       <path class="fe-econ-key" d="M92 452H112" /><text class="fe-econ-legend" x="120" y="456">KUMULIERT: GEWINN − F&amp;E</text>
-      <text class="fe-layout-note" x="320" y="490" text-anchor="middle">Gewinn = Umsatz × Konzernmarge 24,3 % · F&amp;E ohne laufenden Eventbetrieb</text>
-      <text class="fe-layout-note" x="320" y="512" text-anchor="middle">Modellannahmen · Zahlungsbereitschaft noch nicht getestet</text>
     </g>`;
   }
   function scaleMarkup(e) {
     const {x, width} = scaleGeo;
     const costShare = e.variable / e.price;
     const costWidth = width * costShare;
-    return `<g data-fe-scale class="fe-scale" transform="translate(0 70)">
-      <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">HOHE MARGE. KLEINE GRÖSSE.</text>
-      <text class="fe-econ-label" x="320" y="70" text-anchor="middle">DECKUNGSBEITRAG JE GAST · USD</text>
-      <text class="fe-econ-total fe-econ-gain-label" data-fe-guest-total x="320" y="128" text-anchor="middle">0</text>
-      <rect class="fe-scale-track" x="${x}" y="150" width="${width}" height="24"/>
-      <rect class="fe-econ-gain" data-fe-guest-margin x="${x}" y="150" width="0" height="24"/>
-      <rect class="fe-econ-cost" data-fe-guest-cost x="${x + width}" y="150" width="0" height="24"/>
-      <text class="fe-econ-legend fe-econ-gain-label" x="${x}" y="198">${de(e.margin * 100, 0)} % BLEIBEN</text>
-      <text class="fe-econ-legend fe-econ-cost-label" x="${x + width}" y="198" text-anchor="end">${de(e.variable, 0)} USD VARIABLE KOSTEN</text>
-      <text class="fe-layout-note" x="320" y="224" text-anchor="middle">Preis ${de(e.price, 0)} USD · Menü 2.000 · Logistik, Sicherheit, Service 3.000</text>
-      <text class="fe-layout-note" x="320" y="262" text-anchor="middle">Modellannahmen · KI-gestützt recherchiert</text>
+    return `<g data-fe-scale class="fe-scale">
+      <text class="fe-diagram-heading" x="320" y="86" text-anchor="middle">HOHE MARGE. KLEINE GRÖSSE.</text>
+      <text class="fe-econ-label" x="320" y="168" text-anchor="middle">DECKUNGSBEITRAG JE GAST · USD</text>
+      <text class="fe-econ-total fe-econ-gain-label" data-fe-guest-total x="320" y="252" text-anchor="middle">0</text>
+      <rect class="fe-scale-track" x="${x}" y="292" width="${width}" height="28"/>
+      <rect class="fe-econ-gain" data-fe-guest-margin x="${x}" y="292" width="0" height="28"/>
+      <rect class="fe-econ-cost" data-fe-guest-cost x="${x + width}" y="292" width="0" height="28"/>
+      <text class="fe-econ-legend fe-econ-gain-label" x="${x}" y="354">${de(e.margin * 100, 0)} % BLEIBEN</text>
+      <text class="fe-econ-legend fe-econ-cost-label" x="${x + width}" y="354" text-anchor="end">${de(e.variable, 0)} USD VARIABLE KOSTEN</text>
+      <text class="fe-layout-note" x="320" y="408" text-anchor="middle">Preis ${de(e.price, 0)} USD · Menü 2.000 · Logistik, Sicherheit, Service 3.000</text>
     </g>`;
   }
 

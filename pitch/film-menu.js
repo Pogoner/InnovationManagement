@@ -16,31 +16,32 @@
 
   const menus = shared.menus;
   const exampleCounts = {falcon: 13, odyssey: 8, starlight: 10};
-  const geo = {xs: [95, 245, 395], width: 70, base: 270, height: 140, avatar: 26, gap: 3, perRow: 5, max: 10};
-  const qr = {x: 480, y: 130, size: 150};
+  const geo = {xs: [80, 225, 370], width: 84, base: 300, height: 190, avatar: 26, gap: 3, perRow: 5, max: 10, people: 438};
+  const qr = {x: 448, y: 104, size: 190};
   const apiUrl = () => new URL('../api/bookings', document.baseURI);
 
   scenes[8] = {
     markup: () => `<div class="fm-scene" role="group" aria-label="Menüwahl des Publikums" data-fm-scene>
       <svg class="fm-svg" viewBox="0 0 640 520" aria-hidden="true" focusable="false">
         <g data-fm-chart>
-          <text class="fm-heading" x="245" y="29" text-anchor="middle">WELCHES MENÜ WÄHLT DAS PUBLIKUM?</text>
-          <text class="fm-mock" data-fm-status x="245" y="58" text-anchor="middle"></text>
-          <path class="fm-axis" data-fm-axis pathLength="1" d="M25 ${geo.base}H465"/>
+          <text class="fm-heading" x="225" y="29" text-anchor="middle">WELCHES MENÜ WÄHLT DAS PUBLIKUM?</text>
+          <text class="fm-mock" data-fm-status x="225" y="60" text-anchor="middle"></text>
+          <path class="fm-axis" data-fm-axis pathLength="1" d="M10 ${geo.base}H440"/>
           ${menus.map((menu, index) => `<g class="fm-column" data-fm-column="${index}">
             <rect class="fm-bar" data-fm-bar x="${geo.xs[index] - geo.width / 2}" y="${geo.base}" width="${geo.width}" height="0" rx="3"/>
             <text class="fm-count" data-fm-count x="${geo.xs[index]}" y="${geo.base - 10}" text-anchor="middle">0</text>
-            <g transform="translate(${geo.xs[index]} 322)"><circle class="fm-plate" r="29"/><circle class="fm-plate-inner" r="21"/><g class="fm-glyph">${menu.glyph}</g></g>
-            <text class="fm-name" x="${geo.xs[index]}" y="378" text-anchor="middle">${menu.name}</text>
-            <text class="fm-line" x="${geo.xs[index]}" y="399" text-anchor="middle">${menu.tag}</text>
+            <g transform="translate(${geo.xs[index]} 352)"><circle class="fm-plate" r="29"/><circle class="fm-plate-inner" r="21"/><g class="fm-glyph">${menu.glyph}</g></g>
+            <text class="fm-name" x="${geo.xs[index]}" y="404" text-anchor="middle">${menu.name}</text>
+            <text class="fm-line" x="${geo.xs[index]}" y="424" text-anchor="middle">${menu.tag}</text>
             <g data-fm-people="${index}"></g>
           </g>`).join('')}
-          <text class="fm-lead" data-fm-lead x="245" y="508" text-anchor="middle"></text>
+          <text class="fm-lead" data-fm-lead x="225" y="510" text-anchor="middle"></text>
           <g class="fm-qr" data-fm-qr>
-            <text class="fm-qr-head" x="${qr.x + qr.size / 2}" y="${qr.y - 16}" text-anchor="middle">SIE SIND EINGELADEN</text>
+            <text class="fm-qr-head" x="${qr.x + qr.size / 2}" y="${qr.y - 18}" text-anchor="middle">SIE SIND EINGELADEN</text>
             ${shared.qrMarkup(qr.x, qr.y, qr.size)}
-            <text class="fm-qr-action" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 28}" text-anchor="middle">SCANNEN &amp; BUCHEN</text>
-            <text class="fm-qr-url" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 50}" text-anchor="middle"${shared.bookingUrl().length > 40 ? ` textLength="${qr.size + 20}" lengthAdjust="spacingAndGlyphs"` : ''}>${shared.esc(shared.bookingUrl().replace(/^https?:\/\//, ''))}</text>
+            <text class="fm-qr-action" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 32}" text-anchor="middle">SCANNEN &amp; BUCHEN</text>
+            <text class="fm-qr-url" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 54}" text-anchor="middle"${shared.bookingUrl().length > 36 ? ` textLength="${qr.size}" lengthAdjust="spacingAndGlyphs"` : ''}>${shared.esc(shared.bookingUrl().replace(/^https?:\/\//, ''))}</text>
+            <text class="fm-qr-sub" x="${qr.x + qr.size / 2}" y="${qr.y + qr.size + 84}" text-anchor="middle">Eine Minute · keine Zahlung</text>
           </g>
         </g>
       </svg>
@@ -103,9 +104,9 @@
           const width = Math.min(shownList.length, geo.perRow) * (geo.avatar + geo.gap) - geo.gap;
           group.innerHTML = shownList.map((item, i) => {
             const x = geo.xs[index] - width / 2 + (i % geo.perRow) * (geo.avatar + geo.gap);
-            const y = 414 + Math.floor(i / geo.perRow) * (geo.avatar + geo.gap);
+            const y = geo.people + Math.floor(i / geo.perRow) * (geo.avatar + geo.gap);
             return `<g><title>${shared.esc(item.name)}</title>${shared.avatarSVG(item.avatar, geo.avatar, `x="${x}" y="${y}"`)}</g>`;
-          }).join('') + (list.length > geo.max ? `<text class="fm-more" x="${geo.xs[index]}" y="${414 + rows * (geo.avatar + geo.gap) + 12}" text-anchor="middle">+${list.length - geo.max}</text>` : '');
+          }).join('') + (list.length > geo.max ? `<text class="fm-more" x="${geo.xs[index]}" y="${geo.people + rows * (geo.avatar + geo.gap) + 12}" text-anchor="middle">+${list.length - geo.max}</text>` : '');
         });
       }
 

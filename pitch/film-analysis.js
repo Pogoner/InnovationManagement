@@ -179,16 +179,11 @@
           <text class="fa-small" x="24" y="398">OPEN INNOVATION · SEPARAT ENTSTANDEN</text>
           ${openInnovation.map((item, index) => `<text class="fa-pool-name" x="24" y="${414 + index * 27 + 5}">${esc(item.name)}</text>`).join('')}
         </g>
-        <g class="fa-pool-count"><text class="fa-number-large" x="430" y="122">23</text><text class="fa-kicker" x="430" y="150">KONZEPTE INSGESAMT</text></g>
+        <g class="fa-pool-count"><text class="fa-number-large" x="430" y="122">23</text><text class="fa-kicker" x="430" y="150">IDEEN INSGESAMT</text></g>
         <g class="fa-pool-twelve" opacity="0"><text class="fa-number-large" x="430" y="122">12</text><text class="fa-kicker" x="430" y="150">AUSWAHL · 8 + 4</text></g>
-        <g class="fa-pool-legend">
-          <circle class="fa-pool-dot is-favorite" cx="438" cy="190" r="9"/><text class="fa-pool-name" x="458" y="195">KI-Trendfavorit</text>
-          <circle class="fa-pool-dot" cx="438" cy="220" r="9"/><text class="fa-pool-name" x="458" y="225">weitere Geschäftsidee</text>
-          <circle class="fa-pool-dot is-open" cx="438" cy="250" r="9"/><text class="fa-pool-name" x="458" y="255">Open Innovation</text>
-        </g>
-        ${pool.map((item, index) => `<g class="fa-pool-node" data-pool-node="${index}" transform="translate(${item.x} ${item.y})"><circle class="fa-node-halo" r="21"/><circle class="fa-pool-dot${item.favorite ? ' is-favorite' : ''}${item.open ? ' is-open' : ''}" r="15"/><text class="fa-pool-id${item.favorite ? ' is-dark' : ''}" y="5" text-anchor="middle">${esc(item.label)}</text></g>`).join('')}
+        ${pool.map((item, index) => `<g class="fa-pool-node" data-pool-node="${index}" transform="translate(${item.x} ${item.y})"><circle class="fa-node-halo" r="21"/><circle class="fa-pool-dot" r="15"/><text class="fa-pool-id" y="5" text-anchor="middle">${esc(item.label)}</text>${item.matrixId ? `<g class="fa-pool-pick" opacity="0"><circle class="fa-pool-dot is-favorite" r="15"/><text class="fa-pool-id is-dark" y="5" text-anchor="middle">${esc(item.label)}</text></g>` : ''}</g>`).join('')}
         <g class="fa-matrix-phase">
-          <text class="fa-kicker" x="50" y="28">NOW / HOW / WOW · TEAM</text><text class="fa-axis-label" x="50" y="63">ORIGINALITÄT · 1–5</text>
+          <text class="fa-kicker" x="50" y="28">NOW / HOW / WOW</text><text class="fa-axis-label" x="50" y="63">ORIGINALITÄT · 1–5</text>
           <rect class="fa-matrix-wow" x="266.25" y="100" width="129.75" height="108.75"/>
           <path class="fa-grid-border fa-trace fa-matrix-border" pathLength="1" d="M50 100V390H396V100Z"/>
           ${[1, 2, 3].map(index => `<path class="fa-grid-line" d="M${50 + index * 86.5} 100V390M50 ${390 - index * 72.5}H396"/>`).join('')}
@@ -198,7 +193,6 @@
           <text class="fa-axis-label" x="396" y="449" text-anchor="end">MACHBARKEIT · 1–5</text>
           ${matrixGroups.map((group, index) => `<g class="fa-matrix-point ${group.some(point => point.id === 9) ? 'is-pitch' : ''}" data-matrix-cluster="${index}" transform="translate(${group[0].x} ${group[0].y})"><circle r="${group.length > 1 ? 25 : 17}"/><text y="5" text-anchor="middle">${group.map(point => point.id).join('·')}</text></g>`).join('')}
           <g class="fa-matrix-key"><text class="fa-stufen-heading" x="434" y="68">DIE 12 IDEEN</text>${matrix.map((point, index) => `<text class="fa-matrix-idea ${[9, 4, 8].includes(point.id) ? 'is-finalist' : ''}" x="434" y="${104 + index * 29}"><tspan class="fa-copper-text">${String(point.id).padStart(2, '0')}</tspan> ${esc(matrixShortNames[index])}</text>`).join('')}</g>
-          <text class="fa-stufen-note" x="50" y="490">Hoch ab 4 · Positionen aus der Originalbewertung.</text><text class="fa-stufen-note" x="50" y="513">08 ist beim Team NOW, bei der KI WOW. Details bleiben vergleichbar.</text>
         </g>
         <g class="fa-selection-phase">
           <text class="fa-kicker" x="320" y="31" text-anchor="middle">8 TREND-FAVORITEN + 4 OPEN INNOVATION</text>
@@ -209,24 +203,24 @@
             <g data-finalist-copy="8"><text class="fa-finalist-name" x="214" y="428">Launch Engineering</text><text class="fa-finalist-name" x="214" y="457">Cloud</text><text class="fa-footnote" x="214" y="486">Prüft Satellitenentwürfe vor dem Start</text></g>
           </g>
           ${matrix.map((point, index) => `<g class="fa-candidate ${point.id >= 9 ? 'is-extra' : ''} ${point.id === 9 ? 'is-pitch' : ''}" data-candidate="${index}"><circle class="fa-candidate-halo" r="27"/><circle class="fa-candidate-dot" r="9"/><text class="fa-candidate-id" y="6" text-anchor="middle">${String(point.id).padStart(2, '0')}</text></g>`).join('')}
-          <text class="fa-stufen-note" x="320" y="510" text-anchor="middle">Begründete Teamwahl · kein automatisches Matrix-Ranking.</text>
         </g>
       `);
     },
     mount(root) {
       const pool = poolGeometry(), matrix = matrixGeometry();
-      const nodes = [...root.querySelectorAll('[data-pool-node]')].map((node, index) => { const item = pool[index], target = item.matrixId ? matrix.find(point => point.id === item.matrixId) : null; return { node, item, target }; });
-      const rows = root.querySelector('.fa-pool-rows'), legend = root.querySelector('.fa-pool-legend'), count = root.querySelector('.fa-pool-count'), twelve = root.querySelector('.fa-pool-twelve');
+      const nodes = [...root.querySelectorAll('[data-pool-node]')].map((node, index) => { const item = pool[index], target = item.matrixId ? matrix.find(point => point.id === item.matrixId) : null; return { node, item, target, pick: node.querySelector('.fa-pool-pick') }; });
+      const rows = root.querySelector('.fa-pool-rows'), count = root.querySelector('.fa-pool-count'), twelve = root.querySelector('.fa-pool-twelve');
       const matrixLayer = root.querySelector('.fa-matrix-phase'), matrixBorder = root.querySelector('.fa-matrix-border'), matrixPoints = [...root.querySelectorAll('[data-matrix-cluster]')], matrixKey = root.querySelector('.fa-matrix-key');
       const selection = root.querySelector('.fa-selection-phase'), middle = root.querySelector('.fa-selection-middle'), final = root.querySelector('.fa-selection-final'), tree = root.querySelector('.fa-selection-tree'), orbit = root.querySelector('.fa-candidate-orbit');
       const candidates = [...root.querySelectorAll('[data-candidate]')].map((node, index) => ({ node, id: index + 1, dot: node.querySelector('.fa-candidate-dot'), halo: node.querySelector('.fa-candidate-halo'), label: node.querySelector('.fa-candidate-id') }));
       return {
         update(progress, context) {
           const p = pose(progress, context), leaving = 1 - smooth(.52, .58, p);
-          opacity(rows, smooth(0, .08, p) * leaving); opacity(legend, smooth(0, .08, p) * leaving);
+          opacity(rows, smooth(0, .08, p) * leaving);
           opacity(count, smooth(0, .06, p) * (1 - smooth(.32, .37, p))); opacity(twelve, smooth(.32, .37, p) * leaving);
-          nodes.forEach(({ node, item, target }) => {
-            const build = smooth(.01 + item.row * .025, .11 + item.row * .025, p), q = target ? smooth(.6, .74, p) : 0;
+          nodes.forEach(({ node, item, target, pick }) => {
+            const build = smooth(.01 + item.row * .012, .09 + item.row * .012, p), q = target ? smooth(.6, .74, p) : 0;
+            if (pick) opacity(pick, smooth(.34, .42, p));
             at(node, target ? mix(item.x, target.x, q) : item.x, target ? mix(item.y, target.y, q) : item.y, target ? mix(1, .86, q) : 1);
             const presence = target ? 1 - smooth(.7, .76, p) : (1 - .82 * smooth(.32, .4, p)) * (1 - smooth(.56, .62, p));
             opacity(node, build * presence);
@@ -256,7 +250,8 @@
           ${cases.map((item, index) => { const y = 120 + index * 100, teamIR = item.items[0].result.IR; return `<g class="fa-ir-case" data-ir-case="${index}">${lines(index === 2 ? ['Launch Engineering', 'Cloud'] : [item.name], 40, y + 20, 'fa-case-name', 22)}<rect class="fa-ir-team" data-ir-bar="${index}" data-width="${(irX(teamIR) - 230).toFixed(3)}" x="230" y="${y}" width="0" height="36" rx="3"/><text class="fa-ir-value fa-copper-text" data-ir-value="${index}" x="${irX(teamIR) + 10}" y="${y + 27}">${num(teamIR)}</text></g>`; }).join('')}
         </g>
         <g class="fa-ir-callout" opacity="0">
-          <text class="fa-method-note-strong fa-copper-text" x="40" y="466">RocketLight: ${num(team.result.IR)} · der höchste Score</text>
+          <path class="fa-grid-line" d="M40 462H600"/>
+          <text class="fa-method-note-strong fa-copper-text" x="40" y="500">RocketLight: ${num(team.result.IR)} · der höchste Score</text>
         </g>
         </g>
       `);

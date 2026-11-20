@@ -115,6 +115,10 @@
   body.is-printing .film-phase-card { break-inside: avoid; }
   body.is-printing .film-stage[data-film-step="6"] .film-visual { display: block; height: auto; aspect-ratio: auto; padding: 56px 72px; box-sizing: border-box; }
   body.is-printing .film-stage[data-film-step="6"] .film-visual::before { content: "PART 06 / ROADMAP & UMSETZUNG"; display: block; margin-bottom: 28px; color: #a9d9d9; font-size: 11px; letter-spacing: .15em; }
+  body.is-printing .film-timeline-view { break-before: page; margin: 0 !important; padding: 0 !important; border: 0 !important; max-width: none; }
+  body.is-printing .film-gantt-scroll { display: block !important; overflow: visible; }
+  body.is-printing .film-mobile-roadmap, body.is-printing .film-mobile-critical { display: none !important; }
+  body.is-printing .film-gantt { min-width: 0; }
   body.is-printing .film-static-shot:last-child { padding-bottom: 56px; }
   body.is-printing.pitch-page h1, body.is-printing.pitch-page h2, body.is-printing.pitch-page h3 { color: #eff3ed !important; }
   body.is-printing.pitch-page em, body.is-printing.pitch-page h3 em { color: #efbd91 !important; }

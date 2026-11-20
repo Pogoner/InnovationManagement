@@ -73,7 +73,7 @@
       Array.from({length:4},(_,i)=>'<g class="fs-pilot-light" data-world-pilot="'+i+'" transform="translate('+(480+i*150)+' 772)"><circle class="fs-pilot-halo" r="27"/><circle class="fs-pilot-ring" r="16"/><circle class="fs-pilot-dot" r="4"/><text y="49" text-anchor="middle">PILOT '+(i+1)+'</text></g>').join('')+
       '<text class="fs-label" x="590" y="861">Testen · auswerten · anpassen</text>'+
     '</g>'+
-    '<g class="fs-operation-layer"><path class="fs-leader" d="M808 737 946 820 1170 820"/><text class="fs-label" x="965" y="847">Florida · fester Pavillon</text><text class="fs-label-sub" x="965" y="875">STANDORT 1 BLEIBT BESTEHEN</text></g>'+
+    '<g class="fs-operation-layer"><path class="fs-leader" d="M808 737 946 820 1170 820"/><text class="fs-label" x="965" y="847">Florida · fester Pavillon</text><text class="fs-label-sub" x="965" y="875">REGELBETRIEB BEI GO AB 08/2029</text></g>'+
     '</svg>';
 
   // All aerial marks share the generated image's source coordinates. The

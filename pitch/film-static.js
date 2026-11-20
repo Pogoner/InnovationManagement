@@ -40,7 +40,7 @@
       while (walker.nextNode()) text.push(walker.currentNode.textContent);
       return [normalized(text.join(' '))];
     });
-    const description = Array.from(new Set([beat.cue, beat.copy, ...labels].map(normalized).filter(Boolean))).join('. ');
+    const description = Array.from(new Set([beat.cue, beat.copy.replace(/<br\s*\/?>/g, ' '), ...labels].map(normalized).filter(Boolean))).join('. ');
     art.setAttribute('role', 'group');
     art.setAttribute('aria-label', normalized(beat.cue));
     art.setAttribute('aria-description', description);
@@ -169,7 +169,7 @@
       title.innerHTML = beat.title;
       const copy = document.createElement('p');
       copy.className = 'film-static-copy';
-      copy.textContent = beat.copy;
+      copy.innerHTML = beat.copy;
       caption.append(tag, title, copy);
 
       const diagram = document.createElement('div');

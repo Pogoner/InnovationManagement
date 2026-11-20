@@ -27,7 +27,39 @@ function profitRating(profit,share){if(profit<=0)return 0;if(share<=.03)return 1
 function costRating(cost,share){if(cost<=0)return 0;if(share<=.1)return 1;if(share<=.2)return 2;if(share<=.5)return 3;if(share<=1)return 4;return 5}
 const sum=a=>a.reduce((x,y)=>x+(+y||0),0);
 
+/* Projektbezogene Rechnung (fy.model==='project'): Umsatz, variable Kosten, laufende Fixkosten und Investitionen werden getrennt erfasst.
+   Betriebsergebnis = Umsatz - variable Kosten - laufende Fixkosten (vor Abschreibungen, Zinsen und Steuern).
+   Cashflow = Betriebsergebnis - Investitionsauszahlungen. Investitionen werden nur im Cashflow abgezogen, nie im Betriebsergebnis.
+   Die Konzernmarge von SpaceX wird nicht verwendet. Das Betriebsergebnis und die Investitionen dienen nur als Bezugsgrößen für die Hube-Kriterien. */
+function calcProject(fy,base){
+  const yrs=[0,1,2,3,4],years=fy.years||[2027,2028,2029,2030,2031],seatsPer=+fy.seats||0;
+  const byType=fy.dinners.map(d=>yrs.map(i=>(+d.events[i]||0)*seatsPer*(+d.util[i]||0)));
+  const qty=yrs.map(i=>sum(byType.map(t=>t[i])));
+  const revenue=yrs.map(i=>sum(fy.dinners.map((d,k)=>byType[k][i]*(+d.price[i]||0))));
+  const perSeat=sum(fy.varCosts.map(v=>+v.perSeat||0));
+  const varCost=qty.map(q=>q*perSeat);
+  const contribution=revenue.map((r,i)=>r-varCost[i]);
+  const fixed=yrs.map(i=>sum(fy.fixed.map(f=>+f.v[i]||0)));
+  const opResult=contribution.map((c,i)=>c-fixed[i]);
+  const reserve=yrs.map(i=>sum(fy.invest.filter(x=>x.reserve).map(x=>+x.v[i]||0))*(+fy.reservePct||0)/100);
+  const investItems=yrs.map(i=>sum(fy.invest.map(x=>+x.v[i]||0)));
+  const invest=investItems.map((v,i)=>v+reserve[i]);
+  const cashflow=opResult.map((o,i)=>o-invest[i]);
+  let run=0;const cumulative=cashflow.map(c=>run+=c);
+  const idx=cumulative.findIndex(v=>v>=0);
+  const payback={reached:idx>=0,index:idx,year:idx>=0?years[idx]:null,
+    label:idx>=0?'Im Plus ab '+years[idx]:'Im Betrachtungszeitraum nicht erreicht'};
+  const regular=fy.dinners.slice().reverse().find(d=>d.price.some(p=>+p>0));
+  const price=regular?Math.max(...regular.price.map(Number)):0;
+  const guest={price,variable:perSeat,contribution:price-perSeat,share:price>0?(price-perSeat)/price:0};
+  const P=sum(opResult),C=sum(invest);
+  const pShare=base.profit>0?P/(base.profit*1e6):0, cShare=base.rnd>0?C/(base.rnd*1e6):0;
+  return {project:true,years,margin:null,qty,seatsByType:byType,revenue,varCost,contribution,fixed,opResult,reserve,investItems,invest,cashflow,cumulative,payback,guest,
+    profit:opResult,rnd:invest,staffCost:fixed,R:sum(revenue),P,C,Contribution:sum(contribution),Fixed:sum(fixed),Cash:sum(cashflow),pShare,cShare,
+    pRating:profitRating(P,pShare),cRating:costRating(C,cShare),qtySum:sum(qty)};
+}
 function calcFY(fy,base){
+  if(fy&&fy.model==='project')return calcProject(fy,base);
   const margin=base.revenue>0?base.profit/base.revenue:0;
   const revenue=fy.qty.map((q,i)=>(+q||0)*(+fy.price[i]||0));
   const profit=revenue.map(r=>r*margin);

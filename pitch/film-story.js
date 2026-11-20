@@ -1,10 +1,26 @@
 /* Source-backed narrative for a 20-minute study pitch.
  * at, still and view keep spoken beats, graphics and the reading flow together. */
+// Chapter 5 numbers come from the project calculation (rld-ki, 2027-2031), never from fixed copy.
+const financeCopy = (() => {
+  const fin = window.PitchEvidence && window.PitchEvidence.financialA;
+  if (!fin || !fin.project) return {econ: '', econCue: '', scale: ''};
+  const mio = value => (value / 1e6).toLocaleString('de-DE', {minimumFractionDigits: 1, maximumFractionDigits: 1});
+  const int = value => Math.round(value).toLocaleString('de-DE');
+  const first = fin.years[0], last = fin.years[fin.years.length - 1];
+  const payback = fin.payback.reached
+    ? 'Der kumulierte Cashflow ist ab ' + fin.payback.year + ' im Plus.'
+    : 'Im Betrachtungszeitraum wird die Amortisation nicht erreicht.';
+  return {
+    econ: 'Grundstück, Planung, Bau und Ausstattung erfordern ' + mio(fin.C) + ' Mio. USD Investition vor dem ersten Gast. Die vier Piloten bringen erste Umsätze, der Regelbetrieb beginnt erst nach G4 mit Hochlauf. ' + first + '–' + last + ' ergibt sich ein Betriebsergebnis von ' + mio(fin.P) + ' Mio. USD. ' + payback,
+    econCue: fin.payback.reached ? 'Erst investieren, kumulierter Cashflow im Plus ab ' + fin.payback.year + '.' : 'Erst investieren, Amortisation im Betrachtungszeitraum nicht erreicht.',
+    scale: 'Je Gast bleiben bei ' + int(fin.guest.price) + ' USD etwa ' + int(fin.guest.contribution) + ' USD (' + Math.round(fin.guest.share * 100) + ' %) Deckungsbeitrag, vor Fixkosten und Investition. Das Dinner bleibt ein kleines Angebot für 20 Gäste; entscheidend ist der Nachweis der Nachfrage im Pilot.'
+  };
+})();
 window.PitchFilmStory = [
   {
     "step": 1,
     "label": "Das Unternehmen",
-    "sources": [{"file": "Schritt_1_Unternehmensvorstellung.pptx"}],
+    "sources": [{ "file": "Schritt_1_Unternehmensvorstellung.pptx" }],
     "length": 3,
     "beats": [
       {
@@ -31,7 +47,7 @@ window.PitchFilmStory = [
   {
     "step": 2,
     "label": "Der Innovationsprüfstand",
-    "sources": [{"file": "Schritt_2_Innovationsprüfstand.xlsx"}],
+    "sources": [{ "file": "Schritt_2_Innovationsprüfstand.xlsx" }],
     "length": 2.4,
     "beats": [
       {
@@ -49,7 +65,7 @@ window.PitchFilmStory = [
   {
     "step": 3,
     "label": "Trends & Ideenauswahl",
-    "sources": [{"file": "Schritt_3_Trendportfolioanalyse.xlsx"}],
+    "sources": [{ "file": "Schritt_3_Trendportfolioanalyse.xlsx" }],
     "length": 4.4,
     "beats": [
       {
@@ -85,7 +101,7 @@ window.PitchFilmStory = [
         "view": ".fa-selection-final",
         "tag": "DREI IDEEN · DIE KERNIDEE",
         "title": "Drei Favoriten.<br><em>Drei Kernideen.</em>",
-        "copy": "RocketLight: Sternemenü mit Blick auf den Start. Starlink Insights: Netzdaten als Wetterwissen. Launch Engineering Cloud: Prüfung von Satellitenentwürfen.",
+        "copy": "RocketLight: Sternemenü mit Blick auf den Start.<br>Starlink Insights: Netzdaten als Wetterwissen.<br>Launch Engineering Cloud: Prüfung von Satellitenentwürfen.",
         "cue": "Die Dreierauswahl ist eine Teamentscheidung"
       }
     ],
@@ -95,7 +111,7 @@ window.PitchFilmStory = [
   {
     "step": 4,
     "label": "Bewertung & Kalkulation",
-    "sources": [{"file": "Schritt_4_Inno_Rendite_Kalkulator_RocketLight.xlsm", "label": "RocketLight"}, {"file": "Schritt_4_Inno_Rendite_Kalkulator_StarlinkInsights.xlsm", "label": "Starlink Insights"}, {"file": "Schritt_4_Inno_Rendite_Kalkulator_LaunchEngineeringCloud.xlsm", "label": "Launch Engineering Cloud"}],
+    "sources": [{ "file": "Schritt_4_Inno_Rendite_Kalkulator.xlsm" }],
     "length": 3,
     "beats": [
       {
@@ -123,7 +139,7 @@ window.PitchFilmStory = [
   {
     "step": 5,
     "label": "Das Dinner & die Wirtschaftlichkeit",
-    "sources": [{"file": "Schritt_5_5P_Marketing Mix .xlsx", "label": "Marketingmix"}, {"file": "Schritt_4_Inno_Rendite_Kalkulator_RocketLight.xlsm", "label": "Kalkulation"}],
+    "sources": [{ "file": "Schritt_5_5P_Marketing Mix.xlsx", "label": "Marketingmix" }, { "file": "Schritt_4_RocketLight_Finanzrechnung_Fester_Pavillon.xlsx", "label": "Finanzrechnung" }],
     "length": 5.8,
     "beats": [
       {
@@ -158,8 +174,8 @@ window.PitchFilmStory = [
         "at": 0.48,
         "tag": "ERWARTETE KOSTEN UND GEWINNE",
         "title": "Erst investieren.<br><em>Dann verdienen.</em>",
-        "copy": "Im ersten Jahr entstehen nur Kosten für Konzept, Pavillon und Genehmigungen. Ab dem zweiten Jahr laufen die Piloten. Über fünf Jahre stehen rund 11,5 Mio. USD Gewinn etwa 3,5 Mio. USD F&E-Kosten gegenüber.",
-        "cue": "Der Gewinn wächst, die Kosten sinken, kumuliert im Plus ab Jahr 4.",
+        "copy": financeCopy.econ,
+        "cue": financeCopy.econCue,
         "still": 0.62,
         "view": "[data-fe-econ]"
       },
@@ -167,7 +183,7 @@ window.PitchFilmStory = [
         "at": 0.65,
         "tag": "WIRTSCHAFTLICHKEIT",
         "title": "Hohe Marge.<br><em>Kleine Größe.</em>",
-        "copy": "Je Gast bleiben bei 50.000 USD etwa 45.000 USD übrig. Das Dinner bleibt ein kleines Angebot für 20 Gäste; entscheidend ist der Nachweis der Nachfrage im Pilot.",
+        "copy": financeCopy.scale,
         "cue": "Profitabel je Gast, aber ein kleines Angebot.",
         "still": 1,
         "view": "[data-fe-scale]"
@@ -178,16 +194,16 @@ window.PitchFilmStory = [
   {
     "step": 6,
     "label": "Roadmap & Umsetzung",
-    "sources": [{"file": "Schritt_6_Roadmap.pptx"}],
-    "detail": "Fester Pavillon in Florida, langfristig zwei Standorte · acht Planungsphasen",
-    "length": 8.2,
+    "sources": [{ "file": "Schritt_6_Roadmap.pptx" }],
+    "detail": "Fester Pavillon in Titusville, Florida · acht Planungsphasen, Gesamtübersicht",
+    "length": 9,
     "beats": [],
     "seconds": 120
   },
   {
     "step": 7,
     "label": "Ganzheitliches Innovationsmanagement",
-    "sources": [{"file": "Schritt_7_Ganzheitliches Innovationsmanagement.pptx"}],
+    "sources": [{ "file": "Schritt_7_Ganzheitliches Innovationsmanagement.pptx" }],
     "length": 3.6,
     "beats": [
       {
@@ -214,7 +230,7 @@ window.PitchFilmStory = [
   {
     "step": 8,
     "label": "Menüwahl mit dem Publikum",
-    "sources": [{"file": "Schritt_8_Methodenreflexion.xlsx"}],
+    "sources": [{ "file": "Schritt_8_Methodenreflexion.xlsx" }],
     "length": 3.4,
     "beats": [
       {

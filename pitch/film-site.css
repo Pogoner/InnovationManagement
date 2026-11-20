@@ -39,7 +39,7 @@
 .fs-pilot-ring { stroke: #efbd91; fill: #14212ae6; stroke-width: 1.5; }
 .fs-pilot-dot { fill: #ffdbaf; opacity: var(--pilot-reveal,0); filter: drop-shadow(0 0 8px #ffb976); }
 .fs-pilot-light text { fill: #eadac7; font-size: 15px; letter-spacing: .08em; }
-.fs-operation-layer { opacity: var(--fs-operate,0); }
+.fs-operation-layer { opacity: calc(var(--fs-operate,0) * (1 - var(--fs-overview,0))); }
 @media (max-width:760px) {
   /* The linear phase cards carry full labels; retain only spatial marks here. */
   .film-site-overlays .fs-label, .film-site-overlays .fs-label-sub, .film-site-overlays .fs-leader { display: none; }

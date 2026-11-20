@@ -34,52 +34,55 @@
     'Raumkonzept: zehn versetzte Zweiertische mit zwanzig Plätzen, alle auf das Startpanorama ausgerichtet. Konzeptvisualisierung ohne Standort- oder Entfernungszusage.',
     'Erlebniskonzept: sieben Gänge, Missionsbriefing, Service und gemeinsamer Blick auf den Launch.',
     'Preisannahmen: 35.000 US-Dollar je Gast im Pilot, langfristig bis zu 50.000 US-Dollar. Die Zahlungsbereitschaft ist noch zu prüfen.',
-    'Erwartete Kosten und Gewinne über fünf Jahre: Gewinn und F&E-Kosten je Jahr, kumuliert ab Jahr 4 im Plus. Modellannahmen aus dem Inno-Rendite-Kalkulator.',
-    'Hohe Marge je Gast: Bei 50.000 US-Dollar Preis bleiben etwa 45.000 US-Dollar Deckungsbeitrag. Modellannahmen.'
+    'Projektbezogene Rechnung 2027 bis 2031: Betriebsergebnis und Investitionen je Jahr, kumulierter Cashflow und Amortisation. Planannahmen für den festen Pavillon in Florida.',
+    'Hohe Marge je Gast: Bei 50.000 US-Dollar Preis bleiben etwa 45.000 US-Dollar Deckungsbeitrag vor Fixkosten und Investition. Planannahmen.'
   ];
 
-  // Five-year model of the Rendite-Kalkulator (sheet "5-Jahres-Kalkulation"). The
-  // totals come from the frozen evidence; the per-guest split is the workbook's
-  // plausibility check (cells B50:B54) and is not part of the Hube method.
-  const guestCosts = {menu:2000, service:3000};
-  const econGeo = {base:300, k:16, xs:[110,215,320,425,530], width:38};
+  // Project calculation for the fixed pavilion (Standort 1 Florida, 2027-2031). All values come
+  // from the frozen evidence (rld-ki.fy, model "project"); nothing is derived from SpaceX's group margin.
+  const econGeo = {base:268, k:8, xs:[110,215,320,425,530], width:34};
   const scaleGeo = {x:60, width:520};
   const de = (value, digits = 1) => value.toLocaleString('de-DE', {minimumFractionDigits:digits, maximumFractionDigits:digits});
   function economics() {
-    const {financialA, financialAssessmentA, base} = window.PitchEvidence;
+    const {financialA, financialAssessmentA} = window.PitchEvidence;
     const mio = value => value / 1e6;
-    const profit = financialA.profit.map(mio), cost = financialA.rnd.map(mio), revenue = financialA.revenue.map(mio);
-    let gained = 0, spent = 0;
-    const cumulative = profit.map((value, index) => { gained += value; spent += cost[index]; return gained - spent; });
-    const price = financialAssessmentA.fy.price[2];
-    const variable = guestCosts.menu + guestCosts.service;
-    return {profit, cost, revenue, cumulative, gain:mio(financialA.P), spend:mio(financialA.C), pShare:financialA.pShare, cShare:financialA.cShare,
-      companyProfit:base.profit, companyRnd:base.rnd, price, variable, margin:(price - variable) / price, guests:financialAssessmentA.fy.qty.reduce((a, b) => a + b, 0)};
+    const costs = financialAssessmentA.fy.varCosts.map(item => item.perSeat);
+    return {years:financialA.years, result:financialA.opResult.map(mio), invest:financialA.invest.map(mio), revenue:financialA.revenue.map(mio),
+      cumulative:financialA.cumulative.map(mio), gain:mio(financialA.P), spend:mio(financialA.C), payback:financialA.payback, guests:financialA.qtySum,
+      price:financialA.guest.price, variable:financialA.guest.variable, margin:financialA.guest.share, costs};
   }
   function econMarkup(e) {
     const {base, k, xs, width} = econGeo;
     const points = e.cumulative.map((value, index) => [xs[index], base - value * k]);
-    const turn = e.cumulative.findIndex(value => value >= 0);
-    const share = -e.cumulative[turn - 1] / (e.cumulative[turn] - e.cumulative[turn - 1]);
-    const crossX = xs[turn - 1] + share * (xs[turn] - xs[turn - 1]);
+    const turn = e.payback.index;
+    let breakEven = `<text class="fe-econ-legend" x="600" y="${base + 30}" text-anchor="end">IM BETRACHTUNGSZEITRAUM NICHT ERREICHT</text>`;
+    if (e.payback.reached) {
+      let crossX = xs[0];
+      if (turn > 0) {
+        const share = -e.cumulative[turn - 1] / (e.cumulative[turn] - e.cumulative[turn - 1]);
+        crossX = xs[turn - 1] + share * (xs[turn] - xs[turn - 1]);
+      }
+      breakEven = `<circle cx="${n(crossX)}" cy="${base}" r="7"/><text x="${n(crossX + 14)}" y="${base + 30}">IM PLUS AB ${e.payback.year}</text>`;
+    }
     return `<g data-fe-econ class="fe-econ">
       <text class="fe-diagram-heading" x="320" y="29" text-anchor="middle">ERWARTETE KOSTEN UND GEWINNE</text>
-      <text class="fe-econ-label fe-econ-gain-label" x="170" y="76" text-anchor="middle">GEWINN · 5 JAHRE</text>
+      <text class="fe-econ-label fe-econ-gain-label" x="170" y="76" text-anchor="middle">BETRIEBSERGEBNIS · ${e.years[0]}–${e.years[4]}</text>
       <text class="fe-econ-total fe-econ-gain-label" data-fe-gain-total x="170" y="132" text-anchor="middle">0,0</text>
-      <text class="fe-econ-label fe-econ-cost-label" x="470" y="76" text-anchor="middle">F&amp;E-KOSTEN · 5 JAHRE</text>
+      <text class="fe-econ-label fe-econ-cost-label" x="470" y="76" text-anchor="middle">INVESTITIONEN · ${e.years[0]}–${e.years[4]}</text>
       <text class="fe-econ-total fe-econ-cost-label" data-fe-cost-total x="470" y="132" text-anchor="middle">0,0</text>
       <text class="fe-econ-unit" x="170" y="158" text-anchor="middle">MIO. USD</text>
       <text class="fe-econ-unit" x="470" y="158" text-anchor="middle">MIO. USD</text>
       <path class="fe-econ-axis" d="M60 ${base}H600"/>
-      ${e.profit.map((value, index) => `<rect class="fe-econ-gain" data-fe-gain="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
-      ${e.cost.map((value, index) => `<rect class="fe-econ-cost" data-fe-cost="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
+      ${e.result.map((value, index) => `<rect class="fe-econ-gain" data-fe-gain="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
+      ${e.invest.map((value, index) => `<rect class="fe-econ-cost" data-fe-cost="${index}" x="${xs[index] - width / 2}" y="${base}" width="${width}" height="0"/>`).join('')}
       <path class="fe-econ-line" data-fe-cumulative pathLength="1" d="M${points.map(point => point.map(n).join(' ')).join('L')}"/>
       ${points.map((point, index) => `<circle class="fe-econ-dot" data-fe-cum-dot="${index}" cx="${n(point[0])}" cy="${n(point[1])}" r="3.5"/>`).join('')}
-      <g data-fe-breakeven class="fe-econ-breakeven"><circle cx="${n(crossX)}" cy="${base}" r="7"/><text x="${n(crossX + 14)}" y="${base + 30}">IM PLUS AB JAHR ${turn + 1}</text></g>
-      ${xs.map((x, index) => `<text class="fe-econ-year" x="${x}" y="366" text-anchor="middle">JAHR ${index + 1}</text>`).join('')}
+      <g data-fe-breakeven class="fe-econ-breakeven">${breakEven}</g>
+      ${xs.map((x, index) => `<text class="fe-econ-year" x="${x}" y="366" text-anchor="middle">${e.years[index]}</text>`).join('')}
       ${e.revenue.map((value, index) => `<text class="fe-econ-revenue" data-fe-revenue="${index}" x="${xs[index]}" y="398" text-anchor="middle">${value > 0 ? de(value) : '–'}</text>`).join('')}
       <text class="fe-econ-unit" x="320" y="424" text-anchor="middle">UMSATZ JE JAHR IN MIO. USD · ${e.guests} GÄSTE</text>
-      <path class="fe-econ-key" d="M92 452H112" /><text class="fe-econ-legend" x="120" y="456">KUMULIERT: GEWINN − F&amp;E</text>
+      <path class="fe-econ-key" d="M92 452H112" /><text class="fe-econ-legend" x="120" y="456">KUMULIERTER CASHFLOW: BETRIEBSERGEBNIS − INVESTITIONEN</text>
+      <text class="fe-layout-note" x="320" y="494" text-anchor="middle">Planannahmen · Regelbetrieb erst nach G4 · Budget vor G2 auf Angebotsbasis prüfen</text>
     </g>`;
   }
   function scaleMarkup(e) {
@@ -95,7 +98,8 @@
       <rect class="fe-econ-cost" data-fe-guest-cost x="${x + width}" y="292" width="0" height="28"/>
       <text class="fe-econ-legend fe-econ-gain-label" x="${x}" y="354">${de(e.margin * 100, 0)} % BLEIBEN</text>
       <text class="fe-econ-legend fe-econ-cost-label" x="${x + width}" y="354" text-anchor="end">${de(e.variable, 0)} USD VARIABLE KOSTEN</text>
-      <text class="fe-layout-note" x="320" y="408" text-anchor="middle">Preis ${de(e.price, 0)} USD · Menü 2.000 · Logistik, Sicherheit, Service 3.000</text>
+      <text class="fe-layout-note" x="320" y="408" text-anchor="middle">Preis ${de(e.price, 0)} USD · Menü ${de(e.costs[0], 0)} · Logistik, Sicherheit, Service ${de(e.costs[1], 0)}</text>
+      <text class="fe-layout-note" x="320" y="434" text-anchor="middle">Deckungsbeitrag vor Fixkosten und Investition</text>
     </g>`;
   }
 
@@ -182,7 +186,6 @@
           <path class="fe-price-connector" pathLength="1" d="M264 258H374M362 250L374 258 362 266"/>
           <text class="fe-price-unit" x="320" y="321" text-anchor="middle">USD JE GAST</text>
           <text class="fe-price-validation" x="320" y="401" text-anchor="middle">ZAHLUNGSBEREITSCHAFT IM PILOT PRÜFEN</text>
-          <text class="fe-layout-note" x="320" y="432" text-anchor="middle">Modellannahmen · kein buchbares Angebot</text>
         </g>
         ${econMarkup(economics())}
         ${scaleMarkup(economics())}
@@ -258,15 +261,18 @@
           let gainSum = 0, costSum = 0;
           gainBars.forEach((bar,index)=>{
             const grow = smooth(.04+index*.08,.16+index*.08,econT);
-            const height = model.profit[index]*econGeo.k*grow;
-            gainSum += model.profit[index]*grow;
-            bar.setAttribute('y',n(econGeo.base-height));bar.setAttribute('height',n(height));
+            const value = model.result[index]*grow, height = Math.abs(value)*econGeo.k;
+            gainSum += value;
+            bar.setAttribute('y',n(value >= 0 ? econGeo.base-height : econGeo.base));bar.setAttribute('height',n(height));
             set(revenueLabels[index],'opacity',n(smooth(.05+index*.08,.14+index*.08,econT)));
           });
           costBars.forEach((bar,index)=>{
             const grow = smooth(.42+index*.05,.54+index*.05,econT);
-            costSum += model.cost[index]*grow;
-            bar.setAttribute('height',n(model.cost[index]*econGeo.k*grow));
+            costSum += model.invest[index]*grow;
+            // A negative operating result hangs below the axis, so the investment starts underneath it.
+            const offset = Math.max(0,-model.result[index])*econGeo.k*smooth(.04+index*.08,.16+index*.08,econT);
+            bar.setAttribute('y',n(econGeo.base+offset));
+            bar.setAttribute('height',n(model.invest[index]*econGeo.k*grow));
           });
           gainTotal.textContent = de(gainSum);
           costTotal.textContent = de(costSum);

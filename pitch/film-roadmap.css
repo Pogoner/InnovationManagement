@@ -52,35 +52,10 @@
 .film-stage[data-film-step="6"] .film-location-node { display: grid; place-items: center; flex: 0 0 26px; width: 26px; height: 26px; border: 1px solid #efbd9180; border-radius: 50%; background: #efbd9115; color: #efbd91; font-size: 12px; }
 .film-stage[data-film-step="6"] .film-location-second .film-location-node { border-color: #a9d9d980; border-style: dashed; color: #a9d9d9; background: transparent; opacity: calc(.5 + var(--location-reveal,1) * .5); }
 .film-stage[data-film-step="6"] .film-location p { margin: 0 0 5px; color: #d0dcdf; font-size: 13px; line-height: 1.45; }
-.film-stage[data-film-step="6"] .film-location small { display: block; color: #a4bcc5; font-size: 12px; line-height: 1.45; }
-.film-stage[data-film-step="6"] .film-location-transfer { display: flex; align-items: center; gap: 12px; margin: 13px 0 8px; color: #a9d9d9; font-size: 12px; line-height: 1.5; }
-.film-stage[data-film-step="6"] .film-location-transfer::before, .film-stage[data-film-step="6"] .film-location-transfer::after { content: ""; flex: 1; height: 1px; background: #a9d9d944; transform: scaleX(var(--location-reveal,1)); }
-.film-stage[data-film-step="6"] .film-location-transfer::before { transform-origin: right; }
-.film-stage[data-film-step="6"] .film-location-transfer::after { transform-origin: left; }
-.film-stage[data-film-step="6"] .film-location-open { margin: 0; color: #b2c8cf; font-size: 12px; line-height: 1.55; }
 @media (min-width: 761px) and (max-width: 1100px) {
   .film-stage[data-film-step="6"] .film-visual::before { left: -12px; right: -12px; }
 }
 .film-phase-sequence { display: none; }
-.film-plan-timeline { display: block; width: 100%; height: auto; overflow: visible; }
-.film-plan-timeline text { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #d7e4e4; font-weight: 400; font-variant-numeric: tabular-nums; }
-.film-plan-timeline path,.film-plan-timeline line,.film-plan-timeline rect,.film-plan-timeline circle { vector-effect: non-scaling-stroke; }
-.film-plan-timeline .plan-chart-heading { fill: #a9c0c8; font-size: 16px; letter-spacing: 1.3px; }
-.plan-years line { stroke: #a9d9d91e; stroke-width: .8; }
-.film-plan-timeline .plan-years text { fill: #b2c5ca; font-size: 19px; }
-.plan-gate-dots path { fill: #a9d9d970; stroke: #b8d8d9; stroke-width: .6; }
-.film-plan-timeline .plan-gate-dots text { fill: #bbcccc; font-size: 15px; }
-.plan-lane { opacity: calc(.32 + var(--lane-reveal,0) * .68); }
-.film-plan-timeline .plan-lane-label { fill: #dce7e6; font-size: 20px; letter-spacing: -.25px; }
-.plan-lane-guide { fill: none; stroke: #a9d9d92d; stroke-width: .8; }
-.plan-task { fill: #a9d9d9; opacity: calc(.35 + var(--lane-reveal,0) * .65); }
-.plan-task.is-track { fill: #efbd9124; stroke: #efbd91a1; stroke-width: 1; stroke-dasharray: 3 3; }
-.plan-pilot circle { fill: #efbd91; stroke: #0a131c; stroke-width: 1; }
-.film-plan-timeline .plan-pilot text { fill: #efbd91; font-size: 17px; }
-.plan-time-scan { stroke: #f3d7ad; stroke-width: 1.1; }
-.plan-legend rect { fill: #a9d9d9; }
-.plan-legend circle { fill: #efbd91; }
-.film-plan-timeline .plan-legend text { fill: #abc0c7; font-size: 18px; }
 .film-roadmap-pilots { display: flex; flex-wrap: wrap; gap: 3px 6px; align-items: baseline; margin-top: 3px; padding-top: 9px; border-top: 1px solid #a9d9d929; color: #c7d6db; font-size: 10px; line-height: 1.5; font-variant-numeric: tabular-nums; }
 .film-roadmap-pilots > span { color: #efbd91; font-size: 9px; letter-spacing: .07em; margin-right: 2px; }
 .film-roadmap-pilots > b { color: #78909b; font-weight: 400; }
@@ -115,9 +90,7 @@
   .film-gate-strip time { font-size: 9px; }
   .film-gate-strip li > span { font-size: 10px; }
   .film-architecture-plan[data-plan-view="roadmap"] .film-phase-position { display: none; }
-  .film-architecture-plan[data-plan-view="roadmap"] .film-timeline-view { margin-top: 12px; }
-  .film-architecture-plan[data-plan-view="roadmap"] .film-plan-timeline { height: min(300px,calc(100svh - 394px)); }
-  .film-stage[data-film-step="6"]:has([data-plan-view="phase"],[data-plan-view="roadmap"]) .film-stage-bottom { right: auto; gap: 0; }
+    .film-stage[data-film-step="6"]:has([data-plan-view="phase"],[data-plan-view="roadmap"]) .film-stage-bottom { right: auto; gap: 0; }
   .film-stage[data-film-step="6"]:has([data-plan-view="phase"],[data-plan-view="roadmap"]) .film-stage-bottom > .film-local-progress,
   .film-stage[data-film-step="6"]:has([data-plan-view="phase"],[data-plan-view="roadmap"]) .film-stage-bottom > .film-scene-cue { display: none; }
   .film-stage[data-film-step="6"]:has([data-plan-view="phase"],[data-plan-view="roadmap"]) .film-beat-nav { margin-left: 0; }
@@ -135,7 +108,7 @@
 .film-architecture-plan[data-plan-view="linear"] .film-phase-sequence { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px 40px; margin-top: 30px; }
 .film-phase-sequence-heading { grid-column: 1 / -1; font-size: 19px; line-height: 1.4; margin: 0; color: #c7dbde; }
 .film-phase-card.is-linear { border-top: 1px solid #a9d9d936; padding-top: 19px; }
-.film-architecture-plan[data-plan-view="linear"] .film-timeline-view { max-width: 900px; margin-top: 48px; padding-top: 35px; border-top: 1px solid #a9d9d936; }
+.film-architecture-plan[data-plan-view="linear"] .film-timeline-view { margin-top: 48px; padding-top: 35px; border-top: 1px solid #a9d9d936; }
 
 @media (max-width: 760px) {
   .film-chapter[data-step="6"] .film-reel { height: auto; }
@@ -154,7 +127,7 @@
   .film-phase-tasks li > span { font-size: 14px; }
   .film-phase-tasks time { font-size: 11px; }
   .pitch-page .film-phase-result { font-size: 13px; margin-top: 13px; line-height: 1.55; grid-template-columns: 67px minmax(0,1fr); }
-  .film-plan-timeline { display: none; }
+  .film-gantt-scroll { display: none; }
   .film-mobile-roadmap { display: block; }
   .film-mobile-chart-title { font-size: 18px; font-weight: 450; color: #dbe6e4; line-height: 1.4; margin-bottom: 20px; }
   .film-mobile-years { height: 22px; position: relative; font-size: 11px; color: #9bb5bf; font-variant-numeric: tabular-nums; }
@@ -192,5 +165,49 @@
   .film-mobile-activities li { display: block; }
   .film-mobile-activities time { display: block; }
 }
-/* The full plan (Gantt and date list) is not part of the pitch. */
-.film-timeline-view { display: none !important; }
+
+/* Complete plan: a Gantt graphic that appears once at the end of the chapter and stays in the reading flow for reduced motion. */
+.film-gantt-scroll { overflow-x: auto; scrollbar-width: thin; }
+.film-gantt { display: block; width: 100%; min-width: 1040px; height: auto; }
+.film-gantt text { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; fill: #d7e4e4; font-variant-numeric: tabular-nums; }
+.film-gantt .g-axis { font-size: 12px; letter-spacing: 1.6px; fill: #9fb6bd; }
+.film-gantt .g-year { font-size: 16px; font-weight: 500; letter-spacing: 1px; fill: #eef4f0; }
+.film-gantt .g-year-bg { fill: #a9d9d90f; }
+.film-gantt .g-quarter { font-size: 12px; letter-spacing: 1px; fill: #8ea6af; }
+.film-gantt .g-grid-quarter { stroke: #a9d9d915; }
+.film-gantt .g-grid-year { stroke: #a9d9d93a; }
+.film-gantt .g-band { fill: #ffffff05; }
+.film-gantt .g-row:nth-of-type(even) .g-band { fill: #ffffff09; }
+.film-gantt .g-index { font-size: 12px; letter-spacing: 1px; fill: #efbd91; }
+.film-gantt .g-name { font-size: 16px; font-weight: 450; fill: #eaf1ee; }
+.film-gantt .g-phase { stroke-width: 1; }
+.film-gantt .g-phase.p1 { fill: #a9d9d933; stroke: #a9d9d980; }
+.film-gantt .g-phase.p2 { fill: #a9d9d96e; stroke: #a9d9d9a0; }
+.film-gantt .g-phase.p3 { fill: #a9d9d9d0; stroke: #a9d9d9; }
+.film-gantt .g-phase.dot { fill: none; stroke: #efbd91b0; stroke-dasharray: 4 3; }
+.film-gantt .g-phase-title { font-size: 13px; fill: #eef5f1; }
+.film-gantt .g-phase-title.p3 { fill: #07131a; font-weight: 500; }
+.film-gantt .g-track { stroke: #a9d9d99a; stroke-width: 1.3; stroke-dasharray: 4 5; fill: none; }
+.film-gantt .g-label { font-size: 13px; fill: #a9bdc4; }
+.film-gantt .g-dia { stroke-width: 1.6; }
+.film-gantt .g-dia-num { font-size: 11px; font-weight: 600; }
+.film-gantt .g-dep path { fill: none; stroke: #a1afd1; stroke-width: 1.6; opacity: .8; }
+.film-gantt .g-dep circle { fill: #a1afd1; }
+.film-gantt .g-dep text { font-size: 13px; font-style: italic; fill: #a1afd1; }
+.film-gantt .g-legend text { font-size: 13px; fill: #a9bdc4; }
+/* Step 9: the complete plan uses the full stage width; copy shrinks to a headline above it. */
+.film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) { grid-template-columns: minmax(0,1fr); grid-template-rows: auto minmax(0,1fr); align-items: start; align-content: start; row-gap: 14px; padding-top: calc(var(--header-height,80px) + 40px); }
+.film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-copy { grid-row: 1; }
+.film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-copy h2 { font-size: clamp(26px,2.6vw,40px); margin: 6px 0 0; }
+.film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-beat-copy,
+.film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-evidence-links { display: none; }
+.film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-visual { grid-row: 2; justify-self: stretch; width: 100%; max-width: none; margin-right: 0; }
+.film-stage[data-film-step="6"]:has([data-plan-view="roadmap"]) .film-visual::before { inset: -14px -24px -10px; background: #060b10f4; }
+.film-architecture-plan[data-plan-view="roadmap"] .film-plan-header,
+.film-architecture-plan[data-plan-view="roadmap"] .film-gate-strip,
+.film-architecture-plan[data-plan-view="roadmap"] .film-roadmap-pilots,
+.film-architecture-plan[data-plan-view="roadmap"] .film-mobile-roadmap,
+.film-architecture-plan[data-plan-view="roadmap"] .film-mobile-critical { display: none; }
+.film-architecture-plan[data-plan-view="roadmap"] .film-phase-position { margin-block: 0 12px; }
+.film-architecture-plan[data-plan-view="roadmap"] .film-gantt-scroll { overflow: visible; }
+.film-architecture-plan[data-plan-view="roadmap"] .film-gantt { min-width: 0; max-height: calc(100svh - 340px); margin-inline: auto; }

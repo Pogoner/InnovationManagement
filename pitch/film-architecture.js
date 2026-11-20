@@ -6,24 +6,101 @@
   const safe = text => String(text).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const stamp = text => Date.parse(text+'T00:00:00Z');
   const start = stamp('2026-11-01'), end = stamp('2032-01-01');
-  const dateX = text => 210 + (stamp(text)-start)/(end-start)*410;
-  const shortLabels = {
-    A:[['Standort &','Genehmigungen'],['Architektur & Bau'],['Kulinarik & Betrieb'],['Vertrieb &','Pilotgäste'],['Vier Pilot-Dinner'],['Betrieb &','Ausbauprüfung']]
+  // Full plan as one static Gantt graphic (rows of data.rows, same data as the phase cards).
+  const G = {width:1600, startX:294, scale:95, rowHeight:88, top:62};
+  const GC = {gate:'#efbd91', qg:'#a9d9d9', ms:'#8cbaa5', link:'#a1afd1', start:'#d69a92', end:'#8cbaa5', bg:'#0a131c'};
+  const gRowTop = index => G.top + index * G.rowHeight;
+  const gCenter = index => gRowTop(index) + 46;
+  const gPos = value => {
+    const [year, month, day] = value.split('-').map(Number);
+    const months = (year - 2026) * 12 + (month - 10) + (day - 1) / new Date(year, month, 0).getDate();
+    return G.startX + (months <= 27 ? months * .35 * G.scale : 27 * .35 * G.scale + (months - 27) * 1.4 / 12 * G.scale);
   };
-  function roadmapMarkup(variant) {
+  const gSource = value => G.startX + (value - 4.85) * G.scale;
+  const gLines = name => {
+    if (name.length <= 20) return [name];
+    const words = name.split(' ');
+    let best = [name, ''], gap = Infinity;
+    for (let i = 1; i < words.length; i++) {
+      const left = words.slice(0, i).join(' '), right = words.slice(i).join(' ');
+      if (Math.abs(left.length - right.length) < gap) { gap = Math.abs(left.length - right.length); best = [left, right]; }
+    }
+    return best;
+  };
+  const gOne = (n, d = 1) => Number(n.toFixed(d));
+  // Bar caption: omitted when it does not fit, moved right of a milestone that would cross it.
+  function title(item, from, to, tip, y, dias) {
+    if (!item.text) return '';
+    const len = item.text.length * 6.6;
+    let x = (from + to - tip) / 2 + 1, anchor = 'middle';
+    if (len >= to - from - tip - 6) return '';
+    const hit = dias.filter(d => d > from + 4 && d < to - tip - 4 && Math.abs(d - x) < len / 2 + 12);
+    if (hit.length) { x = Math.max(...hit) + 16; anchor = 'start'; if (x + len >= to - tip - 4) return ''; }
+    return '<text x="'+gOne(x)+'" y="'+(y+18)+'" text-anchor="'+anchor+'" class="g-phase-title '+safe(item.style)+'">'+safe(item.text)+'</text>';
+  }
+  function ganttRow(row, index) {
+    const center = gCenter(index), items = row.items || [];
+    const dias = items.filter(item => item.t === 'dia').map(item => gPos(item.d));
+    let out = '';
+    items.forEach(item => {
+      if (item.t === 'bar') {
+        const from = gPos(item.s), to = gPos(item.e), y = gRowTop(index) + 33, h = 26, tip = Math.min(11, (to - from) / 3);
+        out += '<path d="M'+gOne(from)+' '+y+'H'+gOne(to-tip)+'L'+gOne(to)+' '+(y+h/2)+'L'+gOne(to-tip)+' '+(y+h)+'H'+gOne(from)+'Z" class="g-phase '+safe(item.style)+'"/>'+
+          title(item, from, to, tip, y, dias);
+      } else if (item.t === 'track') {
+        out += '<line x1="'+gOne(gPos(item.s))+'" x2="'+gOne(gPos(item.e))+'" y1="'+center+'" y2="'+center+'" class="g-track"/>';
+      }
+    });
+    items.forEach(item => {
+      if (item.t === 'dia') {
+        const x = gPos(item.d), size = 10, color = GC[item.kind];
+        out += '<path d="M'+gOne(x)+' '+(center-size)+'L'+gOne(x+size)+' '+center+'L'+gOne(x)+' '+(center+size)+'L'+gOne(x-size)+' '+center+'Z" class="g-dia" fill="'+(item.planned ? GC.bg : color)+'" stroke="'+(item.planned ? color : GC.bg)+'"/>'+
+          (item.num ? '<text x="'+gOne(x)+'" y="'+(center+4)+'" text-anchor="middle" class="g-dia-num" style="fill:'+(item.planned ? color : GC.bg)+'">'+safe(item.num)+'</text>' : '');
+      } else if (item.t === 'tri') {
+        const color = item.dir === 'start' ? GC.start : GC.end, x = gPos(item.d), w = 9, h = 11;
+        const path = item.dir === 'start'
+          ? 'M'+gOne(x-w)+' '+(center-h)+'L'+gOne(x+w)+' '+center+'L'+gOne(x-w)+' '+(center+h)+'Z'
+          : 'M'+gOne(x+w)+' '+(center-h)+'L'+gOne(x-w)+' '+center+'L'+gOne(x+w)+' '+(center+h)+'Z';
+        out += '<path d="'+path+'" class="g-dia" fill="'+(item.planned ? GC.bg : color)+'" stroke="'+color+'"/>';
+      } else if (item.t === 'lab') {
+        const x = gPos(item.d), y = item.pos === 'above' ? gRowTop(index) + 22 : gRowTop(index) + 78;
+        out += '<text x="'+gOne(x)+'" y="'+y+'" text-anchor="middle" class="g-label">'+safe(item.text)+'</text>';
+      }
+    });
+    return out;
+  }
+  function ganttMarkup(variant) {
     const {data,meta}=window.PitchEvidence.variants[variant];
-    const years=[2027,2028,2029,2030,2031];
-    const rows=data.rows.slice(1);
-    const gateDots=meta.gates.map(g=>{const d=g.date.split('.').reverse().join('-');return '<g transform="translate('+dateX(d).toFixed(1)+' 69)"><path d="M0 -5 5 0 0 5 -5 0Z"/><text y="-13" text-anchor="middle">'+g.id+'</text></g>';}).join('');
-    return '<svg class="film-plan-timeline" viewBox="0 0 640 390" preserveAspectRatio="xMinYMin meet" role="img" aria-labelledby="film-roadmap-title film-roadmap-desc"><title id="film-roadmap-title">Sechs parallele Teilprojekte – '+safe(meta.name)+'</title><desc id="film-roadmap-desc">Zeitproportionale Maßnahmenplanung von November 2026 bis Dezember 2031. Die Balken übernehmen die Originaltermine. Die Punkte markieren vier geplante Pilot-Dinner. '+safe(meta.critical)+'</desc><text x="0" y="19" class="plan-chart-heading">SECHS TEILPROJEKTE · EIN GEMEINSAMER PLAN</text><g class="plan-years">'+years.map(y=>'<line x1="'+dateX(y+'-01-01')+'" x2="'+dateX(y+'-01-01')+'" y1="38" y2="354"/><text x="'+dateX(y+'-01-01')+'" y="42">'+y+'</text>').join('')+'</g><g class="plan-gate-dots">'+gateDots+'</g>'+rows.map((row,i)=>{
-      const y=104+i*43;
-      const bars=row.items.filter(item=>item.t==='bar'||item.t==='track').map(item=>{
-        const x=dateX(item.s),w=dateX(item.e)-x;
-        return '<rect class="plan-task '+(item.t==='track'?'is-track':'')+'" x="'+x.toFixed(1)+'" y="'+(y+1)+'" width="'+w.toFixed(1)+'" height="9" rx="2"><title>'+safe(row.name+' · '+(item.text||'Planungszeitraum')+' · '+item.s+' bis '+item.e)+'</title></rect>';
-      }).join('');
-      const pilots=row.items.filter(item=>item.num).map(item=>'<g class="plan-pilot" transform="translate('+dateX(item.d).toFixed(1)+' '+(y+5.5)+')"><circle r="4"/><text y="22" text-anchor="middle">'+item.num+'</text><title>Pilot '+item.num+' · '+item.d+'</title></g>').join('');
-      return '<g class="plan-lane" data-plan-lane="'+i+'"><title>'+safe(row.name)+'</title><text x="0" y="'+(y+7)+'" class="plan-lane-label">'+shortLabels[variant][i].map((l,j)=>'<tspan x="0" dy="'+(j?18:0)+'">'+safe(l)+'</tspan>').join('')+'</text><path class="plan-lane-guide" d="M210 '+(y+5.5)+'H620"/>'+bars+pilots+'</g>';
-    }).join('')+'<line class="plan-time-scan" x1="210" x2="210" y1="83" y2="354"/><g class="plan-legend"><rect x="0" y="371" width="18" height="6" rx="1"/><text x="28" y="379">geplante Maßnahme</text><circle cx="260" cy="374" r="4"/><text x="274" y="379">Pilot 1–4</text></g></svg>';
+    const rows = data.rows, bottom = gRowTop(rows.length);
+    const years = [['2026','2026-10-01','2027-01-01'],['2027','2027-01-01','2028-01-01'],['2028','2028-01-01','2029-01-01'],['2029','2029-01-01','2030-01-01'],['2030','2030-01-01','2031-01-01'],['2031','2031-01-01','2032-01-01']];
+    const quarters = [['Q4','2026-10-01','2027-01-01']];
+    ['2027','2028'].forEach(year => ['01','04','07','10'].forEach((month, i) => quarters.push(['Q'+(i+1), year+'-'+month+'-01', i < 3 ? year+'-'+['04','07','10'][i]+'-01' : (Number(year)+1)+'-01-01'])));
+    let m = '<text x="18" y="30" class="g-axis">TEILPROJEKT</text>';
+    years.forEach(([label, from, to]) => {
+      const x0 = gPos(from), x1 = gPos(to);
+      m += '<rect x="'+gOne(x0)+'" y="0" width="'+gOne(x1-x0-2)+'" height="31" rx="3" class="g-year-bg"/><text x="'+gOne(label === '2026' ? x0+10 : (x0+x1)/2)+'" y="22" text-anchor="'+(label === '2026' ? 'start' : 'middle')+'" class="g-year">'+label+'</text>';
+    });
+    quarters.forEach(([label, from, to], i) => { m += '<text x="'+gOne(i ? (gPos(from)+gPos(to))/2 : gPos(from)+10)+'" y="51" text-anchor="'+(i ? 'middle' : 'start')+'" class="g-quarter">'+label+'</text>'; });
+    m += '<text x="'+gOne((gPos('2029-01-01')+G.width)/2)+'" y="51" text-anchor="middle" class="g-quarter">JAHRESRASTER</text>';
+    quarters.slice(1).forEach(([label, from]) => { m += '<line x1="'+gOne(gPos(from))+'" x2="'+gOne(gPos(from))+'" y1="60" y2="'+bottom+'" class="'+(label === 'Q1' ? 'g-grid-year' : 'g-grid-quarter')+'"/>'; });
+    ['2029-01-01','2030-01-01','2031-01-01'].forEach(from => { m += '<line x1="'+gOne(gPos(from))+'" x2="'+gOne(gPos(from))+'" y1="60" y2="'+bottom+'" class="g-grid-year"/>'; });
+    rows.forEach((row, index) => {
+      const y = gRowTop(index), lines = gLines(row.name);
+      m += '<g class="g-row"><rect x="0" y="'+y+'" width="'+G.width+'" height="'+G.rowHeight+'" rx="3" class="g-band"/>'+
+        '<text x="18" y="'+(y+51)+'" class="g-index">'+String(index).padStart(2,'0')+'</text>'+
+        '<text x="52" y="'+(y+(lines.length > 1 ? 40 : 52))+'" class="g-name">'+lines.map((line, i) => '<tspan x="52" dy="'+(i ? 20 : 0)+'">'+safe(line)+'</tspan>').join('')+'</text>'+ganttRow(row, index)+'</g>';
+    });
+    (data.links || []).forEach(link => {
+      const fx = gPos(link.from.d), fy = gCenter(link.from.row), tx = gPos(link.to.d), ty = gCenter(link.to.row);
+      m += '<g class="g-dep"><path d="M'+gOne(fx)+' '+fy+'V'+ty+'H'+gOne(tx)+'"/><circle cx="'+gOne(fx)+'" cy="'+fy+'" r="4"/><circle cx="'+gOne(tx)+'" cy="'+ty+'" r="4"/>'+
+        (link.text ? '<text x="'+gOne(gSource(link.textX))+'" y="'+(gRowTop(link.textRow)+22)+'">'+safe(link.text)+'</text>' : '')+'</g>';
+    });
+    const diamond = (x, color) => '<path d="M'+x+' 8L'+(x+7)+' 15L'+x+' 22L'+(x-7)+' 15Z" fill="'+color+'"/>';
+    const ly = bottom + 14;
+    m += '<g class="g-legend" transform="translate(0 '+ly+')">'+diamond(14,GC.gate)+'<text x="28" y="19">Gate</text>'+diamond(110,GC.qg)+'<text x="124" y="19">Genehmigung · Abnahme</text>'+diamond(330,GC.ms)+'<text x="344" y="19">Meilenstein</text>'+
+      '<path d="M450 9h22l6 6-6 6h-22Z" class="g-phase p2"/><text x="488" y="19">Planphase</text><path d="M590 9h22l6 6-6 6h-22Z" class="g-phase dot"/><text x="628" y="19">nach Gate-Entscheid</text>'+
+      '</g>';
+    return '<svg class="film-gantt" viewBox="0 0 '+G.width+' '+(bottom+52)+'" role="img" aria-label="Roadmap für den festen Pavillon, Oktober 2026 bis Dezember 2031: Gesamtprojekt und sechs Teilprojekte mit Gates G0 bis G4">'+m+'</svg>';
   }
 
   const dateLabel = value => value.split('-').reverse().join('.');
@@ -44,12 +121,11 @@
 
   const phaseName = phase => phase.tag.split(' / ').slice(1).join(' / ');
   const activityMarkup = phase => '<ol class="film-phase-tasks">'+phase.activities.map(item=>'<li><span>'+safe(item.label)+'</span><time'+(item.date?' datetime="'+item.date+'"':'')+'>'+safe(item.period)+'</time></li>').join('')+'</ol>';
-  const locationMarkup = () => '<div class="film-location-perspective" role="group" aria-label="Schematische Standortperspektive: Zwei eigenständige feste Pavillons">'+
-    '<p class="film-location-kicker">SCHEMATISCHE STANDORTPERSPEKTIVE</p><div class="film-location-pair">'+
-    '<div class="film-location film-location-first"><div class="film-location-heading"><span class="film-location-node" aria-hidden="true">1</span><h4>Florida</h4></div><p>Standort 1 · Betrieb erproben</p><small>Der feste Pavillon bleibt.</small></div>'+
-    '<div class="film-location film-location-second"><div class="film-location-heading"><span class="film-location-node" aria-hidden="true">2</span><h4>Texas</h4></div><p>Standort 2 · langfristiges Ziel</p><small>Eigenständiger fester Bau.</small></div></div>'+
-    '<p class="film-location-transfer">Erfahrung übertragen</p><p class="film-location-open">Texas: eigener Bauplatz, Freigabe und Investition offen.</p></div>';
-  const phaseMarkup = (phase,index,linear=false) => '<article class="film-phase-card'+(linear?' is-linear':'')+(phase.id==='operate'?' is-operation':'')+'" data-roadmap-phase="'+index+'"><div class="film-phase-kicker"><span>'+String(index+1).padStart(2,'0')+' / '+String(window.PitchRoadmapPhases.A.length).padStart(2,'0')+'</span><span>GEPLANT · '+safe(phase.period)+'</span></div><h3>'+safe(phaseName(phase))+'</h3>'+(phase.id==='operate'?locationMarkup():'')+(phase.id==='operate'&&!linear?'':activityMarkup(phase))+'<p class="film-phase-result"><span>PRÜFPUNKT</span>'+safe(phase.result)+'</p></article>';
+  const locationMarkup = () => '<div class="film-location-perspective" role="group" aria-label="Standortstrategie: Florida und Texas">'+
+    '<p class="film-location-kicker">STANDORTSTRATEGIE</p><div class="film-location-pair">'+
+    '<div class="film-location film-location-first"><div class="film-location-heading"><span class="film-location-node" aria-hidden="true">1</span><h4>Florida</h4></div><p>Regelbetrieb ab August 2029 bei Go an G4</p></div>'+
+    '<div class="film-location film-location-second"><div class="film-location-heading"><span class="film-location-node" aria-hidden="true">2</span><h4>Texas</h4></div><p>Eigenständige Machbarkeits- und Investitionsprüfung</p></div></div></div>';
+  const phaseMarkup = (phase,index,linear=false) => '<article class="film-phase-card'+(linear?' is-linear':'')+(phase.id==='operate'?' is-operation':'')+'" data-roadmap-phase="'+index+'"><div class="film-phase-kicker"><span>'+String(index+1).padStart(2,'0')+' / '+String(window.PitchRoadmapPhases.A.length).padStart(2,'0')+'</span><span>GEPLANT · '+safe(phase.period)+'</span></div><h3>'+safe(phaseName(phase))+'</h3>'+(phase.id==='operate'?locationMarkup():'')+(phase.id==='overview'||(phase.id==='operate'&&!linear)?'':activityMarkup(phase))+'<p class="film-phase-result"><span>PRÜFPUNKT</span>'+safe(phase.result)+'</p></article>';
   const gatesMarkup = variant => '<div class="film-gate-strip"><p>FÜNF GEPLANTE FREIGABEN</p><ol>'+window.PitchEvidence.variants[variant].meta.gates.map(gate=>'<li><b>'+safe(gate.id)+'</b><time datetime="'+gate.date.split('.').reverse().join('-')+'">'+safe(gate.date)+'</time><span>'+safe(gate.title)+'</span></li>').join('')+'</ol></div>';
 
   window.PitchScenes = window.PitchScenes || {};
@@ -66,7 +142,7 @@
       const sequence = root.querySelector('.film-phase-sequence');
       const timeline = root.querySelector('.film-timeline-view');
       const phasePositions = Array.from(root.querySelectorAll('[data-phase-position]'));
-      let cards=[],lanes=[],scan,built=false;
+      let cards=[],built=false;
       return {
         update: function (p, context) {
           const variant = 'A';
@@ -74,21 +150,20 @@
           if (!built) {
             built=true;
             const meta=window.PitchEvidence.variants[variant].meta;
-            name.textContent='STANDORT 1 · ORIENTIERUNGSRAHMEN';
-            total.textContent=meta.budgetReference || meta.budget;
-            unit.textContent=meta.budgetReference?'Ältere Lounge-Schätzung · Pavillon neu validieren':meta.budgetLabel;
+            name.textContent=meta.horizonLabel;
+            total.textContent=meta.horizon;
+            unit.textContent=meta.horizonNote;
             current.innerHTML=phases.map((phase,index)=>phaseMarkup(phase,index)).join('');
-            sequence.innerHTML='<p class="film-phase-sequence-heading">'+phases.length+' Bildphasen · ein paralleler Maßnahmenplan</p>'+phases.map((phase,index)=>phaseMarkup(phase,index,true)).join('');
-            timeline.innerHTML=roadmapMarkup(variant)+compactRoadmapMarkup(variant)+gatesMarkup(variant);
+            sequence.innerHTML='<p class="film-phase-sequence-heading">Maßnahmen und Termine im Überblick</p>'+phases.map((phase,index)=>phaseMarkup(phase,index,true)).join('');
+            timeline.innerHTML='<div class="film-gantt-scroll">'+ganttMarkup(variant)+'</div>'+compactRoadmapMarkup(variant)+gatesMarkup(variant);
             cards=Array.from(current.children);
-            lanes=Array.from(timeline.querySelectorAll('[data-plan-lane]'));
-            scan=timeline.querySelector('.plan-time-scan');
           }
           let index=0;
           phases.forEach((phase,i)=>{if(p>=phase.at)index=i;});
           // The reduced layout remains complete even when a phase button was used.
           const linear=Boolean(context.reduced || context.mobile || document.body.classList.contains('is-reduced'));
-          const fullPlan=false;
+          // The ninth step shows the complete plan; the viewer decides how long to stay on it.
+          const fullPlan=phases[index].id==='overview';
           plan.dataset.planView=linear?'linear':fullPlan?'roadmap':'phase';
           plan.dataset.activePhase=String(index);
           current.hidden=linear||fullPlan;
@@ -101,12 +176,7 @@
           phasePositions.forEach((node,i)=>{node.classList.toggle('is-active',i===index);node.classList.toggle('is-past',i<index);});
           const local=clamp((p-phases[index].at)/((phases[index+1]?.at??1)-phases[index].at));
           plan.style.setProperty('--phase-reveal',(index===0?1:.55+.45*ramp(0,.18,local)).toFixed(4));
-          plan.style.setProperty('--location-reveal',(linear?1:ramp(.86,.96,p)).toFixed(4));
-          const progress=linear?1:ramp(.86,.97,p);
-          lanes.forEach(lane=>lane.style.setProperty('--lane-reveal',(linear?1:ramp(.86+Number(lane.dataset.planLane)*.012,.90+Number(lane.dataset.planLane)*.012,p)).toFixed(4)));
-          scan.setAttribute('x1',(210+410*progress).toFixed(1));
-          scan.setAttribute('x2',(210+410*progress).toFixed(1));
-          scan.style.opacity=progress>0&&progress<1?.7:0;
+          plan.style.setProperty('--location-reveal',(linear?1:ramp(phases[7].at,phases[7].at+.06,p)).toFixed(4));
         }
       };
     }

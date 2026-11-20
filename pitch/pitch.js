@@ -60,7 +60,7 @@
   function renderAssessments() {
     $('#assessment-comparison').innerHTML = E.rocketlightAssessments.map(({ assessment, result }, index) => `<article class="assessment-card"><header><span>${index === 0 ? 'DIE SICHT DES TEAMS' : 'DIE SICHT DER KI · CLAUDE'}</span><b>${index === 0 ? 'Quick win' : 'Umsetzung prüfen'}</b></header><div class="assessment-score"><strong>${number(result.IR)}</strong><span>Innovationsrendite<br>nach Hube</span></div>${[['Nutzen',result.IN],['Aufwand',result.IA]].map(([label,value]) => `<div class="score-row"><div><span>${label}</span><b>${number(value)} / 5</b></div><div class="score-track" aria-hidden="true"><span style="width:${value/5*100}%"></span></div></div>`).join('')}</article>`).join('');
     const modeledCases = E.assessments.filter(({assessment}) => assessment.fy);
-    $('#businesscase-comparison').innerHTML = `<div class="table-scroll"><table><caption>Fünf relative Projektjahre · Millionen USD · Annahmen aus den drei aktuellen XLSM-Dateien</caption><thead><tr><th>Konzept</th><th class="number">Umsatz</th><th class="number">F&amp;E</th><th class="number">Gewinnindikator</th></tr></thead><tbody>${modeledCases.map(({assessment:a,result:r})=>`<tr class="${a.idea===9?'highlight-row':''}"><th scope="row">${escape(a.project)}</th><td class="number">${number(r.fy.R/1e6)}</td><td class="number">${number(r.fy.C/1e6)}</td><td class="number">${number(r.fy.P/1e6)}</td></tr>`).join('')}</tbody></table></div><p>Umsatz ist kein Gewinn. Alle drei Gewinnindikatoren übertragen dieselbe operative Modellmarge des Kerngeschäfts Space + Connectivity (3.766 / 15.473 Mio. USD). Die F&amp;E-Beträge erfassen Entwicklung, nicht den vollständigen laufenden Betrieb. Die Fälle sind eigenständige Szenarien und werden nicht addiert.</p><div class="table-scroll"><table><caption>Umsatzentwicklung je Geschäftsidee · Millionen USD</caption><thead><tr><th>Konzept</th>${[1,2,3,4,5].map(y=>`<th class="number">Jahr ${y}</th>`).join('')}</tr></thead><tbody>${modeledCases.map(({assessment:a,result:r})=>`<tr><th scope="row">${escape(a.project)}</th>${r.fy.revenue.map(v=>`<td class="number">${number(v/1e6)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><a class="text-link" href="#quellen">Originalkalkulationen mit allen Eingaben herunterladen ↓</a>`;
+    $('#businesscase-comparison').innerHTML = `<div class="table-scroll"><table><caption>Millionen USD · RocketLight: projektbezogene Rechnung 2027–2031 · übrige Konzepte: fünf relative Projektjahre aus den XLSM-Dateien</caption><thead><tr><th>Konzept</th><th class="number">Umsatz</th><th class="number">F&amp;E / Investition</th><th class="number">Gewinnindikator / Betriebsergebnis</th></tr></thead><tbody>${modeledCases.map(({assessment:a,result:r})=>`<tr class="${a.idea===9?'highlight-row':''}"><th scope="row">${escape(a.project)}</th><td class="number">${number(r.fy.R/1e6)}</td><td class="number">${number(r.fy.C/1e6)}</td><td class="number">${number(r.fy.P/1e6)}</td></tr>`).join('')}</tbody></table></div><p>Umsatz ist kein Gewinn. Bei RocketLight ist das Betriebsergebnis aus Umsatz, variablen Kosten und laufenden Fixkosten des festen Pavillons berechnet; die Investitionen stehen in der Spalte F&amp;E / Investition und gehören nicht zum Betriebsergebnis. Bei Starlink Insights und Launch Engineering Cloud überträgt der Gewinnindikator die operative Modellmarge des Kerngeschäfts Space + Connectivity (3.766 / 15.473 Mio. USD); dort erfassen die F&amp;E-Beträge Entwicklung, nicht den vollständigen laufenden Betrieb. Die Fälle sind eigenständige Szenarien und werden nicht addiert.</p><div class="table-scroll"><table><caption>Umsatzentwicklung je Geschäftsidee · Millionen USD</caption><thead><tr><th>Konzept</th>${[1,2,3,4,5].map(y=>`<th class="number">Jahr ${y}</th>`).join('')}</tr></thead><tbody>${modeledCases.map(({assessment:a,result:r})=>`<tr><th scope="row">${escape(a.project)}</th>${r.fy.revenue.map(v=>`<td class="number">${number(v/1e6)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><a class="text-link" href="#quellen">Originalkalkulationen mit allen Eingaben herunterladen ↓</a>`;
     const [team, ai] = E.rocketlightAssessments;
     const criteriaTable = (criteria, group, title) => `<div class="table-scroll"><table><caption>${title} · RocketLight Dinner</caption><thead><tr><th>Kriterium</th><th class="number">Gewicht</th><th class="number">Team</th><th class="number">KI</th></tr></thead><tbody>${criteria.map((criterion, index) => `<tr><td>${escape(criterion.t)}</td><td class="number">${E.weights[group][index]} %</td><td class="number">${(group === 'n' ? team.result.n : team.result.x)[index]}</td><td class="number">${(group === 'n' ? ai.result.n : ai.result.x)[index]}</td></tr>`).join('')}</tbody></table></div>`;
     $('#assessment-details').innerHTML = `<div class="table-scroll"><table><caption>Vergleich der drei Finalisten mit den Gruppen-Gewichten. IN = Nutzen, IA = Aufwand, IR = IN ÷ IA.</caption><thead><tr><th>Konzept</th><th>Bewertung</th><th class="number">IN</th><th class="number">IA</th><th class="number">IR</th><th>Portfolio</th></tr></thead><tbody>${E.assessments.map(({assessment:a,result:r}) => `<tr class="${a.idea === 9 ? 'highlight-row' : ''}"><td>${escape(a.project)}</td><td>${escape(a.assessor)}</td><td class="number">${number(r.IN)}</td><td class="number">${number(r.IA)}</td><td class="number">${number(r.IR)}</td><td>${escape(r.pf[0])}</td></tr>`).join('')}</tbody></table></div><div class="criteria-tables">${criteriaTable(E.criteria.benefit,'n','Nutzen / Chancen')}${criteriaTable(E.criteria.effort,'a','Aufwand / Risiko')}</div><p class="table-note">Die Werte beziehen sich auf den ursprünglichen Dinner-Case. Die Team-Bewertung enthält im Original keine schriftlichen Einzelbegründungen. Die folgenden Begründungen stammen aus der KI-Bewertung; sie sind Einschätzungen, keine bestätigten Projektergebnisse.</p><details class="disclosure"><summary>Die einzelnen KI-Begründungen lesen <span aria-hidden="true">+</span></summary><div class="criteria-reasons">${[...E.criteria.benefit,...E.criteria.effort].filter(c => ai.assessment.why[c.k]).map(c => `<h4>${escape(c.t)}</h4><p>${escape(ai.assessment.why[c.k])}</p>`).join('')}</div></details>`;
@@ -68,16 +68,16 @@
 
   function renderFinance() {
     const f = E.financialA;
-    const input = E.financialAssessmentA.fy;
-    const years = [2027,2028,2029,2030,2031];
+    const years = f.years;
     $('#revenue-total').textContent = number(f.R/1e6);
-    $('#revenue-chart').innerHTML = f.revenue.map((value,index) => `<div class="revenue-column"><div class="revenue-bar" style="height:${value/Math.max(...f.revenue)*78}%"><span>${number(value/1e6,value === 0 ? 0 : 2)}</span></div><span class="revenue-year">${years[index]}</span><span class="revenue-seats">${input.qty[index]} Plätze</span></div>`).join('');
+    $('#revenue-chart').innerHTML = f.revenue.map((value,index) => `<div class="revenue-column"><div class="revenue-bar" style="height:${value/Math.max(...f.revenue)*78}%"><span>${number(value/1e6,value === 0 ? 0 : 2)}</span></div><span class="revenue-year">${years[index]}</span><span class="revenue-seats">${f.qty[index]} Plätze</span></div>`).join('');
+    const mio = values => values.map(v=>v/1e6);
     const rows = [
-      ['Verkaufte Plätze',input.qty,0],['USD je Platz',input.price,0],['Umsatz · Mio. USD',f.revenue.map(v=>v/1e6),2],
-      ['Personal für Entwicklung · Mio. USD',f.staffCost.map(v=>v/1e6),2],['Sachaufwand · Mio. USD',input.material.map(v=>v/1e6),2],['Projekt-/F&E-Aufwand · Mio. USD',f.rnd.map(v=>v/1e6),2]
+      ['Verkaufte Plätze',f.qty,0],['Umsatz · Mio. USD',mio(f.revenue),2],['Variable Kosten · Mio. USD',mio(f.varCost),2],['Deckungsbeitrag · Mio. USD',mio(f.contribution),2],
+      ['Laufende Fixkosten · Mio. USD',mio(f.fixed),2],['Betriebsergebnis · Mio. USD',mio(f.opResult),2],['Investitionen · Mio. USD',mio(f.invest),2],['Cashflow · Mio. USD',mio(f.cashflow),2],['Kumulierter Cashflow · Mio. USD',mio(f.cumulative),2]
     ];
-    $('#finance-table').innerHTML = `<table><caption>Variante A · Originalrechnung, relative Jahre 1–5 auf die Roadmap 2027–2031 übertragen.</caption><thead><tr><th>Planwert</th>${years.map(year=>`<th class="number">${year}</th>`).join('')}</tr></thead><tbody>${rows.map(([label,values,digits])=>`<tr><td>${label}</td>${values.map(value=>`<td class="number">${number(value,digits)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
-    $('#finance-explanation').textContent = `${number(f.qtySum,0)} verkaufte Plätze ergeben ${number(f.R/1e6)} Mio. USD Umsatz. Der kumulierte Entwicklungsaufwand beträgt ${number(f.C/1e6)} Mio. USD. Der Kalkulator leitet einen Gewinnindikator von ${number(f.P/1e6)} Mio. USD aus der Modellmarge des Kerngeschäfts Space + Connectivity (${number(f.margin*100)} %) ab. Diese Übertragung ersetzt keine eigene Gastronomie-Kostenrechnung und keinen Projekt-Cashflow; sie belegt weder eine tatsächliche Gewinnmarge noch einen Break-even.`;
+    $('#finance-table').innerHTML = `<table><caption>Standort 1 Florida · Planannahmen ${years[0]}–${years[4]} · Regelbetrieb erst nach G4 am 31.07.2029</caption><thead><tr><th>Planwert</th>${years.map(year=>`<th class="number">${year}</th>`).join('')}</tr></thead><tbody>${rows.map(([label,values,digits])=>`<tr><td>${label}</td>${values.map(value=>`<td class="number">${number(value,digits)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    $('#finance-explanation').textContent = `${number(f.qtySum,0)} verkaufte Plätze ergeben ${number(f.R/1e6)} Mio. USD Umsatz. Nach variablen Kosten und laufenden Fixkosten bleibt ein Betriebsergebnis von ${number(f.P/1e6)} Mio. USD. Dem stehen Investitionen von ${number(f.C/1e6)} Mio. USD gegenüber; Investitionen werden nur im Cashflow abgezogen. Amortisation: ${f.payback.label}. Baukosten, Preise und Auslastung sind Planannahmen. Die 10–15 Mio. USD der früheren Lounge-Schätzung sind kein validiertes Pavillonbudget. Die Hube-Innovationsrendite bleibt ein eigenständiger Bewertungsscore.`;
   }
 
   function renderVariant(announce = false) {
@@ -87,11 +87,11 @@
     const image = $('#variant-image');
     image.src = 'assets/dining-facing-launch.webp';
     image.alt = 'Innenraumkonzept für 20 Gäste im festen Pavillon: einzelne Zweiertische mit freier Sicht auf den Raketenstart. Künstlerische Visualisierung.';
-    $('#variant-location').textContent = 'FLORIDA · TEXAS';
-    $('#variant-title').innerHTML = 'Florida zuerst.<br>Texas langfristig.';
-    $('#variant-description').textContent = 'Der erste Standort bleibt in Florida. Der zweite feste Bau in Texas erhält eine eigene Planung, Finanzierung und Freigabe.';
-    $('#roadmap-metrics').innerHTML = '<div class="roadmap-metric"><span>LANGFRISTIGES ZIEL</span><strong>1 → 2</strong><small>feste Standorte · Florida zuerst, Texas später</small></div><div class="roadmap-metric"><span>RAUMKONZEPT</span><strong>20</strong><small>Plätze je Standort · Konzeptannahme</small></div><div class="roadmap-metric"><span>BUDGETREFERENZ</span><strong>10–15</strong><small>Mio. USD für Standort 1 · neu zu validieren</small></div>';
-    $('#roadmap-budget-note').textContent = 'Die 10–15 Mio. USD stammen aus einer bestehenden Grobschätzung für eine größere Lounge. Für den festen Pavillon in Florida müssen Bauumfang und Kosten neu validiert werden. Der zweite Standort in Texas benötigt ein separates, bisher nicht kalkuliertes Budget.';
+    $('#variant-location').textContent = 'TITUSVILLE · FLORIDA';
+    $('#variant-title').innerHTML = 'Ein fester Pavillon.<br>Ein Betriebsentscheid.';
+    $('#variant-description').textContent = 'Nach vier Pilot-Dinnern entscheidet das Investitionsgremium an G4 über den Regelbetrieb in Florida. Texas wird anschließend in einem eigenen Projekt auf Machbarkeit und Finanzierung geprüft.';
+    $('#roadmap-metrics').innerHTML = '<div class="roadmap-metric"><span>UMSETZUNGSHORIZONT</span><strong>2026–2031</strong><small>Fester Pavillon · Titusville, Florida</small></div><div class="roadmap-metric"><span>RAUMKONZEPT</span><strong>20</strong><small>Gäste · zehn Zweiertische</small></div><div class="roadmap-metric"><span>PILOTPREIS</span><strong>35.000</strong><small>USD je Platz · bezahlte Buchungen prüfen die Zahlungsbereitschaft</small></div>';
+    $('#roadmap-budget-note').textContent = 'Die Budgetplanung ist eine Aufgabe vor G2: Grundstück, Bau, Ausstattung, Betrieb und Pilotliquidität werden auf Angebotsbasis kalkuliert. Das Investitionsgremium entscheidet anhand der Genehmigungen, Angebote und Finanzierung.';
     $('#gate-timeline').innerHTML = meta.gates.map(gate => {
       const date = String(gate.date || '').trim();
       const parts = date.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
@@ -101,12 +101,12 @@
       return `<li><span>${escape(gate.id)}</span>${timing}<h4>${escape(gate.title)}</h4><p>${escape(gate.description)}</p></li>`;
     }).join('');
     $('#critical-path').textContent = meta.critical;
-    $('#roadmap-projects').innerHTML = `<ol class="project-list">${data.t1.map((project,index)=>`<li><span>TEILPROJEKT ${String(index+1).padStart(2,'0')}</span><h4>${escape(project.name)}</h4><p>${escape(project.inhalt)}</p><p><strong>Ziel:</strong> ${escape(project.ziel)}</p></li>`).join('')}</ol><h3>Die vier W-Fragen</h3><p>Geplante Rollen, Partner und Termine. Genannte Organisationen oder Personen haben damit keine Zusage erteilt.</p><div class="four-questions">${[['was','Was?'],['wer','Wer?'],['wann','Wann?'],['wie','Wie?']].map(([key,label])=>`<section><h4>${label}</h4><ul>${data.w4[key].map(item=>`<li>${escape(item)}</li>`).join('')}</ul></section>`).join('')}</div>`;
-    $('#variant-caveat').textContent = 'Planstand 20.11.2026. Termine und Freigaben sind Planannahmen; Dinner hängen zusätzlich von geeigneten Startfenstern ab. Investition und Wirtschaftlichkeit der festen Standorte werden gesondert geprüft. Die bestehende Finanzrechnung beschreibt den früheren mobilen Konzeptstand.';
+    $('#roadmap-projects').innerHTML = `<ol class="project-list">${data.t1.map((project,index)=>`<li><span>TEILPROJEKT ${String(index+1).padStart(2,'0')}</span><h4>${escape(project.name)}</h4><p>${escape(project.inhalt)}</p><p><strong>Ziel:</strong> ${escape(project.ziel)}</p></li>`).join('')}</ol><h3>Die vier W-Fragen</h3><p>Firmen und Ansprechpartner sind vorgesehene Umsetzungspartner; eine Beauftragung ist nicht erfolgt.</p><div class="four-questions">${[['was','Was?'],['wer','Wer?'],['wann','Wann?'],['wie','Wie?']].map(([key,label])=>`<section><h4>${label}</h4><ul>${data.w4[key].map(item=>`<li>${escape(item)}</li>`).join('')}</ul></section>`).join('')}</div>`;
+    $('#variant-caveat').textContent = 'Gates G0–G4 sind Plantermine mit dokumentierten Freigabebedingungen. Bezahlte Pilotbuchungen prüfen die Zahlungsbereitschaft beim Pilotpreis von 35.000 USD je Platz.';
     $('#presentation-download').href = '../quellen/Schritt_6_Roadmap.pptx';
     const alternativeNote = $('#decision-alternative');
     if (alternativeNote) alternativeNote.hidden = isA;
-    if (announce) $('#variant-status').textContent = 'Roadmap für den festen Pavillon: Florida zuerst, Texas langfristig als eigenständiger zweiter Bau. Neue Planannahmen vom 20. November 2026. Termine, Projekte und Download wurden angepasst.';
+    if (announce) $('#variant-status').textContent = 'Roadmap für den festen Pavillon in Titusville, Florida. Termine, Teilprojekte und Download wurden aktualisiert.';
     window.PitchFilm?.setVariant(variant);
     queueMeasure();
   }
@@ -125,7 +125,10 @@
   const launchStage = $('.launch-stage');
   const media = matchMedia('(prefers-reduced-motion: reduce)');
   let motionPreference = read('rocketlight:motion');
-  let preferredReduced = motionPreference === 'reduced' || (motionPreference !== 'full' && media.matches);
+  // ?static (set by the top-level index.html for Firefox) forces the static layout without touching the saved preference.
+  const forceStatic = params.has('static');
+  const wantsReduced = () => forceStatic || motionPreference === 'reduced' || (motionPreference !== 'full' && media.matches);
+  let preferredReduced = wantsReduced();
   const shortWindow = () => innerHeight < 560 || (innerWidth <= 760 && innerHeight < 680);
   let reduced = preferredReduced || shortWindow();
   let needsMeasure = true;
@@ -282,7 +285,7 @@
   pdfButton?.addEventListener('click', exportPDF);
   addEventListener('afterprint', finishPrint);
   media.addEventListener('change', () => {
-    if (motionPreference !== 'full' && motionPreference !== 'reduced') preferredReduced = media.matches;
+    if (motionPreference !== 'full' && motionPreference !== 'reduced') preferredReduced = forceStatic || media.matches;
     updateMotion();
   });
   document.addEventListener('pitch:launchchange', queueFrame);
@@ -307,7 +310,7 @@
   addEventListener('storage', event => {
     if (event.key === 'rocketlight:motion') {
       motionPreference = event.newValue;
-      preferredReduced = motionPreference === 'reduced' || (motionPreference !== 'full' && media.matches);
+      preferredReduced = wantsReduced();
       updateMotion();
     }
   });

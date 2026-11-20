@@ -1,73 +1,73 @@
-/* Teil 6: current fixed-pavilion plan A (20.11.2026). Historical plan B is preserved unchanged. */
+﻿/* Teil 6: fixed-pavilion plan A (20.11.2026, final roadmap deck). Historical plan B is preserved unchanged. */
 window.ROCKET_DATA = {
   "A": {
     "file": "Schritt_6_Roadmap.pptx",
-    "short": "Fester Pavillon · Standort 1 Florida",
+    "short": "Fester Pavillon · Titusville, Florida",
     "titles": {
-      "w4": "Ein fester Pavillon in Florida – langfristig zwei eigenständige Standorte",
-      "t1": "Sechs parallele Teilprojekte führen zum eigenen Pavillon und zu vier Piloten in Florida",
-      "t2": "Investition neu kalkulieren – die frühere Lounge-Schätzung dient nur als Orientierung",
-      "rm": "Erst genehmigen und bauen, dann pilotieren – Texas bleibt eine eigene Ausbauentscheidung",
-      "src": "Neue Planannahme vom 20.11.2026; bestehende Quellen belegen keine Grundstücks- oder Partnerzusage"
+      "w4": "Ein fester Pavillon in Florida – Texas als eigenes Folgeprojekt",
+      "t1": "Sechs parallele Teilprojekte führen zum Pavillon, zu vier Piloten und zum Betriebsentscheid",
+      "t2": "Budgetplanung vor G2 – Kalkulation auf Angebotsbasis",
+      "rm": "Erst genehmigen und bauen, dann pilotieren – Betriebsentscheid an G4",
+      "src": "Planungsgrundlage vom 20.11.2026; Quellenverzeichnis auf Folie 14 der Roadmap-Präsentation"
     },
     "w4": {
       "was": [
-        "Ein fester Pavillon für 20 Gäste am ersten Standort Titusville/Florida. Grundstück, Sichtachse und Zugang müssen noch geprüft und gesichert werden.",
-        "Den eigenen Pavillon zuerst fertigstellen und betrieblich freigeben; danach vier Pilot-Dinner von Oktober 2028 bis Juni 2029. 35.000 USD je Platz bleiben eine zu prüfende Preishypothese.",
-        "Langfristig zwei eigenständige feste Standorte: Florida zuerst, später möglicherweise Raum Starbase/South Padre Island in Texas. Für Texas sind Bauplatz, Budget und Eröffnung offen."
+        "Fester Bau in Titusville / Florida: 20 Gäste, zehn Zweiertische, Panoramafront, Küche und Nebenflächen.",
+        "Vier Pilot-Dinner im eigenen Pavillon. Standortauswahl nach Sichtachse, Zufahrt und Bebaubarkeit.",
+        "Texas ist eine spätere, eigenständige Standortprüfung mit eigenem Budget."
       ],
       "wer": [
-        "Sponsor bzw. Investitionsgremium als Planungsrolle: Zuständigkeit und Besetzung noch zu benennen.",
-        "Projektleitung: Hospitality-Projektleitung mit Fachverantwortung für Standort, Bau und Sicherheit; je Teilprojekt eine Leitung [Name].",
-        "Benötigte Partner: Architektur- und Fachplanung, Bauunternehmen sowie Kulinarik- und Servicepartner. Konkrete Beauftragung und Zuständigkeiten sind offen."
+        "Projektleitung steuert die Umsetzung; das Investitionsgremium entscheidet an G0–G4.",
+        "Planung und Bau: vorgesehene Umsetzungspartner BRPH, RUSH und Allen Engineering; Abstimmung mit Stadt und Fachbehörden.",
+        "Vorgesehene Betriebspartner: Puff ’n Stuff, Courtyard, Mears Select und Visit Space Coast."
       ],
       "wann": [
-        "30.11.2026 Projektauftrag (G0) · 31.03.2027 Standortoption (G1) · 30.09.2027 Bauinvestition (G2).",
-        "Bau 01.11.2027–31.08.2028 · Abnahmen und betriebliche Vorbereitung im September 2028 · 30.09.2028 Pilotfreigabe (G3).",
-        "Geplante Piloten: 15.10.2028, 15.12.2028, 15.03.2029 und 15.06.2029 · 31.07.2029 Betriebs- und Ausbauprüfung (G4). Alle Tage sind Planannahmen, keine bestätigten Starttermine."
+        "2027: Standort sichern, entwerfen, genehmigen und Bauinvestition entscheiden.",
+        "Bau: 01.11.2027–31.08.2028. Abnahmen und Testservice: September 2028.",
+        "Vier Piloten: Oktober 2028–Juni 2029. Betriebsentscheid: G4 am 31.07.2029."
       ],
       "wie": [
-        "Investition für den festen Pavillon neu kalkulieren. Historische Orientierung für Standort 1: 10–15 Mio. USD aus der früheren, größeren Lounge-Planung (damals 13,38 Mio., gerundet 13,4 Mio. USD). Dieser Rahmen ist für den Pavillon neu zu validieren; Texas ist nicht enthalten.",
-        "Bau erst nach Standort- und Investitionsfreigabe; eigene Piloten erst nach Fertigstellung, Abnahmen und Betriebsfreigabe. Echte Dinnertermine bleiben von geeigneten Startfenstern und örtlichen Freigaben abhängig.",
-        "Buchungen, Stornos, Gästefeedback, Ablauf und tatsächliche Kosten im Pilot dokumentieren. Erfolgskriterien vorab festlegen; erst mit den Ergebnissen über Betrieb und eine spätere Ausbauprüfung entscheiden."
+        "Freigaben G0–G4 anhand konkreter Unterlagen; Bau und Piloten erst bei erfüllten Bedingungen.",
+        "Budgetplanung vor G2: Kosten auf Angebotsbasis mit Reserve und Liquiditätsplan.",
+        "Pilotkosten, bezahlte Nachfrage und Servicequalität messen; Kriterien vor G3 beschließen."
       ]
     },
     "t1": [
       {
-        "name": "Standort & Genehmigungen",
+        "name": "Standort sichern",
         "icon": "map",
-        "inhalt": "Fläche in Titusville/Florida prüfen, Sichtachsen und Zugang klären, Grundstücksoption sichern sowie Standort-, Bau-, Sicherheits- und Betriebsfreigaben vorbereiten.",
-        "ziel": "Ein geeigneter, gesicherter und freigegebener erster Standort; noch keine Grundstücks- oder Genehmigungszusage."
+        "inhalt": "Parzelle in Titusville prüfen, Sichtachse, Zufahrt und Nutzungsrechte klären, Vermessung vorbereiten und eine Option bis G2 sichern. Vorgesehene Umsetzungspartner: BCPA, Allen Engineering, Ardaman und Applied Ecology.",
+        "ziel": "G1: Parzellenakte und Standortoption bis G2; Sichtachse, Zufahrt und Nutzungsrechte geklärt."
+      },
+      {
+        "name": "Genehmigungen & Sicherheit",
+        "icon": "shield",
+        "inhalt": "Pre-Application (15.02.2027), Site Plan (30.06.2027), Baugenehmigung und Betriebsnachweise mit Stadt Titusville, SJRWMD und DBPR abstimmen; FAA-Prüfung nach Standort und Bauhöhe.",
+        "ziel": "G2: Genehmigungsmatrix und Baurecht; G3: Nutzungs- und Betriebsfreigaben."
       },
       {
         "name": "Architektur & Bau",
         "icon": "pavilion",
-        "inhalt": "Einen festen Pavillon für 20 Gäste mit Panoramafront, Küche und technischer Versorgung entwerfen, neu kalkulieren und nach G2 bauen; Abnahmen und Probebetrieb im September 2028.",
-        "ziel": "Der eigene Pavillon ist vor dem ersten Pilot-Dinner fertig und betriebsbereit."
+        "inhalt": "Architekt bis 28.02.2027 auswählen; Raumprogramm, Entwurf und Fachplanung (BRPH), Kostenprüfung und Vergabevorbereitung (RUSH). Bau 01.11.2027–31.08.2028, Abnahmen und Testservice im September 2028.",
+        "ziel": "G1: Raumprogramm mit Flächen; G2: Kosten und Vergabe; G3: Übergabe."
       },
       {
-        "name": "Kulinarik & Betrieb",
+        "name": "Küche & Team",
         "icon": "chef",
-        "inhalt": "Kulinarikpartner, Menü, Serviceabläufe und Betriebsrollen entwickeln; das Team im fertigen Pavillon schulen und den Testservice vor G3 prüfen.",
-        "ziel": "Ein belastbarer Ablauf für die Piloten; Rückmeldungen werden vor dem Regelbetrieb umgesetzt."
+        "inhalt": "Menü, Küchen- und Kühlbedarf, Allergene, Team und Kosten mit Puff ’n Stuff bis 30.06.2027 anbieten lassen; Betriebsleitung bis 31.12.2027; Service- und Schichtplan, Schulung und vollständiger Testservice vor G3.",
+        "ziel": "G3: Menü, Team, Schichtplan, Lizenzen, Schulung und vollständiger Testservice."
       },
       {
-        "name": "Vertrieb & Pilotgäste",
-        "icon": "handshake",
-        "inhalt": "Zielgruppen und Partnerkanäle prüfen, Interesse und Warteliste aufbauen; Pilotbuchungen, Stornos und Preishypothese nachvollziehbar dokumentieren.",
-        "ziel": "Nachfrage durch reale Pilotdaten prüfen, ohne bereits bestätigte Zahlungsbereitschaft zu behaupten."
-      },
-      {
-        "name": "Vier Pilot-Dinner",
+        "name": "Pilot-Dinner",
         "icon": "rocket",
-        "inhalt": "Vier geplante Abende im eigenen, freigegebenen Florida-Pavillon: 15.10.2028, 15.12.2028, 15.03.2029 und 15.06.2029; jeweils bis zu 20 Gäste. Preisannahme: 35.000 USD je Platz.",
-        "ziel": "Nachfrage, Ablauf, Rückmeldungen und Kosten als Grundlage für G4 auswerten."
+        "inhalt": "Vier Abende im eigenen Pavillon: 15.10.2028, 15.12.2028, 15.03.2029 und 15.06.2029; bis zu 20 Gäste je Abend, insgesamt 80 Plätze. Pilotpreismodell: 35.000 USD je Platz.",
+        "ziel": "P1–P4: Kosten, Gästefeedback und Verbesserungen für den nächsten Abend; Zahlungsbereitschaft anhand bezahlter Pilotbuchungen prüfen."
       },
       {
-        "name": "Betrieb & Ausbauprüfung",
-        "icon": "chart",
-        "inhalt": "Ab Juli 2029 die Piloten auswerten und den Florida-Betrieb prüfen. Langfristig einen zweiten eigenständigen festen Standort im Raum Starbase/South Padre Island untersuchen; dafür sind ein eigener Bauplatz, Genehmigungen und Investitionsbeschluss nötig.",
-        "ziel": "Florida nur nach belastbarem Nachweis verstetigen; Texas bleibt eine bedingte Perspektive ohne gesicherten Bauplatz, Budget oder Eröffnungstermin."
+        "name": "Vertrieb & Betriebsübergang",
+        "icon": "handshake",
+        "inhalt": "Partnerkanäle (Visit Space Coast, Courtyard, Mears Select, optional KSC), Interesse und Warteliste, Buchungen und Auswertung; bei Go Übergang in den Regelbetrieb ab 08/2029.",
+        "ziel": "G4: Betriebsentscheid und Übergabe; bei Go ab 08/2029 Betrieb und Kennzahlenreviews."
       }
     ],
     "pipeHeads": [
@@ -88,15 +88,15 @@ window.ROCKET_DATA = {
           0,
           0
         ],
-        "pl": "Projektleitung [Name]",
-        "col": "Sponsor als vorgeschlagene Rolle",
+        "pl": "Projektleitung",
+        "col": "Investitionsgremium entscheidet an G0–G4",
         "cust": "–",
         "st": "y",
         "pot": "–",
-        "bud": "offen"
+        "bud": "vor G2"
       },
       {
-        "tp": "1 Standort & Genehmigungen",
+        "tp": "1 Standort sichern",
         "pipe": [
           1,
           1,
@@ -107,15 +107,15 @@ window.ROCKET_DATA = {
           0,
           0
         ],
-        "pl": "TP-Lead Standort/Sicherheit",
-        "col": "Örtliche Stellen und Fachplanung; Zuständigkeiten prüfen",
+        "pl": "Standortleitung",
+        "col": "BCPA · Allen Engineering · Ardaman · Applied Ecology (vorgesehen)",
         "cust": "intern",
         "st": "y",
         "pot": "–",
-        "bud": "offen"
+        "bud": "vor G2"
       },
       {
-        "tp": "2 Architektur & Bau",
+        "tp": "2 Genehmigungen & Sicherheit",
         "pipe": [
           1,
           1,
@@ -126,15 +126,15 @@ window.ROCKET_DATA = {
           0,
           0
         ],
-        "pl": "TP-Lead Bau",
-        "col": "Architektur, Fachplanung, Bauunternehmen; Auswahl offen",
+        "pl": "Genehmigungsleitung",
+        "col": "Stadt Titusville · SJRWMD · DBPR; FAA-Prüfung nach Standort und Bauhöhe",
         "cust": "intern",
         "st": "y",
         "pot": "–",
-        "bud": "offen"
+        "bud": "vor G2"
       },
       {
-        "tp": "3 Kulinarik & Betrieb",
+        "tp": "3 Architektur & Bau",
         "pipe": [
           1,
           1,
@@ -145,15 +145,34 @@ window.ROCKET_DATA = {
           0,
           0
         ],
-        "pl": "Hospitality-PL",
-        "col": "Kulinarikpartner und Serviceleitung; Auswahl offen",
+        "pl": "Bauleitung",
+        "col": "BRPH: Entwurf und Fachplanung · RUSH: Kosten, Vergabe und Bau (vorgesehen)",
+        "cust": "intern",
+        "st": "y",
+        "pot": "–",
+        "bud": "vor G2"
+      },
+      {
+        "tp": "4 Küche & Team",
+        "pipe": [
+          1,
+          1,
+          1
+        ],
+        "fin": [
+          1,
+          0,
+          0
+        ],
+        "pl": "Hospitality-Leitung",
+        "col": "Puff ’n Stuff · Betriebsteam (vorgesehen)",
         "cust": "Gäste",
         "st": "y",
         "pot": "–",
-        "bud": "offen"
+        "bud": "vor G2"
       },
       {
-        "tp": "4 Vertrieb & Pilotgäste",
+        "tp": "5 Pilot-Dinner",
         "pipe": [
           1,
           1,
@@ -164,15 +183,15 @@ window.ROCKET_DATA = {
           0,
           0
         ],
-        "pl": "Sales-Lead [Name]",
-        "col": "Zielgruppen- und Vertriebspartner; keine Zusagen",
-        "cust": "Pilotinteressierte",
+        "pl": "Hospitality-Leitung",
+        "col": "Catering-, Hotel- und Transferpartner (vorgesehen)",
+        "cust": "Bis zu 80 Plätze über vier Piloten",
         "st": "y",
         "pot": "–",
-        "bud": "offen"
+        "bud": "vor G2"
       },
       {
-        "tp": "5 Vier Pilot-Dinner",
+        "tp": "6 Vertrieb & Betriebsübergang",
         "pipe": [
           1,
           1,
@@ -183,40 +202,21 @@ window.ROCKET_DATA = {
           0,
           0
         ],
-        "pl": "Hospitality-PL",
-        "col": "Eigenes Team im freigegebenen Florida-Pavillon",
-        "cust": "Bis zu 80 Plätze als Kapazität; Buchungen offen",
+        "pl": "Vertriebs- / Betriebsleitung",
+        "col": "Visit Space Coast · Courtyard · Mears Select · optional KSC (vorgesehen)",
+        "cust": "Pilotinteressierte und Gäste",
         "st": "y",
         "pot": "–",
-        "bud": "offen"
+        "bud": "vor G2"
       },
       {
-        "tp": "6 Betrieb & Ausbauprüfung",
-        "pipe": [
-          1,
-          1,
-          1
-        ],
-        "fin": [
-          1,
-          0,
-          0
-        ],
-        "pl": "Projektleitung / künftige Betriebsleitung",
-        "col": "Florida-Betrieb; Texas-Partner und Fläche offen",
-        "cust": "Gäste / intern",
-        "st": "y",
-        "pot": "–",
-        "bud": "offen"
-      },
-      {
-        "tp": "Summe · neu zu kalkulieren",
+        "tp": "Summe · Budget vor G2 kalkulieren",
         "sum": true,
-        "pot": "offen",
-        "bud": "offen"
+        "pot": "–",
+        "bud": "vor G2"
       }
     ],
-    "t2note": "Für den festen Pavillon liegt noch keine neue Investitions- oder Umsatzrechnung vor. Der historische Orientierungsrahmen von 10–15 Mio. USD (damals 13,38 Mio., gerundet 13,4 Mio. USD) stammt aus der größeren festen Lounge mit ca. 1.000 m², zwei Geschossen, Dachterrasse und Profiküche. Er betrifft nur Standort 1 und ist für das Pavillonkonzept neu zu validieren. Standort 2 in Texas benötigt eine zusätzliche, eigene Kalkulation. 47,2 Mio. USD Umsatz und die Renditekennzahlen des bisherigen mobilen Rechners validieren diesen neuen Plan nicht.",
+    "t2note": "Die Budgetplanung ist eine konkrete Aufgabe vor G2: Grundstück, Bau, Ausstattung, Betrieb und Pilotliquidität werden auf Angebotsbasis kalkuliert; Reserve, Wetter- und Lieferpuffer, Zahlungsplan und Finanzierung gehören dazu. Das Pilotpreismodell von 35.000 USD je Platz wird anhand bezahlter Pilotbuchungen geprüft.",
     "rows": [
       {
         "name": "Gesamtprojekt",
@@ -316,7 +316,7 @@ window.ROCKET_DATA = {
           {
             "t": "lab",
             "d": "2029-07-31",
-            "text": "Betriebs- & Ausbauprüfung",
+            "text": "Betriebsentscheid",
             "pos": "below"
           },
           {
@@ -358,13 +358,13 @@ window.ROCKET_DATA = {
             "t": "bar",
             "s": "2029-08-01",
             "e": "2031-12-31",
-            "text": "Betrieb Florida (bedingt)",
+            "text": "Regelbetrieb Florida (bei Go)",
             "style": "dot"
           }
         ]
       },
       {
-        "name": "Standort & Genehmigungen",
+        "name": "Standort sichern",
         "icon": "map",
         "st": "y",
         "items": [
@@ -396,6 +396,56 @@ window.ROCKET_DATA = {
           {
             "t": "bar",
             "s": "2027-04-01",
+            "e": "2027-09-20",
+            "text": "Nutzungsrechte sichern",
+            "style": "p2"
+          },
+          {
+            "t": "dia",
+            "d": "2027-09-30",
+            "kind": "qg",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2027-09-30",
+            "text": "Nutzungsrechte vor Baustart",
+            "pos": "below"
+          },
+          {
+            "t": "tri",
+            "d": "2027-09-30",
+            "dir": "end",
+            "planned": true
+          }
+        ]
+      },
+      {
+        "name": "Genehmigungen & Sicherheit",
+        "icon": "shield",
+        "st": "y",
+        "items": [
+          {
+            "t": "tri",
+            "d": "2027-02-15",
+            "dir": "start",
+            "planned": true
+          },
+          {
+            "t": "dia",
+            "d": "2027-02-15",
+            "kind": "ms",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2027-02-15",
+            "text": "Pre-App 15.02.27",
+            "pos": "below"
+          },
+          {
+            "t": "bar",
+            "s": "2027-04-01",
             "e": "2027-06-30",
             "text": "Standort- & Sicherheitsplanung",
             "style": "p2"
@@ -421,9 +471,9 @@ window.ROCKET_DATA = {
           },
           {
             "t": "bar",
-            "s": "2028-09-01",
+            "s": "2028-01-01",
             "e": "2028-09-20",
-            "text": "Betriebsfreigaben",
+            "text": "Betriebsnachweise & Lizenzen",
             "style": "dot"
           },
           {
@@ -458,6 +508,18 @@ window.ROCKET_DATA = {
             "planned": true
           },
           {
+            "t": "dia",
+            "d": "2027-02-28",
+            "kind": "ms",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2027-02-28",
+            "text": "Architekt 28.02.27",
+            "pos": "below"
+          },
+          {
             "t": "bar",
             "s": "2027-01-15",
             "e": "2027-03-31",
@@ -475,7 +537,7 @@ window.ROCKET_DATA = {
             "t": "bar",
             "s": "2027-09-01",
             "e": "2027-09-20",
-            "text": "Kosten & Vergabe",
+            "text": "Kostenprüfung & Vergabevorbereitung",
             "style": "p3"
           },
           {
@@ -525,7 +587,7 @@ window.ROCKET_DATA = {
         ]
       },
       {
-        "name": "Kulinarik & Betrieb",
+        "name": "Küche & Team",
         "icon": "chef",
         "st": "y",
         "items": [
@@ -534,6 +596,30 @@ window.ROCKET_DATA = {
             "d": "2027-01-04",
             "dir": "start",
             "planned": true
+          },
+          {
+            "t": "dia",
+            "d": "2027-06-30",
+            "kind": "ms",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2027-06-30",
+            "text": "Angebot 30.06.27",
+            "pos": "below"
+          },
+          {
+            "t": "dia",
+            "d": "2027-12-31",
+            "kind": "ms",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2027-12-31",
+            "text": "Betriebsleitung 31.12.27",
+            "pos": "below"
           },
           {
             "t": "bar",
@@ -584,7 +670,78 @@ window.ROCKET_DATA = {
         ]
       },
       {
-        "name": "Vertrieb & Pilotgäste",
+        "name": "Pilot-Dinner",
+        "icon": "rocket",
+        "st": "y",
+        "items": [
+          {
+            "t": "tri",
+            "d": "2028-10-01",
+            "dir": "start",
+            "planned": true
+          },
+          {
+            "t": "track",
+            "s": "2028-10-01",
+            "e": "2029-06-30"
+          },
+          {
+            "t": "dia",
+            "d": "2028-10-15",
+            "kind": "ms",
+            "planned": true,
+            "num": "1"
+          },
+          {
+            "t": "dia",
+            "d": "2028-12-15",
+            "kind": "ms",
+            "planned": true,
+            "num": "2"
+          },
+          {
+            "t": "dia",
+            "d": "2029-03-15",
+            "kind": "ms",
+            "planned": true,
+            "num": "3"
+          },
+          {
+            "t": "dia",
+            "d": "2029-06-15",
+            "kind": "ms",
+            "planned": true,
+            "num": "4"
+          },
+          {
+            "t": "bar",
+            "s": "2029-07-01",
+            "e": "2029-07-25",
+            "text": "Pilot-Auswertung",
+            "style": "dot"
+          },
+          {
+            "t": "dia",
+            "d": "2029-07-31",
+            "kind": "qg",
+            "planned": true
+          },
+          {
+            "t": "tri",
+            "d": "2029-07-31",
+            "dir": "end",
+            "planned": true
+          },
+          {
+            "t": "lab",
+            "d": "2029-01-20",
+            "text": "P1 15.10.28 · P2 15.12.28 · P3 15.03.29 · P4 15.06.29",
+            "pos": "below"
+          }
+        ]
+      },
+      {
+        "name": "Vertrieb & Betriebsübergang",
         "icon": "handshake",
         "st": "y",
         "items": [
@@ -629,92 +786,9 @@ window.ROCKET_DATA = {
           },
           {
             "t": "bar",
-            "s": "2029-08-01",
-            "e": "2031-12-31",
-            "text": "Vertrieb Florida (bedingt)",
-            "style": "dot"
-          },
-          {
-            "t": "tri",
-            "d": "2031-12-31",
-            "dir": "end",
-            "planned": true
-          }
-        ]
-      },
-      {
-        "name": "Vier Pilot-Dinner",
-        "icon": "rocket",
-        "st": "y",
-        "items": [
-          {
-            "t": "tri",
-            "d": "2028-10-01",
-            "dir": "start",
-            "planned": true
-          },
-          {
-            "t": "track",
-            "s": "2028-10-01",
-            "e": "2029-06-30"
-          },
-          {
-            "t": "dia",
-            "d": "2028-10-15",
-            "kind": "ms",
-            "planned": true,
-            "num": "1"
-          },
-          {
-            "t": "lab",
-            "d": "2028-10-15",
-            "text": "P1 15.10.2028",
-            "pos": "below"
-          },
-          {
-            "t": "dia",
-            "d": "2028-12-15",
-            "kind": "ms",
-            "planned": true,
-            "num": "2"
-          },
-          {
-            "t": "lab",
-            "d": "2028-12-15",
-            "text": "P2 15.12.2028",
-            "pos": "below"
-          },
-          {
-            "t": "dia",
-            "d": "2029-03-15",
-            "kind": "ms",
-            "planned": true,
-            "num": "3"
-          },
-          {
-            "t": "lab",
-            "d": "2029-03-15",
-            "text": "P3 15.03.2029",
-            "pos": "below"
-          },
-          {
-            "t": "dia",
-            "d": "2029-06-15",
-            "kind": "ms",
-            "planned": true,
-            "num": "4"
-          },
-          {
-            "t": "lab",
-            "d": "2029-06-15",
-            "text": "P4 15.06.2029",
-            "pos": "below"
-          },
-          {
-            "t": "bar",
             "s": "2029-07-01",
             "e": "2029-07-25",
-            "text": "Pilot-Auswertung",
+            "text": "Betriebsentscheid vorbereiten",
             "style": "dot"
           },
           {
@@ -726,52 +800,14 @@ window.ROCKET_DATA = {
           {
             "t": "lab",
             "d": "2029-07-31",
-            "text": "Nachweis für G4",
-            "pos": "below"
-          },
-          {
-            "t": "tri",
-            "d": "2029-07-31",
-            "dir": "end",
-            "planned": true
-          }
-        ]
-      },
-      {
-        "name": "Betrieb & Ausbauprüfung",
-        "icon": "chart",
-        "st": "y",
-        "items": [
-          {
-            "t": "tri",
-            "d": "2029-07-01",
-            "dir": "start",
-            "planned": true
-          },
-          {
-            "t": "bar",
-            "s": "2029-07-01",
-            "e": "2029-07-25",
-            "text": "Betriebs- & Ausbauprüfung",
-            "style": "dot"
-          },
-          {
-            "t": "dia",
-            "d": "2029-07-31",
-            "kind": "qg",
-            "planned": true
-          },
-          {
-            "t": "lab",
-            "d": "2029-07-31",
-            "text": "Betriebsentscheidung 31.07.29",
+            "text": "Betriebsentscheid 31.07.29",
             "pos": "below"
           },
           {
             "t": "bar",
             "s": "2029-08-01",
             "e": "2031-12-31",
-            "text": "Betrieb Florida (bedingt)",
+            "text": "Regelbetrieb Florida (bei Go)",
             "style": "dot"
           },
           {
@@ -786,20 +822,20 @@ window.ROCKET_DATA = {
     "links": [
       {
         "from": {
-          "row": 1,
+          "row": 2,
           "d": "2027-09-30"
         },
         "to": {
-          "row": 2,
+          "row": 3,
           "d": "2027-11-01"
         },
         "text": "Bau erst nach Genehmigung und G2",
         "textX": 9.15,
-        "textRow": 2
+        "textRow": 3
       },
       {
         "from": {
-          "row": 2,
+          "row": 3,
           "d": "2028-09-30"
         },
         "to": {
@@ -816,12 +852,12 @@ window.ROCKET_DATA = {
           "d": "2029-03-15"
         },
         "to": {
-          "row": 3,
+          "row": 4,
           "d": "2029-03-16"
         },
         "text": "Pilot-Feedback verbessert Menü und Ablauf",
         "textX": 14,
-        "textRow": 3
+        "textRow": 4
       },
       {
         "from": {
@@ -832,7 +868,7 @@ window.ROCKET_DATA = {
           "row": 6,
           "d": "2029-07-31"
         },
-        "text": "Nachweis vor Betriebsentscheidung",
+        "text": "Nachweis vor Betriebsentscheid",
         "textX": 14.7,
         "textRow": 6
       }
@@ -960,13 +996,12 @@ window.ROCKET_DATA = {
       }
     ],
     "assumptions": [
-      "Neue redaktionelle Planannahme vom 20.11.2026: ein fester Pavillon in Titusville/Florida; langfristig zwei eigenständige feste Standorte. Der zweite Standort im Raum Starbase/South Padre Island ist nicht gesichert.",
-      "Standort und Planung 2027, Bau November 2027 bis August 2028, Abnahmen und Betriebsbereitschaft September 2028. Vier eigene Piloten erst nach G3: Oktober und Dezember 2028 sowie März und Juni 2029. Auswertung und Betriebsprüfung ab Juli 2029.",
-      "Alle konkreten Tage, Gates, Abhängigkeiten und Ampeln sind Planannahmen, keine bereits erreichten Freigaben. Die Dinnerdaten sind keine bestätigten Raketenstarttermine.",
-      "Investition des festen Pavillons und Wirtschaftlichkeit sind neu zu kalkulieren. Die historische Lounge-Schätzung von 10–15 Mio. USD (13,38 Mio. aufgeteilt, gerundet 13,4 Mio.) dient nur als Orientierung für Standort 1; sie ist kein validiertes Pavillonbudget.",
-      "Texas benötigt ein eigenes Grundstück, Genehmigungen, eine eigene Investitionsfreigabe und zusätzliche Mittel. Für Eröffnung und Bau gibt es hier bewusst keinen festen Termin.",
-      "Die 47,2 Mio. USD Umsatz, das 3,48-Mio.-USD-Projektbudget und Renditekennzahlen der bisherigen mobilen Kalkulation werden nicht als Nachweis für feste Standorte übernommen. Andere Teamkapitel und Rechnerdaten bleiben unverändert.",
-      "Bestehende Quellenbasis und historische Variante B bleiben als Herkunft erhalten. Sie belegen keine Standort-, Genehmigungs-, Partner- oder Kundenzusage. Die Benennung von Organisationen oder Personen ist eine Planungsannahme; [Name]-Felder sind offen."
+      "Planungsgrundlage vom 20.11.2026: ein fester Pavillon in Titusville, Florida (20 Gäste, zehn Zweiertische). Ein Standort in Texas wird nach G4 in einem eigenen Projekt auf Machbarkeit und Finanzierung geprüft.",
+      "Standort und Planung 2027, Bau 01.11.2027–31.08.2028, Abnahmen und Testservice im September 2028. Vier Pilot-Dinner am 15.10.2028, 15.12.2028, 15.03.2029 und 15.06.2029; Betriebsentscheid an G4 am 31.07.2029.",
+      "Gates G0 30.11.2026, G1 31.03.2027, G2 30.09.2027, G3 30.09.2028 und G4 31.07.2029 sind Plantermine mit dokumentierten Freigabebedingungen. Die Dinnertermine sind keine bestätigten Raketenstarttermine.",
+      "Die Budgetplanung für Grundstück, Bau, Ausstattung, Betrieb und Pilotliquidität erfolgt als konkrete Aufgabe vor G2 auf Angebotsbasis. Pilotpreismodell: 35.000 USD je Platz; die Zahlungsbereitschaft wird anhand bezahlter Pilotbuchungen geprüft.",
+      "Firmen und Ansprechpartner sind vorgesehene Umsetzungspartner. Eine Beauftragung ist nicht erfolgt; Auswahl und Vergabe erfolgen in den Projektphasen.",
+      "Quellenverzeichnis und öffentliche Kontakte (geprüft am 20.11.2026): Folie 14 der Roadmap-Präsentation."
     ]
   },
   "B": {
@@ -1996,53 +2031,49 @@ window.ROCKET_DATA = {
 
 window.ROCKET_META = {
   "A": {
-    "name": "Fester Pavillon · Florida zuerst",
-    "short": "Fester Pavillon · Standort 1 Florida",
-    "budget": "offen",
-    "budgetLabel": "Pavillon neu kalkulieren",
-    "budgetReference": "10–15 Mio. USD",
-    "budgetReferenceNote": "Historischer Orientierungsrahmen der größeren festen Lounge für Standort 1 (damals rund 13,4 Mio. USD); für den Pavillon neu validieren. Texas zusätzlich und offen.",
-    "revenue": "offen",
-    "revenueLabel": "Für feste Standorte nicht neu kalkuliert",
+    "name": "Fester Pavillon · Titusville, Florida",
+    "short": "Fester Pavillon · Titusville, Florida",
     "firstDinner": "10/2028",
     "firstDinnerLabel": "Erster Pilot im eigenen Pavillon",
-    "location": "Titusville / Florida · Standort 1 zu prüfen",
-    "secondLocation": "Raum Starbase / South Padre Island · Ausbauperspektive",
-    "expansion": "Langfristig zwei eigenständige feste Standorte. Texas nur nach eigenem Standort-, Genehmigungs- und Investitionsentscheid; Bauplatz, Budget und Eröffnung offen.",
+    "location": "Titusville / Florida",
+    "expansion": "Texas: eigenständige Machbarkeits- und Investitionsprüfung nach dem Betriebsentscheid.",
     "planDate": "20.11.2026",
     "gates": [
       {
         "id": "G0",
         "date": "30.11.2026",
         "title": "Projektauftrag",
-        "description": "Planungsauftrag für den ersten festen Pavillon in Florida; Investitionshöhe noch offen."
+        "description": "Projektumfang, Verantwortlichkeiten, Entscheidungswege und Planungsbudget im Projektauftrag festlegen; Prüfphase beauftragen."
       },
       {
         "id": "G1",
         "date": "31.03.2027",
         "title": "Standortoption",
-        "description": "Geeignete Fläche in Titusville prüfen und eine Option sichern. Noch kein gesicherter Bauplatz."
+        "description": "Parzelle und Option bis G2, Sichtachse, Zufahrt und Versorgung; Vorabklärung zu Nutzung, Baugrund und Umwelt. Option und Entwurfsphase freigeben."
       },
       {
         "id": "G2",
         "date": "30.09.2027",
         "title": "Bauinvestition",
-        "description": "Bau nur bei geeigneter Fläche, erforderlichen Genehmigungen und neu validiertem Budget freigeben; geplanter Baubeginn 01.11.2027."
+        "description": "Abgestimmter Entwurf, Gutachten, Genehmigungen, vergleichbare Angebote, Budget und Finanzierung. Investition freigeben; Baustart nach gesicherten Nutzungsrechten."
       },
       {
         "id": "G3",
         "date": "30.09.2028",
         "title": "Pilotfreigabe",
-        "description": "Eigener Pavillon fertig, Abnahmen und Betriebsfreigaben geklärt, Team geschult. Erst danach eigene Pilot-Dinner."
+        "description": "Abnahmen und Nutzungsfreigabe, Betriebslizenzen, Team, Testservice, Stornoabläufe, Messplan und Pilotbudget. Vier Pilot-Dinner freigeben."
       },
       {
         "id": "G4",
         "date": "31.07.2029",
-        "title": "Betriebs- & Ausbauprüfung",
-        "description": "Vier Piloten auswerten und über Florida-Betrieb entscheiden. Ein zweiter fester Standort in Texas braucht eine eigene Standort-, Genehmigungs- und Investitionsfreigabe."
+        "title": "Betriebsentscheid",
+        "description": "Vier abgeschlossene Piloten; Auslastung, bezahlte Nachfrage, Qualität, Störungen und Istkosten auswerten. Go, Nachbessern oder No-go für den Florida-Betrieb."
       }
     ],
-    "critical": "Kritischer Pfad: Fläche und Genehmigungen klären, Bauinvestition an G2 freigeben, den eigenen Florida-Pavillon fertigstellen und an G3 betrieblich freigeben. Erst danach beginnen die vier eigenen Piloten. Texas hat keinen festen Eröffnungstermin."
+    "critical": "Kritischer Pfad: Standort und Genehmigungen klären, Bauinvestition an G2 entscheiden, den Pavillon bauen und an G3 freigeben, vier Piloten durchführen und an G4 über den Florida-Betrieb entscheiden. Eine Texas-Prüfung folgt als eigenes Projekt.",
+    "horizonLabel": "UMSETZUNGSHORIZONT",
+    "horizon": "2026–2031",
+    "horizonNote": "Fester Pavillon · Titusville, Florida"
   },
   "B": {
     "name": "Lounge Titusville",

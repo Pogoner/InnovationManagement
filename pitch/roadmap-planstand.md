@@ -1,37 +1,46 @@
-# Teil 6 · Fester Pavillon und langfristig zwei Standorte
+# Teil 6 · Roadmap & Umsetzung
 
-Planstand: 20.11.2026. Fortschreibung des Studienkonzepts; alle Termine sind Planannahmen.
+Planstand: 20.11.2026. Grundlage ist die Roadmap-Präsentation [`quellen/Schritt_6_Roadmap.pptx`](../quellen/Schritt_6_Roadmap.pptx) (14 Folien). Alle Termine sind Plantermine.
 
 ## Umfang
 
-Teil 6 wird auf einen festen ersten Pavillon in Titusville/Florida und langfristig einen zweiten eigenständigen festen Standort im Raum Starbase/South Padre Island ausgerichtet. Das Gebäude wird nicht zwischen den Standorten transportiert. Die übrigen Pitch-Kapitel, der bestehende Finanzrechner und die Buchungsfunktion bleiben in ihrem bisherigen Stand.
+Ein fester Pavillon für 20 Gäste (zehn Zweiertische) in Titusville, Florida. Umsetzungshorizont 2026–2031. Ein Standort in Texas wird nach dem Betriebsentscheid in einem eigenen Projekt auf Machbarkeit und Finanzierung geprüft.
 
-Ausgangspunkt ist der gemeinsame Repository-Stand `863a679`. Die bisher aktive mobile Roadmap wird fachlich ersetzt; die vorhandene ältere Lounge-Planung dient nur als Referenz für die Abfolge eines festen Bauvorhabens.
+## Sechs Teilprojekte
 
-## Abfolge und Freigaben
+1. Standort sichern
+2. Genehmigungen & Sicherheit
+3. Architektur & Bau
+4. Küche & Team
+5. Pilot-Dinner
+6. Vertrieb & Betriebsübergang
 
-Die acht Bildphasen zeigen zusammenhängende, teilweise parallele Arbeiten: Standortprüfung, Machbarkeit und Freigaben, Entwurf, Detailplanung und Investition, Bau, Betriebsbereitschaft, vier Pilot-Dinner und schließlich Betrieb mit Prüfung des zweiten Standorts.
+Firmen und Ansprechpartner der Präsentation sind vorgesehene Umsetzungspartner. Eine Beauftragung ist nicht erfolgt.
 
-| Entscheidung | Plantermin | Voraussetzung und Bedeutung |
+## Freigaben und Termine
+
+| Entscheidung | Plantermin | Voraussetzung |
 | --- | --- | --- |
-| G0 · Projektauftrag | 30.11.2026 | Zuständigkeiten und Prüfauftrag festlegen |
-| G1 · Standortoption | 31.03.2027 | Geeignete Fläche und grundsätzliche Machbarkeit prüfen |
-| G2 · Bauinvestition | 30.09.2027 | Genehmigungsstand, Entwurf und neu validierte Baukosten tragen die Investition |
-| G3 · Pilotfreigabe | 30.09.2028 | Fester Pavillon fertiggestellt, betriebliche Abnahmen und Teamvorbereitung abgeschlossen |
-| G4 · Betriebs- und Ausbauprüfung | 31.07.2029 | Erfahrungen aus vier Florida-Piloten auswerten; Regelbetrieb und weitere Standortprüfung entscheiden |
+| G0 · Projektauftrag | 30.11.2026 | Umfang, Verantwortlichkeiten, Entscheidungswege, Planungsbudget |
+| G1 · Standortoption | 31.03.2027 | Parzelle, Sichtachse, Zufahrt, Bebaubarkeit; Option bis G2 |
+| G2 · Bauinvestition | 30.09.2027 | Abgestimmter Entwurf, Genehmigungen, vergleichbare Angebote, Kosten- und Finanzierungsplanung |
+| G3 · Pilotfreigabe | 30.09.2028 | Abnahmen, Betriebslizenzen, Team, Testservice, Messplan, Pilotbudget |
+| G4 · Betriebsentscheid | 31.07.2029 | Vier Piloten ausgewertet: bezahlte Nachfrage, Qualität, Störungen, Istkosten |
 
-Planungsfenster: Standort und Planung 2027; Bau November 2027 bis August 2028; betriebliche Vorbereitung und Abnahmen September 2028. Vier Pilot-Dinner im eigenen festen Pavillon sind am 15.10.2028, 15.12.2028, 15.03.2029 und 15.06.2029 vorgesehen. Tatsächliche Eventtermine hängen zusätzlich von geeigneten Launch-Terminen ab.
+Bau: 01.11.2027–31.08.2028. Pilot-Dinner: 15.10.2028, 15.12.2028, 15.03.2029 und 15.06.2029. Regelbetrieb Florida bei Go ab 01.08.2029, anschließend Kennzahlenreviews bis Ende 2031.
 
-Texas bleibt ein langfristiges Ausbauziel. Grundstück, Genehmigungen, eigenes Investitionsbudget und Eröffnung müssen separat geprüft und freigegeben werden. Die Roadmap legt dafür keinen Eröffnungstermin fest und setzt einen erfolgreichen Florida-Betrieb voraus.
+## Budget
 
-## Budgetgrenze
+Die Budgetplanung ist eine konkrete Aufgabe vor G2: Grundstück, Bau, Ausstattung, Betrieb und Pilotliquidität werden auf Angebotsbasis kalkuliert. Das Pilotpreismodell beträgt 35.000 USD je Platz; bezahlte Pilotbuchungen prüfen die Zahlungsbereitschaft.
 
-Die frühere aktive Planung mit 3,48 Mio. USD galt für ein mobiles Konzept. Sie finanziert nicht automatisch einen oder zwei feste Bauten. Die vorhandene ältere Lounge-Planung enthält einen groben Rahmen von 10–15 Mio. USD (Rechenstand 13,38 Mio. USD) für einen größeren festen Bau mit rund 1.000 m². Dieser Rahmen dient ausschließlich der Orientierung für Standort 1 und muss für den festen Pavillon neu kalkuliert werden. Ein zweiter Standort ist darin nicht enthalten.
+## Finanzrechnung
 
-Umsatz und Innovationsrendite aus dem unveränderten Finanzrechner gelten nicht als nachgerechneter Wirtschaftlichkeitsnachweis für das neue feste Konzept. Auch Nachfrage und Zahlungsbereitschaft sind Prüfziele der Piloten, keine bereits erzielten Ergebnisse.
+Projektbezogene Rechnung für Standort 1 Florida, Betrachtungszeitraum 2027–2031, 20 Plätze je Dinner. Zwei Piloten 2028 (Oktober, Dezember) und zwei 2029 (März, Juni) zum Pilotpreis von 35.000 USD; Regelbetrieb erst nach G4 mit Hochlaufannahme (5, 12 und 20 Dinner in 2029, 2030 und 2031 bei 65, 70 und 75 % Auslastung, Zielpreis 50.000 USD). Texas ist nicht enthalten.
 
-## Dateien und Nachvollziehbarkeit
+Umsatz, variable Kosten (5.000 USD je Gast) und laufende Fixkosten ergeben das Betriebsergebnis. Investitionen (Grundstück, Planung, Genehmigungen, Bau, Ausstattung, 10 % Reserve) werden nur im Cashflow abgezogen. Die Konzernmarge von SpaceX wird nicht verwendet. Alle Beträge sind Planannahmen; die 10–15 Mio. USD der Lounge-Schätzung sind kein Pavillonbudget. 45.000 USD je Gast (90 %) sind der Deckungsbeitrag vor Fixkosten und Investition. Bleibt der kumulierte Cashflow im Zeitraum negativ, erscheint „Im Betrachtungszeitraum nicht erreicht“.
 
-Die aktuelle Darstellung entsteht aus `planning-data.js`, `roadmap-phases.js` und den Teil-6-Ansichten. Der neue Foliensatz `quellen/step-6-roadmap-fester-pavillon.pptx` folgt diesem Planstand. `quellen/step-6-roadmap-pavillon.pptx` bleibt als historische mobile Originalquelle erhalten und wird nicht mehr als aktuelle Roadmap verlinkt.
+Quelle der Werte: `pitch/calc/data.js` (RocketLight, KI-Bewertung, `fy`) und `pitch/calc/model.js` (`calcProject`). Die Arbeitsmappe [Schritt_4_RocketLight_Finanzrechnung_Fester_Pavillon.xlsx](../quellen/Schritt_4_RocketLight_Finanzrechnung_Fester_Pavillon.xlsx) enthält dieselbe Rechnung mit Formeln. Die Hube-Innovationsrendite bleibt ein eigener Bewertungsscore.
 
-Die Überarbeitung wird in einzelnen nachvollziehbaren Commits gesichert. Ausgangsdaten anderer Teamteile werden nicht umgedeutet.
+## Dateien
+
+Die Darstellung entsteht aus `planning-data.js` (Daten), `roadmap-phases.js` (Texte der acht Filmszenen) und `film-architecture.js` (Szenenaufbau). Ersatzansichten ohne Film: `index.html` und `pitch.js`.

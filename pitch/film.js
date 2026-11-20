@@ -99,7 +99,7 @@
       const beat=record.chapter.beats[index];
       record.tag.textContent=beat.tag;
       record.title.innerHTML=beat.title;
-      record.copy.textContent=beat.copy;
+      record.copy.innerHTML=beat.copy;
       record.cue.textContent=beat.cue;
       record.count.textContent=String(index+1).padStart(2,'0')+' / '+String(record.chapter.beats.length).padStart(2,'0');
       if(!record.useStatic&&scrollY+innerHeight>record.top&&scrollY<record.top+record.height)record.status.textContent='Phase '+(index+1)+' von '+record.chapter.beats.length+': '+beat.cue;
@@ -217,25 +217,29 @@
     const p=current.progress;
     const dining=records.find(record=>record.chapter.step===5);
     const site=records[5];
+    // The overview step follows the last planning phase; the world keeps the original eight-phase timeline.
+    const sitePhases=window.PitchRoadmapPhases[variant],overviewAt=sitePhases.find(phase=>phase.id==='overview')?.at??1;
+    const siteP=Math.min(1,site.progress/(sitePhases[sitePhases.length-2]?.point??overviewAt));
     const siteMix=smooth(site.top-height*.58,site.top+height*.08,y)*(1-smooth(site.top+site.height-height*.65,site.top+site.height+height*.1,y));
     const experienceMix=smooth(dining.top-height*.5,dining.top+height*.08,y)*(1-smooth(dining.top+dining.height-height*.65,dining.top+dining.height+height*.1,y));
     // The pilot phase enters the finished Florida pavilion. The final phase
     // returns to the fixed building and the separately gated second-site view.
-    const interiorReveal=siteMix*smooth(.72,.77,site.progress)*(1-smooth(.84,.86,site.progress));
+    const interiorReveal=siteMix*smooth(.72,.77,siteP)*(1-smooth(.84,.86,siteP));
     const diningMix=Math.max(experienceMix,interiorReveal);
     const diningFocus=smooth(.16,.19,dining.progress)*(1-smooth(.29,.32,dining.progress));
     world.style.setProperty('--dining-opacity',fmt(diningMix));
+    world.style.setProperty('--fs-overview',fmt(smooth(overviewAt-.02,overviewAt+.02,site.progress)));
     world.style.setProperty('--dining-image-opacity',fmt(.34+Math.max(diningFocus*experienceMix,interiorReveal*.35)*.55));
     const worldIn=smooth(records[0].top-height*.7,records[0].top-height*.08,y);
     const worldOut=1-smooth(launchTop-height*.4,launchTop+height*.3,y);
     world.style.opacity=fmt(worldIn*worldOut);
     world.dataset.scene=String(step);
     architecture.style.opacity=fmt(siteMix);
-    if(siteMix>0)worldDrawing.update(site.progress,context);
-    siteFlight.update(site.progress,{...context,visible:siteMix});
+    if(siteMix>0)worldDrawing.update(siteP,context);
+    siteFlight.update(siteP,{...context,visible:siteMix});
     const baseScale=1.02+Math.sin((step+p)*.7)*.012;
-    const cameraScale=reduced?1.02:baseScale*(1-siteMix)+(1.01+site.progress*.035)*siteMix;
-    let panY=reduced?0:Math.sin((step+p)*.8)*height*.008*(1-siteMix)-site.progress*height*.005*siteMix;
+    const cameraScale=reduced?1.02:baseScale*(1-siteMix)+(1.01+siteP*.035)*siteMix;
+    let panY=reduced?0:Math.sin((step+p)*.8)*height*.008*(1-siteMix)-siteP*height*.005*siteMix;
     // Ground, drawings and building move together; the nearer rocket's nose
     // remains below the fixed header at its measured y=20/941 image anchor.
     const rocketTipY=cameraTop+cameraHeight*(.72+(20/941-.72)*cameraScale)+panY;
@@ -355,7 +359,7 @@
       r.staticPoint=p;
       r.renderer.update(p,{reduced:false,variant,mobile:width<=760});
       paintCopy(r,p);
-      if(r.chapter.step===6)worldDrawing.update(p,{reduced:false,variant,mobile:width<=760});
+      if(r.chapter.step===6)worldDrawing.update(Math.min(1,p/(r.chapter.beats[r.chapter.beats.length-2]?.point??1)),{reduced:false,variant,mobile:width<=760});
       r.stage.style.setProperty('--film-progress',fmt(p));
       r.stage.dataset.progress=p.toFixed(3);
       r.lastP=p;

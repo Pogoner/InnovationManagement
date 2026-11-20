@@ -1,6 +1,6 @@
 /* RocketLight pitch: a read-only view of the existing concept evidence.
- * Load after assets/js/model.js, assets/js/data.js and pitch/planning-data.js.
- * The calculator's original seed is deliberate: a presentation must not
+ * Load after calc/model.js, calc/data.js and planning-data.js.
+ * The original seed is deliberate: a presentation must not
  * silently change with a visitor's locally edited workbook. No stored data
  * is read, migrated, reset or written here.
  */
@@ -84,8 +84,8 @@ const state = seed();
     },
     sources,
     provenance: {
-      assessments: '../rechner/assets/js/data.js',
-      calculation: '../rechner/assets/js/model.js',
+      assessments: 'calc/data.js',
+      calculation: 'calc/model.js',
       planning: 'planning-data.js',
       financialVariant: 'A',
       horizon: state.horizon,

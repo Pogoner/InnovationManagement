@@ -162,22 +162,6 @@
 .fe-final-mix li > p { font-size: 16px; line-height: 1.45; margin: 0; }
 .fe-final-mix li > p span { display: block; }
 
-.fe-approach-body { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 28px; align-items: center; }
-.fe-model { width: 100%; height: auto; display: block; overflow: visible; }
-.fe-scene .fe-model-ring { fill: none; stroke: #a9d9d94d; stroke-width: 1.4; }
-.fe-scene .fe-model-link { stroke: #a9d9d933; stroke-width: 1; fill: none; }
-.fe-scene .fe-model-field circle { fill: #151f27; stroke: #a9d9d933; stroke-width: 1; }
-.fe-scene .fe-model-field text { fill: #8ea3ab; font-size: 11.5px; }
-.fe-scene .fe-model-field.is-active circle { fill: #efbd91; stroke: #fff0d3; stroke-width: 1.6; filter: drop-shadow(0 0 14px #efbd9199); }
-.fe-scene .fe-model-field.is-active text { fill: #1a1008; font-weight: 600; }
-.fe-scene .fe-model-core { fill: #060b10; stroke: #eff3ed; stroke-width: 1.6; }
-.fe-scene .fe-model-core-title { font-size: 13px; font-weight: 600; }
-.fe-scene .fe-model-core-formula { font-size: 11px; fill: #a9d9d9; }
-.fe-approach-idea { margin: 0 0 22px; font-size: 18px; line-height: 1.4; color: #eff3ed; }
-.fe-chips { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.fe-chips li { padding: 9px 0 9px 14px; border-left: 2px solid #efbd91; background: linear-gradient(90deg, #efbd9112, transparent); }
-.fe-chips strong { display: block; color: #efbd91; font-size: 17px; font-weight: 450; line-height: 1.3; }
-.fe-chips span { display: block; font-size: 15px; line-height: 1.35; color: #c3d2d6; }
 
 /* No rule keyed to the global motion setting reveals hidden sibling phases. */
 .fe-scene.film-static-flow { height: auto; }
@@ -210,20 +194,32 @@
   .film-stage .fe-final-mix h4 small { font-size: 13px; line-height: 1.3; }
   .film-stage .fe-final-mix li > p { font-size: 14px; line-height: 1.35; }
 
-  .film-stage .fe-approach-body { gap: 20px; }
-  .film-stage .fe-approach-idea { margin-bottom: 10px; font-size: 16px; line-height: 1.3; }
-  .film-stage .fe-chips { gap: 7px; }
-  .film-stage .fe-chips li { padding-block: 6px; }
-  .film-stage .fe-chips strong { font-size: 16px; }
-  .film-stage .fe-chips span { font-size: 14px; line-height: 1.3; }
 }
 
 @media (max-width: 760px) {
   .fe-scene .fe-method-panel { padding: 20px; border-radius: 12px; }
   .fe-method-panel h3 { font-size: 25px; }
   .fe-method-panel .fe-method-note { font-size: 15px; }
-  .fe-approach-body { grid-template-columns: 1fr; gap: 16px; }
   .fe-final-mix li { grid-template-columns: 22px minmax(88px,.7fr) minmax(0,1.3fr); gap: 9px; }
   .fe-final-mix h4 { font-size: 17px; }
   .fe-final-mix li > p { font-size: 15px; }
 }
+/* Chapter 7: the model's six fields, then the three ideas. No panel behind the graphic. */
+.fe-focus .fe-focus-ring { fill: none; stroke: #a9d9d93d; stroke-width: 1.2; }
+.fe-focus .fe-focus-link { stroke: #a9d9d940; stroke-width: 1; fill: none; }
+.fe-focus .fe-focus-core { fill: #060b10cc; stroke: #eff3ed; stroke-width: 1.6; }
+.fe-scene .fe-focus-core-title { font-size: 17px; font-weight: 550; }
+.fe-scene .fe-focus-core-formula { font-size: 14px; fill: #a9d9d9; }
+.fe-focus .fe-focus-disc { fill: #121c24; stroke: #a9d9d966; stroke-width: 1.3; }
+.fe-focus .fe-focus-fill { fill: #efbd91; stroke: #fff0d3; stroke-width: 1.8; opacity: 0; }
+.fe-focus .fe-focus-halo { fill: url(#fe-focus-glow); opacity: 0; }
+.fe-scene .fe-focus-label { font-size: 16px; fill: #dbe6e4; letter-spacing: .1px; }
+.fe-scene .fe-focus-field.is-focus .fe-focus-label { fill: #1a1008; font-weight: 600; font-size: 15.5px; }
+.fe-scene .fe-focus-svg text { filter: drop-shadow(0 1px 4px #000c); }
+.fe-scene .fe-focus-field.is-focus .fe-focus-label { filter: none; }
+.fe-scene .fe-focus-svg path.fe-focus-idea-link { vector-effect: none; fill: none; stroke: #efbd91; stroke-width: 2; stroke-dasharray: 1; opacity: 0; }
+.fe-focus .fe-focus-card rect { fill: #0a1218d9; stroke: #efbd91a6; stroke-width: 1.4; }
+.fe-focus .fe-focus-icon { fill: none; stroke: #efbd91; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.fe-scene .fe-focus-card-title { font-size: 28px; font-weight: 450; fill: #f4f1e8; letter-spacing: -.3px; }
+.fe-scene .fe-focus-card-text { font-size: 18px; fill: #cddadc; }
+.fe-focus .fe-focus-card { opacity: 0; }

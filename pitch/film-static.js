@@ -12,7 +12,7 @@
     3: ['.fa-pool-rows', '.fa-pool-twelve', '.fa-matrix-phase', '.fa-selection-final'],
     4: ['.fa-ir-bars', '.fa-ir-callout'],
     5: ['[data-fe-layout]', '[data-fe-panorama]', '[data-fe-price]'],
-    7: ['[data-fe-safety]', '[data-fe-exchange]', '[data-fe-gates]', '[data-fe-engines]'],
+    7: ['.fe-focus-svg', '.fe-focus-svg'],
     8: ['[data-fm-chart]', '[data-fm-chart]']
   };
 

@@ -289,135 +289,88 @@
     }
   };
 
-  const enginePositions = [
-    {x:115,y:178,tx:304,ty:351,labelX:60,labelY:94,title:'Sicherheit',line:'Fehler ohne Angst'},
-    {x:525,y:178,tx:320,ty:351,labelX:414,labelY:94,title:'Austausch',line:'Wissen bleibt'},
-    {x:115,y:351,tx:336,ty:351,labelX:60,labelY:433,title:'Gates',line:'Früh entscheiden'}
+  // Chapter 7: one SVG, two animations. First the Hube model's six fields and the
+  // selection of "Kompetenzen", then the focus field gives rise to three ideas.
+  const focusFields = [
+    {name:['Strategie'],x:320,y:85},{name:['Foresight'],x:498,y:168},{name:['Führung /','Kultur'],x:498,y:332},
+    {name:['Kompetenzen'],x:320,y:415},{name:['Prozesse'],x:142,y:332},{name:['Struktur'],x:142,y:168}
   ];
-  const systemPhases = [0,.25,.5,.78];
-  const systemViews = ['safety','exchange','gates','engines'];
-  // Hube model (see source slides): six fields around "Innovation", one highlighted.
-  const modelFields = [
-    {name:['Strategie'],x:200,y:57},{name:['Foresight'],x:293,y:111},{name:['Führung /','Kultur'],x:293,y:219},
-    {name:['Kompetenzen'],x:200,y:273},{name:['Prozesse'],x:107,y:219},{name:['Struktur'],x:107,y:111}
+  const focusIndex = 3, focusHome = {x:112,y:250};
+  const focusCards = [
+    {title:'Jobrotation',lines:['3–6 Monate zwischen','Bereichen'],icon:'<path d="M7 14a9 9 0 0 1 15-5l3 3M25 18a9 9 0 0 1-15 5l-3-3M25 6v6h-6M7 26v-6h6"/>',y:105},
+    {title:'Food4Thought',lines:['Format zum','Wissensaustausch'],icon:'<path d="M5 17h22a11 11 0 0 1-22 0ZM10 12c0-3 3-3 3-6M17 12c0-3 3-3 3-6"/>',y:250},
+    {title:'Tandemlearning',lines:['Erfahrene und Neue','lernen voneinander'],icon:'<circle cx="11" cy="10" r="4"/><circle cx="22" cy="13" r="3"/><path d="M4 26c0-5 3-8 7-8s7 3 7 8M17 26c0-4 2-6 5-6s5 2 5 6"/>',y:395}
   ];
-  const modelMarkup = active => `<svg class="fe-model" viewBox="0 0 400 330" aria-hidden="true" focusable="false">
-    <ellipse class="fe-model-ring" cx="200" cy="165" rx="192" ry="158"/>
-    ${modelFields.map(f=>`<path class="fe-model-link" d="M200 165L${f.x} ${f.y}"/>`).join('')}
-    ${modelFields.map((f,i)=>`<g class="fe-model-field${i===active?' is-active':''}"><circle cx="${f.x}" cy="${f.y}" r="37"/>${f.name.map((line,row)=>`<text x="${f.x}" y="${f.y+4+(row-(f.name.length-1)/2)*13}" text-anchor="middle">${line}</text>`).join('')}</g>`).join('')}
-    <circle class="fe-model-core" cx="200" cy="165" r="42"/>
-    <text class="fe-model-core-title" x="200" y="162" text-anchor="middle">Innovation</text>
-    <text class="fe-model-core-formula" x="200" y="180" text-anchor="middle">I = N × U</text>
-  </svg>`;
-  const approachMarkup = ({view,hidden,kicker,title,active,idea,chips}) => `<section class="fe-method-panel fe-approach fe-${view}" data-fe-${view}${hidden?' aria-hidden="true"':''}>
-    <p class="fe-method-kicker">${kicker}</p>
-    <h3>${title}</h3>
-    <div class="fe-approach-body">
-      ${modelMarkup(active)}
-      <div class="fe-approach-copy"><p class="fe-approach-idea">${idea}</p><ol class="fe-chips">${chips.map(([lead,text])=>`<li><strong>${lead}</strong><span>${text}</span></li>`).join('')}</ol></div>
-    </div>
-  </section>`;
+  const cardX = 262, cardW = 366, cardH = 108;
 
   scenes[7] = {
-    markup: () => `<div class="fe-scene fe-system" role="group"     aria-label="Drei konkrete Ansätze für das Innovationsmanagement von SpaceX.">
-${approachMarkup({view:'safety',kicker:'Ansatz 01 · DÜRFEN / WOLLEN · Kultur',title:'Psychologische Sicherheit',active:2,idea:'Fehler und Kritik ohne Angst vor Bestrafung. Wie bei Hardware-Tests.',chips:[['Blameless Review','Ursachen statt Schuldige'],['Kritik-Kanal','direkt oder anonym'],['Pulsbefragung','zweimal im Jahr']]})}
-      ${approachMarkup({view:'exchange',hidden:true,kicker:'Ansatz 02 · KÖNNEN · Kompetenzen',title:'Austausch zwischen Bereichen',active:3,idea:'Wissen darf nicht mit der Fluktuation verloren gehen.',chips:[['Rotation','3–6 Monate in einem anderen Bereich'],['Learning Review','Erkenntnisse teilen'],['Tandems','erfahren + neu']]})}
-      ${approachMarkup({view:'gates',hidden:true,kicker:'Ansatz 03 · MACHEN · Prozesse',title:'Klare Go-/No-go-Gates',active:4,idea:'Drei Entscheidungspunkte. Jedes Mal: Go, Anpassen oder Stopp.',chips:[['Gate 1 · Idee','Kunde &amp; Markt'],['Gate 2 · Konzept','Machbarkeit'],['Gate 3 · Pilot','Wirtschaftlichkeit &amp; Umsetzung']]})}
-      <svg class="fe-svg" viewBox="0 0 640 520" aria-hidden="true" focusable="false">
-        <defs>
-          <linearGradient id="fe-vehicle-metal"><stop stop-color="#647782"/><stop offset=".38" stop-color="#eff3ed"/><stop offset=".64" stop-color="#a9b6bc"/><stop offset="1" stop-color="#40535f"/></linearGradient>
-          <radialGradient id="fe-engine-glow"><stop stop-color="#fff2d1" stop-opacity=".75"/><stop offset=".26" stop-color="#efbd91" stop-opacity=".3"/><stop offset="1" stop-color="#efbd91" stop-opacity="0"/></radialGradient>
-          <radialGradient id="fe-engine-interior"><stop stop-color="#fff0d3"/><stop offset=".34" stop-color="#efbd91"/><stop offset="1" stop-color="#b36e43" stop-opacity=".1"/></radialGradient>
-        </defs>
-        <g data-fe-engines>
-        <path class="fe-system-axis" d="M320 25V467M222 361H418"/>
-        <path class="fe-system-ground" d="M220 361H420M250 367H390"/>
-        <path class="fe-vehicle-ghost" d="M295 326V130C295 102 300 78 320 55C340 78 345 102 345 130V326H295ZM295 130H345"/>
-        <g class="fe-engine-sockets">${enginePositions.map(engine=>`<circle cx="${engine.x}" cy="${engine.y}" r="43"/>`).join('')}</g>
-        <g class="fe-rocket-skin" data-fe-vehicle>
-          <path d="M320 55C300 78 295 102 295 130H345C345 102 340 78 320 55Z" fill="url(#fe-vehicle-metal)"/>
-          <path d="M295 130H345V326H295Z" fill="url(#fe-vehicle-metal)"/>
-          <path d="M295 148H345V162H295ZM295 265H345V274H295Z" fill="#233642"/>
-          <path d="M295 290 276 339H295M345 290 364 339H345" fill="#617783"/>
-          <path d="M296 326 291 341H349L344 326Z" fill="#2d3d47"/>
-          <circle cx="320" cy="118" r="7" fill="#0a1924" stroke="#a9d9d9" stroke-width="1"/>
-          <path d="M320 187V238" stroke="#334853" stroke-width="2"/>
+    markup: () => `<div class="fe-scene fe-focus" role="group" aria-label="Fokus auf Kompetenzen im Innovationsmanagement mit drei Ideen: Jobrotation, Food4Thought und Tandemlearning.">
+      <svg class="fe-svg fe-focus-svg" viewBox="0 0 640 520" aria-hidden="true" focusable="false">
+        <defs><radialGradient id="fe-focus-glow"><stop stop-color="#efbd91" stop-opacity=".55"/><stop offset="1" stop-color="#efbd91" stop-opacity="0"/></radialGradient></defs>
+        <g data-fe-model>
+          <ellipse class="fe-focus-ring" cx="320" cy="250" rx="205" ry="165"/>
+          ${focusFields.map((f,i)=>`<path class="fe-focus-link" data-fe-link="${i}" d="M320 250L${f.x} ${f.y}"/>`).join('')}
+          <g data-fe-core><circle class="fe-focus-core" cx="320" cy="250" r="50"/>
+            <text class="fe-focus-core-title" x="320" y="247" text-anchor="middle">Innovation</text>
+            <text class="fe-focus-core-formula" x="320" y="268" text-anchor="middle">I = N × U</text></g>
         </g>
-        <g class="fe-rocket-draft">
-          <path class="fe-vehicle-trace" pathLength="1" d="M295 326V130C295 102 300 78 320 55C340 78 345 102 345 130V326H295ZM295 130H345M295 148H345M295 162H345M295 265H345M295 274H345M295 290 276 339H295M345 290 364 339H345M296 326 291 341H349L344 326"/>
-          <circle class="fe-vehicle-trace" pathLength="1" cx="320" cy="118" r="7"/>
-          <path class="fe-vehicle-trace fe-draft-guide" pathLength="1" d="M270 55H370M270 341H370M280 55V341M276 62 284 54M276 341 284 333"/>
-        </g>
-        <g class="fe-engine-connections">${enginePositions.map((_,index)=>`<path class="fe-engine-wire" data-fe-wire="${index}" pathLength="1" d="M320 351H320"/>`).join('')}</g>
-        ${enginePositions.map((engine,index) => `<g class="fe-engine-unit" data-fe-engine="${index}" transform="translate(${engine.x} ${engine.y})">
-          <circle class="fe-engine-halo" r="76"/>
-          <circle class="fe-engine-frame" r="43"/>
-          <circle class="fe-engine-trace" pathLength="1" r="43" transform="rotate(-90)"/>
-          <path class="fe-engine-ribs" d="M-27-25-19-17M27-25 19-17M-27 25-19 17M27 25 19 17M0-36V-25M0 36V25M-36 0H-25M36 0H25"/>
-          <circle class="fe-engine-chamber" r="25"/>
-          <circle class="fe-engine-core" r="19"/>
-          <text class="fe-engine-number" y="7" text-anchor="middle">0${index+1}</text>
+        ${focusFields.map((f,i)=>`<g class="fe-focus-field${i===focusIndex?' is-focus':''}" data-fe-field="${i}" data-x="${f.x}" data-y="${f.y}">
+          <circle class="fe-focus-halo" r="84"/>
+          <circle class="fe-focus-disc" r="60"/>
+          ${i===focusIndex?'<circle class="fe-focus-fill" r="60"/>':''}
+          ${f.name.map((line,row)=>`<text class="fe-focus-label" y="${6+(row-(f.name.length-1)/2)*20}" text-anchor="middle">${line}</text>`).join('')}
         </g>`).join('')}
-        ${enginePositions.map((engine,index)=>`<g class="fe-engine-label" data-fe-engine-label="${index}"><text class="fe-engine-name" x="${engine.labelX}" y="${engine.labelY}">${engine.title}</text><text class="fe-engine-purpose" x="${engine.labelX}" y="${engine.labelY+27}">${engine.line}</text><path class="fe-engine-label-rule" pathLength="1" d="M${engine.labelX} ${engine.labelY+40}H${engine.labelX+160}"/></g>`).join('')}
-        </g>
+        ${focusCards.map((c,i)=>`<path class="fe-focus-idea-link" data-fe-idea-link="${i}" pathLength="1" d="M${focusHome.x+72} ${focusHome.y}C${cardX-50} ${focusHome.y} ${cardX-50} ${c.y} ${cardX} ${c.y}"/>`).join('')}
+        ${focusCards.map((c,i)=>`<g class="fe-focus-card" data-fe-card="${i}" transform="translate(${cardX} ${c.y-cardH/2})">
+          <rect width="${cardW}" height="${cardH}" rx="14"/>
+          <g class="fe-focus-icon" transform="translate(24 ${cardH/2-24}) scale(1.5)">${c.icon}</g>
+          <text class="fe-focus-card-title" x="92" y="${cardH/2-8}">${c.title}</text>
+          ${c.lines.map((line,row)=>`<text class="fe-focus-card-text" x="92" y="${cardH/2+17+row*20}">${line}</text>`).join('')}
+        </g>`).join('')}
       </svg>
-      <div class="fe-system-caption" aria-hidden="true">Drei Ansätze <span>·</span> Ein gemeinsamer Antrieb</div>
     </div>`,
     mount(root) {
-      const scene = root.querySelector('.fe-system');
-      const views = systemViews.map(name => root.querySelector(`[data-fe-${name}]`));
-      const caption = root.querySelector('.fe-system-caption');
-      const traces = Array.from(root.querySelectorAll('.fe-vehicle-trace'));
-      const vehicle = root.querySelector('[data-fe-vehicle]');
-      const pods = Array.from(root.querySelectorAll('[data-fe-engine]'));
-      const rings = Array.from(root.querySelectorAll('.fe-engine-trace'));
-      const numbers = Array.from(root.querySelectorAll('.fe-engine-number'));
-      const wires = Array.from(root.querySelectorAll('[data-fe-wire]'));
-      const labels = Array.from(root.querySelectorAll('[data-fe-engine-label]'));
-      const labelRules = Array.from(root.querySelectorAll('.fe-engine-label-rule'));
+      const fields = Array.from(root.querySelectorAll('[data-fe-field]'));
+      const links = Array.from(root.querySelectorAll('[data-fe-link]'));
+      const model = root.querySelector('[data-fe-model]');
+      const fill = root.querySelector('.fe-focus-fill');
+      const halo = root.querySelector('.fe-focus-field.is-focus .fe-focus-halo');
+      const ideaLinks = Array.from(root.querySelectorAll('[data-fe-idea-link]'));
+      const cards = Array.from(root.querySelectorAll('[data-fe-card]'));
       let last = '';
       return {
         update(progress, context = {}) {
           const p = context.reduced ? 1 : clamp(progress);
-          const key = `${n(p)}|${Boolean(context.reduced)}|${Boolean(context.mobile)}|${Boolean(context.static)}`;
+          const key = `${n(p)}|${Boolean(context.reduced)}|${Boolean(context.static)}`;
           if (key === last) return;
           last = key;
-          const phase = phaseAt(p, systemPhases);
-          const reveal = context.static || phase===0 ? 1 : smooth(systemPhases[phase], systemPhases[phase]+.025, p);
-          showPhase(scene, views, systemViews, phase, n(reveal));
-          caption.style.display =           phase===3 ? '' : 'none';
-                    scene.setAttribute('aria-label', phase===3 ? 'Drei Ansätze – psychologische Sicherheit, Wissensaustausch und klare Gates – bilden metaphorisch den gemeinsamen Antrieb. Die Rakete bleibt bis zum Finale am Boden.' : views[phase].querySelector('h3').textContent);
-          // Only the closing phase assembles the three previously explained
-          // approaches. All motion is derived from the shared progress.
-          const engineP = clamp((p-.78)/.22);
-          const assembly = smooth(.08,.95,engineP);
-          const vehicleReveal = smooth(.15,.96,engineP);
-          set(scene,'--fe-system-assembled',n(assembly));
-          set(vehicle,'opacity',n(vehicleReveal));
-          traces.forEach((trace,index) => {
-            set(trace,'stroke-dashoffset',0);
-            set(trace,'opacity',n(index===2?.32:(1-.62*vehicleReveal)));
+          const select = smooth(.22,.4,p);
+          const move = smooth(.52,.68,p);
+          const rest = (1-.55*select)*(1-smooth(.5,.62,p));
+          set(model,'opacity',n(rest));
+          fields.forEach((field,i)=>{
+            const own = Number(field.dataset.x), ownY = Number(field.dataset.y);
+            const arrival = smooth(.02+i*.025,.14+i*.025,p);
+            if (i===focusIndex) {
+              const x = lerp(own,focusHome.x,move), y = lerp(ownY,focusHome.y,move);
+              field.setAttribute('transform',`translate(${n(x)} ${n(y)}) scale(${n((.9+.1*arrival)*(1+.3*move))})`);
+              set(field,'opacity',n(arrival));
+            } else {
+              field.setAttribute('transform',`translate(${own} ${ownY}) scale(${n(.9+.1*arrival)})`);
+              set(field,'opacity',n(arrival*rest));
+            }
           });
-          pods.forEach((pod,index) => {
-            const original = enginePositions[index];
-            const localAssembly = smooth(.08+index*.025,.88+index*.025,engineP);
-            const x = lerp(original.x,original.tx,localAssembly);
-            const y = lerp(original.y,original.ty,localAssembly);
-            const scale = lerp(1,.205,localAssembly);
-            set(pod,'opacity',1);
-            set(pod,'--fe-engine-heat',1);
-            pod.setAttribute('transform',`translate(${n(x)} ${n(y)}) scale(${n(scale)})`);
-            set(rings[index],'stroke-dashoffset',0);
-            set(numbers[index],'opacity',n(1-smooth(.15,.7,engineP)));
-            const left = index%2===0;
-            const labelX = original.labelX + (left?160:0);
-            const labelY = original.labelY + 40;
-            const bendX = left ? Math.min(x-38,272) : Math.max(x+38,368);
-            wires[index].setAttribute('d',`M${labelX} ${labelY}C${n(bendX)} ${labelY} ${n(bendX)} ${n(y)} ${n(x)} ${n(y)}`);
-            set(wires[index],'stroke-dashoffset',0);
-            set(wires[index],'opacity',n(.23+.53*assembly));
-            set(labels[index],'opacity',1);
-            set(labelRules[index],'stroke-dashoffset',0);
+          links.forEach((link,i)=>set(link,'opacity',n(smooth(.1+i*.02,.2+i*.02,p))));
+          set(fill,'opacity',n(select));
+          set(halo,'opacity',n(select*(1-.5*move)));
+          cards.forEach((card,i)=>{
+            const reveal = smooth(.66+i*.09,.78+i*.09,p);
+            set(card,'opacity',n(reveal));
+            card.style.translate = `${n(22*(1-reveal))}px 0`;
+          });
+          ideaLinks.forEach((link,i)=>{
+            set(link,'stroke-dashoffset',n(1-smooth(.62+i*.09,.76+i*.09,p)));
+            set(link,'opacity',n(smooth(.6,.64,p)));
           });
         }
       };

@@ -186,44 +186,26 @@ window.PitchFilmStory = [
   {
     "step": 7,
     "label": "Ganzheitliches Innovationsmanagement",
-    "detail": "Drei konkrete Ansätze: Sicherheit, Austausch & Gates",
-    "length": 4.8,
+    "detail": "Fokus Kompetenzen: Jobrotation, Food4Thought, Tandemlearning",
+    "length": 3.6,
     "beats": [
       {
         "at": 0,
-        "still": 0.18,
-        "view": "[data-fe-safety]",
-        "tag": "ANSATZ 01 · PSYCHOLOGISCHE SICHERHEIT",
-        "title": "Scheitern erlaubt.<br><em>Auch Kritik.</em>",
-        "copy": "Fehler dürfen passieren, bei Hardware wie bei Menschen. Kritik bleibt ohne Angst vor Bestrafung möglich.",
-        "cue": "Die Fehlerkultur als Stärke sicherstellen"
-      },
-      {
-        "at": 0.25,
-        "tag": "ANSATZ 02 · WISSENSAUSTAUSCH",
-        "title": "Wissen bleibt.<br><em>Auch wenn Menschen gehen.</em>",
-        "copy": "Bei hoher Fluktuation darf Wissen nicht an Personen hängen. Austausch zwischen Bereichen hält Erfahrung im Unternehmen.",
-        "cue": "Rotation · Learning Review · Tandem",
-        "still": 0.43,
-        "view": "[data-fe-exchange]"
+        "still": 0.42,
+        "view": ".fe-focus-svg",
+        "tag": "GANZHEITLICHES INNOVATIONSMANAGEMENT",
+        "title": "Sechs Felder.<br><em>Ein Fokus.</em>",
+        "copy": "Innovationsmanagement umfasst viele Felder. Wir wählen eines: Kompetenzen. Damit Wissen auch bei hoher Fluktuation im Unternehmen bleibt.",
+        "cue": "Aus sechs Feldern fällt die Wahl auf Kompetenzen"
       },
       {
         "at": 0.5,
-        "still": 0.68,
-        "view": "[data-fe-gates]",
-        "tag": "ANSATZ 03 · KLARE GATES",
-        "title": "Go oder No-go.<br><em>Früh und begründet.</em>",
-        "copy": "Drei Gates mit festen Fragen. Jedes endet mit Go, Anpassen oder Stopp.",
-        "cue": "Gatefragen in eine prüfbare Entscheidung übersetzen"
-      },
-      {
-        "at": 0.78,
-        "tag": "DREI TRIEBWERKE FÜR DEN WANDEL",
-        "title": "Eine Mission.<br><em>Ein gemeinsamer Antrieb.</em>",
-        "copy": "Sicherheit, Austausch und Gates greifen ineinander. Vor dem Start laden wir Sie zu einer ersten Wahl ein.",
-        "cue": "Vom Management zur Menüwahl",
         "still": 1,
-        "view": "[data-fe-engines]"
+        "view": ".fe-focus-svg",
+        "tag": "DREI IDEEN FÜR KOMPETENZEN",
+        "title": "Drei Ideen.<br><em>Wissen, das bleibt.</em>",
+        "copy": "Jobrotation, Food4Thought und Tandemlearning. Vor dem Start laden wir Sie zu einer ersten Wahl ein.",
+        "cue": "Vom Management zur Menüwahl"
       }
     ],
     "seconds": 120

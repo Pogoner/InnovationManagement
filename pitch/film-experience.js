@@ -35,7 +35,7 @@
     'Erlebniskonzept: sieben Gänge, Missionsbriefing, Service und gemeinsamer Blick auf den Launch.',
     'Preisannahmen: 35.000 US-Dollar je Gast im Pilot, langfristig bis zu 50.000 US-Dollar. Die Zahlungsbereitschaft ist noch zu prüfen.',
     'Modellannahme zum Zielpreis: 50.000 US-Dollar je Gast abzüglich 5.000 US-Dollar variabler Kosten ergeben 45.000 US-Dollar Deckungsbeitrag vor Investitionen, Fixkosten und Steuern.',
-    'Fünfjahres-Basisszenario Florida 2027 bis 2031: 13,38 Millionen US-Dollar Gesamtprojektbudget, davon 11,60 Millionen Sachinvestitionen und 1,78 Millionen Entwicklung und Anlauf. Vier Piloten 2028 und 2029, zehn Dinner 2030 und sechzehn 2031. Umsatz 25,64 Millionen, Auszahlungen 20,04 Millionen. Kumuliert 5,60 Millionen Cashflow Ende 2031, vor Finanzierung und Steuern. Alle Mengen, Preise und Kosten sind Szenarioannahmen.',
+    'Fünfjahres-Basisszenario Florida 2027 bis 2031: 13,38 Millionen US-Dollar Projektbudget für Investition und Anlauf, davon 11,60 Millionen Sachinvestitionen und 1,78 Millionen Entwicklung und Anlauf. Vier Piloten 2028 und 2029, zehn Dinner 2030 und sechzehn 2031. Umsatz 25,64 Millionen, Auszahlungen 20,04 Millionen. Kumuliert 5,60 Millionen Cashflow Ende 2031, vor Finanzierung und Steuern. Alle Mengen, Preise und Kosten sind Szenarioannahmen.',
     'Sensitivität im Regelbetrieb: Bei 90 Prozent Auslastung und 50.000 US-Dollar Preis ergeben sich 5,60 Millionen US-Dollar kumulierter Cashflow bis 2031. Bei 70 Prozent und 40.000 US-Dollar sind es minus 2,72 Millionen. Die vier Pilotannahmen bleiben gleich.'
   ];
 

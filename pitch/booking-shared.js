@@ -73,16 +73,17 @@
     s += `<path d="M50 47 L48.6 53 Q50 54 51.6 53" stroke="${skD}" stroke-width=".9" fill="none" stroke-linecap="round"/>`;
     s += W ? `<path d="M45.5 57.2 Q50 60.6 54.5 57.2 Q50 58.2 45.5 57.2Z" fill="#a8414a"/>` : `<path d="M45.5 57.4 Q50 60 54.5 57.4" stroke="${shade(sk, .62)}" stroke-width="1.1" fill="none" stroke-linecap="round"/>`;
     if (a.glasses) s += `<g fill="none" stroke="#1a1a1c" stroke-width="1.1"><rect x="38.6" y="43" width="10" height="7.4" rx="2.6"/><rect x="51.4" y="43" width="10" height="7.4" rx="2.6"/><path d="M48.6 46 L51.4 46"/></g>`;
+    // Fronts start above the top of the face (y 26) so no bare scalp shows; they differ in hairline.
     const front = {
-      side:'M33 46 C31 27 46 23 56 25 C67 27 70 36 67 46 C64 37 58 33 48 34 C42 35 37 40 33 46Z',
-      slick:'M33.5 44 C33 27 67 27 66.5 44 C63 33 37 33 33.5 44Z',
-      buzz:'M34.5 41 C35.5 29 64.5 29 65.5 41 C60 34.5 40 34.5 34.5 41Z',
-      waves:'M33 52 C29 27 71 25 67 52 C64 36 57 31 50 32 C43 33 36 38 33 52Z',
-      bun:'M33.5 44 C33 27 67 27 66.5 44 C63 33 37 33 33.5 44Z'
+      side:'M32 47 C27 14 73 14 68 47 C66 38 62 31 52 31 C43 31 37 38 32 47Z',
+      slick:'M33 45 C29 14 71 14 67 45 C64 35 58 31 50 31 C42 31 36 35 33 45Z',
+      buzz:'M33.5 43 C31 17 69 17 66.5 43 C62 35 56 33.5 50 33.5 C44 33.5 38 35 33.5 43Z',
+      waves:'M32 54 C25 14 75 14 68 54 C65 38 58 32 50 33 C42 32 35 38 32 54Z',
+      bun:'M33 45 C29 14 71 14 67 45 C64 35 58 32 50 32 C42 32 36 35 33 45Z'
     }[a.hs];
     if (front) s += `<path d="${front}" fill="${h}" ${a.hs === 'buzz' ? 'opacity=".75"' : ''}/>`;
-    if (a.hs === 'curly') s += [...Array(9)].map((_, i) => `<circle cx="${34 + i * 4}" cy="${31 + Math.abs(i - 4) * 1.9}" r="5.2" fill="${h}"/>`).join('');
-    if (a.hs === 'afro') s += `<path d="M34 42 C35 28 65 28 66 42 C60 34 40 34 34 42Z" fill="${h}"/>`;
+    if (a.hs === 'curly') s += `<ellipse cx="50" cy="29" rx="18" ry="9" fill="${h}"/>` + [...Array(9)].map((_, i) => `<circle cx="${33 + i * 4.25}" cy="${27 + Math.abs(i - 4) * 2.4}" r="6" fill="${h}"/>`).join('');
+    if (a.hs === 'afro') s += `<path d="M33 46 C29 12 71 12 67 46 C62 34 56 31.5 50 31.5 C44 31.5 38 34 33 46Z" fill="${h}"/>`;
     s += '</g>';
     return `<svg viewBox="0 0 100 100" width="${px}" height="${px}" ${extra} role="img" aria-label="${esc(a.t)}">${s}</svg>`;
   }
